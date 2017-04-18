@@ -15,3 +15,9 @@ part 'src/view.dart';
 const gameHeight = 16;
 const gameWidth = 10;
 
+/**
+ * Definiert die Größe des Feldes für den nächsten Tetris Stein
+ */
+const nextStoneFieldHeight = 4;
+const nextStoneFieldWidth = 4;
+

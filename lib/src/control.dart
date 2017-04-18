@@ -16,7 +16,7 @@ class TetrisGameController {
   /**
    * Erzeugen eines Tetris Game. Aufruf aus der Datei model.dart.
    */
-  var game = new TetrisGame(gameHeight, gameWidth);
+  var game = new TetrisGame(gameHeight, gameWidth, nextStoneFieldHeight, nextStoneFieldWidth);
 
   /**
    * Erzeugen der Tetrisansicht. Aufruf aus der Datei view.dart.
@@ -32,6 +32,7 @@ class TetrisGameController {
   TetrisGameController() {
 
     view.generateField(game);
+    view.generateNextStoneField(game);
 
     // Ein neues Spiel wurde von dem Benutzer gestarted
     view.startButton.onClick.listen((_) {
@@ -49,7 +50,7 @@ class TetrisGameController {
    * Inizalisiert ein neues Spiel.
    */
   dynamic _newGame() async {
-    game = new TetrisGame(gameWidth, gameHeight);
+    game = new TetrisGame(gameWidth, gameHeight, nextStoneFieldHeight, nextStoneFieldWidth);
   }
 
 

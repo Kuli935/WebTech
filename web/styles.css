@@ -74,7 +74,7 @@ body {
     border: 10px solid #d5d4d4;
 }
 #field { top: 12%; left: 0; }
-#nextstone { top: 20%; right: 15%; }
+#nextstone { top: 20%; right: 5%; }
 
 #info {
     position: absolute;

@@ -22,6 +22,10 @@ class TetrisGame {
   final int _sizeHeight;
   final int _sizeWidth;
 
+  // Die Feldgröße für nächsten Tetris Stein (n x m Feld)
+  final int _nextStoneFieldHeight;
+  final int _nextStoneFieldWidth;
+
 
   // Spielzustand #running or #stopped.
   Symbol _gamestate;
@@ -39,7 +43,7 @@ class TetrisGame {
   /**
    * Konstruktor um ein neues Tetris Spiel zu erzeugen
    */
-  TetrisGame(this._sizeHeight, this._sizeWidth) {
+  TetrisGame(this._sizeHeight, this._sizeWidth, this._nextStoneFieldHeight, this._nextStoneFieldWidth) {
     start();
   }
 
@@ -58,6 +62,13 @@ class TetrisGame {
   }
 
 
+  List<List<Symbol>> get nextStoneField {
+    var _nextStoneField = new Iterable.generate(nextStoneFieldHeight, (row) {
+      return new Iterable.generate(nextStoneFieldWidth, (col) => #empty).toList();
+    }).toList();
+    //andere Elemente
+    return _nextStoneField;
+  }
 
   /**
    * Returns die Größe des Spielffeldes. Das Spiel wird auf einen n x m Feld gespielt.
@@ -65,4 +76,9 @@ class TetrisGame {
   int get sizeHeight => _sizeHeight;
   int get sizeWidth => _sizeWidth;
 
+  /**
+   * Returns die Größe des Feldes für den nächsten Stein.
+   */
+  int get nextStoneFieldHeight => _nextStoneFieldHeight;
+  int get nextStoneFieldWidth => _nextStoneFieldWidth;
 }

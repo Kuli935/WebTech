@@ -35,6 +35,14 @@ class TetrisView {
    */
   final game = querySelector('#field');
 
+
+  /**
+   * Elemente mit der ID '#nextStone' im DOM tree.
+   * Wird verwendet um das Feld von nächsten Tetris zu visualisieren als eine HTML Tabelle.
+   */
+  final nextStone = querySelector('#nextstone');
+
+
   /**
    * Start Button für das Spiel.
    */
@@ -46,6 +54,10 @@ class TetrisView {
    */
   List<List<HtmlElement>> fields;
 
+  /**
+   * Enthält alle TD-Elemente des Feldes für den nächsten Tetris Block.
+   */
+  List<List<HtmlElement>> nextStoneFields;
 
 
   /**
@@ -55,8 +67,6 @@ class TetrisView {
    * - Spielfeld anzeigen nachdem Modelstatus
    */
   void update(TetrisGame model, { List<Map> scores: const [] }) {
-
-    querySelector("#copy").innerHtml = "<strong>Funny, I was created by Dart</strong>";
 
     container_start.style.display = "none";
     container_game.style.display = "block";
@@ -73,6 +83,38 @@ class TetrisView {
       }
     }
   }
+
+
+  /**
+   * Generiert ein nächstes Tetris Bock Feld.
+   * Eine HTML Tabelle (4 x 4)
+   */
+  void generateNextStoneField(TetrisGame model) {
+    final nextStoneField = model.nextStoneField;
+    String table = "";
+    for (int row = 0; row < nextStoneField.length; row++) {
+      table += "<tr>";
+      for (int col = 0; col < nextStoneField[row].length; col++) {
+        final assignment = nextStoneField[row][col];
+        final pos = "nextstone_${row}_${col}";
+        table += "<td id='$pos' class='$assignment'></td>";
+      }
+      table += "</tr>";
+    }
+    nextStone.innerHtml = table;
+
+    // Saves all generated TD elements in field to
+    // avoid time intensive querySelector calls in update().
+    // Thanks to Johannes Gosch, SoSe 2015.
+    nextStoneFields = new List<List<HtmlElement>>(nextStoneField.length);
+    for (int row = 0; row < nextStoneField.length; row++) {
+      nextStoneFields[row] = [];
+      for (int col = 0; col < nextStoneField[row].length; col++) {
+        nextStoneFields[row].add(nextStone.querySelector("#nextstone_${row}_${col}"));
+      }
+    }
+  }
+
 
 
   /**
