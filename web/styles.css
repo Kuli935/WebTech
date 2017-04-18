@@ -1,0 +1,107 @@
+body {
+    background-color: #757575;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    color: #000000;
+}
+
+.container_start {
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+#title {
+    margin-top: 15px;
+    width: 100%;
+    height: 96px;
+    background-image: url("img/tetris.png");
+    background-repeat:no-repeat;
+    background-position:center;
+    padding-bottom: 50px;
+}
+
+#startText {
+    position:absolute;
+    width: 1000px;
+    margin-left:-500px;
+    left:50%;
+    bottom: 150px;
+    letter-spacing: 3px;
+    font-family: impact;
+    font-size: 50px;
+}
+
+#startButton {
+    position: absolute;
+    border: 5px solid #000000;;
+    border-radius: 17px;
+    cursor: pointer;  width: 150px;
+    margin-left: -75px;
+    left: 50%;
+    bottom: 60px;
+    font-size: 30px;
+}
+#copy {
+    width: 1000px;
+    margin-left:-500px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    color: #000000;
+}
+
+.container_game {
+    position: relative;
+    height: 100%;
+    width: 500px;
+    margin: auto;
+    display: none;
+}
+
+#field td, #nextstone td {
+    background-color: #ededed;
+    width: 22px;
+    height: 22px;
+}
+
+#field, #nextstone {
+    position: absolute;
+    border-collapse: separate;
+    border: 10px solid #d5d4d4;
+}
+#field { top: 12%; left: 0; }
+#nextstone { top: 20%; right: 15%; }
+
+#info {
+    position: absolute;
+    margin-top: 55%;
+    right: 15%;
+    font-size: 22px;
+}
+
+.container_message {
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+.container_message #message {
+    font-size: 22px;
+    line-height: 8%;
+}
+
+/* Vordefinierten Farben der Steine */
+#cyan { background-color: #00f0f0 !important; }
+#blue { background-color: #0000f0 !important; }
+#yellow { background-color: #f0f000 !important; }
+#orange  { background-color: #f0a000 !important; }
+#red { background-color: #f00000 !important; }
+#green { background-color: #00f000 !important; }
+#purple { background-color: #a000f0 !important; }

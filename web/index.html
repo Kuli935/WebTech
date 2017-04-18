@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div id="title"></div>
+<!-- Container für die Startseite -->
+<div class="container_start">
+    <p id="startText"></p>
+    <p id="startButton">START</p>
+    <p id="copy">&copy; Florian Jeger, Christoph Jeger &amp; Matthias Steffen</p>
+</div>
+
+<!-- Container für die Nachrichten -->
+<div class="container_message">
+    <p id="message"></p>
+</div>
+
+<div class="container_game">
+    <!-- Container für das Spielfeld -->
+    <table id='field'>
+    </table>
+
+    <!-- Container für den nächsten Stein -->
+    <div id="nextstone"></div>
+
+    <!-- Container für die Spielinformationen -->
+    <div id="info">
+        <p id="level">Level: 1</p>
+        <p id="points">Punkte: 0</p>
+    </div>
+</div>
+
+<script type="application/dart" src="tetrisclient.dart"></script>
+<script data-pub-inline src="packages/browser/dart.js"></script>
+
+</body>
+</html>
