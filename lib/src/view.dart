@@ -68,20 +68,49 @@ class TetrisView {
    */
   void update(TetrisGame model, { List<Map> scores: const [] }) {
 
+    // Startfenster ausblenden
     container_start.style.display = "none";
+    // Spielfeld einblenden
     container_game.style.display = "block";
 
-    // Updates the field
+    // Das Spielfeld aktualisieren
     final field = model.field;
     for (int row = 0; row < field.length; row++) {
       for (int col = 0; col < field[row].length; col++) {
         final td = fields[row][col];
         if (td != null) {
           td.classes.clear();
-          td.classes.add('empty');
+          if (field[row][col] == #cyan) td.classes.add('cyan');
+          else if (field[row][col] == #blue) td.classes.add('blue');
+          else if (field[row][col] == #yellow) td.classes.add('yellow');
+          else if (field[row][col] == #orange) td.classes.add('orange');
+          else if (field[row][col] == #red) td.classes.add('red');
+          else if (field[row][col] == #green) td.classes.add('green');
+          else if (field[row][col] == #purple) td.classes.add('purple');
+          else if (field[row][col] == #empty) td.classes.add('empty');
         }
       }
     }
+
+    // Nächster Tetris-Stein-Feld aktualisieren
+    final nextStoneField = model.nextStoneField;
+    for (int row = 0; row < nextStoneField.length; row++) {
+      for (int col = 0; col < nextStoneField[row].length; col++) {
+        final td = nextStoneFields[row][col];
+        if (td != null) {
+          td.classes.clear();
+          if (field[row][col] == #cyan) td.classes.add('cyan');
+          else if (field[row][col] == #blue) td.classes.add('blue');
+          else if (field[row][col] == #yellow) td.classes.add('yellow');
+          else if (field[row][col] == #orange) td.classes.add('orange');
+          else if (field[row][col] == #red) td.classes.add('red');
+          else if (field[row][col] == #green) td.classes.add('green');
+          else if (field[row][col] == #purple) td.classes.add('purple');
+          else if (field[row][col] == #empty) td.classes.add('empty');
+        }
+      }
+    }
+
   }
 
 

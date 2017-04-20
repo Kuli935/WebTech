@@ -5,7 +5,17 @@ part of tetris;
  */
 class Tetris {
 
+  /**
+   * Verweist auf das Spiel.
+   */
+  final TetrisGame _game;
 
+  /**
+   * Konstuktor um ein [Tetris] Objekt für ein [TetrisGame] zu erzeugen.
+   */
+  Tetris.on(this._game) {
+
+  }
 
 
 }
@@ -50,8 +60,10 @@ class TetrisGame {
 
   /**
    * Returns ein Spielfeld als eine Liste von Listen.
-   * Jedes Element des Feldes hat genau eine aus zwei gültigen Zustände (Symbole).
-   * #empty #blocked
+   * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
+   * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
+   * Leerzustand: #empty,
+   * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
    */
   List<List<Symbol>> get field {
     var _field = new Iterable.generate(sizeHeight, (row) {
@@ -61,7 +73,13 @@ class TetrisGame {
     return _field;
   }
 
-
+  /**
+   * Returns Nächster-Tetris-Stein-Feld als eine Liste von Listen.
+   * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
+   * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
+   * Leerzustand: #empty,
+   * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
+   */
   List<List<Symbol>> get nextStoneField {
     var _nextStoneField = new Iterable.generate(nextStoneFieldHeight, (row) {
       return new Iterable.generate(nextStoneFieldWidth, (col) => #empty).toList();
