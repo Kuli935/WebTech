@@ -99,14 +99,14 @@ class TetrisView {
         final td = nextStoneFields[row][col];
         if (td != null) {
           td.classes.clear();
-          if (field[row][col] == #cyan) td.classes.add('cyan');
-          else if (field[row][col] == #blue) td.classes.add('blue');
-          else if (field[row][col] == #yellow) td.classes.add('yellow');
-          else if (field[row][col] == #orange) td.classes.add('orange');
-          else if (field[row][col] == #red) td.classes.add('red');
-          else if (field[row][col] == #green) td.classes.add('green');
-          else if (field[row][col] == #purple) td.classes.add('purple');
-          else if (field[row][col] == #empty) td.classes.add('empty');
+          if (nextStoneField[row][col] == #cyan) td.classes.add('cyan');
+          else if (nextStoneField[row][col] == #blue) td.classes.add('blue');
+          else if (nextStoneField[row][col] == #yellow) td.classes.add('yellow');
+          else if (nextStoneField[row][col] == #orange) td.classes.add('orange');
+          else if (nextStoneField[row][col] == #red) td.classes.add('red');
+          else if (nextStoneField[row][col] == #green) td.classes.add('green');
+          else if (nextStoneField[row][col] == #purple) td.classes.add('purple');
+          else if (nextStoneField[row][col] == #empty) td.classes.add('empty');
         }
       }
     }

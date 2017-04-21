@@ -41,7 +41,6 @@ class TetrisGameController {
     });
 
     // Steuerung des Tetris Blocks
-
   }
 
 
@@ -51,6 +50,8 @@ class TetrisGameController {
    */
   dynamic _newGame() async {
     game = new TetrisGame(gameWidth, gameHeight, nextStoneFieldHeight, nextStoneFieldWidth);
+
+    view.update(game);
   }
 
 

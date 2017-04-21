@@ -98,10 +98,10 @@ body {
 }
 
 /* Vordefinierten Farben der Steine */
-#cyan { background-color: #00f0f0 !important; }
-#blue { background-color: #0000f0 !important; }
-#yellow { background-color: #f0f000 !important; }
-#orange  { background-color: #f0a000 !important; }
-#red { background-color: #f00000 !important; }
-#green { background-color: #00f000 !important; }
-#purple { background-color: #a000f0 !important; }
+.cyan { background-color: #00f0f0 !important; }
+.blue { background-color: #0000f0 !important; }
+.yellow { background-color: #f0f000 !important; }
+.orange  { background-color: #f0a000 !important; }
+.red { background-color: #f00000 !important; }
+.green { background-color: #00f000 !important; }
+.purple { background-color: #a000f0 !important; }
