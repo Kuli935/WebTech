@@ -1,6 +1,12 @@
 part of tetris;
 
 /**
+ * Diese Konstante beschreibt die Geschwindigkeit von dem Tetris Stein
+ * Ein [tetrisSpeed] von 1000ms bestimmt 1 Bewegungen pro Sekunde.
+ */
+const tetrisSpeed = const Duration(milliseconds: 1000);
+
+/**
  * Ein [TetrisGameController]-Objekt registriert mehrere Handler
  * um die Interaktion von einem Benutzers zu greifen für das [TetrisGame] und
  * diese zu übersetzen in gültige [TetrisGame] Taten.
@@ -23,6 +29,11 @@ class TetrisGameController {
    */
   final view = new TetrisView();
 
+  /**
+   * Periodischer Auslöser, der Tetrisbewegungen steuert
+   */
+  Timer tetrisTrigger;
+
 
   /**
    * Konstuktor um ein Controller für Objekte zu erzeugen.
@@ -36,6 +47,8 @@ class TetrisGameController {
 
     // Ein neues Spiel wurde von dem Benutzer gestarted
     view.startButton.onClick.listen((_) {
+      if (tetrisTrigger != null) tetrisTrigger.cancel();
+      tetrisTrigger = new Timer.periodic(tetrisSpeed, (_) => _moveTetris());
       game.start();
       view.update(game);
     });
@@ -44,6 +57,14 @@ class TetrisGameController {
   }
 
 
+  /**
+   * Bewegt den Tetris Stein.
+   */
+  void _moveTetris() {
+    game.moveTetris();
+    view.update(game);
+  }
+
 
   /**
    * Inizalisiert ein neues Spiel.
@@ -51,7 +72,7 @@ class TetrisGameController {
   dynamic _newGame() async {
     game = new TetrisGame(gameWidth, gameHeight, nextStoneFieldHeight, nextStoneFieldWidth);
 
-    view.update(game);
+
   }
 
 
