@@ -58,14 +58,15 @@ body {
     position: relative;
     height: 100%;
     width: 500px;
-    margin: auto;
+    margin:auto;
+    margin-top:40px;
     display: none;
 }
 
 #field td, #nextstone td {
     background-color: #ededed;
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
 }
 
 #field, #nextstone {
@@ -74,12 +75,12 @@ body {
     border: 10px solid #d5d4d4;
 }
 #field { top: 12%; left: 0; }
-#nextstone { top: 20%; right: 5%; }
+#nextstone { top: 20%; right: 25%; }
 
 #info {
     position: absolute;
     margin-top: 55%;
-    right: 15%;
+    right: 30%;
     font-size: 22px;
 }
 
