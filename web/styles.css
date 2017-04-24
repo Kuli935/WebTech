@@ -15,9 +15,10 @@ body {
 
 
 #title {
+    margin:auto;
     margin-top: 15px;
-    width: 100%;
-    height: 96px;
+    width: 633px;
+    height: 166px;
     background-image: url("img/tetris.png");
     background-repeat:no-repeat;
     background-position:center;
@@ -45,9 +46,10 @@ body {
     bottom: 60px;
     font-size: 30px;
 }
+
 #copy {
-    width: 1000px;
-    margin-left:-500px;
+    width: 400px;
+    margin-left:-200px;
     position: absolute;
     bottom: 10px;
     left: 50%;
@@ -63,25 +65,10 @@ body {
     display: none;
 }
 
-#field td, #nextstone td {
-    background-color: #ededed;
-    width: 18px;
-    height: 18px;
-}
-
 #field, #nextstone {
     position: absolute;
     border-collapse: separate;
     border: 10px solid #d5d4d4;
-}
-#field { top: 12%; left: 0; }
-#nextstone { top: 20%; right: 25%; }
-
-#info {
-    position: absolute;
-    margin-top: 55%;
-    right: 30%;
-    font-size: 22px;
 }
 
 .container_message {
@@ -94,7 +81,7 @@ body {
 }
 
 .container_message #message {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 8%;
 }
 
@@ -106,3 +93,34 @@ body {
 .red { background-color: #f00000 !important; }
 .green { background-color: #00f000 !important; }
 .purple { background-color: #a000f0 !important; }
+
+
+
+@media (min-width: 950px) {
+    /* breite Browserfenster */
+    #field td, #nextstone td { background-color: #ededed; width: 22px; height: 22px; }
+    #field { top: 12%; left: 0; }
+    #nextstone { top: 20%; right: 10%; }
+    #info { position: absolute; margin-top: 65%; right: 18%; font-size: 22px; }
+}
+
+@media (min-width: 450px) and (max-width: 950px) {
+    /* Darstellung auf Netbooks */
+    #field td, #nextstone td { background-color: #ededed; width: 22px; height: 22px; }
+    #field { top: 12%; left: 5%; }
+    #nextstone { top: 20%; right: 10%; }
+    #info { position: absolute; margin-top: 65%; right: 18%; font-size: 22px; }
+    #title { background-image: url("img/tetris _netbook.png"); width: 457px; height: 126px;}
+}
+
+@media (max-width: 450px) {
+    /* mobile Geräte */
+    #field td, #nextstone td { background-color: #ededed; width: 14px; height: 14px; }
+    #field { top: 12%; left: 1.5%; }
+    #nextstone { top: 20%; right: 1.5%; }
+    .container_game { width: 320px; }
+    #info { position: absolute; margin-top: 75%; right: 14%; font-size: 14px; }
+    #title { width: 273.6px; height: 76.8px; }
+    #copy {  width: 240px;  margin-left:-120px; }
+    #title { background-image: url("img/tetris_mobil.png"); width: 286px;  height: 80px;}
+}
