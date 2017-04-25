@@ -13,3 +13,4 @@ deploy.py
 .idea/
 analysis_options.yaml
 pubspec.yaml
+deploy/

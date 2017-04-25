@@ -8,6 +8,7 @@ import 'dart:convert';
 part 'src/model.dart';
 part 'src/control.dart';
 part 'src/view.dart';
+part 'src/SwipeHandler.dart';
 
 /**
  * Definiert eine Tetris Spielkonstante, das n x m Feld.
