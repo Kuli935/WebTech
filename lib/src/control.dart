@@ -45,11 +45,11 @@ class TetrisGameController {
     view.generateField(game);
     view.generateNextStoneField(game);
 
-    //setup the handler functions for the touch controls
+    //Vorbereiten der Touch Steuerung
     SwipeHandler sw = SwipeHandler.getInstance();
     sw.onSwipeLeft = (){
       bool canMove = true;
-      //check if one of the parts of the stone reached the edge of the field
+      //pruefen ob der Stein am Rand des Spielfelds ist
       game.tetris._stone.forEach((var element){
         element['col'] == 0 ? canMove = false : null;
       });
@@ -62,7 +62,6 @@ class TetrisGameController {
     };
     sw.onSwipeRight = (){
       bool canMove = true;
-      //check if one of the parts of the stone reached the edge of the field
       game.tetris._stone.forEach((var element){
         element['col'] == 9 ? canMove = false : null;
       });
@@ -78,16 +77,12 @@ class TetrisGameController {
       if (tetrisTrigger != null) tetrisTrigger.cancel();
       tetrisTrigger = new Timer.periodic(tetrisSpeed, (_) => _moveTetris());
       game.start();
-      //register the touch handlers at the window
+      //Touch Steuerung registieren
       window.onTouchStart.listen(sw.handleTouchStart);
       window.onTouchMove.listen(sw.handleTouchMove);
       window.onTouchEnd.listen(sw.handleTouchEnd);
       view.update(game);
     });
-
-    // Steuerung des Tetris Blocks
-
-
   }
 
 

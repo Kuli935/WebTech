@@ -1,14 +1,10 @@
 part of tetris;
 
-/*
-  A simple event handler that detects 4 different swipe directions (up, down,
-  left, right) based on the touch gestures registered. The SwipeHandler is a
-  singelton, because every app has one window, which needs one way of handling
-  touch swipes at most. Different callbacks for each swipe direction can be
-  provided.
+/**
+ * Klasse zum Erkennen verschiedener Touchgesten. Fuer die unterschiedlichen
+ * Touch Gesten koennen Callback function registriert werden.
  */
 class SwipeHandler {
-  //The singelton instance
   static SwipeHandler instance;
   //callbacks
   var onSwipeUp;
@@ -16,7 +12,6 @@ class SwipeHandler {
   var onSwipeLeft;
   var onSwipeRight;
   var onTap;
-  //vars to store the first point of a touch movement
   num xDown;
   num yDown;
   num startTime;
@@ -28,7 +23,10 @@ class SwipeHandler {
     return instance;
   }
 
-  //records the first point of a touch movement and the time it happened
+  /**
+   * Event Handler fuer onTouchstart Events. Speichert den Punkt und den
+   * Zeitpunkt zu dem die Touch Geste beginnt.
+   */
   void handleTouchStart(TouchEvent e) {
     if (startTime == null) {
       startTime = new DateTime.now().millisecondsSinceEpoch;
@@ -37,20 +35,25 @@ class SwipeHandler {
     yDown = e.touches[0].client.y;
   }
 
+  /**
+   * Event Handler fuer onTouchEnd Events. Erkennts 'Tap' Gesten und
+   * loest die entsprechende Callback Funktion aus.
+   */
   void handleTouchEnd(TouchEvent e) {
     if (startTime == null) {
       return null;
     }
-    //check how long the user touched
     num stopTime = new DateTime.now().millisecondsSinceEpoch;
     (stopTime - startTime < 200) && (onTap != null) ? onTap() : null;
     startTime = null;
   }
 
-  //The method is looking for swipes. If a swipe motion is recognized, the
-  //the callback for this swipe motion is called.
+  /**
+   * Event Handler fuer onTouchMove Events. Erkennt unterschiedliche Swipe Gesten
+   * und loest die entsprechende Callback Funktion aus.
+   */
   void handleTouchMove(TouchEvent e) {
-    //local helper function for the absolute of a value
+    //lokale Hilfsfunktion fue den Betrag einer Zahl
     num _abs(num x) => x > 0 ? x : -x;
 
     if (xDown == null || yDown == null) {
