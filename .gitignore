@@ -7,3 +7,9 @@ pubspec.lock
 
 # Directory created by dartdoc
 doc/api/
+
+#custom ignores
+deploy.py
+.idea/
+analysis_options.yaml
+pubspec.yaml
