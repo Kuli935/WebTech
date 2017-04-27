@@ -199,13 +199,16 @@ class Tetris {
       { 'row' : _stone.elementAt(3)['row'] + _dr,  'col' : _stone.elementAt(3)['col'] + _dc  }
     ];
 
-
-    if (onField(_move)){
-      _stone = _move;
-    } else {
-      nextTetris();
+    // Prüfen ob der Tetris Stein die Seiten verlässt
+    if (onSide(_move)){
+      // Prüfen ob der Stein den Grund des Feldes erreicht
+      if (onGround(_move)){
+        _stone = _move;
+      } else {
+        nextTetris();
+      }
     }
-
+    
 
   }
 
@@ -226,33 +229,46 @@ class Tetris {
    */
   void right() { _dr =  0; _dc =  1; }
 
-
   /**
-   * Überprüfen ob sich der Tetris Stein noch im Feld befindet
+   * Überprüfen ob der Tetris Stein an den Seiten angekommen ist
    */
-  bool onField(var moveTo) {
+  bool onSide(var moveTo) {
     bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
-        moveTo.elementAt(0)['row'] < _game._sizeHeight &&
         moveTo.elementAt(0)['col'] >= 0 &&
         moveTo.elementAt(0)['col'] < _game._sizeWidth;
 
     bool stoneTwo = moveTo.elementAt(1)['row'] >= 0&&
-        moveTo.elementAt(1)['row'] < _game._sizeHeight &&
         moveTo.elementAt(1)['col'] >= 0 &&
         moveTo.elementAt(1)['col'] < _game._sizeWidth;
 
     bool stoneThree = moveTo.elementAt(2)['row'] >= 0&&
-        moveTo.elementAt(2)['row'] < _game._sizeHeight &&
         moveTo.elementAt(2)['col'] >= 0 &&
         moveTo.elementAt(2)['col'] < _game._sizeWidth;
 
     bool stoneFour = moveTo.elementAt(3)['row'] >= 0&&
-        moveTo.elementAt(3)['row'] < _game._sizeHeight &&
         moveTo.elementAt(3)['col'] >= 0 &&
         moveTo.elementAt(3)['col'] < _game._sizeWidth;
 
     return stoneOne && stoneTwo && stoneThree && stoneFour;
+  }
 
+  /**
+   * Überprüfen ob der Tetris Stein am Grund angekommen ist
+   */
+  bool onGround(var moveTo) {
+    bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
+        moveTo.elementAt(0)['row'] < _game._sizeHeight;
+
+    bool stoneTwo = moveTo.elementAt(1)['row'] >= 0&&
+        moveTo.elementAt(1)['row'] < _game._sizeHeight;
+
+    bool stoneThree = moveTo.elementAt(2)['row'] >= 0&&
+        moveTo.elementAt(2)['row'] < _game._sizeHeight;
+
+    bool stoneFour = moveTo.elementAt(3)['row'] >= 0&&
+        moveTo.elementAt(3)['row'] < _game._sizeHeight;
+
+    return stoneOne && stoneTwo && stoneThree && stoneFour;
   }
 
   /**
@@ -319,6 +335,9 @@ class TetrisGame {
    * Stopt das Spiel
    */
   void stop() { _gamestate = #stopped; }
+
+
+  var _field;
 
   /**
    * Konstruktor um ein neues Tetris Spiel zu erzeugen

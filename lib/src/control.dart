@@ -83,6 +83,41 @@ class TetrisGameController {
       window.onTouchEnd.listen(sw.handleTouchEnd);
       view.update(game);
     });
+
+    // Steuerung des Tetris Steins über Tastatur
+    window.onKeyDown.listen((KeyboardEvent ev) {
+      if (game.stopped) return;
+      // Nach links bewegen
+      if (ev.keyCode == KeyCode.LEFT) {
+        game.tetris.left();
+        game.moveTetris();
+        game.tetris.down();
+        view.update(game);
+      }
+
+      // Nach rechts bewegen
+      if (ev.keyCode == KeyCode.RIGHT) {
+        game.tetris.right();
+        game.moveTetris();
+        game.tetris.down();
+        view.update(game);
+      }
+
+      // Nach unten bewegen
+      if (ev.keyCode == KeyCode.DOWN) {
+        game.tetris.down();
+        game.moveTetris();
+        view.update(game);
+      }
+
+      // Drehen
+      if (ev.keyCode == KeyCode.UP) {
+        game.tetris.down();
+        game.moveTetris();
+        view.update(game);
+      }
+    });
+
   }
 
 
