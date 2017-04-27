@@ -13,7 +13,7 @@ const tetrisSpeed = const Duration(milliseconds: 500);
  * diese zu übersetzen in gültige [TetrisGame] Taten.
  *
  * Des weiteren löst ein [TetrisGameController]-Objekt die
- * Bewegungen eines Objekts [Tetris].
+ * Bewegungen eines Objekts [Tetromino].
  *
  * Erforderliche Updates für die Ansicht sind, das [TetisView]-Objekt übertragen
  * um den Benutzer zu informieren, was sich im [TetrisGame] verändert
@@ -21,12 +21,12 @@ const tetrisSpeed = const Duration(milliseconds: 500);
 class TetrisGameController {
 
   /**
-   * Erzeugen eines Tetris Game. Aufruf aus der Datei model.dart.
+   * Erzeugen eines Tetris Game. Aufruf aus der Datei Tetromino.dart.
    */
   var game = new TetrisGame(gameHeight, gameWidth, nextStoneFieldHeight, nextStoneFieldWidth);
 
   /**
-   * Erzeugen der Tetrisansicht. Aufruf aus der Datei view.dart.
+   * Erzeugen der Tetrisansicht. Aufruf aus der Datei TetrisView.dart.
    */
   final view = new TetrisView();
 

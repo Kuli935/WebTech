@@ -4,7 +4,6 @@ part of tetris;
  * Ein Tetrisobjekt interagiert mit dem DOM tree
  */
 class TetrisView {
-
   /**
    * Elemente mit der Klasse '.container_start' im DOM tree.
    * Soll nur gezeigt werden wenn das Spiel nicht läuft
@@ -35,19 +34,16 @@ class TetrisView {
    */
   final game = querySelector('#field');
 
-
   /**
    * Elemente mit der ID '#nextStone' im DOM tree.
    * Wird verwendet um das Feld von nächsten Tetris zu visualisieren als eine HTML Tabelle.
    */
   final nextStone = querySelector('#nextstone');
 
-
   /**
    * Start Button für das Spiel.
    */
   HtmlElement get startButton => querySelector('#startButton');
-
 
   /**
    * Enthält alle TD-Elemente des Feldes.
@@ -59,15 +55,13 @@ class TetrisView {
    */
   List<List<HtmlElement>> nextStoneFields;
 
-
   /**
    * Aktualisiert die view nach dem Modelstatus.
    *
    * - [startButton] am Anfang zeigen
    * - Spielfeld anzeigen nachdem Modelstatus
    */
-  void update(TetrisGame model, { List<Map> scores: const [] }) {
-
+  void update(TetrisGame model, {List<Map> scores: const []}) {
     // Startfenster ausblenden
     container_start.style.display = "none";
     // Spielfeld einblenden
@@ -80,13 +74,20 @@ class TetrisView {
         final td = fields[row][col];
         if (td != null) {
           td.classes.clear();
-          if (field[row][col] == #cyan) td.classes.add('cyan');
-          else if (field[row][col] == #blue) td.classes.add('blue');
-          else if (field[row][col] == #yellow) td.classes.add('yellow');
-          else if (field[row][col] == #orange) td.classes.add('orange');
-          else if (field[row][col] == #red) td.classes.add('red');
-          else if (field[row][col] == #green) td.classes.add('green');
-          else if (field[row][col] == #purple) td.classes.add('purple');
+          if (field[row][col] == #cyan)
+            td.classes.add('cyan');
+          else if (field[row][col] == #blue)
+            td.classes.add('blue');
+          else if (field[row][col] == #yellow)
+            td.classes.add('yellow');
+          else if (field[row][col] == #orange)
+            td.classes.add('orange');
+          else if (field[row][col] == #red)
+            td.classes.add('red');
+          else if (field[row][col] == #green)
+            td.classes.add('green');
+          else if (field[row][col] == #purple)
+            td.classes.add('purple');
           else if (field[row][col] == #empty) td.classes.add('empty');
         }
       }
@@ -99,20 +100,25 @@ class TetrisView {
         final td = nextStoneFields[row][col];
         if (td != null) {
           td.classes.clear();
-          if (nextStoneField[row][col] == #cyan) td.classes.add('cyan');
-          else if (nextStoneField[row][col] == #blue) td.classes.add('blue');
-          else if (nextStoneField[row][col] == #yellow) td.classes.add('yellow');
-          else if (nextStoneField[row][col] == #orange) td.classes.add('orange');
-          else if (nextStoneField[row][col] == #red) td.classes.add('red');
-          else if (nextStoneField[row][col] == #green) td.classes.add('green');
-          else if (nextStoneField[row][col] == #purple) td.classes.add('purple');
+          if (nextStoneField[row][col] == #cyan)
+            td.classes.add('cyan');
+          else if (nextStoneField[row][col] == #blue)
+            td.classes.add('blue');
+          else if (nextStoneField[row][col] == #yellow)
+            td.classes.add('yellow');
+          else if (nextStoneField[row][col] == #orange)
+            td.classes.add('orange');
+          else if (nextStoneField[row][col] == #red)
+            td.classes.add('red');
+          else if (nextStoneField[row][col] == #green)
+            td.classes.add('green');
+          else if (nextStoneField[row][col] == #purple)
+            td.classes.add('purple');
           else if (nextStoneField[row][col] == #empty) td.classes.add('empty');
         }
       }
     }
-
   }
-
 
   /**
    * Generiert ein nächstes Tetris Bock Feld.
@@ -139,12 +145,11 @@ class TetrisView {
     for (int row = 0; row < nextStoneField.length; row++) {
       nextStoneFields[row] = [];
       for (int col = 0; col < nextStoneField[row].length; col++) {
-        nextStoneFields[row].add(nextStone.querySelector("#nextstone_${row}_${col}"));
+        nextStoneFields[row]
+            .add(nextStone.querySelector("#nextstone_${row}_${col}"));
       }
     }
   }
-
-
 
   /**
    * Generiert ein Feld entsprechend dem Model Zustand.
@@ -175,5 +180,4 @@ class TetrisView {
       }
     }
   }
-
 }

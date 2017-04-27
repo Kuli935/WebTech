@@ -3,13 +3,13 @@ library tetris;
 import 'dart:html';
 import 'dart:async';
 import 'dart:math';
-import 'dart:convert';
 
-part 'src/model.dart';
-part 'src/control.dart';
-part 'src/view.dart';
+part 'src/Tetromino.dart';
+part 'src/TetrisController.dart';
+part 'src/TetrisView.dart';
 part 'src/SwipeHandler.dart';
 part 'src/Cell.dart';
+part 'src/TetrisGame.dart';
 
 /**
  * Definiert eine Tetris Spielkonstante, das n x m Feld.
@@ -22,4 +22,3 @@ const gameWidth = 10;
  */
 const nextStoneFieldHeight = 4;
 const nextStoneFieldWidth = 4;
-

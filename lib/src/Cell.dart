@@ -1,12 +1,12 @@
 part of tetris;
 
-class Cell{
+class Cell {
   bool _isActive;
   int _row;
   int _col;
   Symbol _color;
 
-  Cell(int row, int col, Symbol color){
+  Cell(int row, int col, Symbol color) {
     this._isActive = false;
     this._row = row;
     this._col = col;
