@@ -48,31 +48,69 @@ class TetrisGameController {
 
     //Vorbereiten der Touch Steuerung
     SwipeHandler sw = SwipeHandler.getInstance();
+    // Nach links bewegen
     sw.onSwipeLeft = (){
-      bool canMove = true;
-      //pruefen ob der Stein am Rand des Spielfelds ist
-      game.tetris._stone.forEach((var element){
-        element['col'] == 0 ? canMove = false : null;
-      });
-      if(canMove){
+        game.tetris.left();
+        game.moveTetris();
+        game.tetris.down();
+        view.update(game);
+    };
+
+    // Nach rechts bewegen
+    sw.onSwipeRight = (){
+        game.tetris.right();
+        game.moveTetris();
+        game.tetris.down();
+        view.update(game);
+    };
+
+    // Nach unten bewegen
+    sw.onSwipeDown = (){
+      game.tetris.down();
+      game.moveTetris();
+      view.update(game);
+    };
+
+    // Drehen
+    sw.onSwipeUp = (){
+      game.tetris.rotate();
+      view.update(game);
+    };
+
+    // Steuerung des Tetris Steins über Tastatur
+    window.onKeyDown.listen((KeyboardEvent ev) {
+      if (game.stopped) return;
+      // Nach links bewegen
+      if (ev.keyCode == KeyCode.LEFT) {
         game.tetris.left();
         game.moveTetris();
         game.tetris.down();
         view.update(game);
       }
-    };
-    sw.onSwipeRight = (){
-      bool canMove = true;
-      game.tetris._stone.forEach((var element){
-        element['col'] == 9 ? canMove = false : null;
-      });
-      if(canMove){
+
+      // Nach rechts bewegen
+      if (ev.keyCode == KeyCode.RIGHT) {
         game.tetris.right();
         game.moveTetris();
         game.tetris.down();
         view.update(game);
       }
-    };
+
+      // Nach unten bewegen
+      if (ev.keyCode == KeyCode.DOWN) {
+        game.tetris.down();
+        game.moveTetris();
+        view.update(game);
+      }
+
+      // Drehen
+      if (ev.keyCode == KeyCode.UP) {
+        game.tetris.rotate();
+        view.update(game);
+      }
+    });
+
+
     // Ein neues Spiel wurde von dem Benutzer gestarted
     view.startButton.onClick.listen((_) {
       if (tetrisTrigger != null) tetrisTrigger.cancel();
@@ -84,6 +122,7 @@ class TetrisGameController {
       window.onTouchEnd.listen(sw.handleTouchEnd);
       view.update(game);
     });
+
   }
 
 

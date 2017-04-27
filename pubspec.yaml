@@ -1,7 +1,7 @@
 name: tetris
 author: Florian Jeger, Christoph Jeger, Matthias Steffen
 version: 0.0.1
-description: Library für das Spiel Tetris.
+description: Bibliothek für das Spiel Tetris.
 
 environment:
   sdk: '>=1.20.1 <2.0.0'
