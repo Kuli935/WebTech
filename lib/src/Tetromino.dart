@@ -225,27 +225,19 @@ class Tetromino {
       { 'row' : _stone.elementAt(3)['row'] + _dr,  'col' : _stone.elementAt(3)['col'] + _dc  }
     ];
 
-/*<<<<<<< HEAD
-  /*TODO: check if the tetromino can be moved. It could be blocked by the
-    bottom of the field or another tetromino that's already placed.*/
-    if (onField(_move) && !_isMoveBlocked(_move)){
-      this._stone.forEach((piece){
-        this._game._field[piece['row']][piece['col']].isActive = false;
-        this._game._field[piece['row']][piece['col']].color = #empty;
-      });
-      _stone = _move;
-    } else {
-      nextTetris();
-=======*/
     // Prüfen ob der Tetris Stein die Seiten verlässt
     if (onSide(_move)){
       // Prüfen ob der Stein den Grund des Feldes erreicht
-      if (onGround(_move)){
+      //window.console.log('onGround: ${onGround(_move)}');
+      if (notOnGround(_move)){
+        //den Stein von der alten Postion entfernen
         this._stone.forEach((piece){
           this._game._field[piece['row']][piece['col']].isActive = false;
           this._game._field[piece['row']][piece['col']].color = #empty;
         });
         _stone = _move;
+        //TODO: check if the current tetromino hit another tetromino that
+        //is already placed on the field
       } else {
         nextTetris();
       }
@@ -253,16 +245,6 @@ class Tetromino {
 
     this._game.updateField();
   }
-
-  bool _isMoveBlocked(List moveTo){
-    bool isMoveBlocked = false;
-    moveTo.forEach((var stone){
-      (stone['row'] == _game.sizeHeight) ? isMoveBlocked = true : null;
-    });
-    return isMoveBlocked;
-  }
-
-
 
   /**
    * Teilt dem Tetris Stein die Bewegung nach unten mit [move]s.
@@ -305,7 +287,7 @@ class Tetromino {
   /**
    * Überprüfen ob der Tetris Stein am Grund angekommen ist
    */
-  bool onGround(var moveTo) {
+  bool notOnGround(var moveTo) {
     bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
         moveTo.elementAt(0)['row'] < _game._sizeHeight;
 
