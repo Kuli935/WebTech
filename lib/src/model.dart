@@ -88,7 +88,9 @@ class Tetris {
     // sonst alle anderen Steine
     // Den normalen Tetris stein erzeugen
     _stone = randomTetris(_tempStone, 0, _game._sizeWidth);
-    //TODO: mark cells of the current tetromino as active
+
+    //Die Zellen, welche von dem aktuellen Tetromino belegt sind als aktiv
+    //makieren
     _stone.forEach((cell){
       this._game._field[cell['row']][cell['col']].isActive = true;
     });
@@ -306,8 +308,8 @@ class TetrisGame {
   // Die Feldgröße für nächsten Tetris Stein (n x m Feld)
   final int _nextStoneFieldHeight;
   final int _nextStoneFieldWidth;
-  //TODO: currently unused
-  List<List<Symbol>> _fieldState;
+
+  // interne Representation des Spielfelds
   List<List<Cell>> _field;
 
 
@@ -348,31 +350,13 @@ class TetrisGame {
 
 
   /**
-   * Returns ein Spielfeld als eine Liste von Listen.
+   * Returns eine Representation des Spielfeld als eine Liste von Listen.
    * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
    * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
    * Leerzustand: #empty,
    * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
    */
   List<List<Symbol>> get field {
-    /*
-    TODO: convert from stateful field to representational field
-     */
-    // Tetris Stein setzen
-    //check which stones are set in the fieldState, then add the new stone and
-    //update the fieldstate
-/*    if(this._fieldState == null){
-      this._fieldState = this.field;
-      return this._fieldState;
-    }
-    _tetris.stone.forEach((s) {
-      final r = s['row'];
-      final c = s['col'];
-//      if (r < 0 || r >= sizeHeight) return;
-//      if (c < 0 || c >= sizeWidth) return;
-
-      _field[r][c] = _tetris.stoneColor;
-    });*/
     List<List<Symbol>> fieldRepresentation = new List();
     for(int row=0; row < this._field.length; row++){
       List<Symbol> newRow = new List();
@@ -390,7 +374,7 @@ class TetrisGame {
    * Tetrominoes) aufgerufen werden.
    */
   void updateField(){
-    window.console.log('updateField called, but NOT IMPLEMENTED YET!');
+    //den aktuellen Tetromino von der alten Position entfernen
     this._field.forEach((row){
       row.forEach((cell){
         if(cell.isActive){
@@ -398,6 +382,7 @@ class TetrisGame {
         }
       });
     });
+    //den aktuellen Tetromino an der neuen Position zeichnen
     this._tetris._stone.forEach((piece){
       this._field[piece['row']][piece['col']].color = this._tetris._stoneColor;
     });
