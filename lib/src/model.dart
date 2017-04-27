@@ -74,6 +74,14 @@ class Tetris {
       // generie den ersten zufalls Tetris Stein
       final random = r.nextInt(7);
       _stone = randomTetris(random, 0, _game._sizeWidth);
+      //TODO: nach dem der erste Stein auf das Spielfeld gesetzt wird, wird die
+      //View nich aktualisiert. Dies geschieht erst, wenn der Stein einmal
+      //bewegt wurde, weshalb der erste Stein erst in der zweiten Zeile
+      //erscheint.
+      _stone.forEach((cell){
+        this._game._field[cell['row']][cell['col']].isActive = true;
+      });
+
       // Farbe setzen
       _stoneColor = _tempColor;
       _firstStone = false;
@@ -88,6 +96,12 @@ class Tetris {
     // sonst alle anderen Steine
     // Den normalen Tetris stein erzeugen
     _stone = randomTetris(_tempStone, 0, _game._sizeWidth);
+
+    //Die Zellen, welche von dem aktuellen Tetromino belegt sind als aktiv
+    //makieren
+    _stone.forEach((cell){
+      this._game._field[cell['row']][cell['col']].isActive = true;
+    });
     // Farbe setzen
     _stoneColor = _nextstoneColor;
     // Vorschau auf den nächsten Stein
@@ -200,9 +214,6 @@ class Tetris {
     _stone = _rotate;
   }
 
-
-
-
   /**
    * Bewegungen von dem Tetris Stein und seine Richtungen (down, left, right)
    */
@@ -214,17 +225,41 @@ class Tetris {
       { 'row' : _stone.elementAt(3)['row'] + _dr,  'col' : _stone.elementAt(3)['col'] + _dc  }
     ];
 
+/*<<<<<<< HEAD
+  /*TODO: check if the tetromino can be moved. It could be blocked by the
+    bottom of the field or another tetromino that's already placed.*/
+    if (onField(_move) && !_isMoveBlocked(_move)){
+      this._stone.forEach((piece){
+        this._game._field[piece['row']][piece['col']].isActive = false;
+        this._game._field[piece['row']][piece['col']].color = #empty;
+      });
+      _stone = _move;
+    } else {
+      nextTetris();
+=======*/
     // Prüfen ob der Tetris Stein die Seiten verlässt
     if (onSide(_move)){
       // Prüfen ob der Stein den Grund des Feldes erreicht
       if (onGround(_move)){
+        this._stone.forEach((piece){
+          this._game._field[piece['row']][piece['col']].isActive = false;
+          this._game._field[piece['row']][piece['col']].color = #empty;
+        });
         _stone = _move;
       } else {
         nextTetris();
       }
     }
 
+    this._game.updateField();
+  }
 
+  bool _isMoveBlocked(List moveTo){
+    bool isMoveBlocked = false;
+    moveTo.forEach((var stone){
+      (stone['row'] == _game.sizeHeight) ? isMoveBlocked = true : null;
+    });
+    return isMoveBlocked;
   }
 
 
@@ -327,6 +362,9 @@ class TetrisGame {
   final int _nextStoneFieldHeight;
   final int _nextStoneFieldWidth;
 
+  // interne Representation des Spielfelds
+  List<List<Cell>> _field;
+
 
   // Spielzustand #running or #stopped.
   Symbol _gamestate;
@@ -357,31 +395,51 @@ class TetrisGame {
    */
   TetrisGame(this._sizeHeight, this._sizeWidth, this._nextStoneFieldHeight, this._nextStoneFieldWidth) {
     start();
+    this._field = new Iterable.generate(sizeHeight, (row) {
+      return new Iterable.generate(sizeWidth, (col) => new Cell(row, col, #empty)).toList();
+    }).toList();
     _tetris = new Tetris.on(this);
     stop();
   }
 
 
   /**
-   * Returns ein Spielfeld als eine Liste von Listen.
+   * Returns eine Representation des Spielfeld als eine Liste von Listen.
    * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
    * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
    * Leerzustand: #empty,
    * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
    */
   List<List<Symbol>> get field {
-    var _field = new Iterable.generate(sizeHeight, (row) {
-      return new Iterable.generate(sizeWidth, (col) => #empty).toList();
-    }).toList();
-    // Tetris Stein setzen
-    _tetris.stone.forEach((s) {
-      final r = s['row'];
-      final c = s['col'];
-      if (r < 0 || r >= sizeHeight) return;
-      if (c < 0 || c >= sizeWidth) return;
-      _field[r][c] = _tetris.stoneColor;
+    List<List<Symbol>> fieldRepresentation = new List();
+    for(int row=0; row < this._field.length; row++){
+      List<Symbol> newRow = new List();
+      for(int col=0; col < this._field[row].length; col++){
+        newRow.add(this._field[row][col].color);
+      }
+      fieldRepresentation.add(newRow);
+    }
+    return fieldRepresentation;
+  }
+
+  /**
+   * Interne Repraesentation des Spielfelds aktualisieren.
+   * Muss nach jeder Aenderung am Zustand des Spielfeldes (z.B. Bewegen eines
+   * Tetrominoes) aufgerufen werden.
+   */
+  void updateField(){
+    //den aktuellen Tetromino von der alten Position entfernen
+    this._field.forEach((row){
+      row.forEach((cell){
+        if(cell.isActive){
+          cell.color = #empty;
+        }
+      });
     });
-    return _field;
+    //den aktuellen Tetromino an der neuen Position zeichnen
+    this._tetris._stone.forEach((piece){
+      this._field[piece['row']][piece['col']].color = this._tetris._stoneColor;
+    });
   }
 
   /**
