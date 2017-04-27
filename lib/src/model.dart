@@ -181,8 +181,24 @@ class Tetris {
     return temp;
   }
 
+  /**
+   * Drehen des Tetris Steins um 90 Grad
+   * Y Koordinate: row
+   * x Koordinate: col
+   * Rotationsformal für 90 Grad:
+   * x' = x * cos(90) - y * sin(90)
+   * y' = x * sin(90) + y * cos(90)
+   */
+  void rotate(){
+    var _rotate = [
+      { 'row' : ~(_stone.elementAt(0)['col'] * sin(90) + _stone.elementAt(0)['row'] * cos(90)),  'col' : ~(_stone.elementAt(0)['col'] * cos(90) - _stone.elementAt(0)['row'] * sin(90)) },
+      { 'row' : ~(_stone.elementAt(1)['col'] * sin(90) + _stone.elementAt(1)['row'] * cos(90)),  'col' : ~(_stone.elementAt(1)['col'] * cos(90) - _stone.elementAt(1)['row'] * sin(90)) },
+      { 'row' : ~(_stone.elementAt(2)['col'] * sin(90) + _stone.elementAt(2)['row'] * cos(90)),  'col' : ~(_stone.elementAt(2)['col'] * cos(90) - _stone.elementAt(2)['row'] * sin(90)) },
+      { 'row' : ~(_stone.elementAt(3)['col'] * sin(90) + _stone.elementAt(3)['row'] * cos(90)),  'col' : ~(_stone.elementAt(3)['col'] * cos(90) - _stone.elementAt(3)['row'] * sin(90)) }
+    ];
 
-
+    _stone = _rotate;
+  }
 
 
 
@@ -191,7 +207,6 @@ class Tetris {
    * Bewegungen von dem Tetris Stein und seine Richtungen (down, left, right)
    */
   void move() {
-
     var _move = [
       { 'row' : _stone.elementAt(0)['row'] + _dr,  'col' : _stone.elementAt(0)['col'] + _dc  },
       { 'row' : _stone.elementAt(1)['row'] + _dr,  'col' : _stone.elementAt(1)['col'] + _dc  },
@@ -208,7 +223,7 @@ class Tetris {
         nextTetris();
       }
     }
-    
+
 
   }
 
