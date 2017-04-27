@@ -74,6 +74,14 @@ class Tetris {
       // generie den ersten zufalls Tetris Stein
       final random = r.nextInt(7);
       _stone = randomTetris(random, 0, _game._sizeWidth);
+      //TODO: nach dem der erste Stein auf das Spielfeld gesetzt wird, wird die
+      //View nich aktualisiert. Dies geschieht erst, wenn der Stein einmal
+      //bewegt wurde, weshalb der erste Stein erst in der zweiten Zeile
+      //erscheint.
+      _stone.forEach((cell){
+        this._game._field[cell['row']][cell['col']].isActive = true;
+      });
+
       // Farbe setzen
       _stoneColor = _tempColor;
       _firstStone = false;
