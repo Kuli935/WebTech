@@ -9,6 +9,7 @@ part 'src/model.dart';
 part 'src/control.dart';
 part 'src/view.dart';
 part 'src/SwipeHandler.dart';
+part 'src/Cell.dart';
 
 /**
  * Definiert eine Tetris Spielkonstante, das n x m Feld.

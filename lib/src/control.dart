@@ -4,7 +4,8 @@ part of tetris;
  * Diese Konstante beschreibt die Geschwindigkeit von dem Tetris Stein
  * Ein [tetrisSpeed] von 1000ms bestimmt 1 Bewegungen pro Sekunde.
  */
-const tetrisSpeed = const Duration(milliseconds: 1000);
+//TODO:
+const tetrisSpeed = const Duration(milliseconds: 500);
 
 /**
  * Ein [TetrisGameController]-Objekt registriert mehrere Handler
@@ -90,6 +91,7 @@ class TetrisGameController {
    * Bewegt den Tetris Stein.
    */
   void _moveTetris() {
+    //window.console.log('SPEED INCREASED FOR DEBUG.');
     game.moveTetris();
     view.update(game);
   }
@@ -100,8 +102,6 @@ class TetrisGameController {
    */
   dynamic _newGame() async {
     game = new TetrisGame(gameWidth, gameHeight, nextStoneFieldHeight, nextStoneFieldWidth);
-
-
   }
 
 
