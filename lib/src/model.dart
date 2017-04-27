@@ -171,7 +171,7 @@ class Tetris {
         // Erzeugt ein Z Tetris Stein in der Farbe rot
         _tempColor = #red;
         temp = [
-          { 'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
+          {'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
           { 'row' : height ~/ 2,       'col' : width ~/ 2      },
           { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2      },
           { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2 + 1  }
@@ -183,18 +183,18 @@ class Tetris {
 
   /**
    * Drehen des Tetris Steins um 90 Grad
-   * Y Koordinate: row
-   * x Koordinate: col
+   * Y-Koordinate: row
+   * X-Koordinate: col
    * Rotationsformal für 90 Grad:
    * x' = x * cos(90) - y * sin(90)
    * y' = x * sin(90) + y * cos(90)
    */
   void rotate(){
     var _rotate = [
-      { 'row' : ~(_stone.elementAt(0)['col'] * sin(90) + _stone.elementAt(0)['row'] * cos(90)),  'col' : ~(_stone.elementAt(0)['col'] * cos(90) - _stone.elementAt(0)['row'] * sin(90)) },
-      { 'row' : ~(_stone.elementAt(1)['col'] * sin(90) + _stone.elementAt(1)['row'] * cos(90)),  'col' : ~(_stone.elementAt(1)['col'] * cos(90) - _stone.elementAt(1)['row'] * sin(90)) },
-      { 'row' : ~(_stone.elementAt(2)['col'] * sin(90) + _stone.elementAt(2)['row'] * cos(90)),  'col' : ~(_stone.elementAt(2)['col'] * cos(90) - _stone.elementAt(2)['row'] * sin(90)) },
-      { 'row' : ~(_stone.elementAt(3)['col'] * sin(90) + _stone.elementAt(3)['row'] * cos(90)),  'col' : ~(_stone.elementAt(3)['col'] * cos(90) - _stone.elementAt(3)['row'] * sin(90)) }
+      { 'row' : (_stone.elementAt(0)['col'] * sin(90).round() + _stone.elementAt(0)['row'] * cos(90).round()),  'col' : (_stone.elementAt(0)['col'] * cos(90).round() - _stone.elementAt(0)['row'] * sin(90).round()) },
+      { 'row' : (_stone.elementAt(1)['col'] * sin(90).round() + _stone.elementAt(1)['row'] * cos(90).round()),  'col' : (_stone.elementAt(1)['col'] * cos(90).round() - _stone.elementAt(1)['row'] * sin(90).round()) },
+      { 'row' : (_stone.elementAt(2)['col'] * sin(90).round() + _stone.elementAt(2)['row'] * cos(90).round()),  'col' : (_stone.elementAt(2)['col'] * cos(90).round() - _stone.elementAt(2)['row'] * sin(90).round()) },
+      { 'row' : (_stone.elementAt(3)['col'] * sin(90).round() + _stone.elementAt(3)['row'] * cos(90).round()),  'col' : (_stone.elementAt(3)['col'] * cos(90).round() - _stone.elementAt(3)['row'] * sin(90).round()) }
     ];
 
     _stone = _rotate;
@@ -351,8 +351,6 @@ class TetrisGame {
    */
   void stop() { _gamestate = #stopped; }
 
-
-  var _field;
 
   /**
    * Konstruktor um ein neues Tetris Spiel zu erzeugen
