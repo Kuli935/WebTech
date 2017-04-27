@@ -88,6 +88,10 @@ class Tetris {
     // sonst alle anderen Steine
     // Den normalen Tetris stein erzeugen
     _stone = randomTetris(_tempStone, 0, _game._sizeWidth);
+    //TODO: mark cells of the current tetromino as active
+    _stone.forEach((cell){
+      this._game._field[cell['row']][cell['col']].isActive = true;
+    });
     // Farbe setzen
     _stoneColor = _nextstoneColor;
     // Vorschau auf den nächsten Stein
@@ -196,12 +200,16 @@ class Tetris {
   /*TODO: check if the tetromino can be moved. It could be blocked by the
     bottom of the field or another tetromino that's already placed.*/
     if (onField(_move) && !_isMoveBlocked(_move)){
+      this._stone.forEach((piece){
+        this._game._field[piece['row']][piece['col']].isActive = false;
+        this._game._field[piece['row']][piece['col']].color = #empty;
+      });
       _stone = _move;
     } else {
       nextTetris();
     }
 
-
+    this._game.updateField();
   }
 
   bool _isMoveBlocked(List moveTo){
@@ -371,6 +379,7 @@ class TetrisGame {
       for(int col=0; col < this._field[row].length; col++){
         newRow.add(this._field[row][col].color);
       }
+      fieldRepresentation.add(newRow);
     }
     return fieldRepresentation;
   }
@@ -381,11 +390,17 @@ class TetrisGame {
    * Tetrominoes) aufgerufen werden.
    */
   void updateField(){
-    //can the current tetromino be moved?
-        //if not is a row cleared?
-
-        //if so just move it
     window.console.log('updateField called, but NOT IMPLEMENTED YET!');
+    this._field.forEach((row){
+      row.forEach((cell){
+        if(cell.isActive){
+          cell.color = #empty;
+        }
+      });
+    });
+    this._tetris._stone.forEach((piece){
+      this._field[piece['row']][piece['col']].color = this._tetris._stoneColor;
+    });
   }
 
   /**
