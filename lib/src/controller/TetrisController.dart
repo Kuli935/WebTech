@@ -1,11 +1,11 @@
 part of tetris;
 
 /**
- * Diese Konstante beschreibt die Geschwindigkeit von dem Tetris Stein
- * Ein [tetrisSpeed] von 1000ms bestimmt 1 Bewegungen pro Sekunde.
+ * Diese Konstante beschreibt die Geschwindigkeit von dem Tetromino
+ * Ein [tetrominoSpeed] von 1000ms bestimmt 1 Bewegungen pro Sekunde.
  */
 //TODO:
-const tetrisSpeed = const Duration(milliseconds: 500);
+const tetrominoSpeed = const Duration(milliseconds: 500);
 
 /**
  * Ein [TetrisController]-Objekt registriert mehrere Handler
@@ -26,14 +26,14 @@ class TetrisController {
   var game = new TetrisGame(gameHeight, gameWidth, nextStoneFieldHeight, nextStoneFieldWidth);
 
   /**
-   * Erzeugen der Tetrisansicht. Aufruf aus der Datei TetrisView.dart.
+   * Erzeugen der Tetrisansicht. Aufruf aus der Datei TetrisView.dart im Ordner view.
    */
   final view = new TetrisView();
 
   /**
    * Periodischer Auslöser, der Tetrisbewegungen steuert
    */
-  Timer tetrisTrigger;
+  Timer tetrominoTrigger;
 
 
   /**
@@ -46,7 +46,7 @@ class TetrisController {
     view.generateField(game);
     view.generateNextStoneField(game);
 
-    //Vorbereiten der Touch Steuerung
+    //Vorbereiten der Touch Steuerung des Tetromino
     SwipeHandler sw = SwipeHandler.getInstance();
     // Nach links bewegen
     sw.onSwipeLeft = (){
@@ -77,7 +77,7 @@ class TetrisController {
       view.update(game);
     };
 
-    // Steuerung des Tetris Steins über Tastatur
+    // Steuerung des Tetromino über Tastatur
     window.onKeyDown.listen((KeyboardEvent ev) {
       if (game.stopped) return;
       // Nach links bewegen
@@ -113,8 +113,8 @@ class TetrisController {
 
     // Ein neues Spiel wurde von dem Benutzer gestarted
     view.startButton.onClick.listen((_) {
-      if (tetrisTrigger != null) tetrisTrigger.cancel();
-      tetrisTrigger = new Timer.periodic(tetrisSpeed, (_) => _moveTetris());
+      if (tetrominoTrigger != null) tetrominoTrigger.cancel();
+      tetrominoTrigger = new Timer.periodic(tetrominoSpeed, (_) => _moveTetris());
       game.start();
       //Touch Steuerung registieren
       window.onTouchStart.listen(sw.handleTouchStart);
@@ -127,7 +127,7 @@ class TetrisController {
 
 
   /**
-   * Bewegt den Tetris Stein.
+   * Bewegt den Tetromino.
    */
   void _moveTetris() {
     //window.console.log('SPEED INCREASED FOR DEBUG.');

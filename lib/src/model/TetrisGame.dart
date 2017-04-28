@@ -4,14 +4,14 @@ part of tetris;
  * Definiert ein Tetris Spiel. Eine Tetris Spielkonstante ist das n x m Feld.
  */
 class TetrisGame {
-  // Tetris Stein
+  // Tetromino = Tetris Stein
   Tetromino _tetris;
 
   // Die Feldgröße des Spiels (n x m Feld)
   final int _sizeHeight;
   final int _sizeWidth;
 
-  // Die Feldgröße für nächsten Tetris Stein (n x m Feld)
+  // Die Feldgröße für das Nächste-Tetromino-Feld (n x m Feld)
   final int _nextStoneFieldHeight;
   final int _nextStoneFieldWidth;
 
@@ -47,6 +47,10 @@ class TetrisGame {
 
   /**
    * Konstruktor um ein neues Tetris Spiel zu erzeugen
+   * @param int _sizeHeight = Höhe des Spielfeldes
+   * @param int _sizeWidth = Breite des Spielfeldes
+   * @param int _nextStoneFieldHeight = Höhe des Nächsten-Tetromino-Feldes
+   * @param int _nextStoneFieldWidth = Breite des Nächsten-Tetromino-Feldes
    */
   TetrisGame(this._sizeHeight, this._sizeWidth, this._nextStoneFieldHeight,
       this._nextStoneFieldWidth) {
@@ -99,7 +103,7 @@ class TetrisGame {
   }
 
   /**
-   * Returns Nächster-Tetris-Stein-Feld als eine Liste von Listen.
+   * Gibt das Nächster-Tetromino-Feld als eine Liste von Listen zurück.
    * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
    * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
    * Leerzustand: #empty,
@@ -110,7 +114,7 @@ class TetrisGame {
       return new Iterable.generate(nextStoneFieldWidth, (col) => #empty)
           .toList();
     }).toList();
-    // Tetris Stein setzen
+    // Tetromino setzen
     _tetris.nextstone.forEach((s) {
       final r = s['row'];
       final c = s['col'];
@@ -122,7 +126,7 @@ class TetrisGame {
   }
 
   /**
-   * Bewegungensstatus für den Tetris Stein [down], [left], [right].
+   * Bewegungensstatus für den Tetromino [down], [left], [right].
    * Bewegungen sind nur im Status [running] möglich.
    */
   void moveTetris() {
@@ -130,21 +134,27 @@ class TetrisGame {
   }
 
   /**
-   * Returns den Tetris Stein.
+   * Gibt den Tetromino zurück.
    */
   Tetromino get tetris => _tetris;
 
   /**
-   * Returns die Größe des Spielffeldes. Das Spiel wird auf einen n x m Feld gespielt.
+   * Gibt die Höhe des Spielfeldes zurück. Das Spiel wird auf einen n x m Feld gespielt.
    */
   int get sizeHeight => _sizeHeight;
 
+  /**
+   * Gibt die Breite des Spielfeldes zurück. Das Spiel wird auf einen n x m Feld gespielt.
+   */
   int get sizeWidth => _sizeWidth;
 
   /**
-   * Returns die Größe des Feldes für den nächsten Stein.
+   * Gibt die Höhe des Feldes für den Nächsten-Tetromino-Feld zurück.
    */
   int get nextStoneFieldHeight => _nextStoneFieldHeight;
 
+  /**
+   * Gibt die Breite des Feldes für den Nächsten-Tetromino-Feld zurück.
+   */
   int get nextStoneFieldWidth => _nextStoneFieldWidth;
 }

@@ -1,7 +1,7 @@
 part of tetris;
 
 /**
- *  * Definiert ein Tetris-Block im Tetris Spiel.
+ *  * Definiert ein Tetromino im Tetris Spiel.
  */
 class Tetromino {
 
@@ -11,67 +11,68 @@ class Tetromino {
   final TetrisGame _game;
 
   /**
-   * Liste der Stein Elemente von dem Tetris Stein
+   * Liste der Stein Elemente von dem Tetromino
    */
   var _stone = [];
 
   /**
-   * Liste der Stein Elemente von dem Tetris Stein für das Nächste-Tetris-Stein-Feld
+   * Liste der Stein Elemente von dem Tetromino für das Nächste-Tetris-Stein-Feld
    */
   var _nextstone = [];
 
   /**
-   * Farbe des Tetris Steins im Spielfeld
+   * Farbe des Tetromino im Spielfeld
    */
   Symbol _stoneColor;
 
   /**
-   * Farbe des Tetris Steins im Nächsten-Tetris-Stein-Feld
+   * Farbe des Tetromino im Nächsten-Tetromino-Feld
    */
   Symbol _nextstoneColor;
 
   /**
-   * Temporäre Farbe des Tetris Steins
+   * Temporäre Farbe des Tetromino
    */
   Symbol _tempColor;
 
   /**
-   * Vertikale, Reihe (row), Bewegung von dem Tetris Stein. Mögliche Richtung nur nach unten: +1.
+   * Vertikale, Reihe (row), Bewegung von dem Tetromino. Mögliche Richtung nur nach unten: +1.
    */
   int _dr;
 
   /**
-   * Horizontale, Spalte (col), Bewegung von dem Tetris Stein. Mögliche Richtungen: links, bleiben, rechts:  -1, 0, 1.
+   * Horizontale, Spalte (col), Bewegung von dem Tetromino. Mögliche Richtungen: links, bleiben, rechts:  -1, 0, 1.
    */
   int _dc;
 
   /**
-   * Variable für den ersten Tetris Stein. Damit der nächste Stein um einen versetzt ist.
+   * Variable für den ersten Tetromino. Damit der nächste Tetromino um einen versetzt ist für die Vorschau
    */
   bool _firstStone = true;
 
   /**
-   * Temporäre Nummer des Tetris Stein
+   * Temporäre Nummer des Tetromino
    */
   int _tempStone;
 
   /**
    * Konstuktor um ein [Tetromino] Objekt für ein [TetrisGame] zu erzeugen.
+   * @param _game = TetrisGame Objekt
    */
   Tetromino.on(this._game) {
-    nextTetris();
+    nextTetromino();
     down();
   }
 
   /**
-   * Generiert einen zufälligen Tetris Stein.
+   * Generiert einen zufälligen Tetromino.
    */
-  void nextTetris() {
+  void nextTetromino() {
     final r = new Random();
 
-    // Prüfe ob es der aller erste Tetris Stein ist
+    // Prüfe ob es der aller erste Tetromino ist
     if (_firstStone) {
-      // generie den ersten zufalls Tetris Stein
+      // generie den ersten zufalls Tetromino
       final random = r.nextInt(7);
       _stone = randomTetris(random, 0, _game._sizeWidth);
       //TODO: nach dem der erste Stein auf das Spielfeld gesetzt wird, wird die
@@ -86,15 +87,15 @@ class Tetromino {
       _stoneColor = _tempColor;
       _firstStone = false;
 
-      // Vorschau auf den nächsten Stein
+      // Vorschau auf den nächsten Tetromino
       _tempStone = r.nextInt(7);
       _nextstone = randomTetris(_tempStone, _game._nextStoneFieldHeight - 1, _game._nextStoneFieldWidth);
       // Farbe setzen
       _nextstoneColor = _tempColor;
     }
 
-    // sonst alle anderen Steine
-    // Den normalen Tetris stein erzeugen
+    // sonst alle anderen Tetromino
+    // Den normalen Tetromino erzeugen
     _stone = randomTetris(_tempStone, 0, _game._sizeWidth);
 
     //Die Zellen, welche von dem aktuellen Tetromino belegt sind als aktiv
@@ -104,7 +105,7 @@ class Tetromino {
     });
     // Farbe setzen
     _stoneColor = _nextstoneColor;
-    // Vorschau auf den nächsten Stein
+    // Vorschau auf den nächsten Tetromino
     _tempStone = r.nextInt(7);
     _nextstone = randomTetris(_tempStone, _game._nextStoneFieldHeight - 1, _game._nextStoneFieldWidth);
     // Farbe setzen
@@ -112,17 +113,17 @@ class Tetromino {
   }
 
   /**
-   * Generiert einen zufälligen Tetris Stein.
-   * @param: int randoom = Einen Zufallswert von 0-6
+   * Generiert einen zufälligen Tetromino.
+   * @param int random = Zufallswert von 0-6, Zahl ermittelt den Tetromino
    * @param int height = Höhe
-   * @param int width = Bereite
-   * @return Liste des Tetris Steins
+   * @param int width = Breite
+   * @return Liste des Tetromino
    */
   List<Map<String, int>> randomTetris(int random, int height, int width){
     List<Map<String, int>> temp;
     switch(random) {
       case 0:
-        // Erzeugt ein I Tetris Stein in der Farbe hellblau
+        // Erzeugt ein I Tetromino in der Farbe hellblau
         _tempColor = #cyan;
         temp = [
           { 'row' : height ~/ 2,    'col' : width ~/ 2 - 2 },
@@ -132,7 +133,7 @@ class Tetromino {
         ];
         break;
       case 1:
-        // Erzeugt ein J Tetris Stein in der Farbe blau
+        // Erzeugt ein J Tetromino in der Farbe blau
         _tempColor = #blue;
         temp = [
           { 'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
@@ -142,7 +143,7 @@ class Tetromino {
         ];
         break;
       case 2:
-        // Erzeugt ein L Tetris Stein in der Farbe orange
+        // Erzeugt ein L Tetromino in der Farbe orange
         _tempColor = #orange;
         temp = [
           { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2 - 1  },
@@ -152,7 +153,7 @@ class Tetromino {
         ];
         break;
       case 3:
-        // Erzeugt ein O Tetris Stein in der Farbe gelb
+        // Erzeugt ein O Tetromino in der Farbe gelb
         _tempColor = #yellow;
         temp = [
           { 'row' : height ~/ 2,      'col' : width ~/ 2 - 1 },
@@ -162,7 +163,7 @@ class Tetromino {
         ];
         break;
       case 4:
-        // Erzeugt ein S Tetris Stein in der Farbe grün
+        // Erzeugt ein S Tetromino in der Farbe grün
         _tempColor = #green;
           temp = [
             { 'row' : height ~/ 2,       'col' : width ~/ 2      },
@@ -172,7 +173,7 @@ class Tetromino {
           ];
           break;
       case 5:
-        // Erzeugt ein T Tetris Stein in der Farbe lila
+        // Erzeugt ein T Tetromino in der Farbe lila
         _tempColor = #purple;
         temp = [
           { 'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
@@ -182,7 +183,7 @@ class Tetromino {
         ];
         break;
       case 6:
-        // Erzeugt ein Z Tetris Stein in der Farbe rot
+        // Erzeugt ein Z Tetromino in der Farbe rot
         _tempColor = #red;
         temp = [
           {'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
@@ -196,7 +197,7 @@ class Tetromino {
   }
 
   /**
-   * Drehen des Tetris Steins um 90 Grad
+   * Drehen des Tetromino um 90 Grad
    * Y-Koordinate: row
    * X-Koordinate: col
    * Rotationsformal für 90 Grad:
@@ -215,7 +216,7 @@ class Tetromino {
   }
 
   /**
-   * Bewegungen von dem Tetris Stein und seine Richtungen (down, left, right)
+   * Bewegungen von dem Tetromino und seine Richtungen (down, left, right)
    */
   void move() {
     var _move = [
@@ -225,12 +226,12 @@ class Tetromino {
       { 'row' : _stone.elementAt(3)['row'] + _dr,  'col' : _stone.elementAt(3)['col'] + _dc  }
     ];
 
-    // Prüfen ob der Tetris Stein die Seiten verlässt
-    if (onSide(_move)){
-      // Prüfen ob der Stein den Grund des Feldes erreicht
+    // Prüfen ob der Tetromino die Seiten verlässt
+    if (notOnSide(_move)){
+      // Prüfen ob der Tetromino den Grund des Feldes erreicht
       //window.console.log('onGround: ${onGround(_move)}');
       if (notOnGround(_move)){
-        //den Stein von der alten Postion entfernen
+        //den Tetromino von der alten Postion entfernen
         this._stone.forEach((piece){
           this._game._field[piece['row']][piece['col']].isActive = false;
           this._game._field[piece['row']][piece['col']].color = #empty;
@@ -239,7 +240,7 @@ class Tetromino {
         //TODO: check if the current tetromino hit another tetromino that
         //is already placed on the field
       } else {
-        nextTetris();
+        nextTetromino();
       }
     }
 
@@ -247,24 +248,26 @@ class Tetromino {
   }
 
   /**
-   * Teilt dem Tetris Stein die Bewegung nach unten mit [move]s.
+   * Teilt dem Tetromino die Bewegung nach unten mit [move]s.
    */
   void down()  { _dr =  1; _dc =  0; }
 
   /**
-   * Teilt dem Tetris Stein die Bewegung nach links mit [move]s.
+   * Teilt dem Tetromino die Bewegung nach links mit [move]s.
    */
   void left()  { _dr =  0; _dc = -1; }
 
   /**
-   * Teilt dem Tetris Stein die Bewegung nach rechts mit [move]s.
+   * Teilt dem Tetromino die Bewegung nach rechts mit [move]s.
    */
   void right() { _dr =  0; _dc =  1; }
 
   /**
-   * Überprüfen ob der Tetris Stein an den Seiten angekommen ist
+   * Überprüfen ob der Tetromino an den Seiten angekommen ist
+   * @param var moveTo = neue Position vom Tetromino
+   * @return bool = true Seite nicht erreicht, false = Seite erreicht
    */
-  bool onSide(var moveTo) {
+  bool notOnSide(var moveTo) {
     bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
         moveTo.elementAt(0)['col'] >= 0 &&
         moveTo.elementAt(0)['col'] < _game._sizeWidth;
@@ -285,7 +288,9 @@ class Tetromino {
   }
 
   /**
-   * Überprüfen ob der Tetris Stein am Grund angekommen ist
+   * Überprüfen ob der Tetromino am Grund angekommen ist
+   * @param var moveTo = neue Position vom Tetromino
+   * @return bool = true nicht den Boden berührt, false = Boden berührt
    */
   bool notOnGround(var moveTo) {
     bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
@@ -304,22 +309,22 @@ class Tetromino {
   }
 
   /**
-   * Returns die Farbe des Steins im Spielfeld.
+   * Gibt die Farbe des Tetromino im Spielfeld zurück.
    */
   Symbol get stoneColor => _stoneColor;
 
   /**
-   * Returns die Farbe des Steins im Nächsten-Tetris-Stein-Feld
+   * Gibt die Farbe des Tetromino im Nächsten-Tetromino-Feld zurück.
    */
   Symbol get nextstoneColor => _nextstoneColor;
 
   /**
-   * Returns die Steine von dem Tetris Element und die Position von dem Element.
+   * Gibt die Elemente des Tetromino und die Position zurück.
    */
    get stone => _stone;
 
   /**
-   * Returns die Steine von dem Tetris Element und die Position von dem Element im Nächsten-Tetris-Stein-Tabelle.
+   * Gibt die Elemente des Tetromino für den nächsten Tetromino und die Position zurück.
    */
   get nextstone => _nextstone;
 

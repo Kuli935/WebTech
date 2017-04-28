@@ -30,13 +30,13 @@ class TetrisView {
 
   /**
    * Elemente mit der ID '#field' im DOM tree.
-   * Wird verwendet um das Feld von Tetris zu visualisieren als eine HTML Tabelle.
+   * Wird verwendet um das Feld von Tetromino zu visualisieren als eine HTML Tabelle.
    */
   final game = querySelector('#field');
 
   /**
    * Elemente mit der ID '#nextStone' im DOM tree.
-   * Wird verwendet um das Feld von nächsten Tetris zu visualisieren als eine HTML Tabelle.
+   * Wird verwendet um das Feld von Nächsten-Tetromino-Feld zu visualisieren als eine HTML Tabelle.
    */
   final nextStone = querySelector('#nextstone');
 
@@ -51,12 +51,12 @@ class TetrisView {
   List<List<HtmlElement>> fields;
 
   /**
-   * Enthält alle TD-Elemente des Feldes für den nächsten Tetris Block.
+   * Enthält alle TD-Elemente des Feldes für den Nächsten-Tetromino-Feld.
    */
   List<List<HtmlElement>> nextStoneFields;
 
   /**
-   * Aktualisiert die view nach dem Modelstatus.
+   * Aktualisiert die View nach dem Modelstatus.
    *
    * - [startButton] am Anfang zeigen
    * - Spielfeld anzeigen nachdem Modelstatus
@@ -93,7 +93,7 @@ class TetrisView {
       }
     }
 
-    // Nächster Tetris-Stein-Feld aktualisieren
+    // Nächster-Tetromino-Feld aktualisieren
     final nextStoneField = model.nextStoneField;
     for (int row = 0; row < nextStoneField.length; row++) {
       for (int col = 0; col < nextStoneField[row].length; col++) {
@@ -121,7 +121,7 @@ class TetrisView {
   }
 
   /**
-   * Generiert ein nächstes Tetris Bock Feld.
+   * Generiert ein Nächstes-Tetromino-Feld.
    * Eine HTML Tabelle (4 x 4)
    */
   void generateNextStoneField(TetrisGame model) {
@@ -138,9 +138,8 @@ class TetrisView {
     }
     nextStone.innerHtml = table;
 
-    // Saves all generated TD elements in field to
-    // avoid time intensive querySelector calls in update().
-    // Thanks to Johannes Gosch, SoSe 2015.
+    // Speichert alle generieten TD Elemente in dem Feld
+    // vermeidet so zeitintensive querySelector Anrufe in der Update Methode
     nextStoneFields = new List<List<HtmlElement>>(nextStoneField.length);
     for (int row = 0; row < nextStoneField.length; row++) {
       nextStoneFields[row] = [];
@@ -152,7 +151,7 @@ class TetrisView {
   }
 
   /**
-   * Generiert ein Feld entsprechend dem Model Zustand.
+   * Generiert ein Spielfeld entsprechend dem Model Zustand.
    * Eine HTML Tabelle (n x m)
    */
   void generateField(TetrisGame model) {
@@ -169,9 +168,8 @@ class TetrisView {
     }
     game.innerHtml = table;
 
-    // Saves all generated TD elements in field to
-    // avoid time intensive querySelector calls in update().
-    // Thanks to Johannes Gosch, SoSe 2015.
+    // Speichert alle generieten TD Elemente in dem Feld
+    // vermeidet so zeitintensive querySelector Anrufe in der Update Methode
     fields = new List<List<HtmlElement>>(field.length);
     for (int row = 0; row < field.length; row++) {
       fields[row] = [];
