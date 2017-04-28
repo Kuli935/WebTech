@@ -8,7 +8,7 @@ part of tetris;
 const tetrisSpeed = const Duration(milliseconds: 500);
 
 /**
- * Ein [TetrisGameController]-Objekt registriert mehrere Handler
+ * Ein [TetrisController]-Objekt registriert mehrere Handler
  * um die Interaktion von einem Benutzers zu greifen für das [TetrisGame] und
  * diese zu übersetzen in gültige [TetrisGame] Taten.
  *
@@ -18,7 +18,7 @@ const tetrisSpeed = const Duration(milliseconds: 500);
  * Erforderliche Updates für die Ansicht sind, das [TetisView]-Objekt übertragen
  * um den Benutzer zu informieren, was sich im [TetrisGame] verändert
  */
-class TetrisGameController {
+class TetrisController {
 
   /**
    * Erzeugen eines Tetris Game. Aufruf aus der Datei Tetromino.dart.
@@ -41,7 +41,7 @@ class TetrisGameController {
    * Registriert alle notwendigen Ereignishandler die notwendig sind
    * für den Benutzer zu der Interaktion mit dem Tetris Spiel.
    */
-  TetrisGameController() {
+  TetrisController() {
 
     view.generateField(game);
     view.generateNextStoneField(game);

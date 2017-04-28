@@ -4,12 +4,12 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:math';
 
-part 'src/Tetromino.dart';
-part 'src/TetrisController.dart';
-part 'src/TetrisView.dart';
-part 'src/SwipeHandler.dart';
-part 'src/Cell.dart';
-part 'src/TetrisGame.dart';
+part 'src/controller/TetrisController.dart';
+part 'src/controller/SwipeHandler.dart';
+part 'src/view/TetrisView.dart';
+part 'src/model/Tetromino.dart';
+part 'src/model/Cell.dart';
+part 'src/model/TetrisGame.dart';
 
 /**
  * Definiert eine Tetris Spielkonstante, das n x m Feld.
