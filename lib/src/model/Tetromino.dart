@@ -198,19 +198,17 @@ class Tetromino {
 
   /**
    * Drehen des Tetromino um 90 Grad
-   * Y-Koordinate: row
-   * X-Koordinate: col
-   * Rotationsformal für 90 Grad:
-   * x' = x * cos(90) - y * sin(90)
-   * y' = x * sin(90) + y * cos(90)
-   */
+   * Spiegelung um die Diagonalachse row = col, col = row
+   * Spiegelung um die Vertikalachse col = Breite - 1 - Element
+   **/
   void rotate(){
     //TODO: Richtige Rotation um 90 Grad
-    var _rotate = [
-      { 'row' : (_stone.elementAt(0)['col'] * sin(90).round() + _stone.elementAt(0)['row'] * cos(90).round()),  'col' : (_stone.elementAt(0)['col'] * cos(90).round() - _stone.elementAt(0)['row'] * sin(90).round()) },
-      { 'row' : (_stone.elementAt(1)['col'] * sin(90).round() + _stone.elementAt(1)['row'] * cos(90).round()),  'col' : (_stone.elementAt(1)['col'] * cos(90).round() - _stone.elementAt(1)['row'] * sin(90).round()) },
-      { 'row' : (_stone.elementAt(2)['col'] * sin(90).round() + _stone.elementAt(2)['row'] * cos(90).round()),  'col' : (_stone.elementAt(2)['col'] * cos(90).round() - _stone.elementAt(2)['row'] * sin(90).round()) },
-      { 'row' : (_stone.elementAt(3)['col'] * sin(90).round() + _stone.elementAt(3)['row'] * cos(90).round()),  'col' : (_stone.elementAt(3)['col'] * cos(90).round() - _stone.elementAt(3)['row'] * sin(90).round()) }
+    //TODO: Aktualisierungsfehler des Spielfeldes
+   var _rotate = [
+      { 'row' : _stone.elementAt(0)['col'],  'col' : _game._sizeWidth - 1 - _stone.elementAt(0)['row'] },
+      { 'row' : _stone.elementAt(1)['col'],  'col' : _game._sizeWidth - 1 - _stone.elementAt(1)['row'] },
+      { 'row' : _stone.elementAt(2)['col'],  'col' : _game._sizeWidth - 1 - _stone.elementAt(2)['row'] },
+      { 'row' : _stone.elementAt(3)['col'],  'col' : _game._sizeWidth - 1 - _stone.elementAt(3)['row'] }
     ];
 
     _stone = _rotate;
