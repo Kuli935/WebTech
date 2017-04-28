@@ -205,6 +205,7 @@ class Tetromino {
    * y' = x * sin(90) + y * cos(90)
    */
   void rotate(){
+    //TODO: Richtige Rotation um 90 Grad
     var _rotate = [
       { 'row' : (_stone.elementAt(0)['col'] * sin(90).round() + _stone.elementAt(0)['row'] * cos(90).round()),  'col' : (_stone.elementAt(0)['col'] * cos(90).round() - _stone.elementAt(0)['row'] * sin(90).round()) },
       { 'row' : (_stone.elementAt(1)['col'] * sin(90).round() + _stone.elementAt(1)['row'] * cos(90).round()),  'col' : (_stone.elementAt(1)['col'] * cos(90).round() - _stone.elementAt(1)['row'] * sin(90).round()) },
@@ -226,7 +227,7 @@ class Tetromino {
       { 'row' : _stone.elementAt(3)['row'] + _dr,  'col' : _stone.elementAt(3)['col'] + _dc  }
     ];
 
-    // Prüfen ob der Tetromino die Seiten verlässt
+    // Prüfen ob der Tetromino nicht die Seiten verlässt
     if (notOnSide(_move)){
       // Prüfen ob der Tetromino den Grund des Feldes erreicht
       //window.console.log('onGround: ${onGround(_move)}');
