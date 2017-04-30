@@ -1,7 +1,7 @@
 part of tetris;
 
 /**
- *  * Definiert ein Tetromino im Tetris Spiel.
+ *  Definiert ein Tetromino im Tetris Spiel.
  */
 class Tetromino {
 
@@ -82,6 +82,7 @@ class Tetromino {
       _stone.forEach((cell){
         this._game._field[cell['row']][cell['col']].isActive = true;
       });
+
 
       // Farbe setzen
       _stoneColor = _tempColor;
@@ -203,7 +204,8 @@ class Tetromino {
      * @param int angle = winkel
      *
      * Anmerkungen:
-     * Rotationsformal um einen Punkt um einen anderen um Winkel alpha rotieren zu lassen:
+     * Rotationsformal um einen Punkt um einen anderen um Winkel alpha rotieren zu lassen.
+     * Wobei x0 und y0 die Koordinaten für den Drehpunkt sind und x und y für den zu rotierenden Stein
      * x' = x0 + (x - x0) * cos(alpha) - (y - y0) * sin(alpha)
      * y' = y0 + (x - x0) * sin(alpha) + (y - y0) * cos(alpha)
      * Der Computer erwartet als Eingabe für sin() und cos() keinen Winkel,
@@ -358,19 +360,19 @@ class Tetromino {
      * @return bool = true Seite nicht erreicht, false = Seite erreicht
      */
     bool notOnSide(var moveTo) {
-      bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
+      bool stoneOne = moveTo.elementAt(0)['row'] >= 0 &&
           moveTo.elementAt(0)['col'] >= 0 &&
           moveTo.elementAt(0)['col'] < this._game._sizeWidth;
 
-      bool stoneTwo = moveTo.elementAt(1)['row'] >= 0&&
+      bool stoneTwo = moveTo.elementAt(1)['row'] >= 0 &&
           moveTo.elementAt(1)['col'] >= 0 &&
           moveTo.elementAt(1)['col'] < this._game._sizeWidth;
 
-      bool stoneThree = moveTo.elementAt(2)['row'] >= 0&&
+      bool stoneThree = moveTo.elementAt(2)['row'] >= 0 &&
           moveTo.elementAt(2)['col'] >= 0 &&
           moveTo.elementAt(2)['col'] < this._game._sizeWidth;
 
-      bool stoneFour = moveTo.elementAt(3)['row'] >= 0&&
+      bool stoneFour = moveTo.elementAt(3)['row'] >= 0 &&
           moveTo.elementAt(3)['col'] >= 0 &&
           moveTo.elementAt(3)['col'] < this._game._sizeWidth;
 
@@ -383,16 +385,16 @@ class Tetromino {
      * @return bool = true nicht den Boden berührt, false = Boden berührt
      */
     bool notOnGround(var moveTo) {
-      bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
+      bool stoneOne = moveTo.elementAt(0)['row'] >= 0 &&
           moveTo.elementAt(0)['row'] < this._game._sizeHeight;
 
-      bool stoneTwo = moveTo.elementAt(1)['row'] >= 0&&
+      bool stoneTwo = moveTo.elementAt(1)['row'] >= 0 &&
           moveTo.elementAt(1)['row'] < this._game._sizeHeight;
 
-      bool stoneThree = moveTo.elementAt(2)['row'] >= 0&&
+      bool stoneThree = moveTo.elementAt(2)['row'] >= 0 &&
           moveTo.elementAt(2)['row'] < this._game._sizeHeight;
 
-      bool stoneFour = moveTo.elementAt(3)['row'] >= 0&&
+      bool stoneFour = moveTo.elementAt(3)['row'] >= 0 &&
           moveTo.elementAt(3)['row'] < this._game._sizeHeight;
 
       return stoneOne && stoneTwo && stoneThree && stoneFour;
