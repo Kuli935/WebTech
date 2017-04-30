@@ -280,9 +280,6 @@ class Tetromino {
 
         }
 
-        querySelector("#level").innerHtml = _rotate.elementAt(2)['col'].toString();
-        querySelector("#points").innerHtml = _rotate.elementAt(2)['row'].toString();
-
         // Methode aufrufen um Kollisionen zu prüfen,
         // wenn Ja neuer Tetromino fallen lassen
         // ansonsten Stein Setzen
