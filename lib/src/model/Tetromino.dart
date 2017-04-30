@@ -221,13 +221,11 @@ class Tetromino {
         { 'row' : (_stone.elementAt(0)['row'] + (_stone.elementAt(2)['col'] - _stone.elementAt(0)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(2)['row'] - _stone.elementAt(0)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(0)['col'] + (_stone.elementAt(2)['col'] - _stone.elementAt(0)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(2)['row'] - _stone.elementAt(0)['row']) * sin(angle / 180 * PI)).round() },
         { 'row' : (_stone.elementAt(0)['row'] + (_stone.elementAt(3)['col'] - _stone.elementAt(0)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(3)['row'] - _stone.elementAt(0)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(0)['col'] + (_stone.elementAt(3)['col'] - _stone.elementAt(0)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(3)['row'] - _stone.elementAt(0)['row']) * sin(angle / 180 * PI)).round() }
       ];
-      
 
       // Methode aufrufen um Kollisionen zu prüfen,
       // wenn Ja neuer Tetromino fallen lassen
       // ansonsten Stein Setzen
       checkCollisions(_rotate);
-
 
     }
 

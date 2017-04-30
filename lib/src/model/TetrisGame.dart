@@ -129,7 +129,7 @@ class TetrisGame {
    * Bewegungensstatus für den Tetromino [down], [left], [right].
    * Bewegungen sind nur im Status [running] möglich.
    */
-  void moveTetris() {
+  void moveTetromino() {
     if (running) tetromino.move();
   }
 

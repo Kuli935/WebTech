@@ -51,7 +51,7 @@ class TetrisController {
     // Nach links bewegen
     sw.onSwipeLeft = (){
         game.tetromino.left();
-        game.moveTetris();
+        game.moveTetromino();
         game.tetromino.down();
         view.update(game);
     };
@@ -59,7 +59,7 @@ class TetrisController {
     // Nach rechts bewegen
     sw.onSwipeRight = (){
         game.tetromino.right();
-        game.moveTetris();
+        game.moveTetromino();
         game.tetromino.down();
         view.update(game);
     };
@@ -67,7 +67,7 @@ class TetrisController {
     // Nach unten bewegen
     sw.onSwipeDown = (){
       game.tetromino.down();
-      game.moveTetris();
+      game.moveTetromino();
       view.update(game);
     };
 
@@ -83,7 +83,7 @@ class TetrisController {
       // Nach links bewegen
       if (ev.keyCode == KeyCode.LEFT) {
         game.tetromino.left();
-        game.moveTetris();
+        game.moveTetromino();
         game.tetromino.down();
         view.update(game);
       }
@@ -91,7 +91,7 @@ class TetrisController {
       // Nach rechts bewegen
       if (ev.keyCode == KeyCode.RIGHT) {
         game.tetromino.right();
-        game.moveTetris();
+        game.moveTetromino();
         game.tetromino.down();
         view.update(game);
       }
@@ -99,7 +99,7 @@ class TetrisController {
       // Nach unten bewegen
       if (ev.keyCode == KeyCode.DOWN) {
         game.tetromino.down();
-        game.moveTetris();
+        game.moveTetromino();
         view.update(game);
       }
 
@@ -114,7 +114,7 @@ class TetrisController {
     // Ein neues Spiel wurde von dem Benutzer gestarted
     view.startButton.onClick.listen((_) {
       if (tetrominoTrigger != null) tetrominoTrigger.cancel();
-      tetrominoTrigger = new Timer.periodic(tetrominoSpeed, (_) => _moveTetris());
+      tetrominoTrigger = new Timer.periodic(tetrominoSpeed, (_) => _moveTetromino());
       game.start();
       //Touch Steuerung registieren
       window.onTouchStart.listen(sw.handleTouchStart);
@@ -129,9 +129,9 @@ class TetrisController {
   /**
    * Bewegt den Tetromino.
    */
-  void _moveTetris() {
+  void _moveTetromino() {
     //window.console.log('SPEED INCREASED FOR DEBUG.');
-    game.moveTetris();
+    game.moveTetromino();
     view.update(game);
   }
 
