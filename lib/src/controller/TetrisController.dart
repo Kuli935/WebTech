@@ -4,7 +4,7 @@ part of tetris;
  * Diese Konstante beschreibt die Geschwindigkeit von dem Tetromino
  * Ein [tetrominoSpeed] von 1000ms bestimmt 1 Bewegungen pro Sekunde.
  */
-//TODO:
+
 const tetrominoSpeed = const Duration(milliseconds: 500);
 
 /**
@@ -50,30 +50,30 @@ class TetrisController {
     SwipeHandler sw = SwipeHandler.getInstance();
     // Nach links bewegen
     sw.onSwipeLeft = (){
-        game.tetris.left();
+        game.tetromino.left();
         game.moveTetris();
-        game.tetris.down();
+        game.tetromino.down();
         view.update(game);
     };
 
     // Nach rechts bewegen
     sw.onSwipeRight = (){
-        game.tetris.right();
+        game.tetromino.right();
         game.moveTetris();
-        game.tetris.down();
+        game.tetromino.down();
         view.update(game);
     };
 
     // Nach unten bewegen
     sw.onSwipeDown = (){
-      game.tetris.down();
+      game.tetromino.down();
       game.moveTetris();
       view.update(game);
     };
 
-    // Drehen
+    // Drehen um 90 Grad
     sw.onSwipeUp = (){
-      game.tetris.rotate();
+      game.tetromino.rotate(90);
       view.update(game);
     };
 
@@ -82,30 +82,30 @@ class TetrisController {
       if (game.stopped) return;
       // Nach links bewegen
       if (ev.keyCode == KeyCode.LEFT) {
-        game.tetris.left();
+        game.tetromino.left();
         game.moveTetris();
-        game.tetris.down();
+        game.tetromino.down();
         view.update(game);
       }
 
       // Nach rechts bewegen
       if (ev.keyCode == KeyCode.RIGHT) {
-        game.tetris.right();
+        game.tetromino.right();
         game.moveTetris();
-        game.tetris.down();
+        game.tetromino.down();
         view.update(game);
       }
 
       // Nach unten bewegen
       if (ev.keyCode == KeyCode.DOWN) {
-        game.tetris.down();
+        game.tetromino.down();
         game.moveTetris();
         view.update(game);
       }
 
-      // Drehen
+      // Drehen um 90 Grad
       if (ev.keyCode == KeyCode.UP) {
-        game.tetris.rotate();
+        game.tetromino.rotate(90);
         view.update(game);
       }
     });

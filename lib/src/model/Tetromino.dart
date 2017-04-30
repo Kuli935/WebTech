@@ -74,7 +74,7 @@ class Tetromino {
     if (_firstStone) {
       // generie den ersten zufalls Tetromino
       final random = r.nextInt(7);
-      _stone = randomTetris(random, 0, _game._sizeWidth);
+      _stone = randomTetromino(random, 0, this._game._sizeWidth);
       //TODO: nach dem der erste Stein auf das Spielfeld gesetzt wird, wird die
       //View nich aktualisiert. Dies geschieht erst, wenn der Stein einmal
       //bewegt wurde, weshalb der erste Stein erst in der zweiten Zeile
@@ -89,14 +89,14 @@ class Tetromino {
 
       // Vorschau auf den nächsten Tetromino
       _tempStone = r.nextInt(7);
-      _nextstone = randomTetris(_tempStone, _game._nextStoneFieldHeight - 1, _game._nextStoneFieldWidth);
+      _nextstone = randomTetromino(_tempStone, this._game._nextStoneFieldHeight - 1, this._game._nextStoneFieldWidth);
       // Farbe setzen
       _nextstoneColor = _tempColor;
     }
 
     // sonst alle anderen Tetromino
     // Den normalen Tetromino erzeugen
-    _stone = randomTetris(_tempStone, 0, _game._sizeWidth);
+    _stone = randomTetromino(_tempStone, 0, this._game._sizeWidth);
 
     //Die Zellen, welche von dem aktuellen Tetromino belegt sind als aktiv
     //makieren
@@ -107,7 +107,7 @@ class Tetromino {
     _stoneColor = _nextstoneColor;
     // Vorschau auf den nächsten Tetromino
     _tempStone = r.nextInt(7);
-    _nextstone = randomTetris(_tempStone, _game._nextStoneFieldHeight - 1, _game._nextStoneFieldWidth);
+    _nextstone = randomTetromino(_tempStone, this._game._nextStoneFieldHeight - 1, this._game._nextStoneFieldWidth);
     // Farbe setzen
     _nextstoneColor = _tempColor;
   }
@@ -119,7 +119,7 @@ class Tetromino {
    * @param int width = Breite
    * @return Liste des Tetromino
    */
-  List<Map<String, int>> randomTetris(int random, int height, int width){
+  List<Map<String, int>> randomTetromino(int random, int height, int width){
     List<Map<String, int>> temp;
     switch(random) {
       case 0:
@@ -136,8 +136,8 @@ class Tetromino {
         // Erzeugt ein J Tetromino in der Farbe blau
         _tempColor = #blue;
         temp = [
+          { 'row' : height ~/ 2,       'col' : width ~/ 2      }, // Drehpunkt
           { 'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
-          { 'row' : height ~/ 2,       'col' : width ~/ 2      },
           { 'row' : height ~/ 2,       'col' : width ~/ 2 + 1  },
           { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2 + 1  }
         ];
@@ -146,10 +146,10 @@ class Tetromino {
         // Erzeugt ein L Tetromino in der Farbe orange
         _tempColor = #orange;
         temp = [
-          { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2 - 1  },
+          { 'row' : height ~/ 2,       'col' : width ~/ 2      }, // Drehpunkt
+          { 'row' : height ~/ 2,       'col' : width ~/ 2 + 1  },
           { 'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
-          { 'row' : height ~/ 2,       'col' : width ~/ 2      },
-          { 'row' : height ~/ 2,       'col' : width ~/ 2 + 1  }
+          { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2 - 1  }
         ];
         break;
       case 3:
@@ -166,9 +166,9 @@ class Tetromino {
         // Erzeugt ein S Tetromino in der Farbe grün
         _tempColor = #green;
           temp = [
+            { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2 - 1  }, // Drehpunkt
             { 'row' : height ~/ 2,       'col' : width ~/ 2      },
             { 'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
-            { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2 - 1  },
             { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2 - 2  }
           ];
           break;
@@ -176,9 +176,9 @@ class Tetromino {
         // Erzeugt ein T Tetromino in der Farbe lila
         _tempColor = #purple;
         temp = [
+          { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2      }, // Drehpunkt
           { 'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
           { 'row' : height ~/ 2,       'col' : width ~/ 2      },
-          { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2      },
           { 'row' : height ~/ 2,       'col' : width ~/ 2 + 1  }
         ];
         break;
@@ -186,56 +186,105 @@ class Tetromino {
         // Erzeugt ein Z Tetromino in der Farbe rot
         _tempColor = #red;
         temp = [
-          {'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
+          { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2      }, // Drehpunkt
+          { 'row' : height ~/ 2,       'col' : width ~/ 2 - 1  },
           { 'row' : height ~/ 2,       'col' : width ~/ 2      },
-          { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2      },
           { 'row' : height ~/ 2 + 1,   'col' : width ~/ 2 + 1  }
+
         ];
         break;
     }
     return temp;
   }
 
-  /**
-   * Drehen des Tetromino um 90 Grad
-   * Spiegelung um die Diagonalachse row = col, col = row
-   * Spiegelung um die Vertikalachse col = Breite - 1 - Element
-   **/
-  void rotate(){
-    //TODO: Richtige Rotation um 90 Grad
-    //TODO: Aktualisierungsfehler des Spielfeldes
-   var _rotate = [
-      { 'row' : _stone.elementAt(0)['col'],  'col' : _game._sizeWidth - 1 - _stone.elementAt(0)['row'] },
-      { 'row' : _stone.elementAt(1)['col'],  'col' : _game._sizeWidth - 1 - _stone.elementAt(1)['row'] },
-      { 'row' : _stone.elementAt(2)['col'],  'col' : _game._sizeWidth - 1 - _stone.elementAt(2)['row'] },
-      { 'row' : _stone.elementAt(3)['col'],  'col' : _game._sizeWidth - 1 - _stone.elementAt(3)['row'] }
-    ];
 
-    _stone = _rotate;
-  }
+    /**
+     * Drehen des Tetromino
+     * @param int angle = winkel
+     *
+     * Anmerkungen:
+     * Rotationsformal um einen Punkt um einen anderen um Winkel alpha rotieren zu lassen:
+     * x' = x0 + (x - x0) * cos(alpha) - (y - y0) * sin(alpha)
+     * y' = y0 + (x - x0) * sin(alpha) + (y - y0) * cos(alpha)
+     * Der Computer erwartet als Eingabe für sin() und cos() keinen Winkel,
+     * sondern ein Bogenmass, also den Umfang des Kreisabschnittes.
+     * Um also aus dem Winkel das Bogenmass zu erhalten,
+     * rechnen wir: Winkel / 180 * PI
+     * Y-Achse = row / Height
+     * X-Achse = col / width
+     **/
+    void rotate(angle){
+      //TODO: Drehungen von I und O Tetromino fehlerhaft
+      var _rotate = [
+        { 'row' : (_stone.elementAt(0)['row'] + (_stone.elementAt(0)['col'] - _stone.elementAt(0)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(0)['row'] - _stone.elementAt(0)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(0)['col'] + (_stone.elementAt(0)['col'] - _stone.elementAt(0)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(0)['row'] - _stone.elementAt(0)['row']) * sin(angle / 180 * PI)).round() },
+        { 'row' : (_stone.elementAt(0)['row'] + (_stone.elementAt(1)['col'] - _stone.elementAt(0)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(1)['row'] - _stone.elementAt(0)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(0)['col'] + (_stone.elementAt(1)['col'] - _stone.elementAt(0)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(1)['row'] - _stone.elementAt(0)['row']) * sin(angle / 180 * PI)).round() },
+        { 'row' : (_stone.elementAt(0)['row'] + (_stone.elementAt(2)['col'] - _stone.elementAt(0)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(2)['row'] - _stone.elementAt(0)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(0)['col'] + (_stone.elementAt(2)['col'] - _stone.elementAt(0)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(2)['row'] - _stone.elementAt(0)['row']) * sin(angle / 180 * PI)).round() },
+        { 'row' : (_stone.elementAt(0)['row'] + (_stone.elementAt(3)['col'] - _stone.elementAt(0)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(3)['row'] - _stone.elementAt(0)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(0)['col'] + (_stone.elementAt(3)['col'] - _stone.elementAt(0)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(3)['row'] - _stone.elementAt(0)['row']) * sin(angle / 180 * PI)).round() }
+      ];
+      
+
+      // Methode aufrufen um Kollisionen zu prüfen,
+      // wenn Ja neuer Tetromino fallen lassen
+      // ansonsten Stein Setzen
+      checkCollisions(_rotate);
+
+
+    }
+
+    /**
+     * Bewegungen von dem Tetromino und seine Richtungen (down, left, right)
+     */
+    void move() {
+      var _move = [
+        { 'row' : _stone.elementAt(0)['row'] + _dr,  'col' : _stone.elementAt(0)['col'] + _dc  },
+        { 'row' : _stone.elementAt(1)['row'] + _dr,  'col' : _stone.elementAt(1)['col'] + _dc  },
+        { 'row' : _stone.elementAt(2)['row'] + _dr,  'col' : _stone.elementAt(2)['col'] + _dc  },
+        { 'row' : _stone.elementAt(3)['row'] + _dr,  'col' : _stone.elementAt(3)['col'] + _dc  }
+      ];
+
+      // Methode aufrufen um Kollisionen zu prüfen,
+      // wenn Ja neuer Tetromino fallen lassen
+      // ansonsten Stein Setzen
+      checkCollisions(_move);
+
+    }
+
+
+    /**
+     * Teilt dem Tetromino die Bewegung nach unten mit.
+     */
+    void down()  { _dr =  1; _dc =  0; }
+
+    /**
+     * Teilt dem Tetromino die Bewegung nach links mit.
+     */
+    void left()  { _dr =  0; _dc = -1; }
+
+    /**
+     * Teilt dem Tetromino die Bewegung nach rechts mit.
+     */
+    void right() { _dr =  0; _dc =  1; }
+
+
 
   /**
-   * Bewegungen von dem Tetromino und seine Richtungen (down, left, right)
+   * Die Bewegungen des Tetromino auf Kollisionen prüfen.
+   * Bei einer Kollision einen neuen Tetromino fallen lassen.
+   * @param var moveTo = neue Position vom Tetromino
    */
-  void move() {
-    var _move = [
-      { 'row' : _stone.elementAt(0)['row'] + _dr,  'col' : _stone.elementAt(0)['col'] + _dc  },
-      { 'row' : _stone.elementAt(1)['row'] + _dr,  'col' : _stone.elementAt(1)['col'] + _dc  },
-      { 'row' : _stone.elementAt(2)['row'] + _dr,  'col' : _stone.elementAt(2)['col'] + _dc  },
-      { 'row' : _stone.elementAt(3)['row'] + _dr,  'col' : _stone.elementAt(3)['col'] + _dc  }
-    ];
-
+  checkCollisions(var moveTo) {
     // Prüfen ob der Tetromino nicht die Seiten verlässt
-    if (notOnSide(_move)){
+    if (notOnSide(moveTo)){
       // Prüfen ob der Tetromino den Grund des Feldes erreicht
       //window.console.log('onGround: ${onGround(_move)}');
-      if (notOnGround(_move)){
+      if (notOnGround(moveTo)){
         //den Tetromino von der alten Postion entfernen
         this._stone.forEach((piece){
           this._game._field[piece['row']][piece['col']].isActive = false;
           this._game._field[piece['row']][piece['col']].color = #empty;
         });
-        _stone = _move;
+        _stone = moveTo;
+        this._game.updateField();
         //TODO: check if the current tetromino hit another tetromino that
         //is already placed on the field
       } else {
@@ -243,74 +292,58 @@ class Tetromino {
       }
     }
 
-    this._game.updateField();
   }
 
-  /**
-   * Teilt dem Tetromino die Bewegung nach unten mit [move]s.
-   */
-  void down()  { _dr =  1; _dc =  0; }
+    /**
+     * Überprüfen ob der Tetromino an den Seiten angekommen ist
+     * @param var moveTo = neue Position vom Tetromino
+     * @return bool = true Seite nicht erreicht, false = Seite erreicht
+     */
+    bool notOnSide(var moveTo) {
+      bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
+          moveTo.elementAt(0)['col'] >= 0 &&
+          moveTo.elementAt(0)['col'] < this._game._sizeWidth;
 
-  /**
-   * Teilt dem Tetromino die Bewegung nach links mit [move]s.
-   */
-  void left()  { _dr =  0; _dc = -1; }
+      bool stoneTwo = moveTo.elementAt(1)['row'] >= 0&&
+          moveTo.elementAt(1)['col'] >= 0 &&
+          moveTo.elementAt(1)['col'] < this._game._sizeWidth;
 
-  /**
-   * Teilt dem Tetromino die Bewegung nach rechts mit [move]s.
-   */
-  void right() { _dr =  0; _dc =  1; }
+      bool stoneThree = moveTo.elementAt(2)['row'] >= 0&&
+          moveTo.elementAt(2)['col'] >= 0 &&
+          moveTo.elementAt(2)['col'] < this._game._sizeWidth;
 
-  /**
-   * Überprüfen ob der Tetromino an den Seiten angekommen ist
-   * @param var moveTo = neue Position vom Tetromino
-   * @return bool = true Seite nicht erreicht, false = Seite erreicht
-   */
-  bool notOnSide(var moveTo) {
-    bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
-        moveTo.elementAt(0)['col'] >= 0 &&
-        moveTo.elementAt(0)['col'] < _game._sizeWidth;
+      bool stoneFour = moveTo.elementAt(3)['row'] >= 0&&
+          moveTo.elementAt(3)['col'] >= 0 &&
+          moveTo.elementAt(3)['col'] < this._game._sizeWidth;
 
-    bool stoneTwo = moveTo.elementAt(1)['row'] >= 0&&
-        moveTo.elementAt(1)['col'] >= 0 &&
-        moveTo.elementAt(1)['col'] < _game._sizeWidth;
+      return stoneOne && stoneTwo && stoneThree && stoneFour;
+    }
 
-    bool stoneThree = moveTo.elementAt(2)['row'] >= 0&&
-        moveTo.elementAt(2)['col'] >= 0 &&
-        moveTo.elementAt(2)['col'] < _game._sizeWidth;
+    /**
+     * Überprüfen ob der Tetromino am Grund angekommen ist
+     * @param var moveTo = neue Position vom Tetromino
+     * @return bool = true nicht den Boden berührt, false = Boden berührt
+     */
+    bool notOnGround(var moveTo) {
+      bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
+          moveTo.elementAt(0)['row'] < this._game._sizeHeight;
 
-    bool stoneFour = moveTo.elementAt(3)['row'] >= 0&&
-        moveTo.elementAt(3)['col'] >= 0 &&
-        moveTo.elementAt(3)['col'] < _game._sizeWidth;
+      bool stoneTwo = moveTo.elementAt(1)['row'] >= 0&&
+          moveTo.elementAt(1)['row'] < this._game._sizeHeight;
 
-    return stoneOne && stoneTwo && stoneThree && stoneFour;
-  }
+      bool stoneThree = moveTo.elementAt(2)['row'] >= 0&&
+          moveTo.elementAt(2)['row'] < this._game._sizeHeight;
 
-  /**
-   * Überprüfen ob der Tetromino am Grund angekommen ist
-   * @param var moveTo = neue Position vom Tetromino
-   * @return bool = true nicht den Boden berührt, false = Boden berührt
-   */
-  bool notOnGround(var moveTo) {
-    bool stoneOne = moveTo.elementAt(0)['row'] >= 0&&
-        moveTo.elementAt(0)['row'] < _game._sizeHeight;
+      bool stoneFour = moveTo.elementAt(3)['row'] >= 0&&
+          moveTo.elementAt(3)['row'] < this._game._sizeHeight;
 
-    bool stoneTwo = moveTo.elementAt(1)['row'] >= 0&&
-        moveTo.elementAt(1)['row'] < _game._sizeHeight;
+      return stoneOne && stoneTwo && stoneThree && stoneFour;
+    }
 
-    bool stoneThree = moveTo.elementAt(2)['row'] >= 0&&
-        moveTo.elementAt(2)['row'] < _game._sizeHeight;
-
-    bool stoneFour = moveTo.elementAt(3)['row'] >= 0&&
-        moveTo.elementAt(3)['row'] < _game._sizeHeight;
-
-    return stoneOne && stoneTwo && stoneThree && stoneFour;
-  }
-
-  /**
-   * Gibt die Farbe des Tetromino im Spielfeld zurück.
-   */
-  Symbol get stoneColor => _stoneColor;
+    /**
+     * Gibt die Farbe des Tetromino im Spielfeld zurück.
+     */
+    Symbol get stoneColor => _stoneColor;
 
   /**
    * Gibt die Farbe des Tetromino im Nächsten-Tetromino-Feld zurück.

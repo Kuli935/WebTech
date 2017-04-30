@@ -5,7 +5,7 @@ part of tetris;
  */
 class TetrisGame {
   // Tetromino = Tetris Stein
-  Tetromino _tetris;
+  Tetromino _tetromino;
 
   // Die Feldgröße des Spiels (n x m Feld)
   final int _sizeHeight;
@@ -59,7 +59,7 @@ class TetrisGame {
       return new Iterable.generate(
           sizeWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
-    _tetris = new Tetromino.on(this);
+    _tetromino = new Tetromino.on(this);
     stop();
   }
 
@@ -97,8 +97,8 @@ class TetrisGame {
       });
     });
     //den aktuellen Tetromino an der neuen Position zeichnen
-    this._tetris._stone.forEach((piece) {
-      this._field[piece['row']][piece['col']].color = this._tetris._stoneColor;
+    this._tetromino._stone.forEach((piece) {
+      this._field[piece['row']][piece['col']].color = this._tetromino._stoneColor;
     });
   }
 
@@ -115,12 +115,12 @@ class TetrisGame {
           .toList();
     }).toList();
     // Tetromino setzen
-    _tetris.nextstone.forEach((s) {
+    _tetromino.nextstone.forEach((s) {
       final r = s['row'];
       final c = s['col'];
       if (r < 0 || r >= nextStoneFieldHeight) return;
       if (c < 0 || c >= nextStoneFieldWidth) return;
-      _nextStoneField[r][c] = _tetris.nextstoneColor;
+      _nextStoneField[r][c] = _tetromino.nextstoneColor;
     });
     return _nextStoneField;
   }
@@ -130,13 +130,13 @@ class TetrisGame {
    * Bewegungen sind nur im Status [running] möglich.
    */
   void moveTetris() {
-    if (running) tetris.move();
+    if (running) tetromino.move();
   }
 
   /**
    * Gibt den Tetromino zurück.
    */
-  Tetromino get tetris => _tetris;
+  Tetromino get tetromino => _tetromino;
 
   /**
    * Gibt die Höhe des Spielfeldes zurück. Das Spiel wird auf einen n x m Feld gespielt.
