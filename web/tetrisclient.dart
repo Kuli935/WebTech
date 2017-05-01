@@ -1,4 +1,4 @@
-import 'package:tetris/Tetris.dart';
+import 'package:tetris/tetris.dart';
 
 /**
  * Hauptklasse um das Tetris Spiel zu starten.

@@ -71,7 +71,7 @@ class TetrisController {
       view.update(game);
     };
 
-    // Drehen um 90 Grad
+    // Drehen um 90 Grad  (rechts Drehung)
     sw.onSwipeUp = (){
       game.tetromino.rotate(90);
       view.update(game);
@@ -103,11 +103,19 @@ class TetrisController {
         view.update(game);
       }
 
-      // Drehen um 90 Grad
+      // Drehen um 90 Grad (rechts Drehung)
       if (ev.keyCode == KeyCode.UP) {
         game.tetromino.rotate(90);
         view.update(game);
       }
+
+
+      // Drehen um -90 Grad (links Drehung)
+      if (ev.keyCode == KeyCode.Y) {
+        game.tetromino.rotate(-90);
+        view.update(game);
+      }
+
     });
 
 

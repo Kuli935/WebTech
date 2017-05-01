@@ -46,6 +46,12 @@ class TetrisView {
   HtmlElement get startButton => querySelector('#startButton');
 
   /**
+   * Elemente mit der ID '.container_control' im DOM tree.
+   * Wird verwendet um ein Steuerungsbild zu zeigen.
+   */
+  final control_image = querySelector('.container_control');
+
+  /**
    * Enthält alle TD-Elemente des Feldes.
    */
   List<List<HtmlElement>> fields;
@@ -66,6 +72,8 @@ class TetrisView {
     container_start.style.display = "none";
     // Spielfeld einblenden
     container_game.style.display = "block";
+    // Steuerungsbild einblenden
+    control_image.style.display = "block";
 
     // Das Spielfeld aktualisieren
     final field = model.field;
