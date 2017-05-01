@@ -5,7 +5,7 @@ part of tetris;
  * Ein [tetrominoSpeed] von 1000ms bestimmt 1 Bewegungen pro Sekunde.
  */
 
-const tetrominoSpeed = const Duration(milliseconds: 500);
+const tetrominoSpeed = const Duration(milliseconds: 1000);
 
 /**
  * Ein [TetrisController]-Objekt registriert mehrere Handler

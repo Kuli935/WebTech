@@ -17,8 +17,8 @@ body {
 #title {
     margin:auto;
     margin-top: 15px;
-    width: 633px;
-    height: 166px;
+    width: 640px;
+    height: 600px;
     background-image: url("img/tetris.png");
     background-repeat:no-repeat;
     background-position:center;
@@ -110,7 +110,7 @@ body {
     #field { top: 12%; left: 5%; }
     #nextstone { top: 20%; right: 10%; }
     #info { position: absolute; margin-top: 65%; right: 18%; font-size: 22px; }
-    #title { background-image: url("img/tetris _netbook.png"); width: 457px; height: 126px;}
+    #title { background-image: url("img/tetris _netbook.png"); width: 460px; height: 400px;}
 }
 
 @media (max-width: 450px) {
@@ -122,5 +122,5 @@ body {
     #info { position: absolute; margin-top: 75%; right: 14%; font-size: 14px; }
     #title { width: 273.6px; height: 76.8px; }
     #copy {  width: 240px;  margin-left:-120px; }
-    #title { background-image: url("img/tetris_mobil.png"); width: 286px;  height: 80px;}
+    #title { background-image: url("img/tetris_mobil.png"); width: 320px;  height: 247px;}
 }
