@@ -22,9 +22,15 @@ class TetrisGame {
   Symbol _gamestate;
 
   /**
-   * Gibt an, ob das Spiel gestoppt wird
+   * Gibt an, ob das Spiel beendet ist
    */
   bool get stopped => _gamestate == #stopped;
+
+
+  /**
+   * Gibt an, ob das Spiel pausiert ist
+   */
+  bool get paused => _gamestate == #paused;
 
   /**
    * Gibt an, ob das Spiel läuft
@@ -36,6 +42,13 @@ class TetrisGame {
    */
   void start() {
     _gamestate = #running;
+  }
+
+  /**
+   * Pausiert das Spiel
+   */
+  void pause() {
+    _gamestate = #paused;
   }
 
   /**
@@ -115,7 +128,7 @@ class TetrisGame {
           .toList();
     }).toList();
     // Tetromino setzen
-    _tetromino.nextstone.forEach((s) {
+    tetromino.nextstone.forEach((s) {
       final r = s['row'];
       final c = s['col'];
       if (r < 0 || r >= nextStoneFieldHeight) return;
@@ -131,6 +144,22 @@ class TetrisGame {
    */
   void moveTetromino() {
     if (running) tetromino.move();
+  }
+
+  /**
+   * Pausiert das Spiel und gibt es beim nächsten Aufruf wieder frei.
+   */
+  void pauseTetromino(){
+    // Wenn das Spiel läuft, dann Pausieren
+    if (running){
+      pause();
+      tetromino.stop();
+
+      // Wenn das Spiel gestoppt ist, dann freigeben
+    } else if (paused) {
+      start();
+      tetromino.down();
+    }
   }
 
   /**

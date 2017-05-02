@@ -216,6 +216,9 @@ class Tetromino {
      * X-Achse | col | width
      **/
     void rotate(angle){
+      // Wenn das Spiel gestoppt wurde ist keine Rotation möglich
+      if (this._game.stopped || this._game.paused) return;
+
       // Liste der Tetromino für die Rotation
       var _rotate;
 
@@ -309,6 +312,10 @@ class Tetromino {
 
     }
 
+    /**
+     * Teilt dem Tetromino keine Bewegung mit, somit stoppt der Tetromino.
+     */
+    void stop()  { _dr =  0; _dc =  0; }
 
     /**
      * Teilt dem Tetromino die Bewegung nach unten mit.

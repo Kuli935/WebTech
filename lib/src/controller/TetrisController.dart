@@ -71,7 +71,7 @@ class TetrisController {
       view.update(game);
     };
 
-    // Drehen um 90 Grad  (rechts Drehung)
+    // Drehen um 90 Grad (rechts Drehung)
     sw.onSwipeUp = (){
       game.tetromino.rotate(90);
       view.update(game);
@@ -79,7 +79,6 @@ class TetrisController {
 
     // Steuerung des Tetromino über Tastatur
     window.onKeyDown.listen((KeyboardEvent ev) {
-      if (game.stopped) return;
       // Nach links bewegen
       if (ev.keyCode == KeyCode.LEFT) {
         game.tetromino.left();
@@ -116,6 +115,12 @@ class TetrisController {
         view.update(game);
       }
 
+      // ruft Pause | Menü auf
+      if (ev.keyCode == KeyCode.ESC) {
+        game.pauseTetromino();
+        view.update(game);
+      }
+
     });
 
 
@@ -149,6 +154,7 @@ class TetrisController {
    */
   dynamic _newGame() async {
     game = new TetrisGame(gameWidth, gameHeight, nextStoneFieldHeight, nextStoneFieldWidth);
+    view.update(game);
   }
 
 
