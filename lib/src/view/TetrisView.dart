@@ -46,6 +46,16 @@ class TetrisView {
   HtmlElement get startButton => querySelector('#startButton');
 
   /**
+   * Fortsetzen Button.
+   */
+  HtmlElement get continueButton => querySelector('#continueButton');
+
+  /**
+   * Neues Spiel Button.
+   */
+  HtmlElement get newGameButton => querySelector('#newGameButton');
+
+  /**
    * Elemente mit der ID '.container_control' im DOM tree.
    * Wird verwendet um ein Steuerungsbild zu zeigen.
    */
@@ -74,6 +84,16 @@ class TetrisView {
     container_game.style.display = "block";
     // Steuerungsbild einblenden
     control_image.style.display = "block";
+
+    // Prüfen ob Pause aufgerufen wurde
+    if(model.paused){
+      // Pause einblenden
+      container_message.style.display = "block";
+      message.innerHtml = "Pause";
+    } else {
+      // Pause ausblenden
+      container_message.style.display = "none";
+    }
 
     // Das Spielfeld aktualisieren
     final field = model.fieldRepresentation;

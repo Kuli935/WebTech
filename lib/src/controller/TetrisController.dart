@@ -136,6 +136,18 @@ class TetrisController {
       view.update(game);
     });
 
+    // Fortsetzen Button wurde gedrückt
+    view.continueButton.onClick.listen((_) {
+      game.pauseTetromino();
+      view.update(game);
+    });
+
+    // Neues Spiel Button wurde gedrückt
+    view.newGameButton.onClick.listen((_) {
+      _newGame();
+      view.update(game);
+    });
+
   }
 
 
