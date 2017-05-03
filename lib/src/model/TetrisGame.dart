@@ -15,7 +15,7 @@ class TetrisGame {
   final int _nextStoneFieldHeight;
   final int _nextStoneFieldWidth;
 
-  // interne Representation des Spielfelds
+// interne Representation des Spielfelds
   List<List<Cell>> _field;
 
   // Spielzustand #running or #stopped.
@@ -25,7 +25,6 @@ class TetrisGame {
    * Gibt an, ob das Spiel beendet ist
    */
   bool get stopped => _gamestate == #stopped;
-
 
   /**
    * Gibt an, ob das Spiel pausiert ist
@@ -77,13 +76,16 @@ class TetrisGame {
   }
 
   /**
-   * Returns eine Representation des Spielfeld als eine Liste von Listen.
+
+   * Gibt eine Representation des Spielfeld als eine Liste von Listen zurück.
    * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
    * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
    * Leerzustand: #empty,
    * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
+   * @return Representation des Spielfeld als eine Liste von Listen
    */
-  List<List<Symbol>> get field {
+
+  List<List<Symbol>> get fieldRepresentation {
     List<List<Symbol>> fieldRepresentation = new List();
     for (int row = 0; row < this._field.length; row++) {
       List<Symbol> newRow = new List();
@@ -121,6 +123,7 @@ class TetrisGame {
    * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
    * Leerzustand: #empty,
    * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
+   * @return Nächster-Tetromino-Feld als eine Liste von Listen
    */
   List<List<Symbol>> get nextStoneField {
     var _nextStoneField = new Iterable.generate(nextStoneFieldHeight, (row) {
@@ -161,6 +164,13 @@ class TetrisGame {
       tetromino.down();
     }
   }
+
+
+  /**
+   * Gibt die interne Representation des Feldes zurück.
+   */
+
+  List<List<Cell>> get field => this._field;
 
   /**
    * Gibt den Tetromino zurück.

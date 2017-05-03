@@ -76,7 +76,7 @@ class TetrisView {
     control_image.style.display = "block";
 
     // Das Spielfeld aktualisieren
-    final field = model.field;
+    final field = model.fieldRepresentation;
     for (int row = 0; row < field.length; row++) {
       for (int col = 0; col < field[row].length; col++) {
         final td = fields[row][col];

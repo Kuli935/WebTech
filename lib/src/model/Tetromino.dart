@@ -79,14 +79,14 @@ class Tetromino {
       //View nich aktualisiert. Dies geschieht erst, wenn der Stein einmal
       //bewegt wurde, weshalb der erste Stein erst in der zweiten Zeile
       //erscheint.
-      _stone.forEach((cell){
-        this._game._field[cell['row']][cell['col']].isActive = true;
-      });
-
 
       // Farbe setzen
       _stoneColor = _tempColor;
       _firstStone = false;
+
+      _stone.forEach((cell){
+        this._game._field[cell['row']][cell['col']].isActive = true;
+      });
 
       // Vorschau auf den nächsten Tetromino
       _tempStone = r.nextInt(7);
@@ -204,7 +204,7 @@ class Tetromino {
      * @param int angle = winkel
      *
      * Anmerkungen:
-     * Rotationsformal um einen Punkt um einen anderen um Winkel alpha rotieren zu lassen.
+     * Rotationsformal um einen Punkt um einen Drehpunkt mit einem Winkel alpha rotieren zu lassen.
      * Wobei x0 und y0 die Koordinaten für den Drehpunkt sind und x und y für den zu rotierenden Stein
      * x' = x0 + (x - x0) * cos(alpha) - (y - y0) * sin(alpha)
      * y' = y0 + (x - x0) * sin(alpha) + (y - y0) * cos(alpha)
@@ -337,75 +337,112 @@ class Tetromino {
   /**
    * Die Bewegungen des Tetromino auf Kollisionen prüfen.
    * Bei einer Kollision einen neuen Tetromino fallen lassen.
-   * @param var moveTo = neue Position vom Tetromino
+   * @param var move = neue Position vom Tetromino
    */
-  checkCollisions(var moveTo) {
-    // Prüfen ob der Tetromino nicht die Seiten verlässt
-    if (notOnSide(moveTo)){
-      // Prüfen ob der Tetromino den Grund des Feldes erreicht
-      //window.console.log('onGround: ${onGround(_move)}');
-      if (notOnGround(moveTo)){
-        //den Tetromino von der alten Postion entfernen
-        this._stone.forEach((piece){
-          this._game._field[piece['row']][piece['col']].isActive = false;
-          this._game._field[piece['row']][piece['col']].color = #empty;
-        });
-        _stone = moveTo;
-        this._game.updateField();
-        //TODO: check if the current tetromino hit another tetromino that
-        //is already placed on the field
+  checkCollisions(var move) {
+    // Prüfen ob der Tetris Stein die Seiten verlässt
+    if (notOnSide(move)){
+      // Prüfen ob der Stein den Grund des Feldes erreicht
+      if (notOnGround(move)){
+        //pruefen ob der Tetromino mit einem bereits gesetzten Tetromino kollidiert
+        if(!tetrominoCollision(move)) {
+          //den Tetromino vin der alten Position entfernen
+          this._stone.forEach((piece) {
+            this._game._field[piece['row']][piece['col']].isActive = false;
+            this._game._field[piece['row']][piece['col']].color = #empty;
+          });
+          //den Tetromino an die neue Position setzen
+          _stone = move;
+          this._stone.forEach((piece) {
+            this._game._field[piece['row']][piece['col']].isActive = true;
+          });
+        } else{
+          //den Tetromino bei einer Kollision an der Position setzen
+          this._stone.forEach((piece) {
+            this._game._field[piece['row']][piece['col']].isActive = false;
+          });
+          //TODO: check if a row was completed
+          nextTetromino();
+        }
       } else {
+        this._stone.forEach((piece) {
+          this._game._field[piece['row']][piece['col']].isActive = false;
+        });
         nextTetromino();
       }
     }
-
+    this._game.updateField();
   }
 
     /**
      * Überprüfen ob der Tetromino an den Seiten angekommen ist
-     * @param var moveTo = neue Position vom Tetromino
-     * @return bool = true Seite nicht erreicht, false = Seite erreicht
+     * @param var move = neue Position vom Tetromino
+     * @return bool true = Seite nicht erreicht, false = Seite erreicht
      */
-    bool notOnSide(var moveTo) {
-      bool stoneOne = moveTo.elementAt(0)['row'] >= 0 &&
-          moveTo.elementAt(0)['col'] >= 0 &&
-          moveTo.elementAt(0)['col'] < this._game._sizeWidth;
+    bool notOnSide(var move) {
+      bool stoneOne = move.elementAt(0)['row'] >= 0 &&
+          move.elementAt(0)['col'] >= 0 &&
+          move.elementAt(0)['col'] < this._game._sizeWidth;
 
-      bool stoneTwo = moveTo.elementAt(1)['row'] >= 0 &&
-          moveTo.elementAt(1)['col'] >= 0 &&
-          moveTo.elementAt(1)['col'] < this._game._sizeWidth;
+      bool stoneTwo = move.elementAt(1)['row'] >= 0 &&
+          move.elementAt(1)['col'] >= 0 &&
+          move.elementAt(1)['col'] < this._game._sizeWidth;
 
-      bool stoneThree = moveTo.elementAt(2)['row'] >= 0 &&
-          moveTo.elementAt(2)['col'] >= 0 &&
-          moveTo.elementAt(2)['col'] < this._game._sizeWidth;
+      bool stoneThree = move.elementAt(2)['row'] >= 0 &&
+          move.elementAt(2)['col'] >= 0 &&
+          move.elementAt(2)['col'] < this._game._sizeWidth;
 
-      bool stoneFour = moveTo.elementAt(3)['row'] >= 0 &&
-          moveTo.elementAt(3)['col'] >= 0 &&
-          moveTo.elementAt(3)['col'] < this._game._sizeWidth;
+      bool stoneFour = move.elementAt(3)['row'] >= 0 &&
+          move.elementAt(3)['col'] >= 0 &&
+          move.elementAt(3)['col'] < this._game._sizeWidth;
 
       return stoneOne && stoneTwo && stoneThree && stoneFour;
     }
 
     /**
      * Überprüfen ob der Tetromino am Grund angekommen ist
-     * @param var moveTo = neue Position vom Tetromino
-     * @return bool = true nicht den Boden berührt, false = Boden berührt
+     * @param var move = neue Position vom Tetromino
+     * @return bool true = nicht den Boden berührt, false = Boden berührt
      */
-    bool notOnGround(var moveTo) {
-      bool stoneOne = moveTo.elementAt(0)['row'] >= 0 &&
-          moveTo.elementAt(0)['row'] < this._game._sizeHeight;
+    bool notOnGround(var move) {
+      bool stoneOne = move.elementAt(0)['row'] >= 0 &&
+          move.elementAt(0)['row'] < this._game._sizeHeight;
 
-      bool stoneTwo = moveTo.elementAt(1)['row'] >= 0 &&
-          moveTo.elementAt(1)['row'] < this._game._sizeHeight;
+      bool stoneTwo = move.elementAt(1)['row'] >= 0 &&
+          move.elementAt(1)['row'] < this._game._sizeHeight;
 
-      bool stoneThree = moveTo.elementAt(2)['row'] >= 0 &&
-          moveTo.elementAt(2)['row'] < this._game._sizeHeight;
+      bool stoneThree = move.elementAt(2)['row'] >= 0 &&
+          move.elementAt(2)['row'] < this._game._sizeHeight;
 
-      bool stoneFour = moveTo.elementAt(3)['row'] >= 0 &&
-          moveTo.elementAt(3)['row'] < this._game._sizeHeight;
+      bool stoneFour = move.elementAt(3)['row'] >= 0 &&
+          move.elementAt(3)['row'] < this._game._sizeHeight;
 
       return stoneOne && stoneTwo && stoneThree && stoneFour;
     }
+
+  /**
+   * Ueberpruefen, ob der Tetromino mit einem bereits gesetzten Tetromino
+   * kollidiert.
+   * @param var move = neue Position vom Tetromino
+   * @return bool true = Kollision, false = keine Kollision
+   */
+  bool tetrominoCollision(List move){
+    //TODO: Tetrominoes lock hovering if the collide from the sides
+    //look at all move to cells
+    //if they are not empty and inactive -> collision
+    for(int cellIndex=0; cellIndex < move.length; cellIndex++){
+      var cell = move[cellIndex];
+      //window.console.log('[$cellIndex]ACTIVE: ${this._game.field[cell['row']][cell['col']].isActive} '
+      //    'COLOR: ${this._game.field[cell['row']][cell['col']].color}');
+      if(this._game.field[cell['row']][cell['col']].color != #empty &&
+          !this._game.field[cell['row']][cell['col']].isActive){
+        return true;
+      }
+    }
+
+    return false;
+
+  }
 
     /**
      * Gibt die Farbe des Tetromino im Spielfeld zurück.
