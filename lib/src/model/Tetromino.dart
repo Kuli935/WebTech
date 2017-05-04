@@ -346,7 +346,7 @@ class Tetromino {
       if (notOnGround(move)){
         //pruefen ob der Tetromino mit einem bereits gesetzten Tetromino kollidiert
         if(!tetrominoCollision(move)) {
-          //den Tetromino vin der alten Position entfernen
+          //den Tetromino in der alten Position entfernen
           this._stone.forEach((piece) {
             this._game._field[piece['row']][piece['col']].isActive = false;
             this._game._field[piece['row']][piece['col']].color = #empty;
@@ -356,13 +356,34 @@ class Tetromino {
           this._stone.forEach((piece) {
             this._game._field[piece['row']][piece['col']].isActive = true;
           });
-        } else{
-          //den Tetromino bei einer Kollision an der Position setzen
-          this._stone.forEach((piece) {
-            this._game._field[piece['row']][piece['col']].isActive = false;
-          });
-          //TODO: check if a row was completed
-          nextTetromino();
+        } else {
+          //falls der aktuelle Tetromino mit einem bereits gesetzten Tetromino
+          //kolliediert muss unterschieden werden, ob von oben oder von der Seite
+
+          //von oben
+          if (this._dc == 0){
+            //den Tetromino bei einer Kollision an der Position setzen
+            this._stone.forEach((piece) {
+              this._game._field[piece['row']][piece['col']].isActive = false;
+            });
+            //TODO: check if a row was completed
+            nextTetromino();
+          } else{
+            //falls die Tetrominoes von der Seite kollidieren, faellt der
+            //aktuelle Tetrominoe nach unten
+            this._stone.forEach((piece) {
+              this._game._field[piece['row']][piece['col']].isActive = false;
+              this._game._field[piece['row']][piece['col']].color = #empty;
+            });
+            //die Seitwaertsbewgung des aktuellen Tetrominos rueckgaening machen
+            move.forEach((piece)  {
+              piece['col'] -= this._dc;
+            });
+            _stone = move;
+            this._stone.forEach((piece) {
+              this._game._field[piece['row']][piece['col']].isActive = true;
+            });
+          }
         }
       } else {
         this._stone.forEach((piece) {
@@ -436,7 +457,7 @@ class Tetromino {
       //    'COLOR: ${this._game.field[cell['row']][cell['col']].color}');
       if(this._game.field[cell['row']][cell['col']].color != #empty &&
           !this._game.field[cell['row']][cell['col']].isActive){
-        return true;
+          return true;
       }
     }
 
