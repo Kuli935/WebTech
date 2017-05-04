@@ -56,6 +56,11 @@ class TetrisView {
   HtmlElement get newGameButton => querySelector('#newGameButton');
 
   /**
+   * Anzeige fuer die Punktezahl
+   */
+  HtmlElement get scoreParagraph => querySelector('#points');
+
+  /**
    * Elemente mit der ID '.container_control' im DOM tree.
    * Wird verwendet um ein Steuerungsbild zu zeigen.
    */
@@ -94,6 +99,8 @@ class TetrisView {
       // Pause ausblenden
       container_message.style.display = "none";
     }
+
+    this.scoreParagraph.text = model.score.toString();
 
     // Das Spielfeld aktualisieren
     final field = model.fieldRepresentation;

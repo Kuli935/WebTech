@@ -22,7 +22,7 @@ class TetrisGame {
   Symbol _gamestate;
 
   // der aktuelle Punktestand
-  num score;
+  num _score;
 
   /**
    * Gibt an, ob das Spiel beendet ist
@@ -38,6 +38,8 @@ class TetrisGame {
    * Gibt an, ob das Spiel läuft
    */
   bool get running => _gamestate == #running;
+
+  num get score => _score;
 
   /**
    * Startet des Spiel
@@ -70,7 +72,7 @@ class TetrisGame {
   TetrisGame(this._sizeHeight, this._sizeWidth, this._nextStoneFieldHeight,
       this._nextStoneFieldWidth) {
     start();
-    this.score = 0;
+    this._score = 0;
     this._field = new Iterable.generate(sizeHeight, (row) {
       return new Iterable.generate(
           sizeWidth, (col) => new Cell(row, col, #empty)).toList();
@@ -201,7 +203,7 @@ class TetrisGame {
       return;
     }
     //increase score
-    this.score += this.calculateScoreOfMove(completedRows.length);
+    this._score += this.calculateScoreOfMove(completedRows.length);
     //remove completed rows
     completedRows.forEach((rowIndex) {
       this.field[rowIndex].forEach((cell){
@@ -232,10 +234,10 @@ class TetrisGame {
         score = 40;
         break;
       case 2:
-        score = 120;
+        score = 100;
         break;
       case 3:
-        score = 400;
+        score = 300;
         break;
       case 4:
         score = 1200;
