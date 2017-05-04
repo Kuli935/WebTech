@@ -288,7 +288,7 @@ class Tetromino {
         // Methode aufrufen um Kollisionen zu prüfen,
         // wenn Ja neuer Tetromino fallen lassen
         // ansonsten Stein Setzen
-        checkCollisions(_rotate);
+        checkCollisionsAndMoveTetromino(_rotate);
 
       }
 
@@ -298,6 +298,7 @@ class Tetromino {
      * Bewegungen von dem Tetromino und seine Richtungen (down, left, right)
      */
     void move() {
+      //naechste Position des aktuellen Tetrominoes berechnen
       var _move = [
         { 'row' : _stone.elementAt(0)['row'] + _dr,  'col' : _stone.elementAt(0)['col'] + _dc  },
         { 'row' : _stone.elementAt(1)['row'] + _dr,  'col' : _stone.elementAt(1)['col'] + _dc  },
@@ -305,11 +306,23 @@ class Tetromino {
         { 'row' : _stone.elementAt(3)['row'] + _dr,  'col' : _stone.elementAt(3)['col'] + _dc  }
       ];
 
-      // Methode aufrufen um Kollisionen zu prüfen,
-      // wenn Ja neuer Tetromino fallen lassen
-      // ansonsten Stein Setzen
-      checkCollisions(_move);
+      //pruefen, ob die berechnete Position valide ist
+      checkCollisionsAndMoveTetromino(_move);
+    }
 
+  /**
+   * Bewegt den aktuellen Tetromino auf gegebene Position und aendert dabei
+   * den Zustand des Spielfeldes.
+   */
+  void moveToNewPosition(List move){
+      this._stone.forEach((piece) {
+        this._game._field[piece['row']][piece['col']].isActive = false;
+        this._game._field[piece['row']][piece['col']].color = #empty;
+      });
+      _stone = move;
+      this._stone.forEach((piece) {
+        this._game._field[piece['row']][piece['col']].isActive = true;
+      });
     }
 
     /**
@@ -339,53 +352,29 @@ class Tetromino {
    * Bei einer Kollision einen neuen Tetromino fallen lassen.
    * @param var move = neue Position vom Tetromino
    */
-  checkCollisions(var move) {
-    // Prüfen ob der Tetris Stein die Seiten verlässt
-    if (notOnSide(move)){
-      // Prüfen ob der Stein den Grund des Feldes erreicht
-      if (notOnGround(move)){
-        //pruefen ob der Tetromino mit einem bereits gesetzten Tetromino kollidiert
-        if(!tetrominoCollision(move)) {
-          //den Tetromino in der alten Position entfernen
-          this._stone.forEach((piece) {
-            this._game._field[piece['row']][piece['col']].isActive = false;
-            this._game._field[piece['row']][piece['col']].color = #empty;
-          });
-          //den Tetromino an die neue Position setzen
-          _stone = move;
-          this._stone.forEach((piece) {
-            this._game._field[piece['row']][piece['col']].isActive = true;
-          });
-        } else {
-          //falls der aktuelle Tetromino mit einem bereits gesetzten Tetromino
-          //kolliediert muss unterschieden werden, ob von oben oder von der Seite
-
-          //von oben
-          if (this._dc == 0){
-            //den Tetromino bei einer Kollision an der Position setzen
+  checkCollisionsAndMoveTetromino(var move) {
+    //TODO: further refactoring to seperate functionality would be nice
+    if(notOnSide(move)){
+      if(notOnGround(move)){
+        if(!tetrominoCollision(move)){
+          this.moveToNewPosition(move);
+        } else{
+          bool movesSideways = (this._dc != 0);
+          if(movesSideways){
+            //ungueltige seitwaerts Bewegung rueckgaening machen
+            move.forEach((piece) {piece['col'] -= this._dc;});
+            this.moveToNewPosition(move);
+          } else{
+            //Tetromino in der Position fest setzen
             this._stone.forEach((piece) {
               this._game._field[piece['row']][piece['col']].isActive = false;
             });
             //TODO: check if a row was completed
             nextTetromino();
-          } else{
-            //falls die Tetrominoes von der Seite kollidieren, faellt der
-            //aktuelle Tetrominoe nach unten
-            this._stone.forEach((piece) {
-              this._game._field[piece['row']][piece['col']].isActive = false;
-              this._game._field[piece['row']][piece['col']].color = #empty;
-            });
-            //die Seitwaertsbewgung des aktuellen Tetrominos rueckgaening machen
-            move.forEach((piece)  {
-              piece['col'] -= this._dc;
-            });
-            _stone = move;
-            this._stone.forEach((piece) {
-              this._game._field[piece['row']][piece['col']].isActive = true;
-            });
           }
         }
-      } else {
+      } else{
+        //falls der Tetrmino aud den Boden faellt wird er gesetzt
         this._stone.forEach((piece) {
           this._game._field[piece['row']][piece['col']].isActive = false;
         });
@@ -448,7 +437,6 @@ class Tetromino {
    * @return bool true = Kollision, false = keine Kollision
    */
   bool tetrominoCollision(List move){
-    //TODO: Tetrominoes lock hovering if the collide from the sides
     //look at all move to cells
     //if they are not empty and inactive -> collision
     for(int cellIndex=0; cellIndex < move.length; cellIndex++){
