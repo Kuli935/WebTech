@@ -79,6 +79,7 @@ class TetrisController {
 
     // Steuerung des Tetromino über Tastatur
     window.onKeyDown.listen((KeyboardEvent ev) {
+      if (game.stopped) return;
       // Nach links bewegen
       if (ev.keyCode == KeyCode.LEFT) {
         game.tetromino.left();
@@ -164,7 +165,8 @@ class TetrisController {
   /**
    * Inizalisiert ein neues Spiel.
    */
-  dynamic _newGame() async {
+  void _newGame() {
+    //TODO: New Game Funktion, das Spielfeld wird nicht zurück gesetzt
     game = new TetrisGame(gameWidth, gameHeight, nextStoneFieldHeight, nextStoneFieldWidth);
     view.update(game);
   }

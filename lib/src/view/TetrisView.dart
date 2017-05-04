@@ -89,7 +89,7 @@ class TetrisView {
     if(model.paused){
       // Pause einblenden
       container_message.style.display = "block";
-      message.innerHtml = "Pause";
+      message.innerHtml = "<h1>Menü</h1><p>Das Spiel wurde pausiert!</p>";
     } else {
       // Pause ausblenden
       container_message.style.display = "none";
