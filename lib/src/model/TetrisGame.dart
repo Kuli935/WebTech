@@ -39,6 +39,9 @@ class TetrisGame {
    */
   bool get running => _gamestate == #running;
 
+  /**
+   * Gibt den aktuellen Punktestand zurück
+   */
   num get score => _score;
 
   /**
@@ -164,12 +167,13 @@ class TetrisGame {
       pause();
       tetromino.stop();
 
-      // Wenn das Spiel gestoppt ist, dann freigeben
+      // Wenn das Spiel pausiert ist, dann freigeben
     } else if (paused) {
       start();
       tetromino.down();
     }
   }
+
 
   /**
    * Gibt eine Liste mit den Indizes aller Zeilen die vollstaendig sind

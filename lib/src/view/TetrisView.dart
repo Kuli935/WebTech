@@ -23,6 +23,13 @@ class TetrisView {
   final message = querySelector("#message");
 
   /**
+   * Elemente mit der ID '#overlay' im DOM tree.
+   * Verwendet um das Display abzudunkeln
+   */
+  final overlay = querySelector("#overlay");
+
+
+  /**
    * Elemente mit der Klasse '.container_game' im DOM tree.
    * Wird verwendet um das Spiel anzuzeigen
    */
@@ -82,24 +89,39 @@ class TetrisView {
    * - [startButton] am Anfang zeigen
    * - Spielfeld anzeigen nachdem Modelstatus
    */
-  void update(TetrisGame model, {List<Map> scores: const []}) {
+  void update(TetrisGame model) {
     // Startfenster ausblenden
     container_start.style.display = "none";
     // Spielfeld einblenden
     container_game.style.display = "block";
     // Steuerungsbild einblenden
     control_image.style.display = "block";
+    // Abdunkeln ausblenden
+    overlay.style.display = "none";
+    // Game Nachrichten ausblenden
+    container_message.style.display = "none";
 
     // Prüfen ob Pause aufgerufen wurde
     if(model.paused){
       // Pause einblenden
+      overlay.style.display = "block";
       container_message.style.display = "block";
       message.innerHtml = "<img src='img/tetris_menu_logo.png'>"
           "<h1>Menü</h1>"
           "<p>Das Spiel wurde pausiert!</p>";
-    } else {
-      // Pause ausblenden
-      container_message.style.display = "none";
+    }
+
+    // Prüfen ob das Spiel gestoppt wurde (Game Over)
+    if(model.stopped){
+      // Game Over einblenden
+      overlay.style.display = "block";
+      continueButton.style.display = "none";
+      container_message.style.display = "block";
+      message.innerHtml = "<img src='img/tetris_menu_logo.png'>"
+          "<h1>Game Over</h1>"
+          "<p>Dein Punktestand beträgt: <h2>" + model.score.toString() +
+          "</h2></p>"
+          "<p>Vielen Dank für's Spielen!</p>";
     }
 
     this.scoreParagraph.text = model.score.toString();
