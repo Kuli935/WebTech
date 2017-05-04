@@ -370,6 +370,9 @@ class Tetromino {
               this._game._field[piece['row']][piece['col']].isActive = false;
             });
             //TODO: check if a row was completed
+            //falls eine oder mehrere Reihen vervollstaendigt sind mussen diese
+            //entfernt werden und alle Reihen darueber nachrutschen
+            this._game.removeCompletedRows();
             nextTetromino();
           }
         }
@@ -378,6 +381,7 @@ class Tetromino {
         this._stone.forEach((piece) {
           this._game._field[piece['row']][piece['col']].isActive = false;
         });
+        this._game.removeCompletedRows();
         nextTetromino();
       }
     }

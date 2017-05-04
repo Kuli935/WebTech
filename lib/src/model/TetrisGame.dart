@@ -21,6 +21,9 @@ class TetrisGame {
   // Spielzustand #running or #stopped.
   Symbol _gamestate;
 
+  // der aktuelle Punktestand
+  num _score;
+
   /**
    * Gibt an, ob das Spiel beendet ist
    */
@@ -35,6 +38,8 @@ class TetrisGame {
    * Gibt an, ob das Spiel läuft
    */
   bool get running => _gamestate == #running;
+
+  num get score => _score;
 
   /**
    * Startet des Spiel
@@ -67,6 +72,7 @@ class TetrisGame {
   TetrisGame(this._sizeHeight, this._sizeWidth, this._nextStoneFieldHeight,
       this._nextStoneFieldWidth) {
     start();
+    this._score = 0;
     this._field = new Iterable.generate(sizeHeight, (row) {
       return new Iterable.generate(
           sizeWidth, (col) => new Cell(row, col, #empty)).toList();
@@ -165,6 +171,80 @@ class TetrisGame {
     }
   }
 
+  /**
+   * Gibt eine Liste mit den Indizes aller Zeilen die vollstaendig sind
+   * zurueck. Eine Reihe gilt als vollstaendig, falls alle ihre Zellen
+   * gefuellt und inaktiv sind.
+   */
+  List<num> getIndexOfCompletedRows(){
+    List<num> rowsCompleted = new List();
+    //fuer jede Zeile pruefen, ob alle cellen belegt und inaktiv sind
+    for(num rowIndex=0; rowIndex < this.field.length; rowIndex++){
+      bool isCompleted = true;
+      for(num colIndex=0; colIndex < this.field[rowIndex].length; colIndex++){
+        Cell cell = this.field[rowIndex][colIndex];
+        if(cell.color == #empty || cell.isActive){
+          isCompleted = false;
+          break;
+        }
+      }
+      (isCompleted == true) ? rowsCompleted.add(rowIndex) : null;
+    }
+    return rowsCompleted;
+  }
+
+  /**
+   * Entfernt alle vollstaendigen Reihen vom Spielfeld.
+   */
+  void removeCompletedRows(){
+    List<num> completedRows = this.getIndexOfCompletedRows();
+    //falls keine Reihen vervollständigt wurden, muss nichts entfernt werden
+    if(completedRows.length == 0){
+      return;
+    }
+    //increase score
+    this._score += this.calculateScoreOfMove(completedRows.length);
+    //remove completed rows
+    completedRows.forEach((rowIndex) {
+      this.field[rowIndex].forEach((cell){
+        cell.color = #empty;
+        cell.isActive = false;
+      });
+    });
+    //move upper rows down
+    completedRows.sort((a, b) => (a-b).toInt());
+    completedRows.forEach((rowIndex){
+      for(num i=rowIndex-1; i >= 0; i--){
+        this.field[i].forEach((cell) {
+          this.field[i+1][cell.col].color = cell.color;
+          cell.color = #empty;
+        });
+      }
+    });
+  }
+
+  /**
+   * Berechnet wie viele Punkte das letzte vervollstaendigen wert ist.
+   */
+  num calculateScoreOfMove(num rowsCompleted){
+    //TODO: change  score formula later to account for the current level
+    num score;
+    switch(rowsCompleted){
+      case 1:
+        score = 40;
+        break;
+      case 2:
+        score = 100;
+        break;
+      case 3:
+        score = 300;
+        break;
+      case 4:
+        score = 1200;
+        break;
+    }
+    return score;
+  }
 
   /**
    * Gibt die interne Representation des Feldes zurück.
