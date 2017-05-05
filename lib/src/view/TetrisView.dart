@@ -124,10 +124,32 @@ class TetrisView {
           "<p>Vielen Dank für's Spielen!</p>";
     }
 
-    this.scoreParagraph.text = model.score.toString();
+    this.scoreParagraph.text = "Punkte: " + model.score.toString();
+
+    // Spielfeld aktualisieren
+    final field = model.fieldRepresentation;
+    updateFields(field, 1);
+
+    // Nächster-Tetromino-Feld aktualisieren
+    final nextStoneField = model.nextStoneField;
+    updateFields(nextStoneField, 2);
+
+
+  }
+
+  /**
+   * Aktualisiert die Tabllen nach dem Model. Je nachdem wo sich Tetrominoes befinden.
+   * @param List<List<Symbol>> field = Modelzustand wo sich die Tetrominoes befinden
+   * @param int generateFieldModus = Welches Feld geändert werden soll
+   * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld
+   *
+   */
+  void updateFields(List<List<Symbol>> field, int generateFieldModus){
+    List<List<HtmlElement>> fields;
+    if(generateFieldModus == 1){fields = this.fields;}
+    if(generateFieldModus == 2){fields = this.nextStoneFields;}
 
     // Das Spielfeld aktualisieren
-    final field = model.fieldRepresentation;
     for (int row = 0; row < field.length; row++) {
       for (int col = 0; col < field[row].length; col++) {
         final td = fields[row][col];
@@ -151,81 +173,31 @@ class TetrisView {
         }
       }
     }
-
-    // Nächster-Tetromino-Feld aktualisieren
-    final nextStoneField = model.nextStoneField;
-    for (int row = 0; row < nextStoneField.length; row++) {
-      for (int col = 0; col < nextStoneField[row].length; col++) {
-        final td = nextStoneFields[row][col];
-        if (td != null) {
-          td.classes.clear();
-          if (nextStoneField[row][col] == #cyan)
-            td.classes.add('cyan');
-          else if (nextStoneField[row][col] == #blue)
-            td.classes.add('blue');
-          else if (nextStoneField[row][col] == #yellow)
-            td.classes.add('yellow');
-          else if (nextStoneField[row][col] == #orange)
-            td.classes.add('orange');
-          else if (nextStoneField[row][col] == #red)
-            td.classes.add('red');
-          else if (nextStoneField[row][col] == #green)
-            td.classes.add('green');
-          else if (nextStoneField[row][col] == #purple)
-            td.classes.add('purple');
-          else if (nextStoneField[row][col] == #empty) td.classes.add('empty');
-        }
-      }
-    }
   }
 
-  /**
-   * Generiert ein Nächstes-Tetromino-Feld.
-   * Eine HTML Tabelle (4 x 4)
-   */
-  void generateNextStoneField(TetrisGame model) {
-    final nextStoneField = model.nextStoneField;
-    String table = "";
-    for (int row = 0; row < nextStoneField.length; row++) {
-      table += "<tr>";
-      for (int col = 0; col < nextStoneField[row].length; col++) {
-        final assignment = nextStoneField[row][col];
-        final pos = "nextstone_${row}_${col}";
-        table += "<td id='$pos' class='$assignment'></td>";
-      }
-      table += "</tr>";
-    }
-    nextStone.innerHtml = table;
-
-    // Speichert alle generieten TD Elemente in dem Feld
-    // vermeidet so zeitintensive querySelector Anrufe in der Update Methode
-    nextStoneFields = new List<List<HtmlElement>>(nextStoneField.length);
-    for (int row = 0; row < nextStoneField.length; row++) {
-      nextStoneFields[row] = [];
-      for (int col = 0; col < nextStoneField[row].length; col++) {
-        nextStoneFields[row]
-            .add(nextStone.querySelector("#nextstone_${row}_${col}"));
-      }
-    }
-  }
 
   /**
    * Generiert ein Spielfeld entsprechend dem Model Zustand.
    * Eine HTML Tabelle (n x m)
+   * @param final field = Modelzustand wo sich die Tetrominoes befinden
+   * @param int generateFieldModus = Welches Feld geändert werden soll
+   * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld
+   * @param var nameID = ID Name um die TD's die Farben zuzuweisen
    */
-  void generateField(TetrisGame model) {
-    final field = model.field;
+  void generateField(final field, int generateFieldModus, var nameID) {
+    List<List<HtmlElement>> fields;
     String table = "";
     for (int row = 0; row < field.length; row++) {
       table += "<tr>";
       for (int col = 0; col < field[row].length; col++) {
         final assignment = field[row][col];
-        final pos = "field_${row}_${col}";
+        final pos = nameID + "_${row}_${col}";
         table += "<td id='$pos' class='$assignment'></td>";
       }
       table += "</tr>";
     }
-    game.innerHtml = table;
+    final selectedDOMTree = querySelector('#' + nameID);
+    selectedDOMTree.innerHtml = table;
 
     // Speichert alle generieten TD Elemente in dem Feld
     // vermeidet so zeitintensive querySelector Anrufe in der Update Methode
@@ -233,8 +205,17 @@ class TetrisView {
     for (int row = 0; row < field.length; row++) {
       fields[row] = [];
       for (int col = 0; col < field[row].length; col++) {
-        fields[row].add(game.querySelector("#field_${row}_${col}"));
+        fields[row].add(selectedDOMTree.querySelector("#" + nameID + "_${row}_${col}"));
       }
     }
+
+    // Ermitteln um welche Feldgeneriung es sich handelt und Variable setzen
+    if(generateFieldModus == 1){this.fields = fields;}
+    if(generateFieldModus == 2){this.nextStoneFields = fields;}
+
   }
+
+
+
+
 }

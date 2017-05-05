@@ -43,8 +43,10 @@ class TetrisController {
    */
   TetrisController() {
 
-    view.generateField(game);
-    view.generateNextStoneField(game);
+    // Erzeugen des Spielfeldes
+    view.generateField(game.field, 1, "field");
+    // Erzeugen des Nächsten-Tetromino-Feldes
+    view.generateField(game.nextStoneField, 2, "nextstone");
 
     //Vorbereiten der Touch Steuerung des Tetromino
     SwipeHandler sw = SwipeHandler.getInstance();
