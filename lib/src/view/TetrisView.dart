@@ -106,8 +106,7 @@ class TetrisView {
       // Pause einblenden
       overlay.style.display = "block";
       container_message.style.display = "block";
-      message.innerHtml = "<img src='img/tetris_menu_logo.png'>"
-          "<h1>Menü</h1>"
+      message.innerHtml = "<h1>Menü</h1>"
           "<p>Das Spiel wurde pausiert!</p>";
     }
 
@@ -117,8 +116,7 @@ class TetrisView {
       overlay.style.display = "block";
       continueButton.style.display = "none";
       container_message.style.display = "block";
-      message.innerHtml = "<img src='img/tetris_menu_logo.png'>"
-          "<h1>Game Over</h1>"
+      message.innerHtml = "<h1>Game Over</h1>"
           "<p>Dein Punktestand beträgt: <h2>" + model.score.toString() +
           "</h2></p>"
           "<p>Vielen Dank für's Spielen!</p>";
@@ -142,7 +140,6 @@ class TetrisView {
    * @param List<List<Symbol>> field = Modelzustand wo sich die Tetrominoes befinden
    * @param int generateFieldModus = Welches Feld geändert werden soll
    * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld
-   *
    */
   void updateFields(List<List<Symbol>> field, int generateFieldModus){
     List<List<HtmlElement>> fields;
@@ -178,7 +175,6 @@ class TetrisView {
 
   /**
    * Generiert ein Spielfeld entsprechend dem Model Zustand.
-   * Eine HTML Tabelle (n x m)
    * @param final field = Modelzustand wo sich die Tetrominoes befinden
    * @param int generateFieldModus = Welches Feld geändert werden soll
    * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld
