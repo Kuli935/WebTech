@@ -21,6 +21,11 @@ class Tetromino {
   var _nextstone = [];
 
   /**
+   * Liste der Stein Elemente von dem Tetromino für das Gehalteten-Tetris-Stein-Feld
+   */
+  var _holdstone = [];
+
+  /**
    * Farbe des Tetromino im Spielfeld
    */
   Symbol _stoneColor;
@@ -90,7 +95,7 @@ class Tetromino {
 
       // Vorschau auf den nächsten Tetromino
       _tempStone = r.nextInt(7);
-      _nextstone = randomTetromino(_tempStone, this._game.nextStoneFieldHeight - 1, this._game.nextStoneFieldWidth);
+      _nextstone = randomTetromino(_tempStone, this._game.extraFieldHeight - 1, this._game.extraFieldWidth);
       // Farbe setzen
       _nextstoneColor = _tempColor;
     }
@@ -108,7 +113,7 @@ class Tetromino {
     _stoneColor = _nextstoneColor;
     // Vorschau auf den nächsten Tetromino
     _tempStone = r.nextInt(7);
-    _nextstone = randomTetromino(_tempStone, this._game.nextStoneFieldHeight - 1, this._game.nextStoneFieldWidth);
+    _nextstone = randomTetromino(_tempStone, this._game.extraFieldHeight - 1, this._game.extraFieldWidth);
     // Farbe setzen
     _nextstoneColor = _tempColor;
   }
@@ -476,5 +481,10 @@ class Tetromino {
    * Gibt die Elemente des Tetromino für den nächsten Tetromino und die Position zurück.
    */
   get nextstone => _nextstone;
+
+  /**
+   * Gibt die Elemente des Tetromino für den gehalteten Tetromino und die Position zurück.
+   */
+  get holdstone => _holdstone;
 
 }

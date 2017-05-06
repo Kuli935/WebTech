@@ -11,9 +11,9 @@ class TetrisGame {
   final int _sizeHeight;
   final int _sizeWidth;
 
-  // Die Feldgröße für das Nächste-Tetromino-Feld (n x m Feld)
-  final int _nextStoneFieldHeight;
-  final int _nextStoneFieldWidth;
+  // Die Feldgröße für das Extra-Tetromino-Feld (n x m Feld)
+  final int _extraFieldHeight;
+  final int _extraFieldWidth;
 
 // interne Representation des Spielfelds
   List<List<Cell>> _field;
@@ -69,11 +69,11 @@ class TetrisGame {
    * Konstruktor um ein neues Tetris Spiel zu erzeugen
    * @param int _sizeHeight = Höhe des Spielfeldes
    * @param int _sizeWidth = Breite des Spielfeldes
-   * @param int _nextStoneFieldHeight = Höhe des Nächsten-Tetromino-Feldes
-   * @param int _nextStoneFieldWidth = Breite des Nächsten-Tetromino-Feldes
+   * @param int _extraFieldHeight = Höhe des Extra-Tetromino-Feldes
+   * @param int _extraFieldWidth = Breite des Extra-Tetromino-Feldes
    */
-  TetrisGame(this._sizeHeight, this._sizeWidth, this._nextStoneFieldHeight,
-      this._nextStoneFieldWidth) {
+  TetrisGame(this._sizeHeight, this._sizeWidth, this._extraFieldHeight,
+      this._extraFieldWidth) {
     start();
     this._score = 0;
     this._field = new Iterable.generate(sizeHeight, (row) {
@@ -135,19 +135,43 @@ class TetrisGame {
    * @return Nächster-Tetromino-Feld als eine Liste von Listen
    */
   List<List<Symbol>> get nextStoneField {
-    var _nextStoneField = new Iterable.generate(nextStoneFieldHeight, (row) {
-      return new Iterable.generate(nextStoneFieldWidth, (col) => #empty)
+    var _nextStoneField = new Iterable.generate(extraFieldHeight, (row) {
+      return new Iterable.generate(extraFieldWidth, (col) => #empty)
           .toList();
     }).toList();
     // Tetromino setzen
     tetromino.nextstone.forEach((s) {
       final r = s['row'];
       final c = s['col'];
-      if (r < 0 || r >= nextStoneFieldHeight) return;
-      if (c < 0 || c >= nextStoneFieldWidth) return;
+      if (r < 0 || r >= extraFieldHeight) return;
+      if (c < 0 || c >= extraFieldWidth) return;
       _nextStoneField[r][c] = _tetromino.nextstoneColor;
     });
     return _nextStoneField;
+  }
+
+  /**
+   * Gibt das Gehalteten-Tetromino-Feld als eine Liste von Listen zurück.
+   * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
+   * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
+   * Leerzustand: #empty,
+   * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
+   * @return Gehalteten-Tetromino-Feld als eine Liste von Listen
+   */
+  List<List<Symbol>> get holdStoneField {
+    var _holdStoneField = new Iterable.generate(extraFieldHeight, (row) {
+      return new Iterable.generate(extraFieldWidth, (col) => #empty)
+          .toList();
+    }).toList();
+    // Tetromino setzen
+    tetromino.holdstone.forEach((s) {
+      final r = s['row'];
+      final c = s['col'];
+      if (r < 0 || r >= extraFieldHeight) return;
+      if (c < 0 || c >= extraFieldWidth) return;
+      _holdStoneField[r][c] = _tetromino.nextstoneColor;
+    });
+    return _holdStoneField;
   }
 
   /**
@@ -274,10 +298,10 @@ class TetrisGame {
   /**
    * Gibt die Höhe des Feldes für den Nächsten-Tetromino-Feld zurück.
    */
-  int get nextStoneFieldHeight => _nextStoneFieldHeight;
+  int get extraFieldHeight => _extraFieldHeight;
 
   /**
    * Gibt die Breite des Feldes für den Nächsten-Tetromino-Feld zurück.
    */
-  int get nextStoneFieldWidth => _nextStoneFieldWidth;
+  int get extraFieldWidth => _extraFieldWidth;
 }

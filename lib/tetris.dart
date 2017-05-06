@@ -20,5 +20,5 @@ const gameWidth = 10;
 /**
  * Definiert die Größe des Feldes für das Nächster-Tetromino-Feld
  */
-const nextStoneFieldHeight = 4;
-const nextStoneFieldWidth = 4;
+const extraFieldHeight = 4;
+const extraFieldWidth = 4;

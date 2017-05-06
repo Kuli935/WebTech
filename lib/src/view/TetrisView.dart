@@ -42,10 +42,16 @@ class TetrisView {
   final game = querySelector('#field');
 
   /**
-   * Elemente mit der ID '#nextStone' im DOM tree.
+   * Elemente mit der ID '#nextstone' im DOM tree.
    * Wird verwendet um das Feld von Nächsten-Tetromino-Feld zu visualisieren als eine HTML Tabelle.
    */
   final nextStone = querySelector('#nextstone');
+
+  /**
+   * Elemente mit der ID '#holdstone' im DOM tree.
+   * Wird verwendet um das Feld von Gehalteten-Tetromino-Feld zu visualisieren als eine HTML Tabelle.
+   */
+  final holdStone = querySelector('#holdstone');
 
   /**
    * Start Button für das Spiel.
@@ -82,6 +88,11 @@ class TetrisView {
    * Enthält alle TD-Elemente des Feldes für den Nächsten-Tetromino-Feld.
    */
   List<List<HtmlElement>> nextStoneFields;
+
+  /**
+   * Enthält alle TD-Elemente des Feldes für den Gehalteten-Tetromino-Feld.
+   */
+  List<List<HtmlElement>> holdStoneFields;
 
   /**
    * Aktualisiert die View nach dem Modelstatus.
@@ -122,7 +133,7 @@ class TetrisView {
           "<p>Vielen Dank für's Spielen!</p>";
     }
 
-    this.scoreParagraph.text = "Punkte: " + model.score.toString();
+    this.scoreParagraph.text = model.score.toString();
 
     // Spielfeld aktualisieren
     final field = model.fieldRepresentation;
@@ -132,6 +143,10 @@ class TetrisView {
     final nextStoneField = model.nextStoneField;
     updateFields(nextStoneField, 2);
 
+    // Gehalteten-Tetromino-Feld aktualisieren
+    final holdStoneField = model.holdStoneField;
+    updateFields(holdStoneField, 3);
+
 
   }
 
@@ -139,12 +154,13 @@ class TetrisView {
    * Aktualisiert die Tabllen nach dem Model. Je nachdem wo sich Tetrominoes befinden.
    * @param List<List<Symbol>> field = Modelzustand wo sich die Tetrominoes befinden
    * @param int generateFieldModus = Welches Feld geändert werden soll
-   * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld
+   * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld, 3 = Gehalteten-Tetromino-Feld
    */
   void updateFields(List<List<Symbol>> field, int generateFieldModus){
     List<List<HtmlElement>> fields;
     if(generateFieldModus == 1){fields = this.fields;}
     if(generateFieldModus == 2){fields = this.nextStoneFields;}
+    if(generateFieldModus == 3){fields = this.holdStoneFields;}
 
     // Das Spielfeld aktualisieren
     for (int row = 0; row < field.length; row++) {
@@ -177,7 +193,7 @@ class TetrisView {
    * Generiert ein Spielfeld entsprechend dem Model Zustand.
    * @param final field = Modelzustand wo sich die Tetrominoes befinden
    * @param int generateFieldModus = Welches Feld geändert werden soll
-   * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld
+   * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld, 3 = Gehalteten-Tetromino-Feld
    * @param var nameID = ID Name um die TD's die Farben zuzuweisen
    */
   void generateField(final field, int generateFieldModus, var nameID) {
@@ -208,10 +224,7 @@ class TetrisView {
     // Ermitteln um welche Feldgeneriung es sich handelt und Variable setzen
     if(generateFieldModus == 1){this.fields = fields;}
     if(generateFieldModus == 2){this.nextStoneFields = fields;}
-
+    if(generateFieldModus == 3){this.holdStoneFields = fields;}
   }
-
-
-
 
 }

@@ -23,7 +23,7 @@ class TetrisController {
   /**
    * Erzeugen eines Tetris Game. Aufruf aus der Datei Tetromino.dart.
    */
-  var game = new TetrisGame(gameHeight, gameWidth, nextStoneFieldHeight, nextStoneFieldWidth);
+  var game = new TetrisGame(gameHeight, gameWidth, extraFieldHeight, extraFieldWidth);
 
   /**
    * Erzeugen der Tetrisansicht. Aufruf aus der Datei TetrisView.dart im Ordner view.
@@ -47,6 +47,8 @@ class TetrisController {
     view.generateField(game.field, 1, "field");
     // Erzeugen des Nächsten-Tetromino-Feldes
     view.generateField(game.nextStoneField, 2, "nextstone");
+    // Erzeugen des Gehalteten-Tetromino-Feldes
+    view.generateField(game.holdStoneField, 3, "holdstone");
 
     //Vorbereiten der Touch Steuerung des Tetromino
     SwipeHandler sw = SwipeHandler.getInstance();
@@ -167,9 +169,15 @@ class TetrisController {
   /**
    * Inizalisiert ein neues Spiel.
    */
-  void _newGame() {
-    //TODO: New Game Funktion, das Spielfeld wird nicht zurück gesetzt
-    game = new TetrisGame(gameWidth, gameHeight, nextStoneFieldHeight, nextStoneFieldWidth);
+  dynamic _newGame() async {
+    game = new TetrisGame(gameHeight, gameWidth, extraFieldHeight, extraFieldWidth);
+    // Erzeugen des Spielfeldes
+    view.generateField(game.field, 1, "field");
+    // Erzeugen des Nächsten-Tetromino-Feldes
+    view.generateField(game.nextStoneField, 2, "nextstone");
+    // Erzeugen des Gehalteten-Tetromino-Feldes
+    view.generateField(game.holdStoneField, 3, "holdstone");
+    game.start();
     view.update(game);
   }
 
