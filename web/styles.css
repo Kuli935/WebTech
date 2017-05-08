@@ -122,7 +122,6 @@ body {
     letter-spacing: 3px;
     font-size: 16px;
     font-weight: bold;
-    border-bottom: 5px dashed;
 }
 
 .container_message #message h1{
@@ -143,6 +142,9 @@ body {
 .green { background-color: #00f000 !important; }
 .purple { background-color: #a000f0 !important; }
 
+#field_row_0, #field_row_1 {
+    display: none;
+}
 
 
 @media (min-width: 950px) {

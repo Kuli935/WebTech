@@ -116,6 +116,7 @@ class TetrisView {
     if(model.paused){
       // Pause einblenden
       overlay.style.display = "block";
+      continueButton.style.display = "block";
       container_message.style.display = "block";
       message.innerHtml = "<h1>Menü</h1>"
           "<p>Das Spiel wurde pausiert!</p>";
@@ -200,11 +201,12 @@ class TetrisView {
     List<List<HtmlElement>> fields;
     String table = "";
     for (int row = 0; row < field.length; row++) {
-      table += "<tr>";
+      final positionPow = nameID + "_row_${row}";
+      table += "<tr id='$positionPow'>";
       for (int col = 0; col < field[row].length; col++) {
         final assignment = field[row][col];
-        final pos = nameID + "_${row}_${col}";
-        table += "<td id='$pos' class='$assignment'></td>";
+        final position = nameID + "_${row}_${col}";
+        table += "<td id='$position' class='$assignment'></td>";
       }
       table += "</tr>";
     }

@@ -14,7 +14,7 @@ part 'src/model/TetrisGame.dart';
 /**
  * Definiert eine Tetris Spielkonstante, das n x m Feld.
  */
-const gameHeight = 16;
+const gameHeight = 18; // -2 unsichtbare Reihen
 const gameWidth = 10;
 
 /**

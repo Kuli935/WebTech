@@ -133,8 +133,8 @@ class Tetromino {
         _tempColor = #cyan;
         temp = [
           { 'row' : height ~/ 2,    'col' : width ~/ 2 - 2 },
-          { 'row' : height ~/ 2,    'col' : width ~/ 2 - 1 },
-          { 'row' : height ~/ 2,    'col' : width ~/ 2     },
+          { 'row' : height ~/ 2,    'col' : width ~/ 2 - 1 }, // Drehpunkt von vertikal nach horizontal
+          { 'row' : height ~/ 2,    'col' : width ~/ 2     }, // Drehpunkt von horizontal nach vertikal
           { 'row' : height ~/ 2,    'col' : width ~/ 2 + 1 }
         ];
         break;
@@ -237,46 +237,26 @@ class Tetromino {
         if(_stone.elementAt(0)['row'] == stone.elementAt(1)['row'] && stone.elementAt(0)['row'] == _stone.elementAt(2)['row'] && _stone.elementAt(0)['row'] == stone.elementAt(3)['row']) {
           // Rotation in die vertikale Form
           // Tetromino von oben nach unten erzeugen
+
           _rotate = [
-               { 'row' : _stone.elementAt(0)['row'],      'col' : _stone.elementAt(0)['col'] },
-               { 'row' : _stone.elementAt(0)['row'] + 1,  'col' : _stone.elementAt(0)['col'] },
-               { 'row' : _stone.elementAt(0)['row'] + 2,  'col' : _stone.elementAt(0)['col'] },
-               { 'row' : _stone.elementAt(0)['row'] + 3,  'col' : _stone.elementAt(0)['col'] }
-           ];
-
-          // Prüfen ob der Tetromino über den Grund erzeugt wird bei der Rotation
-          if(!notOnGround(_rotate)){
-            // Wenn Ja den Tetromino von unten nach oben erzeugen
-            _rotate = [
-              { 'row' : this._game.sizeHeight - 4,  'col' : _stone.elementAt(0)['col'] },
-              { 'row' : this._game.sizeHeight - 3,  'col' : _stone.elementAt(0)['col'] },
-              { 'row' : this._game.sizeHeight - 2,  'col' : _stone.elementAt(0)['col'] },
-              { 'row' : this._game.sizeHeight - 1,  'col' : _stone.elementAt(0)['col'] }
-            ];
-          }
-
+            { 'row' : (_stone.elementAt(2)['row'] + (_stone.elementAt(0)['col'] - _stone.elementAt(2)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(0)['row'] - _stone.elementAt(2)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(2)['col'] + (_stone.elementAt(0)['col'] - _stone.elementAt(2)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(0)['row'] - _stone.elementAt(2)['row']) * sin(angle / 180 * PI)).round() },
+            { 'row' : (_stone.elementAt(2)['row'] + (_stone.elementAt(1)['col'] - _stone.elementAt(2)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(1)['row'] - _stone.elementAt(2)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(2)['col'] + (_stone.elementAt(1)['col'] - _stone.elementAt(2)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(1)['row'] - _stone.elementAt(2)['row']) * sin(angle / 180 * PI)).round() },
+            { 'row' : (_stone.elementAt(2)['row'] + (_stone.elementAt(2)['col'] - _stone.elementAt(2)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(2)['row'] - _stone.elementAt(2)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(2)['col'] + (_stone.elementAt(2)['col'] - _stone.elementAt(2)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(2)['row'] - _stone.elementAt(2)['row']) * sin(angle / 180 * PI)).round() },
+            { 'row' : (_stone.elementAt(2)['row'] + (_stone.elementAt(3)['col'] - _stone.elementAt(2)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(3)['row'] - _stone.elementAt(2)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(2)['col'] + (_stone.elementAt(3)['col'] - _stone.elementAt(2)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(3)['row'] - _stone.elementAt(2)['row']) * sin(angle / 180 * PI)).round() }
+          ];
 
           // Prüfen ob es das I Tetromino in vertikaler Form ist
         } else if(_stone.elementAt(0)['col'] == stone.elementAt(1)['col'] && stone.elementAt(0)['col'] == _stone.elementAt(2)['col'] && _stone.elementAt(0)['col'] == stone.elementAt(3)['col']){
           // Rotation in die horizontale Form
           // Tetromino von links nach rechts erzeugen
-          _rotate = [
-              { 'row' : _stone.elementAt(0)['row'],  'col' : _stone.elementAt(0)['col']     },
-              { 'row' : _stone.elementAt(0)['row'],  'col' : _stone.elementAt(0)['col'] + 1 },
-              { 'row' : _stone.elementAt(0)['row'],  'col' : _stone.elementAt(0)['col'] + 2 },
-              { 'row' : _stone.elementAt(0)['row'],  'col' : _stone.elementAt(0)['col'] + 3 }
-            ];
 
-          // Prüfen ob der Tetromino über den rechten Rand erzeugt wird bei der Rotation
-          if(!notOnSide(_rotate)){
-            // Wenn Ja den Tetromino von rechts nach links erzeugen
-            _rotate = [
-              { 'row' : _stone.elementAt(0)['row'],  'col' : this._game.sizeWidth - 4 },
-              { 'row' : _stone.elementAt(0)['row'],  'col' : this._game.sizeWidth - 3 },
-              { 'row' : _stone.elementAt(0)['row'],  'col' : this._game.sizeWidth - 2 },
-              { 'row' : _stone.elementAt(0)['row'],  'col' : this._game.sizeWidth - 1 }
-            ];
-          }
+          _rotate = [
+            { 'row' : (_stone.elementAt(1)['row'] + (_stone.elementAt(0)['col'] - _stone.elementAt(1)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(0)['row'] - _stone.elementAt(1)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(1)['col'] + (_stone.elementAt(0)['col'] - _stone.elementAt(1)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(0)['row'] - _stone.elementAt(1)['row']) * sin(angle / 180 * PI)).round() },
+            { 'row' : (_stone.elementAt(1)['row'] + (_stone.elementAt(1)['col'] - _stone.elementAt(1)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(1)['row'] - _stone.elementAt(1)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(1)['col'] + (_stone.elementAt(1)['col'] - _stone.elementAt(1)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(1)['row'] - _stone.elementAt(1)['row']) * sin(angle / 180 * PI)).round() },
+            { 'row' : (_stone.elementAt(1)['row'] + (_stone.elementAt(2)['col'] - _stone.elementAt(1)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(2)['row'] - _stone.elementAt(1)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(1)['col'] + (_stone.elementAt(2)['col'] - _stone.elementAt(1)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(2)['row'] - _stone.elementAt(1)['row']) * sin(angle / 180 * PI)).round() },
+            { 'row' : (_stone.elementAt(1)['row'] + (_stone.elementAt(3)['col'] - _stone.elementAt(1)['col']) * sin(angle / 180 * PI) + (_stone.elementAt(3)['row'] - _stone.elementAt(1)['row']) * cos(angle / 180 * PI)).round(),  'col' : (_stone.elementAt(1)['col'] + (_stone.elementAt(3)['col'] - _stone.elementAt(1)['col']) * cos(angle / 180 * PI) - (_stone.elementAt(3)['row'] - _stone.elementAt(1)['row']) * sin(angle / 180 * PI)).round() }
+          ];
+
 
         } else {
 
@@ -293,6 +273,7 @@ class Tetromino {
         // Methode aufrufen um Kollisionen zu prüfen,
         // wenn Ja neuer Tetromino fallen lassen
         // ansonsten Stein Setzen
+        if(tetrominoCollision(_rotate)) return;
         checkCollisionsAndMoveTetromino(_rotate);
 
       }
@@ -393,30 +374,33 @@ class Tetromino {
     this._game.updateField();
   }
 
-    /**
-     * Überprüfen ob der Tetromino an den Seiten angekommen ist
-     * @param var move = neue Position vom Tetromino
-     * @return bool true = Seite nicht erreicht, false = Seite erreicht
-     */
-    bool notOnSide(var move) {
-      bool stoneOne = move.elementAt(0)['row'] >= 0 &&
-          move.elementAt(0)['col'] >= 0 &&
-          move.elementAt(0)['col'] < this._game._sizeWidth;
 
-      bool stoneTwo = move.elementAt(1)['row'] >= 0 &&
-          move.elementAt(1)['col'] >= 0 &&
-          move.elementAt(1)['col'] < this._game._sizeWidth;
 
-      bool stoneThree = move.elementAt(2)['row'] >= 0 &&
-          move.elementAt(2)['col'] >= 0 &&
-          move.elementAt(2)['col'] < this._game._sizeWidth;
+  /**
+   * Überprüfen ob der Tetromino an den Seiten angekommen ist
+   * @param var move = neue Position vom Tetromino
+   * @return bool true = Seite nicht erreicht, false = Seite erreicht
+   */
 
-      bool stoneFour = move.elementAt(3)['row'] >= 0 &&
-          move.elementAt(3)['col'] >= 0 &&
-          move.elementAt(3)['col'] < this._game._sizeWidth;
+  bool notOnSide(var move) {
+    bool stoneOne = move.elementAt(0)['row'] >= 0 &&
+        move.elementAt(0)['col'] >= 0 &&
+        move.elementAt(0)['col'] < this._game._sizeWidth;
 
-      return stoneOne && stoneTwo && stoneThree && stoneFour;
-    }
+    bool stoneTwo = move.elementAt(1)['row'] >= 0 &&
+        move.elementAt(1)['col'] >= 0 &&
+        move.elementAt(1)['col'] < this._game._sizeWidth;
+
+    bool stoneThree = move.elementAt(2)['row'] >= 0 &&
+        move.elementAt(2)['col'] >= 0 &&
+        move.elementAt(2)['col'] < this._game._sizeWidth;
+
+    bool stoneFour = move.elementAt(3)['row'] >= 0 &&
+        move.elementAt(3)['col'] >= 0 &&
+        move.elementAt(3)['col'] < this._game._sizeWidth;
+
+    return stoneOne && stoneTwo && stoneThree && stoneFour;
+  }
 
     /**
      * Überprüfen ob der Tetromino am Grund angekommen ist
