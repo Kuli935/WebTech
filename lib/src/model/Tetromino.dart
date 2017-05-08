@@ -345,6 +345,15 @@ class Tetromino {
         if(!tetrominoCollision(move)){
           this.moveToNewPosition(move);
         } else{
+          // Prüfen auf Game Over
+          if(_stone.elementAt(0)['row'] == 0 || _stone.elementAt(0)['row'] == 1 ||
+              _stone.elementAt(1)['row'] == 0 || _stone.elementAt(1)['row'] == 1 ||
+              _stone.elementAt(2)['row'] == 0 || _stone.elementAt(2)['row'] == 1 ||
+              _stone.elementAt(3)['row'] == 0 || _stone.elementAt(3)['row'] == 1){
+            _game.stop();
+          }
+
+
           bool movesSideways = (this._dc != 0);
           if(movesSideways){
             //ungueltige seitwaerts Bewegung rueckgaening machen
