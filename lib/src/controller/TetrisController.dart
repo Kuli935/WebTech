@@ -53,7 +53,7 @@ class TetrisController {
     // Button Steuerung
     // Nach links bewegen
     view.leftButton.onClick.listen((_) {
-      if (game.stopped) return;
+      if (game.stopped || game.paused) return;
       game.tetromino.left();
       game.moveTetromino();
       game.tetromino.down();
@@ -62,7 +62,7 @@ class TetrisController {
 
     // Nach rechts bewegen
     view.rightButton.onClick.listen((_) {
-      if (game.stopped) return;
+      if (game.stopped || game.paused) return;
       game.tetromino.right();
       game.moveTetromino();
       game.tetromino.down();
@@ -71,7 +71,7 @@ class TetrisController {
 
     // Nach unten bewegen
     view.downButton.onClick.listen((_) {
-      if (game.stopped) return;
+      if (game.stopped || game.paused) return;
       game.tetromino.down();
       game.moveTetromino();
       view.update(game);
@@ -79,7 +79,7 @@ class TetrisController {
 
     // Drehen um 90 Grad (rechts Drehung)
     view.rightRotationButton.onClick.listen((_) {
-      if (game.stopped) return;
+      if (game.stopped || game.paused) return;
       game.tetromino.rotate(90);
       view.update(game);
     });
@@ -87,7 +87,7 @@ class TetrisController {
 
     // Drehen um -90 Grad (links Drehung)
     view.leftRotationButton.onClick.listen((_) {
-      if (game.stopped) return;
+      if (game.stopped || game.paused) return;
       game.tetromino.rotate(-90);
       view.update(game);
     });
@@ -101,14 +101,14 @@ class TetrisController {
 
     // Direkter Fall
     view.hardDropButton.onClick.listen((_) {
-      if (game.stopped) return;
+      if (game.stopped || game.paused) return;
       // TODO Hard Drop Funktionsaufruf
       view.update(game);
     });
 
     // Tetromino halten
     view.holdButton.onClick.listen((_) {
-      if (game.stopped) return;
+      if (game.stopped || game.paused) return;
       // TODO Hold Funktionsaufruf
       view.update(game);
     });
@@ -119,6 +119,7 @@ class TetrisController {
       if (game.stopped) return;
       // Nach links bewegen
       if (ev.keyCode == KeyCode.LEFT) {
+        if (game.paused) return;
         game.tetromino.left();
         game.moveTetromino();
         game.tetromino.down();
@@ -127,6 +128,7 @@ class TetrisController {
 
       // Nach rechts bewegen
       if (ev.keyCode == KeyCode.RIGHT) {
+        if (game.paused) return;
         game.tetromino.right();
         game.moveTetromino();
         game.tetromino.down();
@@ -135,6 +137,7 @@ class TetrisController {
 
       // Nach unten bewegen
       if (ev.keyCode == KeyCode.DOWN) {
+        if (game.paused) return;
         game.tetromino.down();
         game.moveTetromino();
         view.update(game);
@@ -142,6 +145,7 @@ class TetrisController {
 
       // Drehen um 90 Grad (rechts Drehung)
       if (ev.keyCode == KeyCode.UP) {
+        if (game.paused) return;
         game.tetromino.rotate(90);
         view.update(game);
       }
@@ -149,6 +153,7 @@ class TetrisController {
 
       // Drehen um -90 Grad (links Drehung)
       if (ev.keyCode == KeyCode.Y) {
+        if (game.paused) return;
         game.tetromino.rotate(-90);
         view.update(game);
       }
@@ -161,12 +166,14 @@ class TetrisController {
 
       // Direkter Fall
       if (ev.keyCode == KeyCode.SPACE) {
+        if (game.paused) return;
         // TODO Hard Drop Funktionsaufruf
         view.update(game);
       }
 
       // Tetromino halten
       if (ev.keyCode == KeyCode.C) {
+        if (game.paused) return;
         // TODO Hold Funktionsaufruf
         view.update(game);
       }

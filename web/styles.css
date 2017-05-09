@@ -191,6 +191,4 @@ body {
     #left { position: absolute; width: 43px;  height: 43px; left: 26%; bottom: -435px; cursor: pointer;}
     #down { position: absolute; width: 43px;  height: 43px; left: 44%; bottom: -435px; cursor: pointer;}
     #right { position: absolute; width: 43px;  height: 43px; right: 25%; bottom: -435px; cursor: pointer;}
-
-
 }
