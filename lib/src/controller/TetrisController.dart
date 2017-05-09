@@ -50,36 +50,69 @@ class TetrisController {
     // Erzeugen des Gehalteten-Tetromino-Feldes
     view.generateField(game.holdStoneField, 3, "holdstone");
 
-    //Vorbereiten der Touch Steuerung des Tetromino
-    SwipeHandler sw = SwipeHandler.getInstance();
+    // Button Steuerung
     // Nach links bewegen
-    sw.onSwipeLeft = (){
-        game.tetromino.left();
-        game.moveTetromino();
-        game.tetromino.down();
-        view.update(game);
-    };
+    view.leftButton.onClick.listen((_) {
+      if (game.stopped) return;
+      game.tetromino.left();
+      game.moveTetromino();
+      game.tetromino.down();
+      view.update(game);
+    });
 
     // Nach rechts bewegen
-    sw.onSwipeRight = (){
-        game.tetromino.right();
-        game.moveTetromino();
-        game.tetromino.down();
-        view.update(game);
-    };
+    view.rightButton.onClick.listen((_) {
+      if (game.stopped) return;
+      game.tetromino.right();
+      game.moveTetromino();
+      game.tetromino.down();
+      view.update(game);
+    });
 
     // Nach unten bewegen
-    sw.onSwipeDown = (){
+    view.downButton.onClick.listen((_) {
+      if (game.stopped) return;
       game.tetromino.down();
       game.moveTetromino();
       view.update(game);
-    };
+    });
 
     // Drehen um 90 Grad (rechts Drehung)
-    sw.onSwipeUp = (){
+    view.rightRotationButton.onClick.listen((_) {
+      if (game.stopped) return;
       game.tetromino.rotate(90);
       view.update(game);
-    };
+    });
+
+
+    // Drehen um -90 Grad (links Drehung)
+    view.leftRotationButton.onClick.listen((_) {
+      if (game.stopped) return;
+      game.tetromino.rotate(-90);
+      view.update(game);
+    });
+
+    // ruft Menü / Pause auf
+    view.menuButton.onClick.listen((_) {
+      if (game.stopped) return;
+      game.pauseTetromino();
+      view.update(game);
+    });
+
+    // Direkter Fall
+    view.hardDropButton.onClick.listen((_) {
+      if (game.stopped) return;
+      // TODO Hard Drop Funktionsaufruf
+      view.update(game);
+    });
+
+    // Tetromino halten
+    view.holdButton.onClick.listen((_) {
+      if (game.stopped) return;
+      // TODO Hold Funktionsaufruf
+      view.update(game);
+    });
+
 
     // Steuerung des Tetromino über Tastatur
     window.onKeyDown.listen((KeyboardEvent ev) {
@@ -120,11 +153,24 @@ class TetrisController {
         view.update(game);
       }
 
-      // ruft Pause | Menü auf
+      // ruft Menü / Pause auf
       if (ev.keyCode == KeyCode.ESC) {
         game.pauseTetromino();
         view.update(game);
       }
+
+      // Direkter Fall
+      if (ev.keyCode == KeyCode.SPACE) {
+        // TODO Hard Drop Funktionsaufruf
+        view.update(game);
+      }
+
+      // Tetromino halten
+      if (ev.keyCode == KeyCode.C) {
+        // TODO Hold Funktionsaufruf
+        view.update(game);
+      }
+
 
     });
 
@@ -134,10 +180,6 @@ class TetrisController {
       if (tetrominoTrigger != null) tetrominoTrigger.cancel();
       tetrominoTrigger = new Timer.periodic(tetrominoSpeed, (_) => _moveTetromino());
       game.start();
-      //Touch Steuerung registieren
-      window.onTouchStart.listen(sw.handleTouchStart);
-      window.onTouchMove.listen(sw.handleTouchMove);
-      window.onTouchEnd.listen(sw.handleTouchEnd);
       view.update(game);
     });
 

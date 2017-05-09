@@ -5,7 +5,6 @@ import 'dart:async';
 import 'dart:math';
 
 part 'src/controller/TetrisController.dart';
-part 'src/controller/SwipeHandler.dart';
 part 'src/view/TetrisView.dart';
 part 'src/model/Tetromino.dart';
 part 'src/model/Cell.dart';

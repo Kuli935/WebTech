@@ -56,17 +56,58 @@ class TetrisView {
   /**
    * Start Button für das Spiel.
    */
-  HtmlElement get startButton => querySelector('#startButton');
+  HtmlElement get startButton => querySelector('#start');
+
+  /**
+   * Menü Button für das Spiel.
+   */
+  HtmlElement get menuButton => querySelector('#menu');
+
+  /**
+   * Direkter Fall Button für das Spiel.
+   */
+  HtmlElement get hardDropButton => querySelector('#hard_drop');
+
+  /**
+   * Links Rotation Button für das Spiel.
+   */
+  HtmlElement get leftRotationButton => querySelector('#left_rotation');
+
+  /**
+   * Rechts Rotation Button für das Spiel.
+   */
+  HtmlElement get rightRotationButton => querySelector('#right_rotation');
+
+  /**
+   * Stein halten Button für das Spiel.
+   */
+  HtmlElement get holdButton => querySelector('#hold');
+
+  /**
+   * Nach links Button für das Spiel.
+   */
+  HtmlElement get leftButton => querySelector('#left');
+
+  /**
+   * Nach unten Button für das Spiel.
+   */
+  HtmlElement get downButton => querySelector('#down');
+
+  /**
+   * Nach rechts Button für das Spiel.
+   */
+  HtmlElement get rightButton => querySelector('#right');
+
 
   /**
    * Fortsetzen Button.
    */
-  HtmlElement get continueButton => querySelector('#continueButton');
+  HtmlElement get continueButton => querySelector('#continue');
 
   /**
    * Neues Spiel Button.
    */
-  HtmlElement get newGameButton => querySelector('#newGameButton');
+  HtmlElement get newGameButton => querySelector('#newGame');
 
   /**
    * Anzeige fuer die Punktezahl
