@@ -183,14 +183,14 @@ body {
     #copy {  width: 240px;  margin-left:-120px; }
     #title { background-image: url("img/tetris_mobil.png"); width: 320px;  height: 247px;}
     .container_control { background-image: none; }
-    #menu { background-image: url("img/menu.png"); background-repeat: no-repeat; position: absolute; width: 43px;  height: 43px; left: 2.5%; bottom: -365px; cursor: pointer;}
-    #hard_drop { background-image: url("img/hard_drop.png"); background-repeat: no-repeat; position: absolute; width: 43px;  height: 43px; left: 2.5%; bottom: -435px; cursor: pointer;}
-    #left_rotation { background-image: url("img/left_rotation.png"); background-repeat: no-repeat; position: absolute; width: 43px;  height: 43px; left: 33%; bottom: -365px; cursor: pointer;}
-    #right_rotation { background-image: url("img/right_rotation.png"); background-repeat: no-repeat; position: absolute; width: 43px;  height: 43px; right: 33%; bottom: -365px; cursor: pointer;}
-    #hold { background-image: url("img/hold.png"); background-repeat: no-repeat; position: absolute; width: 43px;  height: 43px; right: 2.5%; bottom: -365px; cursor: pointer;}
-    #left { background-image: url("img/left.png"); background-repeat: no-repeat; position: absolute; width: 43px;  height: 43px; left: 26%; bottom: -435px; cursor: pointer;}
-    #down { background-image: url("img/down.png"); background-repeat: no-repeat; position: absolute; width: 43px;  height: 43px; left: 44%; bottom: -435px; cursor: pointer;}
-    #right { background-image: url("img/right.png"); background-repeat: no-repeat; position: absolute; width: 43px;  height: 43px; right: 25%; bottom: -435px; cursor: pointer;}
+    #menu { position: absolute; width: 43px;  height: 43px; left: 2.5%; bottom: -365px; cursor: pointer;}
+    #hard_drop { position: absolute; width: 43px;  height: 43px; left: 2.5%; bottom: -435px; cursor: pointer;}
+    #left_rotation { position: absolute; width: 43px;  height: 43px; left: 33%; bottom: -365px; cursor: pointer;}
+    #right_rotation { position: absolute; width: 43px;  height: 43px; right: 33%; bottom: -365px; cursor: pointer;}
+    #hold { position: absolute; width: 43px;  height: 43px; right: 2.5%; bottom: -365px; cursor: pointer;}
+    #left { position: absolute; width: 43px;  height: 43px; left: 26%; bottom: -435px; cursor: pointer;}
+    #down { position: absolute; width: 43px;  height: 43px; left: 44%; bottom: -435px; cursor: pointer;}
+    #right { position: absolute; width: 43px;  height: 43px; right: 25%; bottom: -435px; cursor: pointer;}
 
 
 }
