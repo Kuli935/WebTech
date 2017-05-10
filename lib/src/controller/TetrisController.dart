@@ -102,7 +102,7 @@ class TetrisController {
     // Direkter Fall
     view.hardDropButton.onClick.listen((_) {
       if (game.stopped || game.paused) return;
-      // TODO Hard Drop Funktionsaufruf
+      game.hardDropCurrentTetromino();
       view.update(game);
     });
 
@@ -167,7 +167,7 @@ class TetrisController {
       // Direkter Fall
       if (ev.keyCode == KeyCode.SPACE) {
         if (game.paused) return;
-        // TODO Hard Drop Funktionsaufruf
+        game.hardDropCurrentTetromino();
         view.update(game);
       }
 

@@ -74,17 +74,13 @@ class Tetromino {
    */
   void nextTetromino() {
     final r = new Random();
+    this._game.incrementTetrominoCount();
 
     // Prüfe ob es der aller erste Tetromino ist
     if (_firstStone) {
       // generie den ersten zufalls Tetromino
       final random = r.nextInt(7);
       _stone = randomTetromino(random, 0, this._game._sizeWidth);
-      //TODO: nach dem der erste Stein auf das Spielfeld gesetzt wird, wird die
-      //View nich aktualisiert. Dies geschieht erst, wenn der Stein einmal
-      //bewegt wurde, weshalb der erste Stein erst in der zweiten Zeile
-      //erscheint.
-
       // Farbe setzen
       _stoneColor = _tempColor;
       _firstStone = false;
@@ -338,7 +334,7 @@ class Tetromino {
    * Bei einer Kollision einen neuen Tetromino fallen lassen.
    * @param var move = neue Position vom Tetromino
    */
-  checkCollisionsAndMoveTetromino(var move) {
+  void checkCollisionsAndMoveTetromino(var move) {
     //TODO: further refactoring to seperate functionality would be nice
     if(notOnSide(move)){
       if(notOnGround(move)){

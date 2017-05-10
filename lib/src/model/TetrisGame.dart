@@ -15,6 +15,9 @@ class TetrisGame {
   final int _extraFieldHeight;
   final int _extraFieldWidth;
 
+  // Zaehlt die Anzahl der breits gefallenen Tetrominoes
+  int tetrominoCount;
+
 // interne Representation des Spielfelds
   List<List<Cell>> _field;
 
@@ -76,12 +79,20 @@ class TetrisGame {
       this._extraFieldWidth) {
     start();
     this._score = 0;
+    this.tetrominoCount = 0;
     this._field = new Iterable.generate(sizeHeight, (row) {
       return new Iterable.generate(
           sizeWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
     _tetromino = new Tetromino.on(this);
     stop();
+  }
+
+  void hardDropCurrentTetromino(){
+    int currentTetrominoCout = this.tetrominoCount;
+    while(currentTetrominoCout == this.tetrominoCount){
+      this.moveTetromino();
+    }
   }
 
   /**
@@ -179,6 +190,7 @@ class TetrisGame {
    * Bewegungen sind nur im Status [running] möglich.
    */
   void moveTetromino() {
+    window.console.log(this.tetrominoCount);
     if (running) tetromino.move();
   }
 
@@ -272,6 +284,10 @@ class TetrisGame {
         break;
     }
     return score;
+  }
+
+  void incrementTetrominoCount(){
+    this.tetrominoCount++;
   }
 
   /**
