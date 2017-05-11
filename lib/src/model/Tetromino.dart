@@ -233,9 +233,17 @@ class Tetromino {
   }
 
   /**
-   * Halten des Tetromino, wenn vorher noch kein Tetromino gehalten wurde
+   * Methode um den Tetromino in das Gehalten-Tetromino-Feld zu legen.
+   * Es darf nur ein Tetromino gehalten werden, danach muss erst ein Tetromino fallen.
+   * Es werden zwei Fälle unterschieden.
+   * Erster Fall: Es wurde vorher kein Tetromino gehalten. Dann wird der aktuelle Tetromino
+   * gehalten und der nächste Tetromino als aktuellen Tetromino gewählt.
+   * Danach einen neuen nächster Tetromino erzeugt.
+   * Zweiter Fall: Es wurde bereits ein Tetromino gehalten. Es wird der aktuelle
+   * Tetromino durch den gehalteten Tetromino getauscht.
    **/
   void hold() {
+    // Erster Fall - erste halten eines Tetromino
     if (firstHoldTetromino && holdTetromino) {
       // den aktuellen Tetromino halten
       _holdStoneNumber = _currentStoneNumber;
@@ -264,6 +272,7 @@ class Tetromino {
       // Keine weiteren Tetrominoes halten, solange der Stein nicht gefallen ist
       holdTetromino = false;
 
+      // Zweiter Fall - es wurde schon ein Tetromino gehalten, also nur tauschen
     } else if(holdTetromino) {
       // den gehalteten Tetromino zwischen speichern
       int tempHoldStoneNumber = _holdStoneNumber;
@@ -287,6 +296,7 @@ class Tetromino {
       // Keine weiteren Tetrominoes halten, solange der Stein nicht gefallen ist
       holdTetromino = false;
     }
+    // Feld aktualisieren
     this._game.updateField();
   }
 
