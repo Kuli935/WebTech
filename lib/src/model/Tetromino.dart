@@ -287,6 +287,7 @@ class Tetromino {
       // Keine weiteren Tetrominoes halten, solange der Stein nicht gefallen ist
       holdTetromino = false;
     }
+    this._game.updateField();
   }
 
 
