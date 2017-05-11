@@ -88,6 +88,9 @@ class TetrisGame {
     stop();
   }
 
+  /**
+  * Methode für den direkten Fall des Tetrominoes.
+  */
   void hardDropCurrentTetromino(){
     int currentTetrominoCout = this.tetrominoCount;
     while(currentTetrominoCout == this.tetrominoCount){
@@ -95,8 +98,8 @@ class TetrisGame {
     }
   }
 
-  /**
 
+  /**
    * Gibt eine Representation des Spielfeld als eine Liste von Listen zurück.
    * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
    * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
@@ -104,7 +107,6 @@ class TetrisGame {
    * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
    * @return Representation des Spielfeld als eine Liste von Listen
    */
-
   List<List<Symbol>> get fieldRepresentation {
     List<List<Symbol>> fieldRepresentation = new List();
     for (int row = 0; row < this._field.length; row++) {
@@ -180,7 +182,7 @@ class TetrisGame {
       final c = s['col'];
       if (r < 0 || r >= extraFieldHeight) return;
       if (c < 0 || c >= extraFieldWidth) return;
-      _holdStoneField[r][c] = _tetromino.nextstoneColor;
+      _holdStoneField[r][c] = _tetromino.holdstoneColor;
     });
     return _holdStoneField;
   }

@@ -109,7 +109,7 @@ class TetrisController {
     // Tetromino halten
     view.holdButton.onClick.listen((_) {
       if (game.stopped || game.paused) return;
-      // TODO Hold Funktionsaufruf
+      game.tetromino.hold();
       view.update(game);
     });
 
@@ -174,7 +174,7 @@ class TetrisController {
       // Tetromino halten
       if (ev.keyCode == KeyCode.C) {
         if (game.paused) return;
-        // TODO Hold Funktionsaufruf
+        game.tetromino.hold();
         view.update(game);
       }
 

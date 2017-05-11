@@ -11,29 +11,34 @@ class Tetromino {
   final TetrisGame _game;
 
   /**
-   * Liste der Stein Elemente von dem Tetromino
+   * Liste der Stein Elemente von dem Tetromino.
    */
   var _stone = [];
 
   /**
-   * Liste der Stein Elemente von dem Tetromino für das Nächste-Tetris-Stein-Feld
+   * Liste der Stein Elemente von dem Tetromino für das Nächste-Tetromino-Stein-Feld.
    */
   var _nextstone = [];
 
   /**
-   * Liste der Stein Elemente von dem Tetromino für das Gehalteten-Tetris-Stein-Feld
+   * Liste der Stein Elemente von dem Tetromino für das Gehalteten-Tetromino-Stein-Feld.
    */
   var _holdstone = [];
 
   /**
-   * Farbe des Tetromino im Spielfeld
+   * Farbe des Tetromino im Spielfeld.
    */
   Symbol _stoneColor;
 
   /**
-   * Farbe des Tetromino im Nächsten-Tetromino-Feld
+   * Farbe des Tetromino im Nächsten-Tetromino-Feld.
    */
   Symbol _nextstoneColor;
+
+  /**
+   * Farbe des Tetromino im Gehalteten-Tetromino-Feld.
+   */
+  Symbol _holdstoneColor;
 
   /**
    * Temporäre Farbe des Tetromino
@@ -51,14 +56,40 @@ class Tetromino {
   int _dc;
 
   /**
-   * Variable für den ersten Tetromino. Damit der nächste Tetromino um einen versetzt ist für die Vorschau
+   * Variable für den ersten Tetromino. Damit der nächste Tetromino um einen versetzt ist für die Vorschau.
    */
   bool _firstStone = true;
 
   /**
-   * Temporäre Nummer des Tetromino
+   * Aktuelle Nummer des Tetromino
    */
-  int _tempStone;
+  int _currentStoneNumber;
+
+  /**
+   * Nummer des nächsten Tetromino
+   */
+  int _nextStoneNumber;
+
+  /**
+   * Gehaltete Tetromino Nummer
+   */
+  int _holdStoneNumber;
+
+  /**
+   * Booloscher Wert ob der Tetromino gehlaten werden darf oder nicht
+   */
+  bool holdTetromino = true;
+
+  /**
+   * Booloscher Wert ob der Tetromino das erste mal gehalten wird
+   */
+  bool firstHoldTetromino = true;
+
+
+  /**
+   * Zufallszahl
+   */
+  final r = new Random();
 
   /**
    * Konstuktor um ein [Tetromino] Objekt für ein [TetrisGame] zu erzeugen.
@@ -73,32 +104,34 @@ class Tetromino {
    * Generiert einen zufälligen Tetromino.
    */
   void nextTetromino() {
-    final r = new Random();
     this._game.incrementTetrominoCount();
 
     // Prüfe ob es der aller erste Tetromino ist
     if (_firstStone) {
       // generie den ersten zufalls Tetromino
-      final random = r.nextInt(7);
-      _stone = randomTetromino(random, 0, this._game._sizeWidth);
+      _currentStoneNumber = r.nextInt(7);
+      _stone = randomTetromino(_currentStoneNumber, 0, this._game._sizeWidth);
       // Farbe setzen
       _stoneColor = _tempColor;
       _firstStone = false;
 
+      //Die Zellen, welche von dem aktuellen Tetromino belegt sind als aktiv
+      //makieren
       _stone.forEach((cell){
         this._game._field[cell['row']][cell['col']].isActive = true;
       });
 
       // Vorschau auf den nächsten Tetromino
-      _tempStone = r.nextInt(7);
-      _nextstone = randomTetromino(_tempStone, this._game.extraFieldHeight - 1, this._game.extraFieldWidth);
+      _nextStoneNumber = r.nextInt(7);
+      _nextstone = randomTetromino(_nextStoneNumber, this._game.extraFieldHeight - 1, this._game.extraFieldWidth);
       // Farbe setzen
       _nextstoneColor = _tempColor;
     }
 
     // sonst alle anderen Tetromino
     // Den normalen Tetromino erzeugen
-    _stone = randomTetromino(_tempStone, 0, this._game.sizeWidth);
+    _currentStoneNumber = _nextStoneNumber;
+    _stone = randomTetromino(_nextStoneNumber, 0, this._game.sizeWidth);
 
     //Die Zellen, welche von dem aktuellen Tetromino belegt sind als aktiv
     //makieren
@@ -106,10 +139,10 @@ class Tetromino {
       this._game._field[cell['row']][cell['col']].isActive = true;
     });
     // Farbe setzen
-    _stoneColor = _nextstoneColor;
+    _stoneColor = _tempColor;
     // Vorschau auf den nächsten Tetromino
-    _tempStone = r.nextInt(7);
-    _nextstone = randomTetromino(_tempStone, this._game.extraFieldHeight - 1, this._game.extraFieldWidth);
+    _nextStoneNumber = r.nextInt(7);
+    _nextstone = randomTetromino(_nextStoneNumber, this._game.extraFieldHeight - 1, this._game.extraFieldWidth);
     // Farbe setzen
     _nextstoneColor = _tempColor;
   }
@@ -199,6 +232,64 @@ class Tetromino {
     return temp;
   }
 
+  /**
+   * Halten des Tetromino, wenn vorher noch kein Tetromino gehalten wurde
+   **/
+  void hold() {
+    if (firstHoldTetromino && holdTetromino) {
+      // den aktuellen Tetromino halten
+      _holdStoneNumber = _currentStoneNumber;
+      _holdstone = randomTetromino(_holdStoneNumber, this._game.extraFieldHeight - 1, this._game.extraFieldWidth);
+      _holdstoneColor = _tempColor;
+
+      // den nächsten Stein zum aktuellen Tetromino machen
+      _stone = randomTetromino(_nextStoneNumber, 0, this._game.sizeWidth);
+      _stoneColor = _tempColor;
+
+      //Die Zellen, welche von dem aktuellen Tetromino belegt sind als aktiv
+      //makieren
+      _stone.forEach((cell){
+        this._game._field[cell['row']][cell['col']].isActive = true;
+      });
+
+      // neuen nächsten Stein erzeugen
+      _nextStoneNumber = r.nextInt(7);
+      _nextstone = randomTetromino(_nextStoneNumber, this._game.extraFieldHeight - 1, this._game.extraFieldWidth);
+      // Farbe setzen
+      _nextstoneColor = _tempColor;
+
+      // Erste Tetromino Halten zu Ende, daher auf false setzen
+      firstHoldTetromino = false;
+
+      // Keine weiteren Tetrominoes halten, solange der Stein nicht gefallen ist
+      holdTetromino = false;
+
+    } else if(holdTetromino) {
+      // den gehalteten Tetromino zwischen speichern
+      int tempHoldStoneNumber = _holdStoneNumber;
+
+      // den aktuellen Tetromino zum gehalteten Tetromino machen
+      _holdStoneNumber = _currentStoneNumber;
+      _holdstone = randomTetromino(_holdStoneNumber, this._game.extraFieldHeight - 1, this._game.extraFieldWidth);
+      _holdstoneColor = _tempColor;
+
+      // den gehalteten Tetromino zum aktuellen Tetromino machen
+      _currentStoneNumber = tempHoldStoneNumber;
+      _stone = randomTetromino(_currentStoneNumber, 0, this._game.sizeWidth);
+      _stoneColor = _tempColor;
+
+      //Die Zellen, welche von dem aktuellen Tetromino belegt sind als aktiv
+      //makieren
+      _stone.forEach((cell){
+        this._game._field[cell['row']][cell['col']].isActive = true;
+      });
+
+      // Keine weiteren Tetrominoes halten, solange der Stein nicht gefallen ist
+      holdTetromino = false;
+    }
+  }
+
+
 
     /**
      * Drehen des Tetromino
@@ -217,9 +308,6 @@ class Tetromino {
      * X-Achse | col | width
      **/
     void rotate(angle){
-      // Wenn das Spiel gestoppt wurde ist keine Rotation möglich
-      if (this._game.stopped || this._game.paused) return;
-
       // Liste der Tetromino für die Rotation
       var _rotate;
 
@@ -349,7 +437,6 @@ class Tetromino {
             _game.stop();
           }
 
-
           bool movesSideways = (this._dc != 0);
           if(movesSideways){
             //ungueltige seitwaerts Bewegung rueckgaening machen
@@ -365,15 +452,21 @@ class Tetromino {
             //entfernt werden und alle Reihen darueber nachrutschen
             this._game.removeCompletedRows();
             nextTetromino();
+
+            // erlauben Tetrominoes zu halten, da der Tetromino gefallen ist
+            holdTetromino = true;
           }
         }
       } else{
-        //falls der Tetrmino aud den Boden faellt wird er gesetzt
+        //falls der Tetrmino auf den Boden faellt wird er gesetzt
         this._stone.forEach((piece) {
           this._game._field[piece['row']][piece['col']].isActive = false;
         });
         this._game.removeCompletedRows();
         nextTetromino();
+
+        // erlauben Tetrominoes zu halten, da der Tetromino gefallen ist
+        holdTetromino = true;
       }
     }
     this._game.updateField();
@@ -451,15 +544,20 @@ class Tetromino {
 
   }
 
-    /**
-     * Gibt die Farbe des Tetromino im Spielfeld zurück.
-     */
-    Symbol get stoneColor => _stoneColor;
+  /**
+   * Gibt die Farbe des Tetromino im Spielfeld zurück.
+   */
+  Symbol get stoneColor => _stoneColor;
 
   /**
    * Gibt die Farbe des Tetromino im Nächsten-Tetromino-Feld zurück.
    */
   Symbol get nextstoneColor => _nextstoneColor;
+
+  /**
+   * Gibt die Farbe des Tetromino im Nächsten-Tetromino-Feld zurück.
+   */
+  Symbol get holdstoneColor => _holdstoneColor;
 
   /**
    * Gibt die Elemente des Tetromino und die Position zurück.
