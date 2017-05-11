@@ -2,9 +2,22 @@
 <html lang="de">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name = "viewport" content = "user-scalable=no, width=device-width, initial-scale=1.0">
     <title>Tetris</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script>
+    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+        //Disable double tap on document
+        var lastTouchEnd = 0;
+        document.documentElement.addEventListener('touchend', function (event) {
+            var now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    }
+    </script>
 </head>
 <body>
 <!-- Container für die Startseite -->
@@ -29,47 +42,47 @@
     <!-- Tabelle für das Spielfeld -->
     <table id="field">
     </table>
-<div>
+    <div>
 
-<div class="container_sidebox">
-    <!-- Container für die Seitenbox -->
-    <div class="container_nextstone">
-        <h3>Nächster Stein</h3>
-        <!-- Tabelle für den nächsten Stein -->
-        <table id="nextstone">
-        </table>
-    </div>
+        <div class="container_sidebox">
+            <!-- Container für die Seitenbox -->
+            <div class="container_nextstone">
+                <h3>Nächster Stein</h3>
+                <!-- Tabelle für den nächsten Stein -->
+                <table id="nextstone">
+                </table>
+            </div>
 
-    <div class="container_holdstone">
-        <h3>Stein halten</h3>
-        <!-- Tabelle für den nächsten Stein -->
-        <table id="holdstone">
-        </table>
-    </div>
+            <div class="container_holdstone">
+                <h3>Stein halten</h3>
+                <!-- Tabelle für den nächsten Stein -->
+                <table id="holdstone">
+                </table>
+            </div>
 
-    <!-- Container für die Spielinformationen -->
-    <div class="container_info">
-        <h3>Level</h3>
-        <p id="level">1</p>
-        <h3>Punkte</h3>
-        <p id="points">0</p>
-    </div>
-</div>
+            <!-- Container für die Spielinformationen -->
+            <div class="container_info">
+                <h3>Level</h3>
+                <p id="level">1</p>
+                <h3>Punkte</h3>
+                <p id="points">0</p>
+            </div>
+        </div>
 
-<!-- Container für die Steuerung -->
-<div class="container_control">
-    <div id="menu"><img src='img/menu.png'></div>
-    <div id="hard_drop"><img src='img/hard_drop.png'></div>
-    <div id="left_rotation"><img src='img/left_rotation.png'></div>
-    <div id="right_rotation"><img src='img/right_rotation.png'></div>
-    <div id="hold"><img src='img/hold.png'></div>
-    <div id="left"><img src='img/left.png'></div>
-    <div id="down"><img src='img/down.png'></div>
-    <div id="right"><img src='img/right.png'></div>
-</div>
+        <!-- Container für die Steuerung -->
+        <div class="container_control">
+            <div id="menu"><img src='img/menu.png'></div>
+            <div id="hard_drop"><img src='img/hard_drop.png'></div>
+            <div id="left_rotation"><img src='img/left_rotation.png'></div>
+            <div id="right_rotation"><img src='img/right_rotation.png'></div>
+            <div id="hold"><img src='img/hold.png'></div>
+            <div id="left"><img src='img/left.png'></div>
+            <div id="down"><img src='img/down.png'></div>
+            <div id="right"><img src='img/right.png'></div>
+        </div>
 
-<script type="application/dart" src="tetrisclient.dart"></script>
-<script data-pub-inline src="packages/browser/dart.js"></script>
+        <script type="application/dart" src="tetrisclient.dart"></script>
+        <script data-pub-inline src="packages/browser/dart.js"></script>
 
 </body>
 </html>
