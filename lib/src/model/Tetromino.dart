@@ -12,7 +12,13 @@ abstract class Tetromino{
     _stones = stones;
     _model = model;
     _color = color;
-    down();
+  }
+
+  void addToField(){
+    _stones.forEach((stone){
+      _model.field[stone['row']][stone['col']].isActive = true;
+      _model.field[stone['row']][stone['col']].color = _color;
+    });
   }
 
   /**
@@ -28,7 +34,8 @@ abstract class Tetromino{
       move.add({ 'row' : stone['row'] + _dr,  'col' : stone['col'] + _dc  });
     });
     //pruefen, ob Bewegung Kollision verursacht
-    _collisionWithTop(move) ? _model.stop() : null;
+    //TODO: detection of the game over state is not working yet.
+    (_collisionWithTop(move) && _collisionWithOtherTetromino(move)) ? _model.stop() : null;
     if(!_collisionWithBorder(move) && !_collisionWithGround(move) &&
        !_collisionWithOtherTetromino(move)) {
       //keine Kollisionen => Tetomino kann bewegt werden
@@ -70,6 +77,7 @@ abstract class Tetromino{
       }
     }
     //TODO: tell model to drop the next tetromino
+    _model.setNextTetrominoe();
   }
 
   void _moveToNewPosition(List<Map<String, int>> move){

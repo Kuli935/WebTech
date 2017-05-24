@@ -18,6 +18,8 @@ class TetrisGame {
   // Zaehlt die Anzahl der breits gefallenen Tetrominoes
   int tetrominoCount;
 
+  List<Tetromino> _tetrominoQueue;
+
   // interne Representation des Spielfelds
   List<List<Cell>> _field;
 
@@ -79,14 +81,31 @@ class TetrisGame {
   TetrisGame(this._sizeHeight, this._sizeWidth, this._extraFieldHeight,
       this._extraFieldWidth) {
     start();
-    this._score = 0;
-    this.tetrominoCount = 0;
+    _score = 0;
+    tetrominoCount = 0;
     this._field = new Iterable.generate(sizeHeight, (row) {
       return new Iterable.generate(
           sizeWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
-    _tetromino = new ITetromino(this);
+    _tetrominoQueue = new List();
+    _fillTetrominoeQueue();
+    setNextTetrominoe();
     stop();
+  }
+
+  void _fillTetrominoeQueue(){
+    _tetrominoQueue.add(new ITetromino(this));
+    _tetrominoQueue.add(new OTetromino(this));
+    _tetrominoQueue.shuffle();
+  }
+
+  void setNextTetrominoe(){
+    if(_tetrominoQueue.isEmpty){
+      _fillTetrominoeQueue();
+    }
+    _tetromino = _tetrominoQueue.removeAt(0);
+    _tetromino.addToField();
+    _tetromino.down();
   }
 
   /**
@@ -193,7 +212,7 @@ class TetrisGame {
    * Bewegungen sind nur im Status [running] möglich.
    */
   void moveTetromino() {
-    if (running) tetromino.move();
+    if (running && _tetromino != null) tetromino.move();
   }
 
   /**
