@@ -47,7 +47,21 @@ abstract class Tetromino{
     });
     return isCollision;
   }
-  
+
+  bool _collisionWithOtherTetromino(List<Map<String, int>> move){
+    bool isCollision = false;
+    /*
+    Alle Zellen des Moves pruefen, ob sie belegt und inaktiv sind. Falls
+    ja liegt eine Kollision mit einem bereits gesetzten Tetromino vor.
+     */
+    move.forEach((stone){
+      if(_model.field[stone['row']][stone['col']].color != #empty &&
+        !_model.field[stone['row']][stone['col']].isActive){
+          isCollision = true;
+      }
+    });
+    return isCollision;
+  }
   get stones => _stones;
 
   get color => _color;
