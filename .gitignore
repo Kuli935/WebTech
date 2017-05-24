@@ -12,3 +12,5 @@ doc/api/
 deploy.py
 .idea/
 deploy/
+documentation/
+/lib/src/model/TetrominoeBAK
