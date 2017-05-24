@@ -66,6 +66,7 @@ class TetrisGame {
    */
   void stop() {
     _gamestate = #stopped;
+
   }
 
   /**
@@ -84,7 +85,7 @@ class TetrisGame {
       return new Iterable.generate(
           sizeWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
-    _tetromino = new OTetromino(this);
+    _tetromino = new ITetromino(this);
     stop();
   }
 
