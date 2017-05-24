@@ -30,6 +30,24 @@ abstract class Tetromino{
     //falls: nein Tetromino bewegen
   }
 
+  bool _collisionWithBorder(List<Map<String, int>> move){
+    bool isCollision = false;
+    move.forEach((stone){
+      if(stone['col'] <= 0 || stone['col'] >= _model._sizeWidth){
+        isCollision = true;
+      }
+    });
+    return isCollision;
+  }
+
+  bool _collisionWithGround(List<Map<String, int>> move){
+    bool isCollision = false;
+    move.forEach((stone){
+      (stone['row'] >= _model.sizeHeight) ? isCollision = true : null;
+    });
+    return isCollision;
+  }
+  
   get stones => _stones;
 
   get color => _color;
