@@ -44,6 +44,9 @@ abstract class Tetromino{
     Kollisionen mit den Seitenraender des Spielfelds muessen nicht extra
     behandelt werden, da in diesem Fall eine Bewegung einfach nicht moeglich ist
      */
+    if(_collisionWithBorder(move)){
+      return;
+    }
     if(_collisionWithGround(move)){
       //falls der Tetrmino auf den Boden faellt wird er gesetzt
       _stones.forEach((stone) {
@@ -83,7 +86,7 @@ abstract class Tetromino{
   bool _collisionWithBorder(List<Map<String, int>> move){
     bool isCollision = false;
     move.forEach((stone){
-      if(stone['col'] <= 0 || stone['col'] >= _model._sizeWidth){
+      if(stone['col'] < 0 || stone['col'] >= _model._sizeWidth){
         isCollision = true;
       }
     });
