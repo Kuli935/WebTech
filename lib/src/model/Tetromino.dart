@@ -22,12 +22,61 @@ abstract class Tetromino{
 
   void move(){
     //Bewegung berechnen
-    final _move = new List<Map<String, int>>();
+    final move = new List<Map<String, int>>();
     _stones.forEach((stone) {
-      _move.add({ 'row' : stone['row'] + _dr,  'col' : stone['col'] + _dc  });
+      move.add({ 'row' : stone['row'] + _dr,  'col' : stone['col'] + _dc  });
     });
     //pruefen, ob Bewegung Kollision verursacht
-    //falls: nein Tetromino bewegen
+    _collisionWithTop(move) ? _model.stop() : null;
+    if(!_collisionWithBorder(move) && !_collisionWithGround(move) &&
+       !_collisionWithOtherTetromino(move)) {
+      //keine Kollisionen => Tetomino kann bewegt werden
+      _moveToNewPosition(move);
+    } else{
+      _handleCollision(move);
+    }
+    _model.updateField();
+  }
+
+  void _handleCollision(List<Map<String, int>> move){
+    /*
+    Kollisionen mit den Seitenraender des Spielfelds muessen nicht extra
+    behandelt werden, da in diesem Fall eine Bewegung einfach nicht moeglich ist
+     */
+    if(_collisionWithGround(move)){
+      //falls der Tetrmino auf den Boden faellt wird er gesetzt
+      _stones.forEach((stone) {
+        _model.field[stone['row']][stone['col']].isActive = false;
+      });
+      _model.removeCompletedRows();
+    } else if(_collisionWithOtherTetromino(move)){
+      bool movesSideways = (this._dc != 0);
+      if(movesSideways){
+        //ungueltige seitwaerts Bewegung rueckgaening machen
+        move.forEach((piece) {piece['col'] -= this._dc;});
+        _moveToNewPosition(move);
+      } else {
+        //Tetromino in der Position fest setzen
+        _stones.forEach((stone) {
+          _model.field[stone['row']][stone['col']].isActive = false;
+        });
+        //falls eine oder mehrere Reihen vervollstaendigt sind mussen diese
+        //entfernt werden und alle Reihen darueber nachrutschen
+        _model.removeCompletedRows();
+      }
+    }
+    //TODO: tell model to drop the next tetromino
+  }
+
+  void _moveToNewPosition(List<Map<String, int>> move){
+    _stones.forEach((stone) {
+      _model.field[stone['row']][stone['col']].isActive = false;
+      _model.field[stone['row']][stone['col']].color = #empty;
+    });
+    _stones = move;
+    _stones.forEach((stone) {
+      _model.field[stone['row']][stone['col']].isActive = true;
+    });
   }
 
   bool _collisionWithBorder(List<Map<String, int>> move){
@@ -44,6 +93,14 @@ abstract class Tetromino{
     bool isCollision = false;
     move.forEach((stone){
       (stone['row'] >= _model.sizeHeight) ? isCollision = true : null;
+    });
+    return isCollision;
+  }
+
+  bool _collisionWithTop(List<Map<String, int>> move){
+    bool isCollision = false;
+    move.forEach((stone){
+      (stone['row'] <= 0) ? isCollision = true : null;
     });
     return isCollision;
   }
