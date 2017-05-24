@@ -21,6 +21,13 @@ abstract class Tetromino{
     });
   }
 
+  void removeFromField(){
+    _stones.forEach((stone) {
+      _model.field[stone['row']][stone['col']].isActive = false;
+      _model.field[stone['row']][stone['col']].color = #empty;
+    });
+  }
+
   /**
    * Abstrakte Definition fuer die Drehung eines Tetrominos. Die Rotation ist
    * fuer jeden Tetromino anders.
@@ -47,6 +54,7 @@ abstract class Tetromino{
   }
 
   void _handleCollision(List<Map<String, int>> move){
+    //TODO: if tetrominoes collide sidewys they disappear
     /*
     Kollisionen mit den Seitenraender des Spielfelds muessen nicht extra
     behandelt werden, da in diesem Fall eine Bewegung einfach nicht moeglich ist
@@ -76,7 +84,6 @@ abstract class Tetromino{
         _model.removeCompletedRows();
       }
     }
-    //TODO: tell model to drop the next tetromino
     _model.setNextTetrominoe();
   }
 

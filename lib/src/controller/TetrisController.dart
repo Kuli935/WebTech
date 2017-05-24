@@ -80,7 +80,7 @@ class TetrisController {
     // Drehen um 90 Grad (rechts Drehung)
     view.rightRotationButton.onClick.listen((_) {
       if (game.stopped || game.paused) return;
-      game.tetromino.rotate(90);
+      game.tetromino.rotate(1);
       view.update(game);
     });
 
@@ -88,7 +88,7 @@ class TetrisController {
     // Drehen um -90 Grad (links Drehung)
     view.leftRotationButton.onClick.listen((_) {
       if (game.stopped || game.paused) return;
-      game.tetromino.rotate(-90);
+      game.tetromino.rotate(-1);
       view.update(game);
     });
 
@@ -146,7 +146,7 @@ class TetrisController {
       // Drehen um 90 Grad (rechts Drehung)
       if (ev.keyCode == KeyCode.UP) {
         if (game.paused) return;
-        game.tetromino.rotate(90);
+        game.tetromino.rotate(1);
         view.update(game);
       }
 
@@ -154,7 +154,7 @@ class TetrisController {
       // Drehen um -90 Grad (links Drehung)
       if (ev.keyCode == KeyCode.Y) {
         if (game.paused) return;
-        game.tetromino.rotate(-90);
+        game.tetromino.rotate(-1);
         view.update(game);
       }
 
