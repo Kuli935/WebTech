@@ -18,6 +18,7 @@ class TetrisGame {
   // Zaehlt die Anzahl der breits gefallenen Tetrominoes
   int tetrominoCount;
 
+  //TODO: refactor to use a real queue = ListQueue
   List<Tetromino> _tetrominoQueue;
 
   // interne Representation des Spielfelds
