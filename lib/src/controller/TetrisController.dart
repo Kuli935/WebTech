@@ -46,9 +46,9 @@ class TetrisController {
     // Erzeugen des Spielfeldes
     view.generateField(game.field, 1, "field");
     // Erzeugen des Nächsten-Tetromino-Feldes
-    view.generateField(game.nextStoneField, 2, "nextstone");
+    //view.generateField(game.nextStoneField, 2, "nextstone");
     // Erzeugen des Gehalteten-Tetromino-Feldes
-    view.generateField(game.holdStoneField, 3, "holdstone");
+    //view.generateField(game.holdStoneField, 3, "holdstone");
 
     // Button Steuerung
     // Nach links bewegen
@@ -109,7 +109,7 @@ class TetrisController {
     // Tetromino halten
     view.holdButton.onClick.listen((_) {
       if (game.stopped || game.paused) return;
-      game.tetromino.hold();
+      //game.tetromino.hold();
       view.update(game);
     });
 
@@ -174,7 +174,7 @@ class TetrisController {
       // Tetromino halten
       if (ev.keyCode == KeyCode.C) {
         if (game.paused) return;
-        game.tetromino.hold();
+        //game.tetromino.hold();
         view.update(game);
       }
 
@@ -223,9 +223,9 @@ class TetrisController {
     // Erzeugen des Spielfeldes
     view.generateField(game.field, 1, "field");
     // Erzeugen des Nächsten-Tetromino-Feldes
-    view.generateField(game.nextStoneField, 2, "nextstone");
+    //view.generateField(game.nextStoneField, 2, "nextstone");
     // Erzeugen des Gehalteten-Tetromino-Feldes
-    view.generateField(game.holdStoneField, 3, "holdstone");
+    //view.generateField(game.holdStoneField, 3, "holdstone");
     game.start();
     view.update(game);
   }

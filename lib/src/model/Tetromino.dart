@@ -1,4 +1,4 @@
-part of 'tetris';
+part of tetris;
 
 abstract class Tetromino{
 
@@ -9,20 +9,21 @@ abstract class Tetromino{
   int _dr;
 
   Tetromino(TetrisGame model, List<Map<String, int>> stones, Symbol color){
-    this._stones = stones;
-    this._model = model;
-    this._color = color;
+    _stones = stones;
+    _model = model;
+    _color = color;
+    down();
   }
 
   /**
    * Abstrakte Definition fuer die Drehung eines Tetrominos. Die Rotation ist
    * fuer jeden Tetromino anders.
    */
-  void rotate();
+  void rotate(int angle);
 
   void move(){
     //Bewegung berechnen
-    final move = new List<Map<String, int>>();
+    var move = new List<Map<String, int>>();
     _stones.forEach((stone) {
       move.add({ 'row' : stone['row'] + _dr,  'col' : stone['col'] + _dc  });
     });
@@ -119,6 +120,26 @@ abstract class Tetromino{
     });
     return isCollision;
   }
+  /**
+   * Teilt dem Tetromino keine Bewegung mit, somit stoppt der Tetromino.
+   */
+  void stop()  { _dr =  0; _dc =  0; }
+
+  /**
+   * Teilt dem Tetromino die Bewegung nach unten mit.
+   */
+  void down()  { _dr =  1; _dc =  0; }
+
+  /**
+   * Teilt dem Tetromino die Bewegung nach links mit.
+   */
+  void left()  { _dr =  0; _dc = -1; }
+
+  /**
+   * Teilt dem Tetromino die Bewegung nach rechts mit.
+   */
+  void right() { _dr =  0; _dc =  1; }
+
   get stones => _stones;
 
   get color => _color;

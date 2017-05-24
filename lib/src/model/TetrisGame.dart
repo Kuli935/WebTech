@@ -18,7 +18,7 @@ class TetrisGame {
   // Zaehlt die Anzahl der breits gefallenen Tetrominoes
   int tetrominoCount;
 
-// interne Representation des Spielfelds
+  // interne Representation des Spielfelds
   List<List<Cell>> _field;
 
   // Spielzustand #running or #stopped.
@@ -84,7 +84,7 @@ class TetrisGame {
       return new Iterable.generate(
           sizeWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
-    _tetromino = new Tetromino.on(this);
+    _tetromino = new OTetromino(this);
     stop();
   }
 
@@ -134,8 +134,8 @@ class TetrisGame {
       });
     });
     //den aktuellen Tetromino an der neuen Position zeichnen
-    this._tetromino._stone.forEach((piece) {
-      this._field[piece['row']][piece['col']].color = this._tetromino._stoneColor;
+    this._tetromino.stones.forEach((piece) {
+      this._field[piece['row']][piece['col']].color = this._tetromino.color;
     });
   }
 
@@ -147,21 +147,21 @@ class TetrisGame {
    * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
    * @return Nächster-Tetromino-Feld als eine Liste von Listen
    */
-  List<List<Symbol>> get nextStoneField {
-    var _nextStoneField = new Iterable.generate(extraFieldHeight, (row) {
-      return new Iterable.generate(extraFieldWidth, (col) => #empty)
-          .toList();
-    }).toList();
-    // Tetromino setzen
-    tetromino.nextstone.forEach((s) {
-      final r = s['row'];
-      final c = s['col'];
-      if (r < 0 || r >= extraFieldHeight) return;
-      if (c < 0 || c >= extraFieldWidth) return;
-      _nextStoneField[r][c] = _tetromino.nextstoneColor;
-    });
-    return _nextStoneField;
-  }
+//  List<List<Symbol>> get nextStoneField {
+//    var _nextStoneField = new Iterable.generate(extraFieldHeight, (row) {
+//      return new Iterable.generate(extraFieldWidth, (col) => #empty)
+//          .toList();
+//    }).toList();
+//    // Tetromino setzen
+//    tetromino.nextstone.forEach((s) {
+//      final r = s['row'];
+//      final c = s['col'];
+//      if (r < 0 || r >= extraFieldHeight) return;
+//      if (c < 0 || c >= extraFieldWidth) return;
+//      _nextStoneField[r][c] = _tetromino.nextstoneColor;
+//    });
+//    return _nextStoneField;
+//  }
 
   /**
    * Gibt das Gehalteten-Tetromino-Feld als eine Liste von Listen zurück.
@@ -171,28 +171,27 @@ class TetrisGame {
    * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
    * @return Gehalteten-Tetromino-Feld als eine Liste von Listen
    */
-  List<List<Symbol>> get holdStoneField {
-    var _holdStoneField = new Iterable.generate(extraFieldHeight, (row) {
-      return new Iterable.generate(extraFieldWidth, (col) => #empty)
-          .toList();
-    }).toList();
-    // Tetromino setzen
-    tetromino.holdstone.forEach((s) {
-      final r = s['row'];
-      final c = s['col'];
-      if (r < 0 || r >= extraFieldHeight) return;
-      if (c < 0 || c >= extraFieldWidth) return;
-      _holdStoneField[r][c] = _tetromino.holdstoneColor;
-    });
-    return _holdStoneField;
-  }
+//  List<List<Symbol>> get holdStoneField {
+//    var _holdStoneField = new Iterable.generate(extraFieldHeight, (row) {
+//      return new Iterable.generate(extraFieldWidth, (col) => #empty)
+//          .toList();
+//    }).toList();
+//    // Tetromino setzen
+//    tetromino.holdstone.forEach((s) {
+//      final r = s['row'];
+//      final c = s['col'];
+//      if (r < 0 || r >= extraFieldHeight) return;
+//      if (c < 0 || c >= extraFieldWidth) return;
+//      _holdStoneField[r][c] = _tetromino.holdstoneColor;
+//    });
+//    return _holdStoneField;
+//  }
 
   /**
    * Bewegungensstatus für den Tetromino [down], [left], [right].
    * Bewegungen sind nur im Status [running] möglich.
    */
   void moveTetromino() {
-    window.console.log(this.tetrominoCount);
     if (running) tetromino.move();
   }
 

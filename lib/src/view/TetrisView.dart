@@ -182,12 +182,12 @@ class TetrisView {
     updateFields(field, 1);
 
     // Nächster-Tetromino-Feld aktualisieren
-    final nextStoneField = model.nextStoneField;
-    updateFields(nextStoneField, 2);
+    //final nextStoneField = model.nextStoneField;
+    //updateFields(nextStoneField, 2);
 
     // Gehalteten-Tetromino-Feld aktualisieren
-    final holdStoneField = model.holdStoneField;
-    updateFields(holdStoneField, 3);
+    //final holdStoneField = model.holdStoneField;
+    //updateFields(holdStoneField, 3);
 
 
   }

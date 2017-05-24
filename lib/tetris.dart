@@ -7,6 +7,7 @@ import 'dart:math';
 part 'src/controller/TetrisController.dart';
 part 'src/view/TetrisView.dart';
 part 'src/model/Tetromino.dart';
+part 'src/model/OTetromino.dart';
 part 'src/model/Cell.dart';
 part 'src/model/TetrisGame.dart';
 
