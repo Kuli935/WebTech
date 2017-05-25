@@ -3,6 +3,7 @@ library tetris;
 import 'dart:html';
 import 'dart:async';
 import 'dart:math';
+import 'dart:collection';
 
 part 'src/controller/TetrisController.dart';
 part 'src/view/TetrisView.dart';

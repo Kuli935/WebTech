@@ -18,8 +18,7 @@ class TetrisGame {
   // Zaehlt die Anzahl der breits gefallenen Tetrominoes
   int tetrominoCount;
 
-  //TODO: refactor to use a real queue = ListQueue
-  List<Tetromino> _tetrominoQueue;
+  ListQueue<Tetromino> _tetrominoQueue;
 
   // interne Representation des Spielfelds
   List<List<Cell>> _field;
@@ -88,25 +87,25 @@ class TetrisGame {
       return new Iterable.generate(
           sizeWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
-    _tetrominoQueue = new List();
+    _tetrominoQueue = new ListQueue();
     _fillTetrominoeQueue();
-    setNextTetrominoe();
+    dumpNextTetrominoe();
     stop();
   }
 
   void _fillTetrominoeQueue(){
-    _tetrominoQueue.add(new ITetromino(this));
-    _tetrominoQueue.add(new OTetromino(this));
-    _tetrominoQueue.shuffle();
+    List<Tetromino> listOfAllTetrominoes = new List();
+    listOfAllTetrominoes.add(new ITetromino(this));
+    listOfAllTetrominoes.add(new OTetromino(this));
+    listOfAllTetrominoes.shuffle();
+    _tetrominoQueue.addAll(listOfAllTetrominoes);
   }
 
-  //TODO: rename
-  void setNextTetrominoe(){
-    //TODO: check if just one tetromio in queue if so pop it and then refill
+  void dumpNextTetrominoe(){
+    _tetromino = _tetrominoQueue.removeFirst();
     if(_tetrominoQueue.isEmpty){
       _fillTetrominoeQueue();
     }
-    _tetromino = _tetrominoQueue.removeAt(0);
     tetrominoCount++;
     _tetromino.addToField();
     _tetromino.down();
@@ -217,17 +216,6 @@ class TetrisGame {
    */
   void moveTetromino() {
     if (running && _tetromino != null){
-      //TODO: debug print
-//      if(_tetrominoQueue.length > 0) {
-//        window.console.log('-----------------------------------');
-//        _tetrominoQueue
-//            .elementAt(0)
-//            .stones
-//            .forEach((stone) {
-//          window.console.log('(${stone['row']} | ${stone['col']})');
-//        });
-//        window.console.log('-----------------------------------');
-//      }
       tetromino.move();
     }
   }
