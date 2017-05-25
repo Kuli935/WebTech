@@ -182,8 +182,8 @@ class TetrisView {
     updateFields(field, 1);
 
     // Nächster-Tetromino-Feld aktualisieren
-    //final nextStoneField = model.nextStoneField;
-    //updateFields(nextStoneField, 2);
+    final nextStoneField = model.nextStoneField;
+    updateFields(nextStoneField, 2);
 
     // Gehalteten-Tetromino-Feld aktualisieren
     //final holdStoneField = model.holdStoneField;
@@ -206,7 +206,7 @@ class TetrisView {
 
     // Das Spielfeld aktualisieren
     for (int row = 0; row < field.length; row++) {
-      for (int col = 0; col < field[row].length; col++) {
+      for(int col=0; col < field[row].length; col++) {
         final td = fields[row][col];
         if (td != null) {
           td.classes.clear();

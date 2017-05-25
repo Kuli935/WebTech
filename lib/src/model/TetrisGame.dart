@@ -100,7 +100,9 @@ class TetrisGame {
     _tetrominoQueue.shuffle();
   }
 
+  //TODO: rename
   void setNextTetrominoe(){
+    //TODO: check if just one tetromio in queue if so pop it and then refill
     if(_tetrominoQueue.isEmpty){
       _fillTetrominoeQueue();
     }
@@ -169,21 +171,21 @@ class TetrisGame {
    * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
    * @return Nächster-Tetromino-Feld als eine Liste von Listen
    */
-//  List<List<Symbol>> get nextStoneField {
-//    var _nextStoneField = new Iterable.generate(extraFieldHeight, (row) {
-//      return new Iterable.generate(extraFieldWidth, (col) => #empty)
-//          .toList();
-//    }).toList();
-//    // Tetromino setzen
-//    tetromino.nextstone.forEach((s) {
-//      final r = s['row'];
-//      final c = s['col'];
-//      if (r < 0 || r >= extraFieldHeight) return;
-//      if (c < 0 || c >= extraFieldWidth) return;
-//      _nextStoneField[r][c] = _tetromino.nextstoneColor;
-//    });
-//    return _nextStoneField;
-//  }
+  List<List<Symbol>> get nextStoneField {
+    //Leeres Feld erzeugen
+    var nextStoneField = new Iterable.generate(extraFieldHeight, (row) {
+      return new Iterable.generate(extraFieldWidth, (col) => #empty)
+          .toList();
+    }).toList();
+
+    if(!_tetrominoQueue.isEmpty) {
+      _tetrominoQueue.elementAt(0).preview.forEach((stone) {
+        nextStoneField[stone['row']][stone['col']] = _tetrominoQueue.elementAt(0).color;
+      });
+    }
+
+    return nextStoneField;
+  }
 
   /**
    * Gibt das Gehalteten-Tetromino-Feld als eine Liste von Listen zurück.
@@ -215,16 +217,17 @@ class TetrisGame {
    */
   void moveTetromino() {
     if (running && _tetromino != null){
-      if(_tetrominoQueue.length > 0) {
-        window.console.log('-----------------------------------');
-        _tetrominoQueue
-            .elementAt(0)
-            .stones
-            .forEach((stone) {
-          window.console.log('(${stone['row']} | ${stone['col']})');
-        });
-        window.console.log('-----------------------------------');
-      }
+      //TODO: debug print
+//      if(_tetrominoQueue.length > 0) {
+//        window.console.log('-----------------------------------');
+//        _tetrominoQueue
+//            .elementAt(0)
+//            .stones
+//            .forEach((stone) {
+//          window.console.log('(${stone['row']} | ${stone['col']})');
+//        });
+//        window.console.log('-----------------------------------');
+//      }
       tetromino.move();
     }
   }

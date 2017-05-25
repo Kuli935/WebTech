@@ -7,10 +7,15 @@ class ITetromino extends Tetromino{
   List<List<List<int>>> _transitions;
 
   ITetromino(TetrisGame model) : super(model, [
-    { 'row' : 0,    'col' : model.sizeWidth ~/ 2 - 2 },
-    { 'row' : 0,    'col' : model.sizeWidth ~/ 2 - 1 },
-    { 'row' : 0,    'col' : model.sizeWidth ~/ 2     },
-    { 'row' : 0,    'col' : model.sizeWidth ~/ 2 + 1 }
+    { 'row' : 0, 'col' : model.sizeWidth ~/ 2 - 2 },
+    { 'row' : 0, 'col' : model.sizeWidth ~/ 2 - 1 },
+    { 'row' : 0, 'col' : model.sizeWidth ~/ 2     },
+    { 'row' : 0, 'col' : model.sizeWidth ~/ 2 + 1 }
+  ],[
+    { 'row' : 2, 'col' : 0},
+    { 'row' : 2, 'col' : 1},
+    { 'row' : 2, 'col' : 2},
+    { 'row' : 2, 'col' : 3}
   ], #cyan){
     _state = 0;
     _numberOfStates = 4;

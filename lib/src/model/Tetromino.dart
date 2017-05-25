@@ -3,13 +3,17 @@ part of tetris;
 abstract class Tetromino{
 
   List<Map<String, int>> _stones;
+  // Darstellung des Tetrominoes in der Vorschau/Hold Box
+  List<Map<String, int>> _preview;
   TetrisGame _model;
   Symbol _color;
   int _dc;
   int _dr;
 
-  Tetromino(TetrisGame model, List<Map<String, int>> stones, Symbol color){
+  Tetromino(TetrisGame model, List<Map<String, int>> stones,
+            List<Map<String, int>> preview, Symbol color){
     _stones = stones;
+    _preview = preview;
     _model = model;
     _color = color;
   }
@@ -156,4 +160,6 @@ abstract class Tetromino{
   get stones => _stones;
 
   get color => _color;
+
+  get preview => _preview;
 }
