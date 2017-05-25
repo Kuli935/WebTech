@@ -22,13 +22,8 @@ class ITetromino extends Tetromino{
     ];
   }
 
-  //TODO: check if a rotation is possible
   //prevent tetrominoes from being rotated off the field
   void rotate(int direction){
-    //Tetromino vom feld entfernen, damit nach der Drehung die alten Zellen
-    //nicht mehr aktiv sind
-    removeFromField();
-
     /*
     Die richtige Drehmatrix wird in Abhaengigkeit des Zustandes und der
     Drehrichtung ausgewält.
@@ -37,19 +32,22 @@ class ITetromino extends Tetromino{
 
     if(direction > 0){
       transition = _transitions.elementAt(_state);
-      _state = (_state + 1) % _numberOfStates; //2 is max number of states
+      _state = (_state + 1) % _numberOfStates;
     } else{
       (_state == 0) ? _state = _numberOfStates - 1 : _state--;
       transition = _transitions.elementAt(_state);
     }
-    //Tetromino drehen
+    List<Map<String, int>> move = new List();
+    //Position des gedrehten Tetrominoes berechnen
     for(int i=0; i < _stones.length; i++){
-      _stones[i]['row'] += direction * transition[i][0];
-      _stones[i]['col'] += direction * transition[i][1];
+      move.add({'row': _stones[i]['row'] + direction * transition[i][0],
+                'col': _stones[i]['col'] + direction * transition[i][1],});
     }
-    //gedrehten Tetrominoe wieder zum Feld hinzufuegen, damit er sichtbar und
-    //aktiv wird.
-    addToField();
-    _model.updateField();
+    //pruefen, ob Drehung Kollisionen verursacht, falls ja Drehung nicht moeglich
+    if(!_collisionWithBorder(move) && !_collisionWithGround(move) &&
+        !_collisionWithOtherTetromino(move)) {
+      _moveToNewPosition(move);
+      _model.updateField();
+    }
   }
 }

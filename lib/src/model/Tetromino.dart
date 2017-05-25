@@ -88,14 +88,9 @@ abstract class Tetromino{
   }
 
   void _moveToNewPosition(List<Map<String, int>> move){
-    _stones.forEach((stone) {
-      _model.field[stone['row']][stone['col']].isActive = false;
-      _model.field[stone['row']][stone['col']].color = #empty;
-    });
+    removeFromField();
     _stones = move;
-    _stones.forEach((stone) {
-      _model.field[stone['row']][stone['col']].isActive = true;
-    });
+    addToField();
   }
 
   bool _collisionWithBorder(List<Map<String, int>> move){
