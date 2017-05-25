@@ -89,7 +89,7 @@ class TetrisGame {
     }).toList();
     _tetrominoQueue = new ListQueue();
     _fillTetrominoeQueue();
-    dumpNextTetrominoe();
+    dumpNextTetromino();
     stop();
   }
 
@@ -97,11 +97,12 @@ class TetrisGame {
     List<Tetromino> listOfAllTetrominoes = new List();
     listOfAllTetrominoes.add(new ITetromino(this));
     listOfAllTetrominoes.add(new OTetromino(this));
+    listOfAllTetrominoes.add(new TTetromino(this));
     listOfAllTetrominoes.shuffle();
     _tetrominoQueue.addAll(listOfAllTetrominoes);
   }
 
-  void dumpNextTetrominoe(){
+  void dumpNextTetromino(){
     _tetromino = _tetrominoQueue.removeFirst();
     if(_tetrominoQueue.isEmpty){
       _fillTetrominoeQueue();

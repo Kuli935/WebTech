@@ -10,6 +10,7 @@ part 'src/view/TetrisView.dart';
 part 'src/model/Tetromino.dart';
 part 'package:tetris/src/model/tetrominoes/OTetromino.dart';
 part 'package:tetris/src/model/tetrominoes/ITetromino.dart';
+part 'package:tetris/src/model/tetrominoes/TTetromino.dart';
 part 'src/model/Cell.dart';
 part 'src/model/TetrisGame.dart';
 

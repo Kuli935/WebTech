@@ -88,7 +88,7 @@ abstract class Tetromino{
         _model.removeCompletedRows();
       }
     }
-    _model.dumpNextTetrominoe();
+    _model.dumpNextTetromino();
   }
 
   void _moveToNewPosition(List<Map<String, int>> move){
