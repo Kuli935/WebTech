@@ -105,6 +105,7 @@ class TetrisGame {
       _fillTetrominoeQueue();
     }
     _tetromino = _tetrominoQueue.removeAt(0);
+    tetrominoCount++;
     _tetromino.addToField();
     _tetromino.down();
   }
@@ -213,7 +214,19 @@ class TetrisGame {
    * Bewegungen sind nur im Status [running] möglich.
    */
   void moveTetromino() {
-    if (running && _tetromino != null) tetromino.move();
+    if (running && _tetromino != null){
+      if(_tetrominoQueue.length > 0) {
+        window.console.log('-----------------------------------');
+        _tetrominoQueue
+            .elementAt(0)
+            .stones
+            .forEach((stone) {
+          window.console.log('(${stone['row']} | ${stone['col']})');
+        });
+        window.console.log('-----------------------------------');
+      }
+      tetromino.move();
+    }
   }
 
   /**

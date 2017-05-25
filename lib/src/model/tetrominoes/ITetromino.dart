@@ -22,30 +22,33 @@ class ITetromino extends Tetromino{
     ];
   }
 
-  //prevent tetrominoes from being rotated off the field
   void rotate(int direction){
     /*
     Die richtige Drehmatrix wird in Abhaengigkeit des Zustandes und der
     Drehrichtung ausgewält.
      */
     List<List<int>> transition;
+    int nextState;
 
     if(direction > 0){
       transition = _transitions.elementAt(_state);
-      _state = (_state + 1) % _numberOfStates;
+      nextState = (_state + 1) % _numberOfStates;
     } else{
-      (_state == 0) ? _state = _numberOfStates - 1 : _state--;
-      transition = _transitions.elementAt(_state);
+      (_state == 0) ? nextState = _numberOfStates - 1 : nextState--;
+      transition = _transitions.elementAt(nextState);
     }
     List<Map<String, int>> move = new List();
     //Position des gedrehten Tetrominoes berechnen
     for(int i=0; i < _stones.length; i++){
+      if(_stones[i]['row'] + direction * transition[i][0] < 0) return;
       move.add({'row': _stones[i]['row'] + direction * transition[i][0],
-                'col': _stones[i]['col'] + direction * transition[i][1],});
+                'col': _stones[i]['col'] + direction * transition[i][1]});
     }
     //pruefen, ob Drehung Kollisionen verursacht, falls ja Drehung nicht moeglich
     if(!_collisionWithBorder(move) && !_collisionWithGround(move) &&
         !_collisionWithOtherTetromino(move)) {
+      //durch die Drehung wird der Tetromino in den naechsten Zustand ueberfuehrt
+      _state = nextState;
       _moveToNewPosition(move);
       _model.updateField();
     }

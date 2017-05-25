@@ -10,5 +10,5 @@ class OTetromino extends Tetromino{
      { 'row' : 1, 'col' : model.sizeWidth ~/ 2     }
      ], #yellow);
 
-  void rotate(int angle){}
+  void rotate(int direction){}
 }

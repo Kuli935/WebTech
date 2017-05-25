@@ -32,7 +32,7 @@ abstract class Tetromino{
    * Abstrakte Definition fuer die Drehung eines Tetrominos. Die Rotation ist
    * fuer jeden Tetromino anders.
    */
-  void rotate(int angle);
+  void rotate(int direction);
 
   void move(){
     //Bewegung berechnen
