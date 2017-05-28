@@ -9,6 +9,7 @@ abstract class Tetromino{
   Symbol _color;
   int _dc;
   int _dr;
+  PowerUp _powerUp;
 
   Tetromino(TetrisGame model, List<Map<String, int>> stones,
             List<Map<String, int>> preview, Symbol color){
@@ -72,6 +73,7 @@ abstract class Tetromino{
         _model.field[stone['row']][stone['col']].isActive = false;
       });
       _model.removeCompletedRows();
+      _powerUp?.consume({'tetrominoMove': move});
     } else if(_collisionWithOtherTetromino(move)){
       bool movesSideways = (this._dc != 0);
       if(movesSideways){
@@ -86,6 +88,7 @@ abstract class Tetromino{
         //falls eine oder mehrere Reihen vervollstaendigt sind mussen diese
         //entfernt werden und alle Reihen darueber nachrutschen
         _model.removeCompletedRows();
+        _powerUp?.consume({'tetrominoMove': move});
       }
     }
     _model.dumpNextTetromino();

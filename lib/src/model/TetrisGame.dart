@@ -265,22 +265,26 @@ class TetrisGame {
    */
   void removeCompletedRows(){
     List<num> completedRows = this.getIndexOfCompletedRows();
+    removeRows(completedRows);
+  }
+
+  void removeRows(List<num> rows){
     //falls keine Reihen vervollständigt wurden, muss nichts entfernt werden
-    if(completedRows.length == 0){
+    if(rows.length == 0){
       return;
     }
     //increase score
-    this._score += this.calculateScoreOfMove(completedRows.length);
+    this._score += this.calculateScoreOfMove(rows.length);
     //remove completed rows
-    completedRows.forEach((rowIndex) {
+    rows.forEach((rowIndex) {
       this.field[rowIndex].forEach((cell){
         cell.color = #empty;
         cell.isActive = false;
       });
     });
     //move upper rows down
-    completedRows.sort((a, b) => (a-b).toInt());
-    completedRows.forEach((rowIndex){
+    rows.sort((a, b) => (a-b).toInt());
+    rows.forEach((rowIndex){
       for(num i=rowIndex-1; i >= 0; i--){
         this.field[i].forEach((cell) {
           this.field[i+1][cell.col].color = cell.color;

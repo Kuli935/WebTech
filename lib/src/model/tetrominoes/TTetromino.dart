@@ -25,6 +25,7 @@ class TTetromino extends Tetromino{
       [[1, -1], [0, 0], [-1, 1], [1, 1]], //t2: s2 -> s0
       [[-2, -1], [-1, 0], [0, 1], [0, -1]]
     ];
+    _powerUp = new RemoveAllRowsOfTetromino(model, this);
   }
 
   void rotate(int direction){
