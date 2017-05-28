@@ -13,6 +13,7 @@ part 'package:tetris/src/model/tetrominoes/ITetromino.dart';
 part 'package:tetris/src/model/tetrominoes/TTetromino.dart';
 part 'package:tetris/src/model/powerUps/PowerUp.dart';
 part 'package:tetris/src/model/powerUps/tetrominoPowerUps/RemoveAllRowsOfTetromino.dart';
+part 'package:tetris/src/model/powerUps/PowerUpUser.dart';
 part 'src/model/Cell.dart';
 part 'src/model/TetrisGame.dart';
 

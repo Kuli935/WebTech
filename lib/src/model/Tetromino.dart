@@ -1,6 +1,6 @@
 part of tetris;
 
-abstract class Tetromino{
+abstract class Tetromino extends PowerUpUser{
 
   List<Map<String, int>> _stones;
   // Darstellung des Tetrominoes in der Vorschau/Hold Box
@@ -73,7 +73,7 @@ abstract class Tetromino{
         _model.field[stone['row']][stone['col']].isActive = false;
       });
       _model.removeCompletedRows();
-      _powerUp?.consume({'tetrominoMove': move});
+      consumeAllPowerUps({'tetrominoMove': move});
     } else if(_collisionWithOtherTetromino(move)){
       bool movesSideways = (this._dc != 0);
       if(movesSideways){
@@ -88,7 +88,7 @@ abstract class Tetromino{
         //falls eine oder mehrere Reihen vervollstaendigt sind mussen diese
         //entfernt werden und alle Reihen darueber nachrutschen
         _model.removeCompletedRows();
-        _powerUp?.consume({'tetrominoMove': move});
+        consumeAllPowerUps({'tetrominoMove': move});
       }
     }
     _model.dumpNextTetromino();

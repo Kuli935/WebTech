@@ -3,7 +3,7 @@ part of tetris;
 /**
  * Definiert ein Tetris Spiel. Eine Tetris Spielkonstante ist das n x m Feld.
  */
-class TetrisGame {
+class TetrisGame extends PowerUpUser{
   // Tetromino = Tetris Stein
   Tetromino _tetromino;
 
