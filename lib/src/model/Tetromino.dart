@@ -4,12 +4,18 @@ abstract class Tetromino extends PowerUpUser{
 
   List<Map<String, int>> _stones;
   // Darstellung des Tetrominoes in der Vorschau/Hold Box
+  //TODO: reuse preview to place the tetromino in a 'spwan box' which is
+  //placed in the middle of the field (or maybe user changeable)
+  // tetromnioDimension = 4
+  // (model.sizeWidth ~/2 ) + (previewCol - (tetrominoDimension/2))
+  //TODO: make color serializable
+  //-read a hex color from json (individual for every stone)
+  //-implement this functionality in the rest of the app
   List<Map<String, int>> _preview;
   TetrisGame _model;
   Symbol _color;
   int _dc;
   int _dr;
-  PowerUp _powerUp;
 
   Tetromino(TetrisGame model, List<Map<String, int>> stones,
             List<Map<String, int>> preview, Symbol color){

@@ -17,7 +17,6 @@ class RemoveAllRowsOfTetromino extends PowerUp{
   bool _isConsumable(Map<String, Object> kwargs){
     //prufen, ob alle benoetigten Daten uebergeben wurden
     if(!kwargs.containsKey('tetrominoMove')){
-      //TODO: maybe raise an exception instead of returning false
       return false;
     }
     if(_tetromino._collisionWithGround(kwargs['tetrominoMove']) ||

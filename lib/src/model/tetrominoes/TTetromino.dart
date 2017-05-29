@@ -7,7 +7,7 @@ class TTetromino extends Tetromino{
   List<List<List<int>>> _transitions;
 
   TTetromino(TetrisGame model) : super(model, [
-    { 'row' : 0, 'col' : model.sizeWidth ~/ 2 - 1}, // Drehpunkt
+    { 'row' : 0, 'col' : model.sizeWidth ~/ 2 - 1},
     { 'row' : 0, 'col' : model.sizeWidth ~/ 2},
     { 'row' : 0, 'col' : model.sizeWidth ~/ 2 + 1},
     { 'row' : 1, 'col' : model.sizeWidth ~/ 2}
