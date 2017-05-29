@@ -114,9 +114,9 @@ class TetrisGame extends PowerUpUser{
     _currentLevel.availibleTetrominoes.forEach((tetromino){
       //TODO: create tetrominoes from map and add them to the queue
     });
+    listOfAllTetrominoes.add(new TTetromino(this));
     listOfAllTetrominoes.add(new ITetromino(this));
     listOfAllTetrominoes.add(new OTetromino(this));
-    listOfAllTetrominoes.add(new TTetromino(this));
     listOfAllTetrominoes.add(new LTetromino(this));
     listOfAllTetrominoes.add(new JTetromino(this));
     listOfAllTetrominoes.add(new STetromino(this));

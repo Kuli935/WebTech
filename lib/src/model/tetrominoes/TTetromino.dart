@@ -34,7 +34,7 @@ class TTetromino extends Tetromino{
     Drehrichtung ausgewält.
      */
     List<List<int>> transition;
-    int nextState;
+    int nextState = _state;
 
     if(direction > 0){
       transition = _transitions.elementAt(_state);
