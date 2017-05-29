@@ -117,6 +117,10 @@ class TetrisGame extends PowerUpUser{
     listOfAllTetrominoes.add(new ITetromino(this));
     listOfAllTetrominoes.add(new OTetromino(this));
     listOfAllTetrominoes.add(new TTetromino(this));
+    listOfAllTetrominoes.add(new LTetromino(this));
+    listOfAllTetrominoes.add(new JTetromino(this));
+    listOfAllTetrominoes.add(new STetromino(this));
+    listOfAllTetrominoes.add(new ZTetromino(this));
     listOfAllTetrominoes.shuffle();
     _tetrominoQueue.addAll(listOfAllTetrominoes);
   }
