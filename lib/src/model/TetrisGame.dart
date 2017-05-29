@@ -15,8 +15,13 @@ class TetrisGame extends PowerUpUser{
   final int _extraFieldHeight;
   final int _extraFieldWidth;
 
+  List<Level> _levels;
+  Level _currentLevel;
+
   // Zaehlt die Anzahl der breits gefallenen Tetrominoes
   int tetrominoCount;
+
+  int _numberOfRowsCleared;
 
   ListQueue<Tetromino> _tetrominoQueue;
 
@@ -48,6 +53,8 @@ class TetrisGame extends PowerUpUser{
    * Gibt den aktuellen Punktestand zurück
    */
   num get score => _score;
+
+  int get numberOfRowsCleared => _numberOfRowsCleared;
 
   /**
    * Startet des Spiel
@@ -83,14 +90,24 @@ class TetrisGame extends PowerUpUser{
     start();
     _score = 0;
     tetrominoCount = 0;
+    _numberOfRowsCleared = 0;
     this._field = new Iterable.generate(sizeHeight, (row) {
       return new Iterable.generate(
           sizeWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
+    _levels = new List();
+    _createSampleLevel();
     _tetrominoQueue = new ListQueue();
     _fillTetrominoeQueue();
     dumpNextTetromino();
     stop();
+  }
+
+  //TODO: should be removed later
+  void _createSampleLevel(){
+    List<Type> t = [TTetromino, OTetromino];
+    Level sample = new Level(this, t, 1.0, 1, {'numberOfRowsCleared': 5.0}, 1);
+    _currentLevel = sample;
   }
 
   void _fillTetrominoeQueue(){
@@ -149,6 +166,8 @@ class TetrisGame extends PowerUpUser{
    * Tetrominoes) aufgerufen werden.
    */
   void updateField() {
+    //TODO: remove following line
+    _currentLevel.isComplete();
     //den aktuellen Tetromino von der alten Position entfernen
     this._field.forEach((row) {
       row.forEach((cell) {
@@ -273,6 +292,8 @@ class TetrisGame extends PowerUpUser{
     if(rows.length == 0){
       return;
     }
+    //TODO: list may contains duplicates, use set instead
+    _numberOfRowsCleared += rows.length;
     //increase score
     this._score += this.calculateScoreOfMove(rows.length);
     //remove completed rows

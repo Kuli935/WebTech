@@ -2,7 +2,7 @@ part of tetris;
 
 class Level{
   TetrisGame _model;
-  List<Tetromino> _availibleTetrominoes;
+  List<Type> _availibleTetrominoes;
   double _scoreMultiplier;
   int _tetrominoSpeedInMs;
   Map<String, double> _goals;
@@ -10,7 +10,7 @@ class Level{
   Map<String, Function> _goalCheckers =
   {'numberOfRowsCleared':_numberOfRowsClearedComplete};
 
-  Level(TetrisGame model, List<Tetromino> availibleTetrominoes,
+  Level(TetrisGame model, List<Type> availibleTetrominoes,
       double scoreMultiplier, int tetrominoSpeedInMs, Map<String, double> golas,
       int priority){
     _model = model;
@@ -21,8 +21,8 @@ class Level{
     _priority = priority;
   }
 
-  static bool _numberOfRowsClearedComplete(double numberOfRows){
-    if(numberOfRows.toInt() >= 5){
+  static bool _numberOfRowsClearedComplete(TetrisGame model, double numberOfRows){
+    if(model.numberOfRowsCleared >= numberOfRows.toInt()){
       return true;
     }
     return false;
@@ -35,13 +35,17 @@ class Level{
       -number of tetrominoes dumped by game
       -number of points reached
     */
+    //TODO: implement null check for goal?!
     bool isComplete = true;
     _goals.forEach((goal, value){
-      if(!_goalCheckers[goal](value)){
+      if(!_goalCheckers[goal](_model, value)){
         isComplete = false;
       }
     });
-   
+    if(isComplete) {
+      window.console.log('>>>: LEVEL COMPLETE');
+    }
+    //window.console.log('number of rows cleared: ${_model.numberOfRowsCleared}');
     return isComplete;
   }
 
