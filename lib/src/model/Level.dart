@@ -1,16 +1,24 @@
 part of tetris;
 
+/**
+ * Ein Level haelt verschiede Werte zur konfiguration des TetrisGame.
+ */
 class Level{
   TetrisGame _model;
-  List<Type> _availibleTetrominoes;
+  //TODO: serialized version of each tetromino availible in this level
+  List<Map<String, Object>> _availibleTetrominoes;
+  //TODO: maybe add a spwan chance for each tetromino
   double _scoreMultiplier;
   int _tetrominoSpeedInMs;
   Map<String, double> _goals;
   int _priority;
+  //TODO: add a reward (bonus points, special power up)
+  //TODO: show current goals in in view
+
   Map<String, Function> _goalCheckers =
   {'numberOfRowsCleared':_numberOfRowsClearedComplete};
 
-  Level(TetrisGame model, List<Type> availibleTetrominoes,
+  Level(TetrisGame model, List<Map<String, Object>> availibleTetrominoes,
       double scoreMultiplier, int tetrominoSpeedInMs, Map<String, double> golas,
       int priority){
     _model = model;
@@ -21,6 +29,13 @@ class Level{
     _priority = priority;
   }
 
+  /*
+  Eine Auswahl an Level Zielen soll vorhanden sein. Fuer jedes Ziel muss eine
+  Check Funktion implementiert werden (siehe unten). In der JSON Datei wird dann
+  folgendes stehen: {'numberOfRowsCleared': 5.0, 'pointsReched': 3000}
+  Wenn alle Bedingungen erfuellt sind, ist das Level beendet und das model muss
+  das naechste Level laden.
+   */
   static bool _numberOfRowsClearedComplete(TetrisGame model, double numberOfRows){
     if(model.numberOfRowsCleared >= numberOfRows.toInt()){
       return true;

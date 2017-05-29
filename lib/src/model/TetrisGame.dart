@@ -105,13 +105,15 @@ class TetrisGame extends PowerUpUser{
 
   //TODO: should be removed later
   void _createSampleLevel(){
-    List<Type> t = [TTetromino, OTetromino];
-    Level sample = new Level(this, t, 1.0, 1, {'numberOfRowsCleared': 5.0}, 1);
+    Level sample = new Level(this, [{}, {}], 1.0, 1, {'numberOfRowsCleared': 5.0}, 1);
     _currentLevel = sample;
   }
 
   void _fillTetrominoeQueue(){
     List<Tetromino> listOfAllTetrominoes = new List();
+    _currentLevel.availibleTetrominoes.forEach((tetromino){
+      //TODO: create tetrominoes from map and add them to the queue
+    });
     listOfAllTetrominoes.add(new ITetromino(this));
     listOfAllTetrominoes.add(new OTetromino(this));
     listOfAllTetrominoes.add(new TTetromino(this));

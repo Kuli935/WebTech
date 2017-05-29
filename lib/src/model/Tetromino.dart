@@ -11,6 +11,7 @@ abstract class Tetromino extends PowerUpUser{
   //TODO: make color serializable
   //-read a hex color from json (individual for every stone)
   //-implement this functionality in the rest of the app
+
   List<Map<String, int>> _preview;
   TetrisGame _model;
   Symbol _color;
