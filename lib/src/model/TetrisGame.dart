@@ -8,12 +8,13 @@ class TetrisGame extends PowerUpUser{
   Tetromino _tetromino;
 
   // Die Feldgröße des Spiels (n x m Feld)
-  final int _sizeHeight;
-  final int _sizeWidth;
+  final int _fieldHeight;
+  final int _fieldWidth;
 
+  //TODO: remove
   // Die Feldgröße für das Extra-Tetromino-Feld (n x m Feld)
-  final int _extraFieldHeight;
-  final int _extraFieldWidth;
+  final int _extraFieldHeight = 4;
+  final int _extraFieldWidth = 4;
 
   List<Level> _levels;
   Level _currentLevel;
@@ -85,15 +86,15 @@ class TetrisGame extends PowerUpUser{
    * @param int _extraFieldHeight = Höhe des Extra-Tetromino-Feldes
    * @param int _extraFieldWidth = Breite des Extra-Tetromino-Feldes
    */
-  TetrisGame(this._sizeHeight, this._sizeWidth, this._extraFieldHeight,
-      this._extraFieldWidth) {
+  TetrisGame(int fieldWidth, int fieldHeight):_fieldWidth = fieldWidth,
+        _fieldHeight = fieldHeight {
     start();
     _score = 0;
     tetrominoCount = 0;
     _numberOfRowsCleared = 0;
-    this._field = new Iterable.generate(sizeHeight, (row) {
+    this._field = new Iterable.generate(_fieldHeight, (row) {
       return new Iterable.generate(
-          sizeWidth, (col) => new Cell(row, col, #empty)).toList();
+          _fieldWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
     _levels = new List();
     _createSampleLevel();
@@ -362,12 +363,12 @@ class TetrisGame extends PowerUpUser{
   /**
    * Gibt die Höhe des Spielfeldes zurück. Das Spiel wird auf einen n x m Feld gespielt.
    */
-  int get sizeHeight => _sizeHeight;
+  int get sizeHeight => _fieldHeight;
 
   /**
    * Gibt die Breite des Spielfeldes zurück. Das Spiel wird auf einen n x m Feld gespielt.
    */
-  int get sizeWidth => _sizeWidth;
+  int get sizeWidth => _fieldWidth;
 
   /**
    * Gibt die Höhe des Feldes für den Nächsten-Tetromino-Feld zurück.

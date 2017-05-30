@@ -4,6 +4,7 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:math';
 import 'dart:collection';
+import 'dart:convert';
 
 part 'src/controller/TetrisController.dart';
 part 'src/view/TetrisView.dart';
@@ -19,6 +20,8 @@ part 'package:tetris/src/model/powerUps/PowerUp.dart';
 part 'package:tetris/src/model/powerUps/tetrominoPowerUps/RemoveAllRowsOfTetromino.dart';
 part 'package:tetris/src/model/powerUps/PowerUpUser.dart';
 part 'package:tetris/src/model/Level.dart';
+part 'package:tetris/src/util/JsonReader.dart';
+part 'package:tetris/src/util/TetrisGameBuilder.dart';
 part 'src/model/Cell.dart';
 part 'src/model/TetrisGame.dart';
 

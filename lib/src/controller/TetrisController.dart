@@ -23,7 +23,8 @@ class TetrisController {
   /**
    * Erzeugen eines Tetris Game. Aufruf aus der Datei Tetromino.dart.
    */
-  var game = new TetrisGame(gameHeight, gameWidth, extraFieldHeight, extraFieldWidth);
+  //var game = new TetrisGame(gameHeight, gameWidth, extraFieldHeight, extraFieldWidth);
+  TetrisGame game;
 
   /**
    * Erzeugen der Tetrisansicht. Aufruf aus der Datei TetrisView.dart im Ordner view.
@@ -35,13 +36,18 @@ class TetrisController {
    */
   Timer tetrominoTrigger;
 
+  final JsonReader _configReader;
 
   /**
    * Konstuktor um ein Controller für Objekte zu erzeugen.
    * Registriert alle notwendigen Ereignishandler die notwendig sind
    * für den Benutzer zu der Interaktion mit dem Tetris Spiel.
    */
-  TetrisController() {
+  TetrisController(JsonReader configReader): _configReader = configReader{
+
+    TetrisGameBuilder modelBuilder = new TetrisGameBuilder(_configReader);
+    game = modelBuilder.build();
+
 
     // Erzeugen des Spielfeldes
     view.generateField(game.field, 1, "field");
@@ -219,7 +225,7 @@ class TetrisController {
    * Inizalisiert ein neues Spiel.
    */
   dynamic _newGame() async {
-    game = new TetrisGame(gameHeight, gameWidth, extraFieldHeight, extraFieldWidth);
+    //game = new TetrisGame(gameHeight, gameWidth, extraFieldHeight, extraFieldWidth);
     // Erzeugen des Spielfeldes
     view.generateField(game.field, 1, "field");
     // Erzeugen des Nächsten-Tetromino-Feldes

@@ -110,7 +110,7 @@ abstract class Tetromino extends PowerUpUser{
   bool _collisionWithBorder(List<Map<String, int>> move){
     bool isCollision = false;
     move.forEach((stone){
-      if(stone['col'] < 0 || stone['col'] >= _model._sizeWidth){
+      if(stone['col'] < 0 || stone['col'] >= _model._fieldWidth){
         isCollision = true;
       }
     });
