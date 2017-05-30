@@ -1,6 +1,12 @@
 {
-  "gameConfiguration":{
+  "gameConfiguration": {
     "fieldWidth": 10,
     "fieldHeight": 18
-  }
+  },
+  "tetrominoes": [
+
+  ],
+  "levels":[
+    
+  ]
 }

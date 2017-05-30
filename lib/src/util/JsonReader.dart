@@ -1,17 +1,16 @@
 part of tetris;
 
-class JsonReader{
+class JsonReader extends Reader{
 
-  final String _dataUri;
   Map<String, Object> _gameConfiguration;
 
-  JsonReader(String dataUri):_dataUri = dataUri{}
+  JsonReader(String dataUri):super(dataUri){}
 
   Map<String, Object> readModelConfiguration(){
     return _gameConfiguration['gameConfiguration'];
   }
 
-  dynamic loadGameConfiguration() async{
+  Future loadGameConfiguration() async{
     await HttpRequest.getString(_dataUri).then((flatConfig){
       _gameConfiguration = JSON.decode(flatConfig);
     }).catchError((){

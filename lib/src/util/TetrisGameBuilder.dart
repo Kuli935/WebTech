@@ -1,10 +1,8 @@
 part of tetris;
 
-class TetrisGameBuilder{
+class TetrisGameBuilder extends Builder<TetrisGame>{
 
-  final JsonReader _reader;
-
-  TetrisGameBuilder(JsonReader reader):_reader = reader{}
+  TetrisGameBuilder(JsonReader reader):super(reader){}
 
   TetrisGame build(){
     Map<String, Object> modelConfiguration = _reader.readModelConfiguration();
