@@ -4,9 +4,41 @@
     "fieldHeight": 18
   },
   "tetrominoes": [
-
+    {
+      "id": "ITetromino",
+      "stones":[
+        { "row" : 0, "col" : -2 },
+        { "row" : 0, "col" : -1 },
+        { "row" : 0, "col" : 0},
+        { "row" : 0, "col" : 1}
+      ],
+      "preview":[
+        { "row" : 2, "col" : 0},
+        { "row" : 2, "col" : 1},
+        { "row" : 2, "col" : 2},
+        { "row" : 2, "col" : 3}
+      ],
+      "transitions":[
+        [[-3, 1], [-2, 0], [-1, -1], [0, -2]],
+        [[3, -1], [2, 0], [1, 1], [0, 2]],
+        [[-3, 1], [-2, 0], [-1, -1], [0, -2]],
+        [[3, -1], [2, 0], [1, 1], [0, 2]]
+      ],
+      "color": "cyan"
+    }
   ],
   "levels":[
-    
+    {
+      "id": "level1",
+      "availibleTetrominoes":[
+        "ITetromino"
+      ],
+      "scoreMultiplier": 1.0,
+      "tetrominoSpeedInMs": 1000,
+      "goals":{
+        "numberOfRowsCleared": 5.0
+      },
+      "priority": 99
+    }
   ]
 }

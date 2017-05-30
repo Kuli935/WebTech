@@ -20,10 +20,10 @@ part 'package:tetris/src/model/powerUps/PowerUp.dart';
 part 'package:tetris/src/model/powerUps/tetrominoPowerUps/RemoveAllRowsOfTetromino.dart';
 part 'package:tetris/src/model/powerUps/PowerUpUser.dart';
 part 'package:tetris/src/model/Level.dart';
-part 'package:tetris/src/util/JsonReader.dart';
-part 'package:tetris/src/util/TetrisGameBuilder.dart';
-part 'package:tetris/src/util/Reader.dart';
-part 'package:tetris/src/util/Builder.dart';
+part 'package:tetris/src/util/readers/JsonReader.dart';
+part 'package:tetris/src/util/builders/TetrisGameBuilder.dart';
+part 'package:tetris/src/util/readers/Reader.dart';
+part 'package:tetris/src/util/builders/Builder.dart';
 part 'src/model/Cell.dart';
 part 'src/model/TetrisGame.dart';
 
