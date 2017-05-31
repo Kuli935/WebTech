@@ -46,7 +46,8 @@ class TetrisController {
   TetrisController(JsonReader configReader): _configReader = configReader{
 
     TetrisGameBuilder modelBuilder = new TetrisGameBuilder(_configReader);
-    game = modelBuilder.build();
+    game = modelBuilder.build('modelDefault');
+    new TetrominoBuilder(_configReader, game).build('ITetromino');
 
 
     // Erzeugen des Spielfeldes

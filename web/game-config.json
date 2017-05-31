@@ -1,5 +1,6 @@
 {
   "gameConfiguration": {
+    "id":"modelDefault",
     "fieldWidth": 10,
     "fieldHeight": 18
   },

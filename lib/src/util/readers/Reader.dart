@@ -5,8 +5,13 @@ abstract class Reader{
 
   Reader(String dataUri):_dataUri = dataUri{}
 
-  Map<String, Object> readModelConfiguration();
-
   Future loadGameConfiguration();
 
+  Map<String, Map> readModelConfiguration();
+
+  Map<String, Object> readTetrominoeConfiguration(String id);
+
+  List<String> readAllTetrominoIds();
+
+  get dataUri => _dataUri;
 }

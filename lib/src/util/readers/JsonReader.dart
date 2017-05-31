@@ -6,10 +6,6 @@ class JsonReader extends Reader{
 
   JsonReader(String dataUri):super(dataUri){}
 
-  Map<String, Object> readModelConfiguration(){
-    return _gameConfiguration['gameConfiguration'];
-  }
-
   Future loadGameConfiguration() async{
     await HttpRequest.getString(_dataUri).then((flatConfig){
       _gameConfiguration = JSON.decode(flatConfig);
@@ -20,5 +16,28 @@ class JsonReader extends Reader{
           -show the user an error in a nice message
       */
     });
+  }
+
+  Map<String, Map> readModelConfiguration(){
+    return _gameConfiguration['gameConfiguration'];
+  }
+
+  List<String> readAllTetrominoIds(){
+    List<String> tetrominoIds = new List();
+    List<Map<String, Object>> tetrominoConfigurations = _gameConfiguration['tetrominoes'];
+    tetrominoConfigurations.forEach((tetrominoConfiguration){
+      tetrominoIds.add(tetrominoConfiguration['id']);
+    });
+    return tetrominoIds;
+  }
+
+  Map<String, Object> readTetrominoeConfiguration(String id){
+    List<Map<String, Object>> tetrominoConfigurations = _gameConfiguration['tetrominoes'];
+    for(int i=0; i < tetrominoConfigurations.length; i++){
+      if(tetrominoConfigurations[i]['id'] == id){
+        return tetrominoConfigurations[i];
+      }
+    }
+    return null;
   }
 }

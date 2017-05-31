@@ -16,6 +16,8 @@ class TetrisGame extends PowerUpUser{
   final int _extraFieldHeight = 4;
   final int _extraFieldWidth = 4;
 
+  Reader _configReader;
+
   List<Level> _levels;
   Level _currentLevel;
 
@@ -86,8 +88,9 @@ class TetrisGame extends PowerUpUser{
    * @param int _extraFieldHeight = Höhe des Extra-Tetromino-Feldes
    * @param int _extraFieldWidth = Breite des Extra-Tetromino-Feldes
    */
-  TetrisGame(int fieldWidth, int fieldHeight):_fieldWidth = fieldWidth,
-        _fieldHeight = fieldHeight {
+  TetrisGame(int fieldWidth, int fieldHeight, Reader configReader):
+        _fieldWidth = fieldWidth, _fieldHeight = fieldHeight,
+        _configReader = configReader {
     start();
     _score = 0;
     tetrominoCount = 0;
@@ -115,13 +118,14 @@ class TetrisGame extends PowerUpUser{
     _currentLevel.availibleTetrominoes.forEach((tetromino){
       //TODO: create tetrominoes from map and add them to the queue
     });
-    listOfAllTetrominoes.add(new TTetromino(this));
+/*    listOfAllTetrominoes.add(new TTetromino(this));
     listOfAllTetrominoes.add(new ITetromino(this));
     listOfAllTetrominoes.add(new OTetromino(this));
     listOfAllTetrominoes.add(new LTetromino(this));
     listOfAllTetrominoes.add(new JTetromino(this));
     listOfAllTetrominoes.add(new STetromino(this));
-    listOfAllTetrominoes.add(new ZTetromino(this));
+    listOfAllTetrominoes.add(new ZTetromino(this));*/
+    listOfAllTetrominoes.add(new TetrominoBuilder(_configReader, this).build('ITetromino'));
     listOfAllTetrominoes.shuffle();
     _tetrominoQueue.addAll(listOfAllTetrominoes);
   }

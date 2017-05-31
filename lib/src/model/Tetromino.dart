@@ -1,8 +1,8 @@
 part of tetris;
 
-abstract class Tetromino extends PowerUpUser{
+class Tetromino extends PowerUpUser{
 
-  List<Map<String, int>> _stones;
+
   // Darstellung des Tetrominoes in der Vorschau/Hold Box
   //TODO: reuse preview to place the tetromino in a 'spwan box' which is
   //placed in the middle of the field (or maybe user changeable)
@@ -12,19 +12,37 @@ abstract class Tetromino extends PowerUpUser{
   //-read a hex color from json (individual for every stone)
   //-implement this functionality in the rest of the app
 
+  List<Map<String, int>> _stones;
   List<Map<String, int>> _preview;
   TetrisGame _model;
   Symbol _color;
   int _dc;
   int _dr;
+  int _state;
+  int _numberOfStates;
+  List<List<List<int>>> _transitions;
 
-  Tetromino(TetrisGame model, List<Map<String, int>> stones,
-            List<Map<String, int>> preview, Symbol color){
-    _stones = stones;
-    _preview = preview;
+  //TODO: refactor constructor messs to use benefits of builder, move initis
+  //to initializer
+  Tetromino(TetrisGame model, List<Map<String, int>> stonesConfig,
+            List<List<List<int>>> transitions,
+            List<Map<String, int>> preview,
+      Symbol color):_state = 0, _numberOfStates = 4{
     _model = model;
-    _color = color;
+    _stones = _calculateInitialPosition(stonesConfig);
+    _transitions = transitions;
+    _preview = preview;
+    _color = #cyan;
   }
+
+  List<Map<String, int>> _calculateInitialPosition(List<Map<String, int>> stonesConfig){
+    List<Map<String, int>> initialPosition = new List();
+    stonesConfig.forEach((stone){
+      initialPosition.add({'row': stone['row'], 'col': _model.sizeWidth ~/2 + stone['col']});
+    });
+    return initialPosition;
+  }
+
 
   void addToField(){
     _stones.forEach((stone){
@@ -44,7 +62,37 @@ abstract class Tetromino extends PowerUpUser{
    * Abstrakte Definition fuer die Drehung eines Tetrominos. Die Rotation ist
    * fuer jeden Tetromino anders.
    */
-  void rotate(int direction);
+  void rotate(int direction){
+    /*
+    Die richtige Drehmatrix wird in Abhaengigkeit des Zustandes und der
+    Drehrichtung ausgewält.
+     */
+    List<List<int>> transition;
+    int nextState = _state;
+
+    if(direction > 0){
+      transition = _transitions.elementAt(_state);
+      nextState = (_state + 1) % _numberOfStates;
+    } else{
+      (_state == 0) ? nextState = _numberOfStates - 1 : nextState--;
+      transition = _transitions.elementAt(nextState);
+    }
+    List<Map<String, int>> move = new List();
+    //Position des gedrehten Tetrominoes berechnen
+    for(int i=0; i < _stones.length; i++){
+      if(_stones[i]['row'] + direction * transition[i][0] < 0) return;
+      move.add({'row': _stones[i]['row'] + direction * transition[i][0],
+        'col': _stones[i]['col'] + direction * transition[i][1]});
+    }
+    //pruefen, ob Drehung Kollisionen verursacht, falls ja Drehung nicht moeglich
+    if(!_collisionWithBorder(move) && !_collisionWithGround(move) &&
+        !_collisionWithOtherTetromino(move)) {
+      //durch die Drehung wird der Tetromino in den naechsten Zustand ueberfuehrt
+      _state = nextState;
+      _moveToNewPosition(move);
+      _model.updateField();
+    }
+  }
 
   void move(){
     //Bewegung berechnen

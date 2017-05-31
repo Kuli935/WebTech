@@ -5,6 +5,5 @@ abstract class Builder<T>{
 
   Builder(Reader reader):_reader = reader{}
 
-  T build();
-
+  T build(String id);
 }
