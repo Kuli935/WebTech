@@ -40,4 +40,23 @@ class JsonReader extends Reader{
     }
     return null;
   }
+
+  List<String> readAllLevelIds(){
+    List<String> levelIds = new List();
+    List<Map<String, Object>> levelConfigurations = _gameConfiguration['levels'];
+    levelConfigurations.forEach((levelConig){
+      levelIds.add(levelConig['id']);
+    });
+    return levelIds;
+  }
+
+  Map<String, Object> readLevelConfiguration(String id){
+    List<Map<String, Object>> levelConfigurations = _gameConfiguration['levels'];
+    for(int i=0; i < levelConfigurations.length; i++){
+      if(levelConfigurations[i]['id'] == id){
+        return levelConfigurations[i];
+      }
+    }
+    return null;
+  }
 }

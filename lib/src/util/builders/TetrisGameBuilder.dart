@@ -12,10 +12,14 @@ class TetrisGameBuilder extends Builder<TetrisGame>{
           'id: "${id}" in the file: "${_reader.dataUri}".');
       return null;
     }
-    //TODO: set levels
     TetrisGame model = new TetrisGame(modelConfiguration['fieldWidth'],
                                       modelConfiguration['fieldHeight'],
                                       _reader);
+    //alle Level der Konfigurationsdatei erstellen und zum Spiel hinzufuegen
+    _reader.readAllLevelIds().forEach((levelId){
+      LevelBuilder levelBuilder = new LevelBuilder(_reader, model);
+      model.addLevel(levelBuilder.build(levelId));
+    });
     return model;
   }
 }

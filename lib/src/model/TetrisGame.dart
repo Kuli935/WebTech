@@ -18,7 +18,7 @@ class TetrisGame extends PowerUpUser{
 
   Reader _configReader;
 
-  List<Level> _levels;
+  PriorityQueue<Level> _levels;
   Level _currentLevel;
 
   // Zaehlt die Anzahl der breits gefallenen Tetrominoes
@@ -63,6 +63,7 @@ class TetrisGame extends PowerUpUser{
    * Startet des Spiel
    */
   void start() {
+    _startNextLevel();
     _gamestate = #running;
   }
 
@@ -91,7 +92,6 @@ class TetrisGame extends PowerUpUser{
   TetrisGame(int fieldWidth, int fieldHeight, Reader configReader):
         _fieldWidth = fieldWidth, _fieldHeight = fieldHeight,
         _configReader = configReader {
-    start();
     _score = 0;
     tetrominoCount = 0;
     _numberOfRowsCleared = 0;
@@ -99,25 +99,17 @@ class TetrisGame extends PowerUpUser{
       return new Iterable.generate(
           _fieldWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
-    _levels = new List();
-    _createSampleLevel();
     _tetrominoQueue = new ListQueue();
     _fillTetrominoeQueue();
     dumpNextTetromino();
     stop();
   }
 
-  //TODO: should be removed later
-  void _createSampleLevel(){
-    Level sample = new Level(this, [{}, {}], 1.0, 1, {'numberOfRowsCleared': 5.0}, 1);
-    _currentLevel = sample;
-  }
-
   void _fillTetrominoeQueue(){
     List<Tetromino> listOfAllTetrominoes = new List();
-    _currentLevel.availibleTetrominoes.forEach((tetromino){
-      //TODO: create tetrominoes from map and add them to the queue
-    });
+//    _currentLevel.availibleTetrominoes.forEach((tetromino){
+//      //TODO: create tetrominoes from map and add them to the queue
+//    });
 /*    listOfAllTetrominoes.add(new TTetromino(this));
     listOfAllTetrominoes.add(new ITetromino(this));
     listOfAllTetrominoes.add(new OTetromino(this));
@@ -177,8 +169,10 @@ class TetrisGame extends PowerUpUser{
    * Tetrominoes) aufgerufen werden.
    */
   void updateField() {
-    //TODO: remove following line
-    _currentLevel.isComplete();
+    if(_currentLevel.isComplete()){
+      //TODO: claim reward
+      _startNextLevel();
+    }
     //den aktuellen Tetromino von der alten Position entfernen
     this._field.forEach((row) {
       row.forEach((cell) {
@@ -383,4 +377,23 @@ class TetrisGame extends PowerUpUser{
    * Gibt die Breite des Feldes für den Nächsten-Tetromino-Feld zurück.
    */
   int get extraFieldWidth => _extraFieldWidth;
+
+  void addLevel(Level level){
+    if(_levels == null){
+      _levels = new PriorityQueue(
+              (Level l1, Level l2) => (l2.priority - l1.priority));
+    }
+    _levels.add(level);
+  }
+
+  void _startNextLevel(){
+    if(_levels.isNotEmpty){
+      _currentLevel = _levels.removeFirst();
+    } else{
+      //TODO: notify user, that all levels are cleared and that the game
+      //now runs in endless mode
+      _currentLevel = new Level(this, _configReader.readAllTetrominoIds(),
+          1.0, 1, {'endlessGame': 42.0}, 0);
+    }
+  }
 }

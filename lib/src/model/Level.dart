@@ -5,8 +5,12 @@ part of tetris;
  */
 class Level{
   TetrisGame _model;
-  //TODO: serialized version of each tetromino availible in this level
-  List<Map<String, Object>> _availibleTetrominoes;
+
+  /**
+   * Enthaelt die eindeutigen Ids aller Tetrominoes, die in diesem Level
+   * verfuegbar sind.
+   */
+  List<String> _idsOfAvailableTetrominoes;
   //TODO: maybe add a spwan chance for each tetromino
   double _scoreMultiplier;
   int _tetrominoSpeedInMs;
@@ -16,13 +20,16 @@ class Level{
   //TODO: show current goals in in view
 
   Map<String, Function> _goalCheckers =
-  {'numberOfRowsCleared':_numberOfRowsClearedComplete};
+  {'numberOfRowsCleared': _numberOfRowsClearedComplete,
+   'endlessGame': _endlessGame};
 
-  Level(TetrisGame model, List<Map<String, Object>> availibleTetrominoes,
+  //TODO: refactor constructor messs to use benefits of builder, move initis
+  //to initializer
+  Level(TetrisGame model, List<String> idsOfAvailableTetrominoes,
       double scoreMultiplier, int tetrominoSpeedInMs, Map<String, double> golas,
       int priority){
     _model = model;
-    _availibleTetrominoes = availibleTetrominoes;
+    _idsOfAvailableTetrominoes = idsOfAvailableTetrominoes;
     _scoreMultiplier = scoreMultiplier;
     _tetrominoSpeedInMs = tetrominoSpeedInMs;
     _goals = golas;
@@ -40,6 +47,10 @@ class Level{
     if(model.numberOfRowsCleared >= numberOfRows.toInt()){
       return true;
     }
+    return false;
+  }
+
+  static bool _endlessGame(TetrisGame model, double value){
     return false;
   }
 
@@ -64,7 +75,7 @@ class Level{
     return isComplete;
   }
 
-  get availibleTetrominoes => _availibleTetrominoes;
+  get idsOfAvailableTetrominoes => _idsOfAvailableTetrominoes;
 
   get scoreMultiplier => _scoreMultiplier;
 

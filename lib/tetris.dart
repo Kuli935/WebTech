@@ -4,6 +4,7 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:math';
 import 'dart:collection';
+import 'package:collection/collection.dart';
 import 'dart:convert';
 
 part 'src/controller/TetrisController.dart';
@@ -25,6 +26,7 @@ part 'package:tetris/src/util/builders/TetrisGameBuilder.dart';
 part 'package:tetris/src/util/readers/Reader.dart';
 part 'package:tetris/src/util/builders/Builder.dart';
 part 'package:tetris/src/util/builders/TetrominoBuilder.dart';
+part 'package:tetris/src/util/builders/LevelBuilder.dart';
 part 'src/model/Cell.dart';
 part 'src/model/TetrisGame.dart';
 

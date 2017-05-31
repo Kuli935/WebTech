@@ -9,9 +9,13 @@ abstract class Reader{
 
   Map<String, Map> readModelConfiguration();
 
+  List<String> readAllTetrominoIds();
+
   Map<String, Object> readTetrominoeConfiguration(String id);
 
-  List<String> readAllTetrominoIds();
+  List<String> readAllLevelIds();
+
+  Map<String, Object> readLevelConfiguration(String id);
 
   get dataUri => _dataUri;
 }

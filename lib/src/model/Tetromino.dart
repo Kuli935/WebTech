@@ -114,7 +114,8 @@ class Tetromino extends PowerUpUser{
   }
 
   void _handleCollision(List<Map<String, int>> move){
-    //TODO: if tetrominoes collide sidewys they disappear
+    //TODO: if tetrominoes collide sideways (from the left and the right)
+    // they disappear
     /*
     Kollisionen mit den Seitenraender des Spielfelds muessen nicht extra
     behandelt werden, da in diesem Fall eine Bewegung einfach nicht moeglich ist
