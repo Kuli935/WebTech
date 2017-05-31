@@ -64,6 +64,8 @@ class TetrisGame extends PowerUpUser{
    */
   void start() {
     _startNextLevel();
+    _fillTetrominoeQueue();
+    dumpNextTetromino();
     _gamestate = #running;
   }
 
@@ -74,6 +76,12 @@ class TetrisGame extends PowerUpUser{
     _gamestate = #paused;
   }
 
+  /**
+   * Fuehrt das Spiel nach einer Pause fort.
+   */
+  void resume(){
+    _gamestate = #running;
+  }
   /**
    * Stopt das Spiel
    */
@@ -100,26 +108,18 @@ class TetrisGame extends PowerUpUser{
           _fieldWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
     _tetrominoQueue = new ListQueue();
-    _fillTetrominoeQueue();
-    dumpNextTetromino();
+    //TODO: warum steht hier stop?
     stop();
   }
 
   void _fillTetrominoeQueue(){
-    List<Tetromino> listOfAllTetrominoes = new List();
-//    _currentLevel.availibleTetrominoes.forEach((tetromino){
-//      //TODO: create tetrominoes from map and add them to the queue
-//    });
-/*    listOfAllTetrominoes.add(new TTetromino(this));
-    listOfAllTetrominoes.add(new ITetromino(this));
-    listOfAllTetrominoes.add(new OTetromino(this));
-    listOfAllTetrominoes.add(new LTetromino(this));
-    listOfAllTetrominoes.add(new JTetromino(this));
-    listOfAllTetrominoes.add(new STetromino(this));
-    listOfAllTetrominoes.add(new ZTetromino(this));*/
-    listOfAllTetrominoes.add(new TetrominoBuilder(_configReader, this).build('ITetromino'));
-    listOfAllTetrominoes.shuffle();
-    _tetrominoQueue.addAll(listOfAllTetrominoes);
+    Set<Tetromino> setOfTetrominoes = new Set();
+    _currentLevel.idsOfAvailableTetrominoes.forEach((tetrominoId){
+      setOfTetrominoes.add(new TetrominoBuilder(_configReader, this).build(tetrominoId));
+    });
+    List<Tetromino> shuffledTetrominoes = setOfTetrominoes.toList();
+    shuffledTetrominoes.shuffle();
+    _tetrominoQueue.addAll(shuffledTetrominoes);
   }
 
   void dumpNextTetromino(){
@@ -202,7 +202,7 @@ class TetrisGame extends PowerUpUser{
           .toList();
     }).toList();
 
-    if(!_tetrominoQueue.isEmpty) {
+    if(_tetrominoQueue.isNotEmpty) {
       _tetrominoQueue.elementAt(0).preview.forEach((stone) {
         nextStoneField[stone['row']][stone['col']] = _tetrominoQueue.elementAt(0).color;
       });
@@ -256,7 +256,7 @@ class TetrisGame extends PowerUpUser{
 
       // Wenn das Spiel pausiert ist, dann freigeben
     } else if (paused) {
-      start();
+      resume();
       tetromino.down();
     }
   }

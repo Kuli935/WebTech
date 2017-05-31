@@ -47,8 +47,6 @@ class TetrisController {
 
     TetrisGameBuilder modelBuilder = new TetrisGameBuilder(_configReader);
     game = modelBuilder.build('modelDefault');
-    new TetrominoBuilder(_configReader, game).build('ITetromino');
-
 
     // Erzeugen des Spielfeldes
     view.generateField(game.field, 1, "field");

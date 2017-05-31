@@ -20,6 +20,7 @@ class TetrisGameBuilder extends Builder<TetrisGame>{
       LevelBuilder levelBuilder = new LevelBuilder(_reader, model);
       model.addLevel(levelBuilder.build(levelId));
     });
+
     return model;
   }
 }
