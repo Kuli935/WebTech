@@ -19,6 +19,12 @@ class TetrominoBuilder extends Builder<Tetromino>{
         tetrominoConfig['transitions'],
         tetrominoConfig['preview'],
         tetrominoConfig['color']);
+    //alle PowerUps fuer dieses Tetromnie hinzufuegen
+    List<String> powerUpIds = tetrominoConfig['powerUps'];
+    powerUpIds.forEach((powerUpId){
+      PowerUp powerUp = new PowerUpBuilder(_reader, _model, tetromino).build(powerUpId);
+      tetromino.addPowerUp(powerUp);
+    });
     return tetromino;
   }
 

@@ -25,6 +25,7 @@
         [[-3, 1], [-2, 0], [-1, -1], [0, -2]],
         [[3, -1], [2, 0], [1, 1], [0, 2]]
       ],
+      "powerUps":[],
       "color": "cyan"
     },
     {
@@ -47,6 +48,9 @@
         [[1, -1], [0, 0], [-1, 1], [1, 1]],
         [[-2, -1], [-1, 0], [0, 1], [0, -1]]
         ],
+      "powerUps":[
+        "RemoveAllRowsOfTetromino"
+      ],
       "color": "purple"
     }
   ],
@@ -54,7 +58,7 @@
     {
       "id": "level1",
       "availibleTetrominoes":[
-        "ITetromino"
+        "ITetromino", "TTetromino"
       ],
       "scoreMultiplier": 1.0,
       "tetrominoSpeedInMs": 1000,

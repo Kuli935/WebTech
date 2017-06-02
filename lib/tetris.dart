@@ -27,6 +27,7 @@ part 'package:tetris/src/util/readers/Reader.dart';
 part 'package:tetris/src/util/builders/Builder.dart';
 part 'package:tetris/src/util/builders/TetrominoBuilder.dart';
 part 'package:tetris/src/util/builders/LevelBuilder.dart';
+part 'package:tetris/src/util/builders/PowerUpBuilder.dart';
 part 'src/model/Cell.dart';
 part 'src/model/TetrisGame.dart';
 
