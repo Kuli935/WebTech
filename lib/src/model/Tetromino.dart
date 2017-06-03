@@ -1,13 +1,7 @@
 part of tetris;
 
 class Tetromino extends PowerUpUser{
-
-
-  // Darstellung des Tetrominoes in der Vorschau/Hold Box
-  //TODO: reuse preview to place the tetromino in a 'spwan box' which is
-  //placed in the middle of the field (or maybe user changeable)
-  // tetromnioDimension = 4
-  // (model.sizeWidth ~/2 ) + (previewCol - (tetrominoDimension/2))
+  
   //TODO: make color serializable
   //-read a hex color from json (individual for every stone)
   //-implement this functionality in the rest of the app

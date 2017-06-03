@@ -9,7 +9,6 @@ part of tetris;
 class RemoveAllRowsOfTetromino extends PowerUp{
   Tetromino _tetromino;
 
-  //TODO: replace the place holder id
   RemoveAllRowsOfTetromino(TetrisGame model, Tetromino tetromino):
         super(model, 'RemoveAllRowsOfTetromino'){
     _tetromino = tetromino;

@@ -11,7 +11,6 @@ class TetrisGame extends PowerUpUser{
   final int _fieldHeight;
   final int _fieldWidth;
 
-  //TODO: remove
   // Die Feldgröße für das Extra-Tetromino-Feld (n x m Feld)
   final int _extraFieldHeight = 4;
   final int _extraFieldWidth = 4;
@@ -391,7 +390,7 @@ class TetrisGame extends PowerUpUser{
       _currentLevel = _levels.removeFirst();
     } else{
       //TODO: notify user, that all levels are cleared and that the game
-      //now runs in endless mode
+      //TODO: endless mode should only contain tetrominoes with no powerups
       _currentLevel = new Level(this, _configReader.readAllTetrominoIds(),
           1.0, 1, {'endlessGame': 42.0}, 0);
     }

@@ -3,6 +3,7 @@ part of tetris;
 /**
  * Ein Level haelt verschiede Werte zur konfiguration des TetrisGame.
  */
+//TODO: maybe make Level a PowerUp user???
 class Level{
   TetrisGame _model;
 
@@ -55,15 +56,14 @@ class Level{
   }
 
   bool isComplete(){
-    /*TODO: check for each condition in the goal map if it is satisfied.
+    /*
     possible goals are:
       -number of rows cleared
       -number of tetrominoes dumped by game
       -number of points reached
     */
-    //TODO: implement null check for goal?!
     bool isComplete = true;
-    _goals.forEach((goal, value){
+    _goals?.forEach((goal, value){
       if(!_goalCheckers[goal](_model, value)){
         isComplete = false;
       }

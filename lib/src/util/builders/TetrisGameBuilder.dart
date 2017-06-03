@@ -16,8 +16,6 @@ class TetrisGameBuilder extends Builder<TetrisGame>{
                                       modelConfiguration['fieldHeight'],
                                       _reader);
     //alle Level der Konfigurationsdatei erstellen und zum Spiel hinzufuegen
-    //TODO: add power ups for model and tetrominoes
-    //maybe add a PowerUp builder
     _reader.readAllLevelIds().forEach((levelId){
       LevelBuilder levelBuilder = new LevelBuilder(_reader, model);
       model.addLevel(levelBuilder.build(levelId));
