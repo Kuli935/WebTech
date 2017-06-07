@@ -107,8 +107,6 @@ class TetrisGame extends PowerUpUser{
           _fieldWidth, (col) => new Cell(row, col, #empty)).toList();
     }).toList();
     _tetrominoQueue = new ListQueue();
-    //TODO: warum steht hier stop?
-    stop();
   }
 
   void _fillTetrominoeQueue(){

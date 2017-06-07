@@ -18,7 +18,7 @@ class TetrominoBuilder extends Builder<Tetromino>{
         tetrominoConfig['stones'],
         tetrominoConfig['transitions'],
         tetrominoConfig['preview'],
-        tetrominoConfig['color']);
+        new Symbol(tetrominoConfig['color']));
 
     List<String> powerUpIds = tetrominoConfig['powerUps'];
     powerUpIds.forEach((powerUpId){
