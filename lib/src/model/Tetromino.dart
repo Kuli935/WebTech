@@ -29,11 +29,6 @@ class Tetromino extends PowerUpUser{
     _color = color;
   }
 
-  Symbol getColor(int ColorId){
-
-  }
-
-
   List<Map<String, int>> _calculateInitialPosition(List<Map<String, int>> stonesConfig){
     List<Map<String, int>> initialPosition = new List();
     stonesConfig.forEach((stone){
