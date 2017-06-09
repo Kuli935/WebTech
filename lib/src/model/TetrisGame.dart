@@ -97,8 +97,8 @@ class TetrisGame extends PowerUpUser{
    * @param int _extraFieldWidth = Breite des Extra-Tetromino-Feldes
    */
   TetrisGame(int fieldWidth, int fieldHeight, Reader configReader):
-        _fieldWidth = fieldWidth, _fieldHeight = fieldHeight,
-        _configReader = configReader {
+    _fieldWidth = fieldWidth, _fieldHeight = fieldHeight,
+    _configReader = configReader {
     _score = 0;
     tetrominoCount = 0;
     _numberOfRowsCleared = 0;
