@@ -95,7 +95,7 @@ class Tetromino extends PowerUpUser{
       move.add({ 'row' : stone['row'] + _dr,  'col' : stone['col'] + _dc  });
     });
     //pruefen, ob Bewegung Kollision verursacht
-    //TODO: detection of the game over state is not working yet.
+    //GameOver überprüfen
     (_collisionWithTop(move) && _collisionWithOtherTetromino(move)) ? _model.stop() : null;
     if(!_collisionWithBorder(move) && !_collisionWithGround(move) &&
        !_collisionWithOtherTetromino(move)) {
@@ -171,7 +171,7 @@ class Tetromino extends PowerUpUser{
   bool _collisionWithTop(List<Map<String, int>> move){
     bool isCollision = false;
     move.forEach((stone){
-      (stone['row'] <= 0) ? isCollision = true : null;
+      (stone['row'] < 3) ? isCollision = true : null;
     });
     return isCollision;
   }
