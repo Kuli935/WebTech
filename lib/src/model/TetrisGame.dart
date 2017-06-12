@@ -21,7 +21,7 @@ class TetrisGame extends PowerUpUser{
   Level _currentLevel;
 
   // Zaehlt die Anzahl der breits gefallenen Tetrominoes
-  int tetrominoCount;
+  int _tetrominoCount;
 
   int _numberOfRowsCleared;
 
@@ -100,7 +100,7 @@ class TetrisGame extends PowerUpUser{
     _fieldWidth = fieldWidth, _fieldHeight = fieldHeight,
     _configReader = configReader {
     _score = 0;
-    tetrominoCount = 0;
+    _tetrominoCount = 0;
     _numberOfRowsCleared = 0;
     this._field = new Iterable.generate(_fieldHeight, (row) {
       return new Iterable.generate(
@@ -124,7 +124,7 @@ class TetrisGame extends PowerUpUser{
     if(_tetrominoQueue.isEmpty){
       _fillTetrominoeQueue();
     }
-    tetrominoCount++;
+    _tetrominoCount++;
     _tetromino.addToField();
     _tetromino.down();
   }
@@ -133,8 +133,8 @@ class TetrisGame extends PowerUpUser{
   * Methode für den direkten Fall des Tetrominoes.
   */
   void hardDropCurrentTetromino(){
-    int currentTetrominoCout = this.tetrominoCount;
-    while(currentTetrominoCout == this.tetrominoCount){
+    int currentTetrominoCout = this._tetrominoCount;
+    while(currentTetrominoCout == this._tetrominoCount){
       this.moveTetromino();
     }
   }
@@ -341,7 +341,7 @@ class TetrisGame extends PowerUpUser{
   }
 
   void incrementTetrominoCount(){
-    this.tetrominoCount++;
+    this._tetrominoCount++;
   }
 
   /**
