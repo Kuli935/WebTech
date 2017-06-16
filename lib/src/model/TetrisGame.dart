@@ -1,7 +1,7 @@
 part of tetris;
 
 /**
- * Definiert ein Tetris Spiel. Eine Tetris Spielkonstante ist das n x m Feld.
+ * Definiert ein Tetris Spiel.
  */
 class TetrisGame extends PowerUpUser{
   // Tetromino = Tetris Stein
@@ -15,16 +15,22 @@ class TetrisGame extends PowerUpUser{
   final int _extraFieldHeight = 4;
   final int _extraFieldWidth = 4;
 
+  // Reader
   Reader _configReader;
 
+  // Level Warteschlange
   PriorityQueue<Level> _levels;
+
+  // Aktuelles Level
   Level _currentLevel;
 
   // Zaehlt die Anzahl der breits gefallenen Tetrominoes
   int tetrominoCount;
 
+  // Anzahl an gelöschte Reihen
   int _numberOfRowsCleared;
 
+  // Tetromino Warteschlange
   ListQueue<Tetromino> _tetrominoQueue;
 
   // interne Representation des Spielfelds
@@ -56,6 +62,9 @@ class TetrisGame extends PowerUpUser{
    */
   num get score => _score;
 
+  /**
+   * Gibt die Nummer an gelöschten Reihen zurück.
+   */
   int get numberOfRowsCleared => _numberOfRowsCleared;
 
   /**
@@ -81,6 +90,7 @@ class TetrisGame extends PowerUpUser{
   void resume(){
     _gamestate = #running;
   }
+
   /**
    * Stopt das Spiel
    */
@@ -109,6 +119,9 @@ class TetrisGame extends PowerUpUser{
     _tetrominoQueue = new ListQueue();
   }
 
+  /**
+   * Füllt die Tetromino Warteschlange
+   */
   void _fillTetrominoeQueue(){
     Set<Tetromino> setOfTetrominoes = new Set();
     _currentLevel.idsOfAvailableTetrominoes.forEach((tetrominoId){
@@ -119,6 +132,9 @@ class TetrisGame extends PowerUpUser{
     _tetrominoQueue.addAll(shuffledTetrominoes);
   }
 
+  /**
+   * Fügt dem Spielfeld den nächsten fallenden Tetromino hinzu
+   */
   void dumpNextTetromino(){
     _tetromino = _tetrominoQueue.removeFirst();
     if(_tetrominoQueue.isEmpty){
@@ -289,6 +305,10 @@ class TetrisGame extends PowerUpUser{
     removeRows(completedRows);
   }
 
+  /**
+   * Entfernt eine vollständige Tetromino Reihe
+   * @param List<num> rows = Liste an Reihen
+   */
   void removeRows(List<num> rows){
     //falls keine Reihen vervollständigt wurden, muss nichts entfernt werden
     if(rows.length == 0){
@@ -319,6 +339,7 @@ class TetrisGame extends PowerUpUser{
 
   /**
    * Berechnet wie viele Punkte das letzte vervollstaendigen wert ist.
+   * @param num rowsCompleted = Anzahl an kompletten Reihen
    */
   num calculateScoreOfMove(num rowsCompleted){
     //TODO: change  score formula later to account for the current level
@@ -340,6 +361,9 @@ class TetrisGame extends PowerUpUser{
     return score;
   }
 
+  /**
+   * Erhöht den Tetromino Zähler
+   */
   void incrementTetrominoCount(){
     this.tetrominoCount++;
   }
@@ -347,7 +371,6 @@ class TetrisGame extends PowerUpUser{
   /**
    * Gibt die interne Representation des Feldes zurück.
    */
-
   List<List<Cell>> get field => this._field;
 
   /**
@@ -375,6 +398,10 @@ class TetrisGame extends PowerUpUser{
    */
   int get extraFieldWidth => _extraFieldWidth;
 
+  /**
+   * Fügt Levels hinzu.
+   * @param Level level = Das Level was hinzugefügt werden soll
+   */
   void addLevel(Level level){
     if(_levels == null){
       _levels = new PriorityQueue(
@@ -383,6 +410,9 @@ class TetrisGame extends PowerUpUser{
     _levels.add(level);
   }
 
+  /**
+   * Startet den nächsten Level.
+   */
   void _startNextLevel(){
     if(_levels.isNotEmpty){
       _currentLevel = _levels.removeFirst();

@@ -29,6 +29,10 @@ class Tetromino extends PowerUpUser{
     _color = color;
   }
 
+  /**
+   * Berechnet für den fallenden Tetromino die mittige start Position.
+   * @param List<Map<String, int>> stonesConfig
+   */
   List<Map<String, int>> _calculateInitialPosition(List<Map<String, int>> stonesConfig){
     List<Map<String, int>> initialPosition = new List();
     stonesConfig.forEach((stone){
@@ -37,7 +41,9 @@ class Tetromino extends PowerUpUser{
     return initialPosition;
   }
 
-
+  /**
+   * Tetromino Steine dem Feld hinzufügen.
+   */
   void addToField(){
     _stones.forEach((stone){
       _model.field[stone['row']][stone['col']].isActive = true;
@@ -45,6 +51,9 @@ class Tetromino extends PowerUpUser{
     });
   }
 
+  /**
+   * Tetromino Steine vom Feld entfernen
+   */
   void removeFromField(){
     _stones.forEach((stone) {
       _model.field[stone['row']][stone['col']].isActive = false;
@@ -88,6 +97,9 @@ class Tetromino extends PowerUpUser{
     }
   }
 
+  /**
+   * Bewegt den Tetromino und prüft auf Kollisionen
+   */
   void move(){
     //Bewegung berechnen
     var move = new List<Map<String, int>>();
@@ -107,6 +119,10 @@ class Tetromino extends PowerUpUser{
     _model.updateField();
   }
 
+  /**
+   * Handelt die Kollosionen ab.
+   * @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+   */
   void _handleCollision(List<Map<String, int>> move){
     //TODO: if tetrominoes collide sideways (from the left and the right)
     // they disappear
@@ -144,12 +160,20 @@ class Tetromino extends PowerUpUser{
     _model.dumpNextTetromino();
   }
 
+  /**
+   * Bewegt den Tetromino zur nächsten Position.
+   * @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+   */
   void _moveToNewPosition(List<Map<String, int>> move){
     removeFromField();
     _stones = move;
     addToField();
   }
 
+  /**
+   * Prüft auf Kollosionen mit dem Rand.
+   * @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+   */
   bool _collisionWithBorder(List<Map<String, int>> move){
     bool isCollision = false;
     move.forEach((stone){
@@ -160,6 +184,10 @@ class Tetromino extends PowerUpUser{
     return isCollision;
   }
 
+  /**
+   * Prüft auf Kollosionen mit dem Grund.
+   * @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+   */
   bool _collisionWithGround(List<Map<String, int>> move){
     bool isCollision = false;
     move.forEach((stone){
@@ -168,6 +196,10 @@ class Tetromino extends PowerUpUser{
     return isCollision;
   }
 
+  /**
+   * Prüft auf Kollosionen mit den oberen Rand.
+   * @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+   */
   bool _collisionWithTop(List<Map<String, int>> move){
     bool isCollision = false;
     move.forEach((stone){
@@ -176,6 +208,10 @@ class Tetromino extends PowerUpUser{
     return isCollision;
   }
 
+  /**
+   * Prüft auf Kollosionen mit Tetrominoes.
+   * @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+   */
   bool _collisionWithOtherTetromino(List<Map<String, int>> move){
     bool isCollision = false;
     /*
@@ -210,9 +246,18 @@ class Tetromino extends PowerUpUser{
    */
   void right() { _dr =  0; _dc =  1; }
 
+  /**
+   * Gibt die Tetrominoes Steine zurück.
+   */
   get stones => _stones;
 
+  /**
+   * Gibt die Tetrominoes Farbe zurück.
+   */
   get color => _color;
 
+  /**
+   * Gibt die Tetrominoes Vorschau Steine zurück.
+   */
   get preview => _preview;
 }

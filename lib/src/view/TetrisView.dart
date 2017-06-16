@@ -175,6 +175,7 @@ class TetrisView {
           "<p>Vielen Dank für's Spielen!</p>";
     }
 
+    // Punkteanzahl
     this.scoreParagraph.text = model.score.toString();
 
     // Spielfeld aktualisieren
