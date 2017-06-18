@@ -127,6 +127,12 @@ body {
     font-weight: bold;
 }
 
+.container_goal{
+    background-color:#d5d4d4;
+    position: absolute;
+    padding: 8px 8px 4px 8px;
+}
+
 
 /* Vordefinierten Farben der Steine */
 .cyan { background-color: #00f0f0 !important; }
@@ -153,6 +159,7 @@ body {
     #menu, #hard_drop, #left_rotation, #right_rotation, #hold, #left, #down, #right { display: none; }
     .container_message { left:41.5%; top:30%; height: 380px; width: 360px;}
     #continueButton, #newGameButton { margin-top: 45px;}
+    .container_goal{top: 430px; left: 0px; width: 266px;}
 }
 
 @media (min-width: 450px) and (max-width: 950px) {
@@ -167,6 +174,7 @@ body {
     #menu, #hard_drop, #left_rotation, #right_rotation, #hold, #left, #down, #right { display: none; }
     .container_message { left:41.5%; top:35%; height: 340px; width: 340px;}
     #continueButton, #newGameButton { margin-top: 35px;}
+    .container_goal{top: 430px; left: 25px; width: 266px;}
 }
 
 @media (max-width: 450px) {
@@ -187,8 +195,9 @@ body {
     #hard_drop { position: absolute; width: 43px;  height: 43px; left: 2.5%; bottom: -470px; cursor: pointer;}
     #left_rotation { position: absolute; width: 43px;  height: 43px; left: 33%; bottom: -400px; cursor: pointer;}
     #right_rotation { position: absolute; width: 43px;  height: 43px; right: 33%; bottom: -400px; cursor: pointer;}
-    #hold { position: absolute; width: 43px;  height: 43px; right: 2.5%; bottom: -400px; cursor: pointer;}
-    #left { position: absolute; width: 43px;  height: 43px; left: 26%; bottom: -470px; cursor: pointer;}
-    #down { position: absolute; width: 43px;  height: 43px; left: 44%; bottom: -470px; cursor: pointer;}
-    #right { position: absolute; width: 43px;  height: 43px; right: 25%; bottom: -470px; cursor: pointer;}
+    #hold { position: absolute; width: 43px; height: 43px; right: 2.5%; bottom: -400px; cursor: pointer;}
+    #left { position: absolute; width: 43px; height: 43px; left: 26%; bottom: -470px; cursor: pointer;}
+    #down { position: absolute; width: 43px; height: 43px; left: 44%; bottom: -470px; cursor: pointer;}
+    #right { position: absolute; width: 43px; height: 43px; right: 25%; bottom: -470px; cursor: pointer;}
+    .container_goal{ font-size: 12px; top: 300px; left: 5px; width: 186px;}
 }

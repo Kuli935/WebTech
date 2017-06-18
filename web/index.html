@@ -5,19 +5,6 @@
     <meta name = "viewport" content = "user-scalable=no, width=device-width, initial-scale=1.0">
     <title>Tetris</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script>
-    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
-        //Disable double tap on document
-        var lastTouchEnd = 0;
-        document.documentElement.addEventListener('touchend', function (event) {
-            var now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-    }
-    </script>
 </head>
 <body>
 <!-- Container für die Startseite -->
@@ -68,6 +55,8 @@
                 <p id="points">0</p>
             </div>
         </div>
+
+        <div class="container_goal"><b>Ziel:</b> <span id="goal">Reihen löschen</span> <span id="start_goal">0</span>/<span id="end_goal">5</span></div>
 
         <!-- Container für die Steuerung -->
         <div class="container_control">
