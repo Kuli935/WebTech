@@ -187,7 +187,7 @@ class TetrisGame extends PowerUpUser{
       _startNextLevel();
     }
     //den aktuellen Tetromino von der alten Position entfernen
-    this._field.forEach((row) {
+    _field.forEach((row) {
       row.forEach((cell) {
         if (cell.isActive) {
           cell.color = #empty;
@@ -195,8 +195,8 @@ class TetrisGame extends PowerUpUser{
       });
     });
     //den aktuellen Tetromino an der neuen Position zeichnen
-    this._tetromino.stones.forEach((piece) {
-      this._field[piece['row']][piece['col']].color = this._tetromino.color;
+    _tetromino.stones.forEach((piece) {
+      _field[piece['row']][piece['col']].color = _tetromino.color;
     });
   }
 
