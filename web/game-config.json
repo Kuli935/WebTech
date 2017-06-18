@@ -174,7 +174,9 @@
       "scoreMultiplier": 1.0,
       "tetrominoSpeedInMs": 1000,
       "goals":{
-        "numberOfRowsCleared": 5.0
+        "goalName": "Reihen löschen",
+        "numberOfRowsCleared": 5,
+        "levelPoints": 1000
       },
       "priority": 99
     }

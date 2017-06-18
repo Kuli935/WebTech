@@ -420,7 +420,7 @@ class TetrisGame extends PowerUpUser{
       //TODO: notify user, that all levels are cleared and that the game
       //TODO: endless mode should only contain tetrominoes with no powerups
       _currentLevel = new Level(this, _configReader.readAllTetrominoIds(),
-          1.0, 1, {'endlessGame': 42.0}, 0);
+          1.0, 1, {'endlessGame': "42"}, 0);
     }
   }
 }
