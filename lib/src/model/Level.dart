@@ -15,7 +15,7 @@ class Level{
   //TODO: maybe add a spwan chance for each tetromino
   double _scoreMultiplier;
   int _tetrominoSpeedInMs;
-  Map<String, double> _goals;
+  Map<String, String> _goals;
   int _priority;
   //TODO: add a reward (bonus points, special power up)
   //TODO: show current goals in in view
@@ -27,7 +27,7 @@ class Level{
   //TODO: refactor constructor messs to use benefits of builder, move initis
   //to initializer
   Level(TetrisGame model, List<String> idsOfAvailableTetrominoes,
-      double scoreMultiplier, int tetrominoSpeedInMs, Map<String, double> golas,
+      double scoreMultiplier, int tetrominoSpeedInMs, Map<String, String> golas,
       int priority){
     _model = model;
     _idsOfAvailableTetrominoes = idsOfAvailableTetrominoes;

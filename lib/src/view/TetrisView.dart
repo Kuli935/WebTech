@@ -68,6 +68,10 @@ class TetrisView {
    */
   HtmlElement get end_goal => querySelector('#end_goal');
 
+  /**
+   * Ziel des Levels als Zahl.
+   */
+  HtmlElement get goal_points => querySelector('#goal_points');
 
   /**
    * Start Button für das Spiel.
@@ -208,11 +212,14 @@ class TetrisView {
 
     // Ziele aktualisieren
     // Ziel Text aktualisieren
-    // this.goal = ;
+    this.goal.text = model._currentLevel._goals['goalName'];
     // Ziel als Zahl erreicht
     this.start_goal.text = model.numberOfRowsCleared.toString();
     // Zial als Zahl
-    this.end_goal.text = model._currentLevel._goals['numberOfRowsCleared'].toString();
+    this.end_goal.text = model._currentLevel._goals['numberOfRowsCleared'];
+    // Punkte für das beenden des Levels
+    this.goal_points.text = model._currentLevel._goals['levelPoints'];
+
   }
 
   /**
