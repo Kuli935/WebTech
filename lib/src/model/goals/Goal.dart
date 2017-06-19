@@ -2,13 +2,11 @@ part of tetris;
 
 abstract class Goal{
 
-  TetrisGame _model;
   Level _level;
   String _description;
   double _goalValue;
 
-  Goal(TetrisGame model, Level level,  String description, double goalValue):
-        _model = model,
+  Goal(Level level,  String description, double goalValue):
         _level = level,
         _description = description,
         _goalValue = goalValue{}

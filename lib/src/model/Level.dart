@@ -19,10 +19,21 @@ class Level{
   List<String> _idsOfAvailableTetrominoes;
   double _scoreMultiplier;
   int _tetrominoSpeedInMs;
-  Map<String, double> _goals;
+  //depricated: Map<String, double> _goals;
+  /**
+   * Alle Ziele fuer dieses Level. Jedes einzelne Ziel darf maximal einmal
+   * vorkommen.
+   */
+  List<Goal> _goals;
   int _priority;
   String _nameOfFirstGoal;
   double _numericalFirstGoal;
+
+  /**
+   * Diese Map speichert den aktuellen Zustand aller Werte, die fuer das
+   * Erfüllen eines Ziels von Bedeutung sind. Sobald sich einer dieser Werte
+   * aendert, muss die Map aktualisiert werden.
+   */
   Map<String, double> _goalMetrics;
 
   Map<String, Function> _goalCheckers =
@@ -31,18 +42,22 @@ class Level{
 
   //TODO: refactor constructor messs to use benefits of builder, move initis
   //to initializer
-  Level(TetrisGame model, List<String> idsOfAvailableTetrominoes,
-      double scoreMultiplier, int tetrominoSpeedInMs, Map<String, double> golas,
-      int priority, String nameOfFirstGoal, numericalFistGoal){
+  Level(TetrisGame model,
+      List<String> idsOfAvailableTetrominoes,
+      double scoreMultiplier,
+      int tetrominoSpeedInMs,
+      int priority){
     _model = model;
     _idsOfAvailableTetrominoes = idsOfAvailableTetrominoes;
     _scoreMultiplier = scoreMultiplier;
     _tetrominoSpeedInMs = tetrominoSpeedInMs;
-    _goals = golas;
+    _goals = new List();
     _priority = priority;
-    _nameOfFirstGoal = nameOfFirstGoal;
-    _numericalFirstGoal = numericalFistGoal;
     _goalMetrics = _initGoalMetrics();
+  }
+
+  set goals(List<Goal> goals){
+    _goals = goals;
   }
 
   /*
@@ -74,8 +89,8 @@ class Level{
       -number of points reached
     */
     bool isComplete = true;
-    _goals?.forEach((goal, value){
-      if(!_goalCheckers[goal](_model, value)){
+    _goals.forEach((goal) {
+      if(!goal.isCompleted()){
         isComplete = false;
       }
     });
@@ -111,4 +126,6 @@ class Level{
   double get numericalFirstGoal => _numericalFirstGoal;
 
   Map<String, double> get goalMetrics => _goalMetrics;
+
+  List<Goal> get goals => _goals;
 }

@@ -18,16 +18,19 @@ class LevelBuilder extends Builder<Level>{
       return null;
     }
 
-    //parse the name of the first goal from the json object, to look up the
-    //description for this goal
-    String firstGoalName = levelConfig['goals'].toString().replaceAll('{', '').split(':')[0];
-    Level level = new Level(_model, levelConfig['availibleTetrominoes'],
+    Level level = new Level(_model,
+        levelConfig['availibleTetrominoes'],
         levelConfig['scoreMultiplier'],
         levelConfig['tetrominoSpeedInMs'],
-        levelConfig['goals'],
-        levelConfig['priority'],
-        firstGoalName,
-        levelConfig['goals'][firstGoalName]);
+        levelConfig['priority']);
+
+    List<Goal> goals = new List();
+    //ATM it only is possible to load one goal for each level
+    GoalBuilder builder = new GoalBuilder(_reader, level, levelConfig['goal']);
+    goals.add(builder.build(''));
+
+    //add the goals to the level
+    level.goals = goals;
     return level;
   }
 }

@@ -2,8 +2,8 @@ part of tetris;
 
 class NumberOfRowClearedGoal extends Goal{
 
-  NumberOfRowClearedGoal(TetrisGame model, Level level, double goalValue):
-        super(model, level, 'FooBar', goalValue){
+  NumberOfRowClearedGoal(Level level, double goalValue):
+        super(level, 'Reihen vervollständigen', goalValue){
 
   }
 

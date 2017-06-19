@@ -425,8 +425,10 @@ class TetrisGame extends PowerUpUser{
     if(_levels.isNotEmpty){
       _currentLevel = _levels.removeFirst();
     } else{
+      /*TODO: depricated
       _currentLevel = new Level(this, _configReader.readAllTetrominoIds(),
           1.0, 1, {'endlessGame': 42.0}, 0, 'Endlos Modus', 42.0);
+      */
     }
   }
 }

@@ -210,9 +210,10 @@ class TetrisView {
     // Ziel Text aktualisieren
     // this.goal = ;
     // Ziel als Zahl erreicht
-    this.startGoal.text = model.currentLevel.goalDescription;
+    this.startGoal.text = model.currentLevel.goals[0].description;
+    //TODO: add a 3rd span for the current progress of this goal
     // Zial als Zahl
-    this.endGoal.text = '<PH>';
+    this.endGoal.text = model.currentLevel.goals[0].goalValue.toString();
   }
 
   /**

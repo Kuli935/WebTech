@@ -12,7 +12,7 @@ class JsonReader extends Reader{
     }).catchError((){
       window.alert('Could not load the configuration file. Please make sure '
           'you have placed it in the same directory as the tetrisclient.dart '
-          'file. For more information visit: '
+          'file. For more information visit:'
           'https://github.com/Kuli935/WebTech');
     });
   }
