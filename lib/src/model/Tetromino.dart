@@ -129,9 +129,6 @@ class Tetromino extends PowerUpUser{
     behandelt werden, da in diesem Fall eine Bewegung einfach nicht moeglich ist
      */
     if(_collisionWithBorder(move)){
-      //TODO: if tetrominoes are in the invisible upper part of the field they
-      //can be moved beyond the boarders of the field which yield to array
-      //out of bounds
       return;
     }
     if(_collisionWithGround(move)){
@@ -224,9 +221,11 @@ class Tetromino extends PowerUpUser{
     ja liegt eine Kollision mit einem bereits gesetzten Tetromino vor.
      */
     move.forEach((stone){
-      if(_model.field[stone['row']][stone['col']].color != #empty &&
-        !_model.field[stone['row']][stone['col']].isActive){
+      if(stone['col'] >= 0 && stone['col'] < _model.sizeWidth) {
+        if (_model.field[stone['row']][stone['col']].color != #empty &&
+            !_model.field[stone['row']][stone['col']].isActive) {
           isCollision = true;
+        }
       }
     });
     return isCollision;
