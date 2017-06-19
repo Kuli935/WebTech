@@ -174,7 +174,7 @@
       "scoreMultiplier": 1.0,
       "tetrominoSpeedInMs": 1000,
       "goal":{
-        "numberOfRowsCleared": 5.0
+        "numberOfRowsCleared": 3.0
       },
       "priority": 99
     }

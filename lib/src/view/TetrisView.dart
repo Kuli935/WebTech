@@ -211,6 +211,7 @@ class TetrisView {
     //updateFields(holdStoneField, 3);
 
     // Ziel als Zahl erreicht
+    window.console.log(model.currentLevel);
     this.goalDescription.text = model.currentLevel.goals[0].description;
     this.goalProgress.text = model.currentLevel.goals[0].getProgress().toString();
     this.goal.text = model.currentLevel.goals[0].goalValue.toString();
