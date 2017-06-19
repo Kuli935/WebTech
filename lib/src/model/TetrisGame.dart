@@ -319,10 +319,10 @@ class TetrisGame extends PowerUpUser{
     _numberOfRowsCleared += rows.length;
     //increase score
     this._score += this.calculateScoreOfMove(rows.length);
+    //keep track of how many row were completed this level
+    _currentLevel.goalMetrics['numberOfRowsCleared'] += rows.length;
     //remove completed rows
     rows.forEach((rowIndex) {
-      //keep track of how many row were completed this level
-      _currentLevel.goalMetrics['numberOfRowsCleared'] += 1;
       this.field[rowIndex].forEach((cell){
         cell.color = #empty;
         cell.isActive = false;
