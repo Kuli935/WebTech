@@ -24,6 +24,9 @@ class TetrisGame extends PowerUpUser{
   // Aktuelles Level
   Level _currentLevel;
 
+  // Anzahl der abgeschlossenen Level
+  int _levelCount;
+
   // Zaehlt die Anzahl der breits gefallenen Tetrominoes
   int _tetrominoCount;
 
@@ -111,6 +114,7 @@ class TetrisGame extends PowerUpUser{
     _fieldWidth = fieldWidth, _fieldHeight = fieldHeight,
     _configReader = configReader{
     _score = 0;
+    _levelCount = 0;
     _tetrominoCount = 0;
     _numberOfRowsCleared = 0;
     this._field = new Iterable.generate(_fieldHeight, (row) {
@@ -185,6 +189,7 @@ class TetrisGame extends PowerUpUser{
   void updateField() {
     if(_currentLevel.isComplete()){
       _score += _currentLevel.bonusPoints;
+      _levelCount++;
       _startNextLevel();
     }
     //den aktuellen Tetromino von der alten Position entfernen
@@ -406,6 +411,10 @@ class TetrisGame extends PowerUpUser{
    */
   Level get currentLevel => _currentLevel;
 
+  /**
+   * Gibt die Anzanl der abgeschlossenen Level zurueck
+   */
+  int get levelCount => _levelCount;
   /**
    * Fügt Levels hinzu.
    * @param Level level = Das Level was hinzugefügt werden soll

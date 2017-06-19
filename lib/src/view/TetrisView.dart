@@ -74,6 +74,11 @@ class TetrisView {
    */
   HtmlElement get bonusPoints => querySelector('#bonusPoints');
 
+  /**
+   * Anzeige des aktuellen Levels
+   */
+  HtmlElement get levelParagraph => querySelector('#level');
+
 
   /**
    * Start Button für das Spiel.
@@ -217,6 +222,8 @@ class TetrisView {
     this.goalProgress.text = model.currentLevel.goals[0].getProgress().toString();
     this.goal.text = model.currentLevel.goals[0].goalValue.toString();
     this.bonusPoints.text = model.currentLevel.bonusPoints.toString();
+
+    this.levelParagraph.text = model.levelCount.toString();
   }
 
   /**
