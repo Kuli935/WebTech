@@ -12,6 +12,12 @@ class PowerUpBuilder extends Builder<PowerUp>{
     switch(id){
       case "RemoveAllRowsOfTetromino":
         return new RemoveAllRowsOfTetromino(_model, _target);
+      default:
+        window.alert('Could not find a Powerup configuration with the '
+            'id: "${id}" in the file: "${_reader.dataUri}". Please make sure '
+            'your game configuration file is correct. You can find the manual '
+            'and a sample configuration file at: '
+            'https://github.com/Kuli935/WebTech');
     }
     return null;
   }

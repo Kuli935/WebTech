@@ -8,8 +8,11 @@ class TetrisGameBuilder extends Builder<TetrisGame>{
     Map<String, Object> modelConfiguration = _reader.readModelConfiguration();
     if(modelConfiguration['id'] != id){
       //TODO: raise error and shos it in gui
-      window.console.log('Could not find a TetrisGame configuration with the '
-          'id: "${id}" in the file: "${_reader.dataUri}".');
+      window.alert('Could not find a TetrisGame configuration with the '
+          'id: "${id}" in the file: "${_reader.dataUri}". Please make sure '
+          'your game configuration file is correct. You can find the manual '
+          'and a sample configuration file at: '
+          'https://github.com/Kuli935/WebTech');
       return null;
     }
     TetrisGame model = new TetrisGame(modelConfiguration['fieldWidth'],

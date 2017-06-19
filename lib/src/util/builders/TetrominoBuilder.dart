@@ -9,9 +9,11 @@ class TetrominoBuilder extends Builder<Tetromino>{
   Tetromino build(String id){
     Map<String, Object> tetrominoConfig = _reader.readTetrominoeConfiguration(id);
     if(tetrominoConfig == null){
-      //TODO: raise error
-      window.console.log('Could not find a Tetromino configuration with the '
-          'id: "${id}" in the file: "${_reader.dataUri}".');
+      window.alert('Could not find a Tetrominoe configuration with the '
+          'id: "${id}" in the file: "${_reader.dataUri}". Please make sure '
+          'your game configuration file is correct. You can find the manual '
+          'and a sample configuration file at: '
+          'https://github.com/Kuli935/WebTech');
       return null;
     }
     Tetromino tetromino = new Tetromino(_model,

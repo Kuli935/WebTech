@@ -51,6 +51,9 @@ class Level{
     return false;
   }
 
+  /*
+
+   */
   static bool _endlessGame(TetrisGame model, double value){
     return false;
   }

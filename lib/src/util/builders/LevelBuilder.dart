@@ -7,11 +7,13 @@ class LevelBuilder extends Builder<Level>{
   LevelBuilder(Reader reader, TetrisGame model): _model = model, super(reader){}
 
   Level build(String id){
-    Map<String, Object> levelConfig = _reader.readLevelConfiguration(id);
+    Map<String, Object> levelConfig = _reader.readLevelConfiguration('asd');
     if(levelConfig == null){
-      //TODO: raise error
-      window.console.log('Could not find a Level configuration with the '
-          'id: "${id}" in the file: "${_reader.dataUri}".');
+      window.alert('Could not find a Level configuration with the '
+          'id: "${id}" in the file: "${_reader.dataUri}". Please make sure '
+          'your game configuration file is correct. You can find the manual '
+          'and a sample configuration file at: '
+          'https://github.com/Kuli935/WebTech');
       return null;
     }
     Level level = new Level(_model, levelConfig['availibleTetrominoes'],
