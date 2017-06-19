@@ -192,7 +192,7 @@ body {
     #title { width: 273.6px; height: 76.8px; }
     #copy {  width: 240px;  margin-left:-120px; }
     #title { background-image: url("img/tetris_mobil.png"); width: 320px;  height: 247px;}
-    .container_control { background-image: none; clear: both; }
+    .container_control { background-image: none; }
     #menu { position: absolute; width: 43px; height: 43px; left: 2.5%; bottom: -400px; cursor: pointer;}
     #hard_drop { position: absolute; width: 43px; height: 43px; left: 2.5%; bottom: -470px; cursor: pointer;}
     #left_rotation { position: absolute; width: 43px; height: 43px; left: 33%; bottom: -400px; cursor: pointer;}

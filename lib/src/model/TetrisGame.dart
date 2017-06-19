@@ -114,7 +114,7 @@ class TetrisGame extends PowerUpUser{
     _fieldWidth = fieldWidth, _fieldHeight = fieldHeight,
     _configReader = configReader{
     _score = 0;
-    _levelCount = 0;
+    _levelCount = 1;
     _tetrominoCount = 0;
     _numberOfRowsCleared = 0;
     this._field = new Iterable.generate(_fieldHeight, (row) {
