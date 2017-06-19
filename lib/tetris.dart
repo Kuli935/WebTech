@@ -9,6 +9,8 @@ import 'dart:convert';
 part 'src/controller/TetrisController.dart';
 part 'src/view/TetrisView.dart';
 part 'src/model/Tetromino.dart';
+part 'package:tetris/src/model/goals/Goal.dart';
+part 'package:tetris/src/model/goals/NumberOfRowsClearedGoal.dart';
 part 'package:tetris/src/model/powerUps/PowerUp.dart';
 part 'package:tetris/src/model/powerUps/tetrominoPowerUps/RemoveAllRowsOfTetromino.dart';
 part 'package:tetris/src/model/powerUps/PowerUpUser.dart';

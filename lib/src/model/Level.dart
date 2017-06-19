@@ -3,8 +3,13 @@ part of tetris;
 /**
  * Ein Level haelt verschiede Werte zur konfiguration des TetrisGame.
  */
-//TODO: maybe make Level a PowerUp user???
 class Level{
+
+  static final Map<String, String> goalDescriptions = {
+    "numberOfRowsCleared": "Vervollständige Reihen",
+    "endlessGame": "Endlos Modus"
+  };
+
   TetrisGame _model;
 
   /**
@@ -12,12 +17,13 @@ class Level{
    * verfuegbar sind.
    */
   List<String> _idsOfAvailableTetrominoes;
-  //TODO: maybe add a spwan chance for each tetromino
   double _scoreMultiplier;
   int _tetrominoSpeedInMs;
   Map<String, double> _goals;
   int _priority;
-  String _description;
+  String _nameOfFirstGoal;
+  double _numericalFirstGoal;
+  Map<String, double> _goalMetrics;
 
   Map<String, Function> _goalCheckers =
   {'numberOfRowsCleared': _numberOfRowsClearedComplete,
@@ -27,14 +33,16 @@ class Level{
   //to initializer
   Level(TetrisGame model, List<String> idsOfAvailableTetrominoes,
       double scoreMultiplier, int tetrominoSpeedInMs, Map<String, double> golas,
-      int priority, String description){
+      int priority, String nameOfFirstGoal, numericalFistGoal){
     _model = model;
     _idsOfAvailableTetrominoes = idsOfAvailableTetrominoes;
     _scoreMultiplier = scoreMultiplier;
     _tetrominoSpeedInMs = tetrominoSpeedInMs;
     _goals = golas;
     _priority = priority;
-    _description = description;
+    _nameOfFirstGoal = nameOfFirstGoal;
+    _numericalFirstGoal = numericalFistGoal;
+    _goalMetrics = _initGoalMetrics();
   }
 
   /*
@@ -78,11 +86,29 @@ class Level{
     return isComplete;
   }
 
-  get idsOfAvailableTetrominoes => _idsOfAvailableTetrominoes;
+  /**
+   * Initalize a new metrics map for this Level
+   */
+  Map<String, double> _initGoalMetrics(){
+    Map<String, double> metrics = {
+      'numberOfRowsCleared': 0.0
+    };
+    return metrics;
+  }
 
-  get scoreMultiplier => _scoreMultiplier;
+  List<String> get idsOfAvailableTetrominoes => _idsOfAvailableTetrominoes;
 
-  get tetrominoSpeedInMs => _tetrominoSpeedInMs;
+  double get scoreMultiplier => _scoreMultiplier;
 
-  get priority => _priority;
+  int get tetrominoSpeedInMs => _tetrominoSpeedInMs;
+
+  int get priority => _priority;
+
+  String get goalDescription {
+    return goalDescriptions[_nameOfFirstGoal];
+  }
+
+  double get numericalFirstGoal => _numericalFirstGoal;
+
+  Map<String, double> get goalMetrics => _goalMetrics;
 }

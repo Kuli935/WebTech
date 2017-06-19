@@ -30,6 +30,7 @@ class TetrisGame extends PowerUpUser{
   // Anzahl an gelöschte Reihen
   int _numberOfRowsCleared;
 
+
   // Tetromino Warteschlange
   ListQueue<Tetromino> _tetrominoQueue;
 
@@ -108,7 +109,7 @@ class TetrisGame extends PowerUpUser{
    */
   TetrisGame(int fieldWidth, int fieldHeight, Reader configReader):
     _fieldWidth = fieldWidth, _fieldHeight = fieldHeight,
-    _configReader = configReader {
+    _configReader = configReader{
     _score = 0;
     tetrominoCount = 0;
     _numberOfRowsCleared = 0;
@@ -320,6 +321,8 @@ class TetrisGame extends PowerUpUser{
     this._score += this.calculateScoreOfMove(rows.length);
     //remove completed rows
     rows.forEach((rowIndex) {
+      //keep track of how many row were completed this level
+      _currentLevel.goalMetrics['numberOfRowsCleared'] += 1;
       this.field[rowIndex].forEach((cell){
         cell.color = #empty;
         cell.isActive = false;
@@ -399,6 +402,11 @@ class TetrisGame extends PowerUpUser{
   int get extraFieldWidth => _extraFieldWidth;
 
   /**
+   * Gibt das aktuelle Level des Spiel zuruek.
+   */
+  Level get currentLevel => _currentLevel;
+
+  /**
    * Fügt Levels hinzu.
    * @param Level level = Das Level was hinzugefügt werden soll
    */
@@ -418,7 +426,7 @@ class TetrisGame extends PowerUpUser{
       _currentLevel = _levels.removeFirst();
     } else{
       _currentLevel = new Level(this, _configReader.readAllTetrominoIds(),
-          1.0, 1, {'endlessGame': 42.0}, 0, 'Endlos Modus');
+          1.0, 1, {'endlessGame': 42.0}, 0, 'Endlos Modus', 42.0);
     }
   }
 }

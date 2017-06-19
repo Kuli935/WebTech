@@ -2,10 +2,6 @@ part of tetris;
 
 class LevelBuilder extends Builder<Level>{
 
-  static final Map<String, String> goalDescription = {
-    "numberOfRowsCleared": "Vervollständige Reihen",
-    "endlessGame": "Endlos Modus"
-  };
 
   final TetrisGame _model;
 
@@ -21,12 +17,17 @@ class LevelBuilder extends Builder<Level>{
           'https://github.com/Kuli935/WebTech');
       return null;
     }
+
+    //parse the name of the first goal from the json object, to look up the
+    //description for this goal
+    String firstGoalName = levelConfig['goals'].toString().replaceAll('{', '').split(':')[0];
     Level level = new Level(_model, levelConfig['availibleTetrominoes'],
         levelConfig['scoreMultiplier'],
         levelConfig['tetrominoSpeedInMs'],
         levelConfig['goals'],
         levelConfig['priority'],
-        goalDescription[levelConfig['goals'].toString()]);
+        firstGoalName,
+        levelConfig['goals'][firstGoalName]);
     return level;
   }
 }
