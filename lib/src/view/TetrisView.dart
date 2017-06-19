@@ -3,6 +3,7 @@ part of tetris;
 /**
  * Ein Tetrisobjekt interagiert mit dem DOM tree
  */
+//TODO: why are all attributes public? could they be private instead?
 class TetrisView {
   /**
    * Elemente mit der Klasse '.container_start' im DOM tree.
@@ -71,7 +72,8 @@ class TetrisView {
   /**
    * Ziel des Levels als Zahl.
    */
-  HtmlElement get goal_points => querySelector('#goal_points');
+  HtmlElement get bonusPoints => querySelector('#bonusPoints');
+
 
   /**
    * Start Button für das Spiel.
@@ -214,6 +216,7 @@ class TetrisView {
     this.goalDescription.text = model.currentLevel.goals[0].description;
     this.goalProgress.text = model.currentLevel.goals[0].getProgress().toString();
     this.goal.text = model.currentLevel.goals[0].goalValue.toString();
+    this.bonusPoints.text = model.currentLevel.bonusPoints.toString();
   }
 
   /**

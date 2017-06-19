@@ -5,11 +5,6 @@ part of tetris;
  */
 class Level{
 
-  static final Map<String, String> goalDescriptions = {
-    "numberOfRowsCleared": "Vervollständige Reihen",
-    "endlessGame": "Endlos Modus"
-  };
-
   TetrisGame _model;
 
   /**
@@ -19,16 +14,15 @@ class Level{
   List<String> _idsOfAvailableTetrominoes;
   double _scoreMultiplier;
   int _tetrominoSpeedInMs;
-  //depricated: Map<String, double> _goals;
   /**
    * Alle Ziele fuer dieses Level. Jedes einzelne Ziel darf maximal einmal
    * vorkommen.
+   * //TODO: maybe change this to be just a single goal
    */
   List<Goal> _goals;
 
   int _priority;
-  String _nameOfFirstGoal;
-  double _numericalFirstGoal;
+  int _bonusPoints;
 
   /**
    * Diese Map speichert den aktuellen Zustand aller Werte, die fuer das
@@ -37,9 +31,6 @@ class Level{
    */
   Map<String, double> _goalMetrics;
 
-  Map<String, Function> _goalCheckers =
-  {'numberOfRowsCleared': _numberOfRowsClearedComplete,
-   'endlessGame': _endlessGame};
 
   //TODO: refactor constructor messs to use benefits of builder, move initis
   //to initializer
@@ -47,12 +38,14 @@ class Level{
       List<String> idsOfAvailableTetrominoes,
       double scoreMultiplier,
       int tetrominoSpeedInMs,
+      int bonusPoints,
       int priority){
     _model = model;
     _idsOfAvailableTetrominoes = idsOfAvailableTetrominoes;
     _scoreMultiplier = scoreMultiplier;
     _tetrominoSpeedInMs = tetrominoSpeedInMs;
     _goals = new List();
+    _bonusPoints = bonusPoints;
     _priority = priority;
     _goalMetrics = _initGoalMetrics();
   }
@@ -61,49 +54,25 @@ class Level{
     _goals = goals;
   }
 
-  /*
-  Eine Auswahl an Level Zielen soll vorhanden sein. Fuer jedes Ziel muss eine
-  Check Funktion implementiert werden (siehe unten). In der JSON Datei wird dann
-  folgendes stehen: {'numberOfRowsCleared': 5.0, 'pointsReched': 3000}
-  Wenn alle Bedingungen erfuellt sind, ist das Level beendet und das model muss
-  das naechste Level laden.
-   */
-  static bool _numberOfRowsClearedComplete(TetrisGame model, double numberOfRows){
-    if(model.numberOfRowsCleared >= numberOfRows.toInt()){
-      return true;
-    }
-    return false;
-  }
-
-  /*
-
-   */
-  static bool _endlessGame(TetrisGame model, double value){
-    return false;
-  }
 
   bool isComplete(){
-    /*
-    possible goals are:
-      -number of rows cleared
-      -number of tetrominoes dumped by game
-      -number of points reached
-    */
     bool isComplete = true;
     _goals.forEach((goal) {
       if(!goal.isCompleted()){
         isComplete = false;
       }
     });
-    if(isComplete) {
+/*    if(isComplete) {
       window.console.log('>>>: LEVEL COMPLETE');
     }
+*/
     //window.console.log('number of rows cleared: ${_model.numberOfRowsCleared}');
     return isComplete;
   }
 
   /**
-   * Initalize a new metrics map for this Level
+   * Initialisiert eine neue Map mit allen Metriken die fuer den Fortschritt des
+   * Levels relevant sind.
    */
   Map<String, double> _initGoalMetrics(){
     Map<String, double> metrics = {
@@ -120,11 +89,7 @@ class Level{
 
   int get priority => _priority;
 
-  String get goalDescription {
-    return goalDescriptions[_nameOfFirstGoal];
-  }
-
-  double get numericalFirstGoal => _numericalFirstGoal;
+  int get bonusPoints => _bonusPoints;
 
   Map<String, double> get goalMetrics => _goalMetrics;
 

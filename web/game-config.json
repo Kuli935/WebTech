@@ -176,6 +176,7 @@
       "goal":{
         "numberOfRowsCleared": 3.0
       },
+      "bounsPoints": 2000,
       "priority": 99
     }
   ]

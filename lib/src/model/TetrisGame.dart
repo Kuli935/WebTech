@@ -184,7 +184,7 @@ class TetrisGame extends PowerUpUser{
    */
   void updateField() {
     if(_currentLevel.isComplete()){
-      //TODO: claim reward
+      _score += _currentLevel.bonusPoints;
       _startNextLevel();
     }
     //den aktuellen Tetromino von der alten Position entfernen
@@ -425,9 +425,13 @@ class TetrisGame extends PowerUpUser{
     if(_levels.isNotEmpty){
       _currentLevel = _levels.removeFirst();
     } else{
+
+      //TODO: let the user decide (in the json file) if the endless mode
+      // should be enabled afterall levels are completed.
+
       //after all levels are completed switch to endless mode
       Level endlessMode = new Level(this, _configReader.readAllTetrominoIds(),
-          1.0, 1, 1);
+          1.0, 1, 0, 1);
       List<Goal> endlessGoals = new List();
       Goal endlessGoal = new EndlessGoal(endlessMode);
       endlessGoals.add(endlessGoal);

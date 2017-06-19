@@ -18,10 +18,12 @@ class LevelBuilder extends Builder<Level>{
       return null;
     }
 
+
     Level level = new Level(_model,
         levelConfig['availibleTetrominoes'],
         levelConfig['scoreMultiplier'],
         levelConfig['tetrominoSpeedInMs'],
+        levelConfig['bounsPoints'],
         levelConfig['priority']);
 
     List<Goal> goals = new List();
