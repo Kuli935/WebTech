@@ -2,12 +2,17 @@ part of tetris;
 
 class LevelBuilder extends Builder<Level>{
 
+  static final Map<String, String> goalDescription = {
+    "numberOfRowsCleared": "Vervollständige Reihen",
+    "endlessGame": "Endlos Modus"
+  };
+
   final TetrisGame _model;
 
   LevelBuilder(Reader reader, TetrisGame model): _model = model, super(reader){}
 
   Level build(String id){
-    Map<String, Object> levelConfig = _reader.readLevelConfiguration('asd');
+    Map<String, Object> levelConfig = _reader.readLevelConfiguration(id);
     if(levelConfig == null){
       window.alert('Could not find a Level configuration with the '
           'id: "${id}" in the file: "${_reader.dataUri}". Please make sure '
@@ -20,7 +25,8 @@ class LevelBuilder extends Builder<Level>{
         levelConfig['scoreMultiplier'],
         levelConfig['tetrominoSpeedInMs'],
         levelConfig['goals'],
-        levelConfig['priority']);
+        levelConfig['priority'],
+        goalDescription[levelConfig['goals'].toString()]);
     return level;
   }
 }

@@ -17,8 +17,7 @@ class Level{
   int _tetrominoSpeedInMs;
   Map<String, double> _goals;
   int _priority;
-  //TODO: add a reward (bonus points, special power up)
-  //TODO: show current goals in in view
+  String _description;
 
   Map<String, Function> _goalCheckers =
   {'numberOfRowsCleared': _numberOfRowsClearedComplete,
@@ -28,13 +27,14 @@ class Level{
   //to initializer
   Level(TetrisGame model, List<String> idsOfAvailableTetrominoes,
       double scoreMultiplier, int tetrominoSpeedInMs, Map<String, double> golas,
-      int priority){
+      int priority, String description){
     _model = model;
     _idsOfAvailableTetrominoes = idsOfAvailableTetrominoes;
     _scoreMultiplier = scoreMultiplier;
     _tetrominoSpeedInMs = tetrominoSpeedInMs;
     _goals = golas;
     _priority = priority;
+    _description = description;
   }
 
   /*
