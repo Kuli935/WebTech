@@ -66,6 +66,10 @@ class Tetromino extends PowerUpUser{
     Die richtige Drehmatrix wird in Abhaengigkeit des Zustandes und der
     Drehrichtung ausgewält.
      */
+    //if there are no transitions the tetromino can not be rotated
+    if(_transitions.length == 0){
+      return;
+    }
     List<List<int>> transition;
     int nextState = _state;
 
