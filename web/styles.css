@@ -123,7 +123,7 @@ body {
     font-weight: bold;
 }
 
-.container_message #message h1{
+.container_message #message h1 {
     margin: 5px;
     padding: 0px;
     letter-spacing: 3px;
@@ -131,12 +131,10 @@ body {
     font-weight: bold;
 }
 
-.container_goal{
+.container_goal {
     position: absolute;
-    background-color:#d5d4d4;
     padding: 8px 8px 4px 8px;
 }
-
 
 /* Vordefinierten Farben der Steine */
 .cyan { background-color: #00f0f0 !important; }
@@ -155,21 +153,21 @@ body {
 @media (min-width: 950px) {
     /* breite Browserfenster */
     #field td, #nextstone td, #holdstone td { background-color: #ededed; width: 22px; height: 22px; }
-    #field { padding-top:38px; left: 0; }
-    .container_sidebox { width: 126px; top: 12%; right: 10%; }
+    #field {  border-top: 52px solid #d5d4d4;}
+    .container_sidebox { width: 126px; top: 12%; right: 10%;}
     .container_holdstone { margin-top: 123px;}
     .container_info { margin-top: 123px;}
     .container_control { width: 315px; height: 207px; background-image: url("img/keyboard_control.png"); background-repeat:no-repeat; position: absolute; left: 15%; bottom: -700px; display: none; }
     #menu, #hard_drop, #left_rotation, #right_rotation, #hold, #left, #down, #right { display: none; }
     .container_message { left:41.5%; top:30%; height: 380px; width: 360px;}
     #continueButton, #newGameButton { margin-top: 45px;}
-    .container_goal{left: 0px; width: 266px;}
+    .container_goal{z-index: 100; left: 0px; width: 266px;}
 }
 
 @media (min-width: 450px) and (max-width: 950px) {
     /* Darstellung auf Netbooks */
     #field td, #nextstone td, #holdstone td { background-color: #ededed; width: 22px; height: 22px; }
-    #field { padding-top:38px; left: 0%;}
+    #field {  border-top: 52px solid #d5d4d4;}
     .container_sidebox { width: 126px; top: 12%; right: 0%; }
     .container_holdstone { margin-top: 123px;}
     .container_info { margin-top: 123px;}
@@ -178,13 +176,13 @@ body {
     #menu, #hard_drop, #left_rotation, #right_rotation, #hold, #left, #down, #right { display: none; }
     .container_message { left:41.5%; top:35%; height: 340px; width: 340px;}
     #continueButton, #newGameButton { margin-top: 35px;}
-    .container_goal{left: 0px; width: 266px;}
+    .container_goal{z-index: 100; left: 0px; width: 266px;}
 }
 
 @media (max-width: 450px) {
     /* mobile Geräte */
     #field td, #nextstone td, #holdstone td { background-color: #ededed; width: 14px; height: 14px; }
-    #field { padding-top: 32px; left: 1.5%; }
+    #field { border-top: 42px solid #d5d4d4; left: 1.5%;}
     .container_sidebox { width: 94px; top: 12%; right: 1.5%; }
     .container_sidebox h3, #level, #points { font-size: 12px; padding: 8px 8px 0px 8px;}
     #points {padding: 8px 8px 4px 8px;}
@@ -203,5 +201,5 @@ body {
     #left { position: absolute; width: 43px; height: 43px; left: 26%; bottom: -470px; cursor: pointer;}
     #down { position: absolute; width: 43px; height: 43px; left: 44%; bottom: -470px; cursor: pointer;}
     #right { position: absolute; width: 43px; height: 43px; right: 25%; bottom: -470px; cursor: pointer;}
-    .container_goal{ font-size: 12px; left: 5px; width: 185px; float: left;}
+    .container_goal{ z-index: 100; font-size: 12px; left: 5px; width: 182px; float: left;}
 }
