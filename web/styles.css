@@ -157,7 +157,7 @@ body {
     .container_sidebox { width: 126px; top: 12%; right: 10%;}
     .container_holdstone { margin-top: 123px;}
     .container_info { margin-top: 123px;}
-    .container_control { width: 315px; height: 207px; background-image: url("img/keyboard_control.png"); background-repeat:no-repeat; position: absolute; left: 15%; bottom: -700px; display: none; }
+    .container_control { width: 315px; height: 207px; background-image: url("img/keyboard_control.png"); background-repeat:no-repeat; position: absolute; left: 15%; bottom: -700px; display: none; clear: both; }
     #menu, #hard_drop, #left_rotation, #right_rotation, #hold, #left, #down, #right { display: none; }
     .container_message { left:41.5%; top:30%; height: 380px; width: 360px;}
     #continueButton, #newGameButton { margin-top: 45px;}
@@ -172,7 +172,7 @@ body {
     .container_holdstone { margin-top: 123px;}
     .container_info { margin-top: 123px;}
     #title { background-image: url("img/tetris _netbook.png"); width: 460px; height: 400px; }
-    .container_control { width: 315px; height: 207px; background-image: url("img/keyboard_control.png"); background-repeat:no-repeat; position: absolute; left: 20%; bottom: -700px; display: none; }
+    .container_control { width: 315px; height: 207px; background-image: url("img/keyboard_control.png"); background-repeat:no-repeat; position: absolute; left: 20%; bottom: -700px; display: none; clear: both; }
     #menu, #hard_drop, #left_rotation, #right_rotation, #hold, #left, #down, #right { display: none; }
     .container_message { left:41.5%; top:35%; height: 340px; width: 340px;}
     #continueButton, #newGameButton { margin-top: 35px;}
@@ -192,7 +192,7 @@ body {
     #title { width: 273.6px; height: 76.8px; }
     #copy {  width: 240px;  margin-left:-120px; }
     #title { background-image: url("img/tetris_mobil.png"); width: 320px;  height: 247px;}
-    .container_control { background-image: none; }
+    .container_control { background-image: none; clear: both; }
     #menu { position: absolute; width: 43px; height: 43px; left: 2.5%; bottom: -400px; cursor: pointer;}
     #hard_drop { position: absolute; width: 43px; height: 43px; left: 2.5%; bottom: -470px; cursor: pointer;}
     #left_rotation { position: absolute; width: 43px; height: 43px; left: 33%; bottom: -400px; cursor: pointer;}
