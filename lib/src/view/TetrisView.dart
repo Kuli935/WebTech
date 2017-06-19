@@ -68,6 +68,10 @@ class TetrisView {
    */
   HtmlElement get goalProgress => querySelector('#goalProgress');
 
+  /**
+   * Ziel des Levels als Zahl.
+   */
+  HtmlElement get goal_points => querySelector('#goal_points');
 
   /**
    * Start Button für das Spiel.
@@ -206,9 +210,6 @@ class TetrisView {
     //final holdStoneField = model.holdStoneField;
     //updateFields(holdStoneField, 3);
 
-    // Ziele aktualisieren
-    // Ziel Text aktualisieren
-    // this.goal = ;
     // Ziel als Zahl erreicht
     this.goalDescription.text = model.currentLevel.goals[0].description;
     this.goalProgress.text = model.currentLevel.goals[0].getProgress().toString();

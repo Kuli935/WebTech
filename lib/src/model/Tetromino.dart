@@ -1,10 +1,6 @@
 part of tetris;
 
 class Tetromino extends PowerUpUser{
-  
-  //TODO: make color serializable
-  //-read a hex color from json (individual for every stone)
-  //-implement this functionality in the rest of the app
 
   List<Map<String, int>> _stones;
   List<Map<String, int>> _preview;
@@ -124,13 +120,14 @@ class Tetromino extends PowerUpUser{
    * @param List<Map<String, int>> move = Position des nächsten Tetrominoes
    */
   void _handleCollision(List<Map<String, int>> move){
-    //TODO: if tetrominoes collide sideways (from the left and the right)
-    // they disappear
     /*
     Kollisionen mit den Seitenraender des Spielfelds muessen nicht extra
     behandelt werden, da in diesem Fall eine Bewegung einfach nicht moeglich ist
      */
     if(_collisionWithBorder(move)){
+      //TODO: if tetrominoes are in the invisible upper part of the field they
+      //can be moved beyond the boarders of the field which yield to array
+      //out of bounds
       return;
     }
     if(_collisionWithGround(move)){
@@ -141,11 +138,15 @@ class Tetromino extends PowerUpUser{
       _model.removeCompletedRows();
       consumeAllPowerUps({'tetrominoMove': move});
     } else if(_collisionWithOtherTetromino(move)){
-      bool movesSideways = (this._dc != 0);
+      bool movesSideways = (_dc != 0);
       if(movesSideways){
         //ungueltige seitwaerts Bewegung rueckgaening machen
-        move.forEach((piece) {piece['col'] -= this._dc;});
+        move.forEach((piece) {piece['col'] -= _dc;});
         _moveToNewPosition(move);
+        //Damit ist die Kollisionsbehandlung abgeschlossen. Da der aktuelle Stein
+        //noch weiter nach untne bewegt werden kann, muss kein neuer
+        //Tetromino fallen gelassen werden.
+        return;
       } else {
         //Tetromino in der Position fest setzen
         _stones.forEach((stone) {

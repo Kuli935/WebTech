@@ -25,6 +25,7 @@ class Level{
    * vorkommen.
    */
   List<Goal> _goals;
+
   int _priority;
   String _nameOfFirstGoal;
   double _numericalFirstGoal;
