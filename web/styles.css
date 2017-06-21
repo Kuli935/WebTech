@@ -107,10 +107,15 @@ body {
     height: 340px;
     width: 280px;
     text-align: center;
-    z-index: 100;
+    z-index: 1000;
     border: 5px solid #000000;
     border-radius: 17px;
     display: none;
+}
+
+#portrait{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .container_message img {
@@ -145,7 +150,7 @@ body {
 .green { background-color: #00f000 !important; }
 .purple { background-color: #a000f0 !important; }
 
-#field_row_0, #field_row_1 {
+#field_row_0, #field_row_1, #portrait {
     display: none;
 }
 
@@ -179,7 +184,7 @@ body {
     .container_goal{z-index: 100; left: 0px; width: 266px;}
 }
 
-@media (max-width: 450px) {
+@media (max-width: 450px){
     /* mobile Geräte */
     #field td, #nextstone td, #holdstone td { background-color: #ededed; width: 14px; height: 14px; }
     #field { border-top: 42px solid #d5d4d4; left: 1.5%;}
@@ -202,4 +207,12 @@ body {
     #down { position: absolute; width: 43px; height: 43px; left: 44%; bottom: -470px; cursor: pointer;}
     #right { position: absolute; width: 43px; height: 43px; right: 25%; bottom: -470px; cursor: pointer;}
     .container_goal{ z-index: 100; font-size: 12px; left: 5px; width: 182px; float: left;}
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+    #title { background-image: url("img/tetris_menu_logo.png"); width: 260px; height: 57px; }
+    .container_message { }
+    #logo { margin-right: auto; margin-left: auto; }
+    .container_message { margin-top: -95px; height: 280px; width: 400px;}
+    #portrait { display: block;}
 }
