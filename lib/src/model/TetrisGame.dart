@@ -386,8 +386,10 @@ class TetrisGame extends PowerUpUser{
       case 4:
         score = 1200;
         break;
+      default:
+        score = 1500;
     }
-    return score;
+    return score * _currentLevel.scoreMultiplier;
   }
 
   /**
