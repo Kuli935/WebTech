@@ -293,12 +293,23 @@ class TetrisView {
       for (int col = 0; col < field[row].length; col++) {
         final assignment = field[row][col];
         final position = nameID + "_${row}_${col}";
-        table += "<td id='$position' class='$assignment'></td>";
+        //For the play field is build of complex cells. The additional fields
+        //for the preview and the hold box are simple symbols. The redering of
+        // the cells is different, which is the reason for the following
+        // statements.
+        if(assignment is Cell){
+          Cell cell = assignment as Cell;
+          String color = cell.color.toString();
+          table += "<td id='$position' class='$color'></td>";
+        } else {
+          table += "<td id='$position' class='$assignment'></td>";
+        }
       }
       table += "</tr>";
     }
     final selectedDOMTree = querySelector('#' + nameID);
-    selectedDOMTree.innerHtml = table;
+    //selectedDOMTree.innerHtml = table;
+    selectedDOMTree.setInnerHtml(table);
 
     // Speichert alle generieten TD Elemente in dem Feld
     // vermeidet so zeitintensive querySelector Anrufe in der Update Methode

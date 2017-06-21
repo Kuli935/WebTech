@@ -309,7 +309,7 @@ class TetrisGame extends PowerUpUser{
    */
   List<num> getIndexOfCompletedRows(){
     List<num> rowsCompleted = new List();
-    //fuer jede Zeile pruefen, ob alle cellen belegt und inaktiv sind
+    //fuer jede Zeile pruefen, ob alle Zellen belegt und inaktiv sind
     for(num rowIndex=0; rowIndex < this.field.length; rowIndex++){
       bool isCompleted = true;
       for(num colIndex=0; colIndex < this.field[rowIndex].length; colIndex++){
