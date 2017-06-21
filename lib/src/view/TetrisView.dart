@@ -180,14 +180,25 @@ class TetrisView {
     // Game Nachrichten ausblenden
     container_message.style.display = "none";
 
+
     // Prüfen ob Pause aufgerufen wurde
     if(model.paused){
       // Pause einblenden
       overlay.style.display = "block";
       continueButton.style.display = "block";
+      newGameButton.style.display = "block";
       container_message.style.display = "block";
       message.innerHtml = "<h1>Menü</h1>"
           "<p>Das Spiel wurde pausiert!</p>";
+    }
+
+    // landscape unterbinden
+    if (window.innerWidth > window.innerHeight && window.innerHeight < 481){
+      model.pause();
+      newGameButton.style.display = "none";
+      continueButton.style.display = "none";
+      message.innerHtml = "<p>Das Spiel wurde pausiert!</p>"
+          "<p>Zum Fortsetzen des Spiels, drehe das Smartphone in den Portrait-Modus!</p>";
     }
 
     // Prüfen ob das Spiel gestoppt wurde (Game Over)
@@ -224,6 +235,7 @@ class TetrisView {
     this.bonusPoints.text = model.currentLevel.bonusPoints.toString();
 
     this.levelParagraph.text = model.levelCount.toString();
+
   }
 
   /**
