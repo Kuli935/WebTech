@@ -178,6 +178,19 @@
       },
       "bounsPoints": 2000,
       "priority": 99
+    },
+    {
+      "id": "level2",
+      "availibleTetrominoes":[
+        "TTetromino"
+      ],
+      "scoreMultiplier": 2.0,
+      "tetrominoSpeedInMs": 1000,
+      "goal":{
+        "numberOfRowsCleared": 5.0
+      },
+      "bounsPoints": 0,
+      "priority": 50
     }
   ]
 }

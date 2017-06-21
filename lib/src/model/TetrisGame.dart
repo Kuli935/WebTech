@@ -470,5 +470,8 @@ class TetrisGame extends PowerUpUser{
       endlessMode.goals = endlessGoals;
       _currentLevel = endlessMode;
     }
+    _tetrominoQueue.clear();
+    _fillTetrominoeQueue();
+    dumpNextTetromino();
   }
 }
