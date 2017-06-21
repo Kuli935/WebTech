@@ -33,9 +33,11 @@ class TetrisGame extends PowerUpUser{
   // Anzahl an gelöschte Reihen
   int _numberOfRowsCleared;
 
-
   // Tetromino Warteschlange
   ListQueue<Tetromino> _tetrominoQueue;
+
+  //Holdbox (leer oder mit Tetromino gefuellt)
+  Tetromino _tetrominoOnHold;
 
   // interne Representation des Spielfelds
   List<List<Cell>> _field;
@@ -116,6 +118,7 @@ class TetrisGame extends PowerUpUser{
     _score = 0;
     _levelCount = 1;
     _tetrominoCount = 0;
+    _tetrominoOnHold = null;
     _numberOfRowsCleared = 0;
     this._field = new Iterable.generate(_fieldHeight, (row) {
       return new Iterable.generate(
@@ -238,21 +241,23 @@ class TetrisGame extends PowerUpUser{
    * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
    * @return Gehalteten-Tetromino-Feld als eine Liste von Listen
    */
-//  List<List<Symbol>> get holdStoneField {
-//    var _holdStoneField = new Iterable.generate(extraFieldHeight, (row) {
-//      return new Iterable.generate(extraFieldWidth, (col) => #empty)
-//          .toList();
-//    }).toList();
-//    // Tetromino setzen
-//    tetromino.holdstone.forEach((s) {
-//      final r = s['row'];
-//      final c = s['col'];
-//      if (r < 0 || r >= extraFieldHeight) return;
-//      if (c < 0 || c >= extraFieldWidth) return;
-//      _holdStoneField[r][c] = _tetromino.holdstoneColor;
-//    });
-//    return _holdStoneField;
-//  }
+  List<List<Symbol>> get holdStoneField {
+    var _holdStoneField = new Iterable.generate(extraFieldHeight, (row) {
+      return new Iterable.generate(extraFieldWidth, (col) => #empty)
+          .toList();
+    }).toList();
+    // Tetromino setzen
+    if(_tetrominoOnHold != null) {
+      _tetrominoOnHold.preview.forEach((piece) {
+        final r = piece['row'];
+        final c = piece['col'];
+        if (r < 0 || r >= extraFieldHeight) return;
+        if (c < 0 || c >= extraFieldWidth) return;
+        _holdStoneField[r][c] = _tetrominoOnHold.color;
+      });
+    }
+    return _holdStoneField;
+  }
 
   /**
    * Bewegungensstatus für den Tetromino [down], [left], [right].
@@ -280,6 +285,22 @@ class TetrisGame extends PowerUpUser{
     }
   }
 
+  /**
+   * Legt den aktuellen Tetrominoe in die Hold Box. Falls bereits ein Tetrominoe
+   * in der Hold Box ist, wird diser aus der Box genommen und faellt herunter.
+   */
+  void holdCurrentTetrominoe(){
+    if(_tetrominoOnHold == null){
+      _tetrominoOnHold = _tetromino;
+      dumpNextTetromino();
+    } else{
+      _tetrominoOnHold.resetPosition();
+      _tetrominoQueue.addFirst(_tetrominoOnHold);
+      _tetrominoOnHold = _tetromino;
+      _tetromino.removeFromField();
+      dumpNextTetromino();
+    }
+  }
 
   /**
    * Gibt eine Liste mit den Indizes aller Zeilen die vollstaendig sind

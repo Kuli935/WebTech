@@ -214,8 +214,8 @@ class TetrisView {
     updateFields(nextStoneField, 2);
 
     // Gehalteten-Tetromino-Feld aktualisieren
-    //final holdStoneField = model.holdStoneField;
-    //updateFields(holdStoneField, 3);
+    final holdStoneField = model.holdStoneField;
+    updateFields(holdStoneField, 3);
 
     // Ziel als Zahl erreicht
     this.goalDescription.text = model.currentLevel.goals[0].description;

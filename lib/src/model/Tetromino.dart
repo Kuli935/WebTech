@@ -4,6 +4,7 @@ class Tetromino extends PowerUpUser{
 
   List<Map<String, int>> _stones;
   List<Map<String, int>> _preview;
+  List<Map<String, int>> _initialPosition;
   TetrisGame _model;
   Symbol _color;
   int _dc;
@@ -20,6 +21,7 @@ class Tetromino extends PowerUpUser{
       Symbol color):_state = 0, _numberOfStates = 4{
     _model = model;
     _stones = _calculateInitialPosition(stonesConfig);
+    _initialPosition = _stones;
     _transitions = transitions;
     _preview = preview;
     _color = color;
@@ -55,6 +57,16 @@ class Tetromino extends PowerUpUser{
       _model.field[stone['row']][stone['col']].isActive = false;
       _model.field[stone['row']][stone['col']].color = #empty;
     });
+  }
+
+  /**
+   * Setzt den Tetromino auf seine Anfangsposition (idR. am oberen Rand des
+   * Spielfelds) zurueck. Dabei wird der Rotationszustand auf den initialen
+   * Zustand zurueck gesetzt.
+   */
+  void resetPosition(){
+    _stones = _initialPosition;
+    _state = 0;
   }
 
   /**
