@@ -304,7 +304,6 @@ class TetrisView {
         // the cells is different, which is the reason for the following
         // statements.
         if (assignment is Cell) {
-          window.console.log('FOOOO');
           Cell cell = assignment as Cell;
           String color = cell.color.toString();
           table += "<td id='$position' class='$color'></td>";

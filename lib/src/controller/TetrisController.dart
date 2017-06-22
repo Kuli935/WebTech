@@ -25,7 +25,7 @@ class TetrisController {
   TetrisGame game;
 
   /// Die zu diesem Controller zugehoerige Ansicht.
-  final TetrisView _view;
+  final TetrisView _view = new TetrisView();
 
   /// Periodischer Timer, welcher das Spiel
   Timer tetrominoTrigger;
@@ -36,16 +36,22 @@ class TetrisController {
 
   /// Erstellt einen neuen TetrisContoroller, dessen Model nach der
   /// Konfiguration des uebergebenen [Reader] konfiguriert wird.
-  TetrisController(Reader configReader) :
-        _view = new TetrisView(),
-        _configReader = configReader {
+  TetrisController(Reader configReader) : _configReader = configReader {
     //start a new game, the games configuration is read from the _configReader
-    _newGame();
+    TetrisGameBuilder modelBuilder = new TetrisGameBuilder(_configReader);
+    game = modelBuilder.build('modelDefault');
+
+    // Erzeugen des Spielfeldes
+    _view.generateField(game.fieldRepresentation, 1, "field");
+    // Erzeugen des Nächsten-Tetromino-Feldes
+    _view.generateField(game.nextStoneField, 2, "nextstone");
+    // Erzeugen des Gehalteten-Tetromino-Feldes
+    _view.generateField(game.holdStoneField, 3, "holdstone");
     _registerControlCallbacks();
   }
 
   /// Initialisiert ein neues Spiel.
-  void _newGame() {
+  dynamic _newGame() async{
     TetrisGameBuilder modelBuilder = new TetrisGameBuilder(_configReader);
     game = modelBuilder.build('modelDefault');
     // Erzeugen des Spielfeldes
