@@ -1,14 +1,20 @@
 part of tetris;
 
+/// Ein Builder zum Erstellen von Level Instanzen. Die Konfiguration fuer die
+/// Level wird aus dem zugehoerigen [Reader] ausgelesen.
 class LevelBuilder extends Builder<Level> {
 
-
+  /// Das Model zum dem dieses Level gehoert.
   final TetrisGame _model;
 
+  /// Erstellt einen neuen [LevelBuilder]. Die von diesem [LevelBuilder]
+  /// erstellten [Level] gehoeren zu [model].
   LevelBuilder(Reader reader, TetrisGame model)
       : _model = model,
         super(reader) {}
 
+  /// Erstell ein neues [Level] mit den im [Reader] gespeicherten Parameter
+  /// mit der [id]
   Level build(String id) {
     Map<String, Object> levelConfig = _reader.readLevelConfiguration(id);
     if (levelConfig == null) {
