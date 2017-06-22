@@ -1,9 +1,9 @@
 part of tetris;
 
-abstract class Reader{
+abstract class Reader {
   final String _dataUri;
 
-  Reader(String dataUri):_dataUri = dataUri{}
+  Reader(String dataUri) :_dataUri = dataUri {}
 
   Future loadGameConfiguration();
 

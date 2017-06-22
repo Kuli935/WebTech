@@ -7,7 +7,7 @@ import 'package:tetris/tetris.dart';
  */
 //main () => new TetrisController();
 
-dynamic main() async{
+dynamic main() async {
   JsonReader reader = new JsonReader('game-config.json');
   await reader.loadGameConfiguration();
   new TetrisController(reader);

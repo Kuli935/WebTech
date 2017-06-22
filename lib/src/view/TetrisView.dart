@@ -182,7 +182,7 @@ class TetrisView {
 
 
     // Prüfen ob Pause aufgerufen wurde
-    if(model.paused){
+    if (model.paused) {
       // Pause einblenden
       overlay.style.display = "block";
       continueButton.style.display = "block";
@@ -193,7 +193,7 @@ class TetrisView {
     }
 
     // landscape unterbinden
-    if (window.innerWidth > window.innerHeight && window.innerHeight < 481){
+    if (window.innerWidth > window.innerHeight && window.innerHeight < 481) {
       model.pause();
       newGameButton.style.display = "none";
       continueButton.style.display = "none";
@@ -202,7 +202,7 @@ class TetrisView {
     }
 
     // Prüfen ob das Spiel gestoppt wurde (Game Over)
-    if(model.stopped){
+    if (model.stopped) {
       // Game Over einblenden
       overlay.style.display = "block";
       continueButton.style.display = "none";
@@ -210,7 +210,7 @@ class TetrisView {
       message.innerHtml = "<h1>Game Over</h1>"
           "<p>Dein Punktestand beträgt: <h2>" + model.score.toString() +
           "</h2></p>"
-          "<p>Vielen Dank für's Spielen!</p>";
+              "<p>Vielen Dank für's Spielen!</p>";
     }
 
     // Punkteanzahl
@@ -230,12 +230,12 @@ class TetrisView {
 
     // Ziel als Zahl erreicht
     this.goalDescription.text = model.currentLevel.goals[0].description;
-    this.goalProgress.text = model.currentLevel.goals[0].getProgress().toString();
+    this.goalProgress.text =
+        model.currentLevel.goals[0].getProgress().toString();
     this.goal.text = model.currentLevel.goals[0].goalValue.toString();
     this.bonusPoints.text = model.currentLevel.bonusPoints.toString();
 
     this.levelParagraph.text = model.levelCount.toString();
-
   }
 
   /**
@@ -244,15 +244,21 @@ class TetrisView {
    * @param int generateFieldModus = Welches Feld geändert werden soll
    * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld, 3 = Gehalteten-Tetromino-Feld
    */
-  void updateFields(List<List<Symbol>> field, int generateFieldModus){
+  void updateFields(List<List<Symbol>> field, int generateFieldModus) {
     List<List<HtmlElement>> fields;
-    if(generateFieldModus == 1){fields = this.fields;}
-    if(generateFieldModus == 2){fields = this.nextStoneFields;}
-    if(generateFieldModus == 3){fields = this.holdStoneFields;}
+    if (generateFieldModus == 1) {
+      fields = this.fields;
+    }
+    if (generateFieldModus == 2) {
+      fields = this.nextStoneFields;
+    }
+    if (generateFieldModus == 3) {
+      fields = this.holdStoneFields;
+    }
 
     // Das Spielfeld aktualisieren
     for (int row = 0; row < field.length; row++) {
-      for(int col=0; col < field[row].length; col++) {
+      for (int col = 0; col < field[row].length; col++) {
         final td = fields[row][col];
         if (td != null) {
           td.classes.clear();
@@ -297,7 +303,8 @@ class TetrisView {
         //for the preview and the hold box are simple symbols. The redering of
         // the cells is different, which is the reason for the following
         // statements.
-        if(assignment is Cell){
+        if (assignment is Cell) {
+          window.console.log('FOOOO');
           Cell cell = assignment as Cell;
           String color = cell.color.toString();
           table += "<td id='$position' class='$color'></td>";
@@ -317,14 +324,21 @@ class TetrisView {
     for (int row = 0; row < field.length; row++) {
       fields[row] = [];
       for (int col = 0; col < field[row].length; col++) {
-        fields[row].add(selectedDOMTree.querySelector("#" + nameID + "_${row}_${col}"));
+        fields[row].add(
+            selectedDOMTree.querySelector("#" + nameID + "_${row}_${col}"));
       }
     }
 
     // Ermitteln um welche Feldgeneriung es sich handelt und Variable setzen
-    if(generateFieldModus == 1){this.fields = fields;}
-    if(generateFieldModus == 2){this.nextStoneFields = fields;}
-    if(generateFieldModus == 3){this.holdStoneFields = fields;}
+    if (generateFieldModus == 1) {
+      this.fields = fields;
+    }
+    if (generateFieldModus == 2) {
+      this.nextStoneFields = fields;
+    }
+    if (generateFieldModus == 3) {
+      this.holdStoneFields = fields;
+    }
   }
 
 }

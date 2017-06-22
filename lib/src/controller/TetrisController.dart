@@ -43,14 +43,13 @@ class TetrisController {
    * Registriert alle notwendigen Ereignishandler die notwendig sind
    * für den Benutzer zu der Interaktion mit dem Tetris Spiel.
    */
-  TetrisController(JsonReader configReader): _configReader = configReader{
-
+  TetrisController(JsonReader configReader) : _configReader = configReader {
     TetrisGameBuilder modelBuilder = new TetrisGameBuilder(_configReader);
     game = modelBuilder.build('modelDefault');
 
     //TODO: user _newGame
     // Erzeugen des Spielfeldes
-    view.generateField(game.field, 1, "field");
+    view.generateField(game.fieldRepresentation, 1, "field");
     // Erzeugen des Nächsten-Tetromino-Feldes
     view.generateField(game.nextStoneField, 2, "nextstone");
     // Erzeugen des Gehalteten-Tetromino-Feldes
@@ -183,15 +182,14 @@ class TetrisController {
         game.holdCurrentTetrominoe();
         view.update(game);
       }
-
-
     });
 
 
     // Ein neues Spiel wurde von dem Benutzer gestarted
     view.startButton.onClick.listen((_) {
       if (tetrominoTrigger != null) tetrominoTrigger.cancel();
-      tetrominoTrigger = new Timer.periodic(tetrominoSpeed, (_) => _moveTetromino());
+      tetrominoTrigger =
+      new Timer.periodic(tetrominoSpeed, (_) => _moveTetromino());
       game.start();
       view.update(game);
     });
@@ -207,7 +205,6 @@ class TetrisController {
       _newGame();
       view.update(game);
     });
-
   }
 
 
@@ -228,7 +225,7 @@ class TetrisController {
     TetrisGameBuilder modelBuilder = new TetrisGameBuilder(_configReader);
     game = modelBuilder.build('modelDefault');
     // Erzeugen des Spielfeldes
-    view.generateField(game.field, 1, "field");
+    view.generateField(game.fieldRepresentation, 1, "field");
     // Erzeugen des Nächsten-Tetromino-Feldes
     view.generateField(game.nextStoneField, 2, "nextstone");
     // Erzeugen des Gehalteten-Tetromino-Feldes

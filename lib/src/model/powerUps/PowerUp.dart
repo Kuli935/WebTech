@@ -6,7 +6,7 @@ part of tetris;
  * passieren. Ob das PowerUp zu diesem Zeitpunkt wirklich genutzt werden kann,
  * muss in _isConsumable geprueft werden.
  */
-abstract class PowerUp{
+abstract class PowerUp {
   TetrisGame _model;
 
   /**
@@ -19,7 +19,7 @@ abstract class PowerUp{
   /**
    * Ein PoerUp muss wenigstens das Model kennen, welches es manipulieren soll.
    */
-  PowerUp(TetrisGame model, String id):_id = id{
+  PowerUp(TetrisGame model, String id) :_id = id {
     _model = model;
   }
 

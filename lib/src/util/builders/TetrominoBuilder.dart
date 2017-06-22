@@ -1,14 +1,17 @@
 part of tetris;
 
-class TetrominoBuilder extends Builder<Tetromino>{
+class TetrominoBuilder extends Builder<Tetromino> {
 
   TetrisGame _model;
 
-  TetrominoBuilder(Reader reader, TetrisGame model):_model = model, super(reader){}
+  TetrominoBuilder(Reader reader, TetrisGame model)
+      :_model = model,
+        super(reader) {}
 
-  Tetromino build(String id){
-    Map<String, Object> tetrominoConfig = _reader.readTetrominoeConfiguration(id);
-    if(tetrominoConfig == null){
+  Tetromino build(String id) {
+    Map<String, Object> tetrominoConfig = _reader.readTetrominoeConfiguration(
+        id);
+    if (tetrominoConfig == null) {
       window.alert('Could not find a Tetrominoe configuration with the '
           'id: "${id}" in the file: "${_reader.dataUri}". Please make sure '
           'your game configuration file is correct. You can find the manual '
@@ -23,8 +26,9 @@ class TetrominoBuilder extends Builder<Tetromino>{
         new Symbol(tetrominoConfig['color']));
 
     List<String> powerUpIds = tetrominoConfig['powerUps'];
-    powerUpIds.forEach((powerUpId){
-      PowerUp powerUp = new PowerUpBuilder(_reader, _model, tetromino).build(powerUpId);
+    powerUpIds.forEach((powerUpId) {
+      PowerUp powerUp = new PowerUpBuilder(_reader, _model, tetromino).build(
+          powerUpId);
       tetromino.addPowerUp(powerUp);
     });
     return tetromino;

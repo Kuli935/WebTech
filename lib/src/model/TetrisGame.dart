@@ -3,7 +3,7 @@ part of tetris;
 /**
  * Definiert ein Tetris Spiel.
  */
-class TetrisGame extends PowerUpUser{
+class TetrisGame extends PowerUpUser {
   // Tetromino = Tetris Stein
   Tetromino _tetromino;
 
@@ -49,29 +49,29 @@ class TetrisGame extends PowerUpUser{
   num _score;
 
   /**
-   * Gibt an, ob das Spiel beendet ist
+   * Konstruktor um ein neues Tetris Spiel zu erzeugen
+   * @param int _sizeHeight = Höhe des Spielfeldes
+   * @param int _sizeWidth = Breite des Spielfeldes
+   * @param int _extraFieldHeight = Höhe des Extra-Tetromino-Feldes
+   * @param int _extraFieldWidth = Breite des Extra-Tetromino-Feldes
    */
-  bool get stopped => _gamestate == #stopped;
-
-  /**
-   * Gibt an, ob das Spiel pausiert ist
-   */
-  bool get paused => _gamestate == #paused;
-
-  /**
-   * Gibt an, ob das Spiel läuft
-   */
-  bool get running => _gamestate == #running;
-
-  /**
-   * Gibt den aktuellen Punktestand zurück
-   */
-  num get score => _score;
-
-  /**
-   * Gibt die Nummer an gelöschten Reihen zurück.
-   */
-  int get numberOfRowsCleared => _numberOfRowsCleared;
+  //TODO: refactor constructor
+  TetrisGame(int fieldWidth, int fieldHeight, Reader configReader)
+      :
+        _fieldWidth = fieldWidth,
+        _fieldHeight = fieldHeight,
+        _configReader = configReader {
+    _score = 0;
+    _levelCount = 1;
+    _tetrominoCount = 0;
+    _tetrominoOnHold = null;
+    _numberOfRowsCleared = 0;
+    _field = new Iterable.generate(_fieldHeight, (row) {
+      return new Iterable.generate(
+          _fieldWidth, (col) => new Cell(row, col, #empty)).toList();
+    }).toList();
+    _tetrominoQueue = new ListQueue();
+  }
 
   /**
    * Startet des Spiel
@@ -93,7 +93,7 @@ class TetrisGame extends PowerUpUser{
   /**
    * Fuehrt das Spiel nach einer Pause fort.
    */
-  void resume(){
+  void resume() {
     _gamestate = #running;
   }
 
@@ -102,38 +102,16 @@ class TetrisGame extends PowerUpUser{
    */
   void stop() {
     _gamestate = #stopped;
-
-  }
-
-  /**
-   * Konstruktor um ein neues Tetris Spiel zu erzeugen
-   * @param int _sizeHeight = Höhe des Spielfeldes
-   * @param int _sizeWidth = Breite des Spielfeldes
-   * @param int _extraFieldHeight = Höhe des Extra-Tetromino-Feldes
-   * @param int _extraFieldWidth = Breite des Extra-Tetromino-Feldes
-   */
-  TetrisGame(int fieldWidth, int fieldHeight, Reader configReader):
-    _fieldWidth = fieldWidth, _fieldHeight = fieldHeight,
-    _configReader = configReader{
-    _score = 0;
-    _levelCount = 1;
-    _tetrominoCount = 0;
-    _tetrominoOnHold = null;
-    _numberOfRowsCleared = 0;
-    this._field = new Iterable.generate(_fieldHeight, (row) {
-      return new Iterable.generate(
-          _fieldWidth, (col) => new Cell(row, col, #empty)).toList();
-    }).toList();
-    _tetrominoQueue = new ListQueue();
   }
 
   /**
    * Füllt die Tetromino Warteschlange
    */
-  void _fillTetrominoeQueue(){
+  void _fillTetrominoeQueue() {
     Set<Tetromino> setOfTetrominoes = new Set();
-    _currentLevel.idsOfAvailableTetrominoes.forEach((tetrominoId){
-      setOfTetrominoes.add(new TetrominoBuilder(_configReader, this).build(tetrominoId));
+    _currentLevel.idsOfAvailableTetrominoes.forEach((tetrominoId) {
+      setOfTetrominoes.add(
+          new TetrominoBuilder(_configReader, this).build(tetrominoId));
     });
     List<Tetromino> shuffledTetrominoes = setOfTetrominoes.toList();
     shuffledTetrominoes.shuffle();
@@ -143,9 +121,9 @@ class TetrisGame extends PowerUpUser{
   /**
    * Fügt dem Spielfeld den nächsten fallenden Tetromino hinzu
    */
-  void dumpNextTetromino(){
+  void dumpNextTetromino() {
     _tetromino = _tetrominoQueue.removeFirst();
-    if(_tetrominoQueue.isEmpty){
+    if (_tetrominoQueue.isEmpty) {
       _fillTetrominoeQueue();
     }
     _tetrominoCount++;
@@ -154,134 +132,12 @@ class TetrisGame extends PowerUpUser{
   }
 
   /**
-  * Methode für den direkten Fall des Tetrominoes.
-  */
-  void hardDropCurrentTetromino(){
+   * Methode für den direkten Fall des Tetrominoes.
+   */
+  void hardDropCurrentTetromino() {
     int currentTetrominoCout = this._tetrominoCount;
-    while(currentTetrominoCout == this._tetrominoCount){
+    while (currentTetrominoCout == this._tetrominoCount) {
       this.moveTetromino();
-    }
-  }
-
-
-  /**
-   * Gibt eine Representation des Spielfeld als eine Liste von Listen zurück.
-   * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
-   * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
-   * Leerzustand: #empty,
-   * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
-   * @return Representation des Spielfeld als eine Liste von Listen
-   */
-  List<List<Symbol>> get fieldRepresentation {
-    List<List<Symbol>> fieldRepresentation = new List();
-    for (int row = 0; row < this._field.length; row++) {
-      List<Symbol> newRow = new List();
-      for (int col = 0; col < this._field[row].length; col++) {
-        newRow.add(this._field[row][col].color);
-      }
-      fieldRepresentation.add(newRow);
-    }
-    return fieldRepresentation;
-  }
-
-  /**
-   * Interne Repraesentation des Spielfelds aktualisieren.
-   * Muss nach jeder Aenderung am Zustand des Spielfeldes (z.B. Bewegen eines
-   * Tetrominoes) aufgerufen werden.
-   */
-  void updateField() {
-    if(_currentLevel.isComplete()){
-      _score += _currentLevel.bonusPoints;
-      _levelCount++;
-      _startNextLevel();
-    }
-    //den aktuellen Tetromino von der alten Position entfernen
-    _field.forEach((row) {
-      row.forEach((cell) {
-        if (cell.isActive) {
-          cell.color = #empty;
-        }
-      });
-    });
-    //den aktuellen Tetromino an der neuen Position zeichnen
-    _tetromino.stones.forEach((piece) {
-      _field[piece['row']][piece['col']].color = _tetromino.color;
-    });
-  }
-
-  /**
-   * Gibt das Nächster-Tetromino-Feld als eine Liste von Listen zurück.
-   * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
-   * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
-   * Leerzustand: #empty,
-   * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
-   * @return Nächster-Tetromino-Feld als eine Liste von Listen
-   */
-  List<List<Symbol>> get nextStoneField {
-    //Leeres Feld erzeugen
-    var nextStoneField = new Iterable.generate(extraFieldHeight, (row) {
-      return new Iterable.generate(extraFieldWidth, (col) => #empty)
-          .toList();
-    }).toList();
-
-    if(_tetrominoQueue.isNotEmpty) {
-      _tetrominoQueue.elementAt(0).preview.forEach((stone) {
-        nextStoneField[stone['row']][stone['col']] = _tetrominoQueue.elementAt(0).color;
-      });
-    }
-
-    return nextStoneField;
-  }
-
-  /**
-   * Gibt das Gehalteten-Tetromino-Feld als eine Liste von Listen zurück.
-   * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
-   * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
-   * Leerzustand: #empty,
-   * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
-   * @return Gehalteten-Tetromino-Feld als eine Liste von Listen
-   */
-  List<List<Symbol>> get holdStoneField {
-    var _holdStoneField = new Iterable.generate(extraFieldHeight, (row) {
-      return new Iterable.generate(extraFieldWidth, (col) => #empty)
-          .toList();
-    }).toList();
-    // Tetromino setzen
-    if(_tetrominoOnHold != null) {
-      _tetrominoOnHold.preview.forEach((piece) {
-        final r = piece['row'];
-        final c = piece['col'];
-        if (r < 0 || r >= extraFieldHeight) return;
-        if (c < 0 || c >= extraFieldWidth) return;
-        _holdStoneField[r][c] = _tetrominoOnHold.color;
-      });
-    }
-    return _holdStoneField;
-  }
-
-  /**
-   * Bewegungensstatus für den Tetromino [down], [left], [right].
-   * Bewegungen sind nur im Status [running] möglich.
-   */
-  void moveTetromino() {
-    if (running && _tetromino != null){
-      tetromino.move();
-    }
-  }
-
-  /**
-   * Pausiert das Spiel und gibt es beim nächsten Aufruf wieder frei.
-   */
-  void pauseTetromino(){
-    // Wenn das Spiel läuft, dann Pausieren
-    if (running){
-      pause();
-      tetromino.stop();
-
-      // Wenn das Spiel pausiert ist, dann freigeben
-    } else if (paused) {
-      resume();
-      tetromino.down();
     }
   }
 
@@ -303,18 +159,72 @@ class TetrisGame extends PowerUpUser{
   }
 
   /**
+   * Interne Repraesentation des Spielfelds aktualisieren.
+   * Muss nach jeder Aenderung am Zustand des Spielfeldes (z.B. Bewegen eines
+   * Tetrominoes) aufgerufen werden.
+   */
+  void updateField() {
+    if (_currentLevel.isComplete()) {
+      _score += _currentLevel.bonusPoints;
+      _levelCount++;
+      _startNextLevel();
+    }
+    //den aktuellen Tetromino von der alten Position entfernen
+    _field.forEach((row) {
+      row.forEach((cell) {
+        if (cell.isActive) {
+          cell.color = #empty;
+        }
+      });
+    });
+    //den aktuellen Tetromino an der neuen Position zeichnen
+    _tetromino.stones.forEach((piece) {
+      _field[piece['row']][piece['col']].color = _tetromino.color;
+    });
+  }
+
+
+  /**
+   * Bewegungensstatus für den Tetromino [down], [left], [right].
+   * Bewegungen sind nur im Status [running] möglich.
+   */
+  void moveTetromino() {
+    if (running && _tetromino != null) {
+      tetromino.move();
+    }
+  }
+
+  /**
+   * Pausiert das Spiel und gibt es beim nächsten Aufruf wieder frei.
+   */
+  void pauseTetromino() {
+    // Wenn das Spiel läuft, dann Pausieren
+    if (running) {
+      pause();
+      tetromino.stop();
+
+      // Wenn das Spiel pausiert ist, dann freigeben
+    } else if (paused) {
+      resume();
+      tetromino.down();
+    }
+  }
+
+
+  /**
    * Gibt eine Liste mit den Indizes aller Zeilen die vollstaendig sind
    * zurueck. Eine Reihe gilt als vollstaendig, falls alle ihre Zellen
    * gefuellt und inaktiv sind.
    */
-  List<num> getIndexOfCompletedRows(){
+  List<num> getIndexOfCompletedRows() {
     List<num> rowsCompleted = new List();
     //fuer jede Zeile pruefen, ob alle Zellen belegt und inaktiv sind
-    for(num rowIndex=0; rowIndex < this.field.length; rowIndex++){
+    for (num rowIndex = 0; rowIndex < this.field.length; rowIndex++) {
       bool isCompleted = true;
-      for(num colIndex=0; colIndex < this.field[rowIndex].length; colIndex++){
+      for (num colIndex = 0; colIndex < this.field[rowIndex].length;
+      colIndex++) {
         Cell cell = this.field[rowIndex][colIndex];
-        if(cell.color == #empty || cell.isActive){
+        if (cell.color == #empty || cell.isActive) {
           isCompleted = false;
           break;
         }
@@ -327,7 +237,7 @@ class TetrisGame extends PowerUpUser{
   /**
    * Entfernt alle vollstaendigen Reihen vom Spielfeld.
    */
-  void removeCompletedRows(){
+  void removeCompletedRows() {
     List<num> completedRows = this.getIndexOfCompletedRows();
     removeRows(completedRows);
   }
@@ -336,9 +246,9 @@ class TetrisGame extends PowerUpUser{
    * Entfernt eine vollständige Tetromino Reihe
    * @param List<num> rows = Liste an Reihen
    */
-  void removeRows(List<num> rows){
+  void removeRows(List<num> rows) {
     //falls keine Reihen vervollständigt wurden, muss nichts entfernt werden
-    if(rows.length == 0){
+    if (rows.length == 0) {
       return;
     }
     //TODO: list may contains duplicates, use set instead
@@ -349,17 +259,17 @@ class TetrisGame extends PowerUpUser{
     _currentLevel.goalMetrics['numberOfRowsCleared'] += rows.length;
     //remove completed rows
     rows.forEach((rowIndex) {
-      this.field[rowIndex].forEach((cell){
+      this.field[rowIndex].forEach((cell) {
         cell.color = #empty;
         cell.isActive = false;
       });
     });
     //move upper rows down
-    rows.sort((a, b) => (a-b).toInt());
-    rows.forEach((rowIndex){
-      for(num i=rowIndex-1; i >= 0; i--){
+    rows.sort((a, b) => (a - b).toInt());
+    rows.forEach((rowIndex) {
+      for (num i = rowIndex - 1; i >= 0; i--) {
         this.field[i].forEach((cell) {
-          this.field[i+1][cell.col].color = cell.color;
+          this.field[i + 1][cell.col].color = cell.color;
           cell.color = #empty;
         });
       }
@@ -370,10 +280,9 @@ class TetrisGame extends PowerUpUser{
    * Berechnet wie viele Punkte das letzte vervollstaendigen wert ist.
    * @param num rowsCompleted = Anzahl an kompletten Reihen
    */
-  num calculateScoreOfMove(num rowsCompleted){
-    //TODO: change  score formula later to account for the current level
+  num calculateScoreOfMove(num rowsCompleted) {
     num score;
-    switch(rowsCompleted){
+    switch (rowsCompleted) {
       case 1:
         score = 40;
         break;
@@ -393,16 +302,127 @@ class TetrisGame extends PowerUpUser{
   }
 
   /**
+   * Fügt Levels hinzu.
+   * @param Level level = Das Level was hinzugefügt werden soll
+   */
+  void addLevel(Level level) {
+    if (_levels == null) {
+      _levels = new PriorityQueue(
+              (Level l1, Level l2) => (l2.priority - l1.priority));
+    }
+    _levels.add(level);
+  }
+
+  /**
+   * Startet den nächsten Level.
+   */
+  void _startNextLevel() {
+    if (_levels.isNotEmpty) {
+      _currentLevel = _levels.removeFirst();
+    } else {
+      //TODO: let the user decide (in the json file) if the endless mode
+      // should be enabled afterall levels are completed.
+
+      //after all levels are completed switch to endless mode
+      Level endlessMode = new Level(this, _configReader.readAllTetrominoIds(),
+          1.0, 1, 0, 1);
+      List<Goal> endlessGoals = new List();
+      Goal endlessGoal = new EndlessGoal(endlessMode);
+      endlessGoals.add(endlessGoal);
+      endlessMode.goals = endlessGoals;
+      _currentLevel = endlessMode;
+    }
+    _tetrominoQueue.clear();
+    _fillTetrominoeQueue();
+    dumpNextTetromino();
+  }
+
+  /**
    * Erhöht den Tetromino Zähler
    */
-  void incrementTetrominoCount(){
-    this._tetrominoCount++;
+  void incrementTetrominoCount() {
+    _tetrominoCount++;
+  }
+
+  /**
+   * Gibt eine Representation des Spielfeld als eine Liste von Listen zurück.
+   * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
+   * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
+   * Leerzustand: #empty,
+   * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
+   * @return Representation des Spielfeld als eine Liste von Listen
+   */
+  List<List<Symbol>> get fieldRepresentation {
+    List<List<Symbol>> fieldRepresentation = new List();
+    for (int row = 0; row < _field.length; row++) {
+      List<Symbol> newRow = new List();
+      for (int col = 0; col < _field[row].length; col++) {
+        newRow.add(_field[row][col].color);
+      }
+      fieldRepresentation.add(newRow);
+    }
+    return fieldRepresentation;
+  }
+
+  /**
+   * Gibt das Nächster-Tetromino-Feld als eine Liste von Listen zurück.
+   * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
+   * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
+   * Leerzustand: #empty,
+   * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
+   * @return Nächster-Tetromino-Feld als eine Liste von Listen
+   */
+  List<List<Symbol>> get nextStoneField {
+    //Leeres Feld erzeugen
+    var nextStoneField = new Iterable.generate(extraFieldHeight, (row) {
+      return new Iterable.generate(extraFieldWidth, (col) => #empty)
+          .toList();
+    }).toList();
+
+    if (_tetrominoQueue.isNotEmpty) {
+      _tetrominoQueue
+          .elementAt(0)
+          .preview
+          .forEach((stone) {
+        nextStoneField[stone['row']][stone['col']] = _tetrominoQueue
+            .elementAt(0)
+            .color;
+      });
+    }
+
+    return nextStoneField;
+  }
+
+  /**
+   * Gibt das Gehalteten-Tetromino-Feld als eine Liste von Listen zurück.
+   * Jedes Element des Feldes hat genau eine aus acht gültigen Zustände (Symbole).
+   * Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
+   * Leerzustand: #empty,
+   * Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
+   * @return Gehalteten-Tetromino-Feld als eine Liste von Listen
+   */
+  List<List<Symbol>> get holdStoneField {
+    var _holdStoneField = new Iterable.generate(extraFieldHeight, (row) {
+      return new Iterable.generate(extraFieldWidth, (col) => #empty)
+          .toList();
+    }).toList();
+    // Tetromino setzen
+    if (_tetrominoOnHold != null) {
+      _tetrominoOnHold.preview.forEach((piece) {
+        final r = piece['row'];
+        final c = piece['col'];
+        if (r < 0 || r >= extraFieldHeight) return;
+        if (c < 0 || c >= extraFieldWidth) return;
+        _holdStoneField[r][c] = _tetrominoOnHold.color;
+      });
+    }
+    return _holdStoneField;
   }
 
   /**
    * Gibt die interne Representation des Feldes zurück.
    */
-  List<List<Cell>> get field => this._field;
+  List<List<Cell>> get field => _field;
 
   /**
    * Gibt den Tetromino zurück.
@@ -438,40 +458,30 @@ class TetrisGame extends PowerUpUser{
    * Gibt die Anzanl der abgeschlossenen Level zurueck
    */
   int get levelCount => _levelCount;
-  /**
-   * Fügt Levels hinzu.
-   * @param Level level = Das Level was hinzugefügt werden soll
-   */
-  void addLevel(Level level){
-    if(_levels == null){
-      _levels = new PriorityQueue(
-              (Level l1, Level l2) => (l2.priority - l1.priority));
-    }
-    _levels.add(level);
-  }
 
   /**
-   * Startet den nächsten Level.
+   * Gibt an, ob das Spiel beendet ist
    */
-  void _startNextLevel(){
-    if(_levels.isNotEmpty){
-      _currentLevel = _levels.removeFirst();
-    } else{
+  bool get stopped => _gamestate == #stopped;
 
-      //TODO: let the user decide (in the json file) if the endless mode
-      // should be enabled afterall levels are completed.
+  /**
+   * Gibt an, ob das Spiel pausiert ist
+   */
+  bool get paused => _gamestate == #paused;
 
-      //after all levels are completed switch to endless mode
-      Level endlessMode = new Level(this, _configReader.readAllTetrominoIds(),
-          1.0, 1, 0, 1);
-      List<Goal> endlessGoals = new List();
-      Goal endlessGoal = new EndlessGoal(endlessMode);
-      endlessGoals.add(endlessGoal);
-      endlessMode.goals = endlessGoals;
-      _currentLevel = endlessMode;
-    }
-    _tetrominoQueue.clear();
-    _fillTetrominoeQueue();
-    dumpNextTetromino();
-  }
+  /**
+   * Gibt an, ob das Spiel läuft
+   */
+  bool get running => _gamestate == #running;
+
+  /**
+   * Gibt den aktuellen Punktestand zurück
+   */
+  num get score => _score;
+
+  /**
+   * Gibt die Nummer an gelöschten Reihen zurück.
+   */
+  int get numberOfRowsCleared => _numberOfRowsCleared;
+
 }

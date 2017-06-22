@@ -3,7 +3,7 @@ part of tetris;
 /**
  * Ein Level haelt verschiede Werte zur konfiguration des TetrisGame.
  */
-class Level{
+class Level {
 
   TetrisGame _model;
 
@@ -14,6 +14,7 @@ class Level{
   List<String> _idsOfAvailableTetrominoes;
   double _scoreMultiplier;
   int _tetrominoSpeedInMs;
+
   /**
    * Alle Ziele fuer dieses Level. Jedes einzelne Ziel darf maximal einmal
    * vorkommen.
@@ -39,7 +40,7 @@ class Level{
       double scoreMultiplier,
       int tetrominoSpeedInMs,
       int bonusPoints,
-      int priority){
+      int priority) {
     _model = model;
     _idsOfAvailableTetrominoes = idsOfAvailableTetrominoes;
     _scoreMultiplier = scoreMultiplier;
@@ -50,15 +51,15 @@ class Level{
     _goalMetrics = _initGoalMetrics();
   }
 
-  set goals(List<Goal> goals){
+  set goals(List<Goal> goals) {
     _goals = goals;
   }
 
 
-  bool isComplete(){
+  bool isComplete() {
     bool isComplete = true;
     _goals.forEach((goal) {
-      if(!goal.isCompleted()){
+      if (!goal.isCompleted()) {
         isComplete = false;
       }
     });
@@ -74,7 +75,7 @@ class Level{
    * Initialisiert eine neue Map mit allen Metriken die fuer den Fortschritt des
    * Levels relevant sind.
    */
-  Map<String, double> _initGoalMetrics(){
+  Map<String, double> _initGoalMetrics() {
     Map<String, double> metrics = {
       'numberOfRowsCleared': 0.0
     };

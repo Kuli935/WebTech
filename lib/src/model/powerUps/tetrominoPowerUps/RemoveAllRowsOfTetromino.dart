@@ -6,7 +6,7 @@ part of tetris;
  * aktiviert werden, wenn der Tetromio auf den Boden aufsetzt oder mit einem
  * anderen Tetromino kollidiert.
  */
-class RemoveAllRowsOfTetromino extends PowerUp{
+class RemoveAllRowsOfTetromino extends PowerUp {
   Tetromino _tetromino;
 
   /**
@@ -14,8 +14,8 @@ class RemoveAllRowsOfTetromino extends PowerUp{
    * @param TetrisGame model = Klasse TetrisGame
    * @param Tetromino tetromino = Klasse Tetromino
    */
-  RemoveAllRowsOfTetromino(TetrisGame model, Tetromino tetromino):
-        super(model, 'RemoveAllRowsOfTetromino'){
+  RemoveAllRowsOfTetromino(TetrisGame model, Tetromino tetromino) :
+        super(model, 'RemoveAllRowsOfTetromino') {
     _tetromino = tetromino;
   }
 
@@ -24,15 +24,15 @@ class RemoveAllRowsOfTetromino extends PowerUp{
    * @param Map<String, Object> kwargs = enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
    * die Bedingung erfuellt wurde
    */
-  bool _isConsumable(Map<String, Object> kwargs){
+  bool _isConsumable(Map<String, Object> kwargs) {
     //prufen, ob alle benoetigten Daten uebergeben wurden
-    if(!kwargs.containsKey('tetrominoMove')){
+    if (!kwargs.containsKey('tetrominoMove')) {
       return false;
     }
-    if(_tetromino._collisionWithGround(kwargs['tetrominoMove']) ||
-       _tetromino._collisionWithOtherTetromino(kwargs['tetrominoMove'])){
+    if (_tetromino._collisionWithGround(kwargs['tetrominoMove']) ||
+        _tetromino._collisionWithOtherTetromino(kwargs['tetrominoMove'])) {
       return true;
-    } else{
+    } else {
       return false;
     }
   }
