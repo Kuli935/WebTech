@@ -20,21 +20,19 @@ class LevelBuilder extends Builder<Level> {
       return null;
     }
 
-
-    Level level = new Level(_model,
-        levelConfig['availibleTetrominoes'],
-        levelConfig['scoreMultiplier'],
-        levelConfig['tetrominoSpeedInMs'],
-        levelConfig['bounsPoints'],
-        levelConfig['priority']);
+    Level level = new Level().setModel(_model).
+      setIdsOfAvailableTetrominoes(levelConfig['availibleTetrominoes']).
+      setScoreMultiplier(levelConfig['scoreMultiplier']).
+      setTetrominoSpeedInMs(levelConfig['tetrominoSpeedInMs']).
+      setBonusPoints(levelConfig['bounsPoints']).
+      setPriority(levelConfig['priority']);
 
     List<Goal> goals = new List();
     //ATM it only is possible to load one goal for each level
     GoalBuilder builder = new GoalBuilder(_reader, level, levelConfig['goal']);
     goals.add(builder.build(''));
+    level.setGoals(goals);
 
-    //add the goals to the level
-    level.goals = goals;
     return level;
   }
 }

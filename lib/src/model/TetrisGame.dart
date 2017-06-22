@@ -322,14 +322,15 @@ class TetrisGame extends PowerUpUser {
     } else {
       //TODO: let the user decide (in the json file) if the endless mode
       // should be enabled afterall levels are completed.
+      Level endlessMode = new Level().setModel(this).
+      setIdsOfAvailableTetrominoes(_configReader.readAllTetrominoIds()).
+      setScoreMultiplier(1.0).setBonusPoints(0).setPriority(99);
 
-      //after all levels are completed switch to endless mode
-      Level endlessMode = new Level(this, _configReader.readAllTetrominoIds(),
-          1.0, 1, 0, 1);
       List<Goal> endlessGoals = new List();
       Goal endlessGoal = new EndlessGoal(endlessMode);
       endlessGoals.add(endlessGoal);
-      endlessMode.goals = endlessGoals;
+      endlessMode.setGoals(endlessGoals);
+
       _currentLevel = endlessMode;
     }
     _tetrominoQueue.clear();

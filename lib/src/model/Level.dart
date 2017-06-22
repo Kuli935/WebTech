@@ -32,29 +32,10 @@ class Level {
    */
   Map<String, double> _goalMetrics;
 
-
-  //TODO: refactor constructor messs to use benefits of builder, move initis
-  //to initializer
-  Level(TetrisGame model,
-      List<String> idsOfAvailableTetrominoes,
-      double scoreMultiplier,
-      int tetrominoSpeedInMs,
-      int bonusPoints,
-      int priority) {
-    _model = model;
-    _idsOfAvailableTetrominoes = idsOfAvailableTetrominoes;
-    _scoreMultiplier = scoreMultiplier;
-    _tetrominoSpeedInMs = tetrominoSpeedInMs;
-    _goals = new List();
-    _bonusPoints = bonusPoints;
-    _priority = priority;
+  Level(){
     _goalMetrics = _initGoalMetrics();
+    _goals = new List<Goal>();
   }
-
-  set goals(List<Goal> goals) {
-    _goals = goals;
-  }
-
 
   bool isComplete() {
     bool isComplete = true;
@@ -63,11 +44,6 @@ class Level {
         isComplete = false;
       }
     });
-/*    if(isComplete) {
-      window.console.log('>>>: LEVEL COMPLETE');
-    }
-*/
-    //window.console.log('number of rows cleared: ${_model.numberOfRowsCleared}');
     return isComplete;
   }
 
@@ -95,4 +71,39 @@ class Level {
   Map<String, double> get goalMetrics => _goalMetrics;
 
   List<Goal> get goals => _goals;
+
+  Level setPriority(int priority){
+    _priority = priority;
+    return this;
+  }
+
+  Level setBonusPoints(int bonusPoints){
+    _bonusPoints = bonusPoints;
+    return this;
+  }
+
+  Level setTetrominoSpeedInMs(int tetrominoSpeedInMs){
+    _tetrominoSpeedInMs = tetrominoSpeedInMs;
+    return this;
+  }
+
+  Level setScoreMultiplier(double scoreMultiplier){
+    _scoreMultiplier = scoreMultiplier;
+    return this;
+  }
+
+  Level setIdsOfAvailableTetrominoes(List<String> idsOfAvailableTetrominoes){
+    _idsOfAvailableTetrominoes = idsOfAvailableTetrominoes;
+    return this;
+  }
+
+  Level setGoals(List<Goal> goals) {
+    _goals = goals;
+    return this;
+  }
+
+  Level setModel(TetrisGame model){
+    _model = model;
+    return this;
+  }
 }
