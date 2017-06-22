@@ -20,7 +20,8 @@ class Level {
   /// solange dieses Level aktiv ist.
   int _tetrominoSpeedInMs;
 
-  // TODO: refactor to use just one goal
+  /// Alle Ziele fuer dieses Level. Jedes einzelne Ziel darf maximal einmal
+  /// vorkommen.
   List<Goal> _goals;
 
   /// Der Spieler erhaelt [bonusPoints] viele Extrapunkte, nachdem er das Ziel
@@ -35,6 +36,7 @@ class Level {
   /// Diese Map speichert den aktuellen Zustand aller Werte, die fuer das
   /// Erfüllen eines Ziels von Bedeutung sind. Sobald sich einer dieser Werte
   /// aendert, muss die Map aktualisiert werden.
+  ///
   Map<String, double> _goalMetrics;
 
   /// Er stellt eine neue [Level] Instanz, welche NICHT KONFIGURIERT IST.
@@ -57,8 +59,8 @@ class Level {
     return isComplete;
   }
 
-   /// Initialisiert eine neue Map mit allen Metriken die fuer den Fortschritt des
-   /// Levels relevant sind.
+  /// Initialisiert eine neue Map mit allen Metriken die fuer den Fortschritt des
+  /// Levels relevant sind.
   Map<String, double> _initGoalMetrics() {
     Map<String, double> metrics = {
       'numberOfRowsCleared': 0.0

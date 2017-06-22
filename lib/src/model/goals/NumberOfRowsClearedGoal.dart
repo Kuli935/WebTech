@@ -11,10 +11,10 @@ class NumberOfRowClearedGoal extends Goal {
     return _level.goalMetrics['numberOfRowsCleared'];
   }
 
-  /**
-   * Prueft ob die fuer dieses Level spezifizierte Anzahl an Reihen
-   * vervollstaendigt wurde.
-   */
+  ///
+  /// Prueft ob die fuer dieses Level spezifizierte Anzahl an Reihen
+  /// vervollstaendigt wurde.
+  ///
   bool isCompleted() {
     if (_level.goalMetrics['numberOfRowsCleared'] >= _goalValue.toInt()) {
       return true;
