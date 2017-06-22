@@ -7,18 +7,18 @@ part of tetris;
 /// Ein [tetrominoSpeed] von 1000ms bestimmt 1 Bewegungen pro Sekunde.
 const tetrominoSpeed = const Duration(milliseconds: 1000);
 
-/**
- * TODO: .....
- * Ein [TetrisController]-Objekt registriert mehrere Handler
- * um die Interaktion von einem Benutzers zu greifen für das [TetrisGame] und
- * diese zu übersetzen in gültige [TetrisGame] Taten.
- *
- * Des weiteren löst ein [TetrisGameController]-Objekt die
- * Bewegungen eines Objekts [Tetromino].
- *
- * Erforderliche Updates für die Ansicht sind, das [TetisView]-Objekt übertragen
- * um den Benutzer zu informieren, was sich im [TetrisGame] verändert
- */
+///
+/// TODO: .....
+/// Ein [TetrisController]-Objekt registriert mehrere Handler
+/// um die Interaktion von einem Benutzers zu greifen für das [TetrisGame] und
+/// diese zu übersetzen in gültige [TetrisGame] Taten.
+///
+/// Des weiteren löst ein [TetrisGameController]-Objekt die
+/// Bewegungen eines Objekts [Tetromino].
+///
+/// Erforderliche Updates für die Ansicht sind, das [TetisView]-Objekt übertragen
+/// um den Benutzer zu informieren, was sich im [TetrisGame] verändert
+///
 class TetrisController {
 
   /// Das zu diesem Controller zugehoerige Model.

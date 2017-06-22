@@ -1,35 +1,35 @@
 part of tetris;
 
-/**
- * Ein Level haelt verschiede Werte zur konfiguration des TetrisGame.
- */
+///
+/// Ein Level haelt verschiede Werte zur konfiguration des TetrisGame.
+///
 class Level {
 
   TetrisGame _model;
 
-  /**
-   * Enthaelt die eindeutigen Ids aller Tetrominoes, die in diesem Level
-   * verfuegbar sind.
-   */
+  ///
+  /// Enthaelt die eindeutigen Ids aller Tetrominoes, die in diesem Level
+  /// verfuegbar sind.
+  ///
   List<String> _idsOfAvailableTetrominoes;
   double _scoreMultiplier;
   int _tetrominoSpeedInMs;
 
-  /**
-   * Alle Ziele fuer dieses Level. Jedes einzelne Ziel darf maximal einmal
-   * vorkommen.
-   * //TODO: maybe change this to be just a single goal
-   */
+  ///
+  /// Alle Ziele fuer dieses Level. Jedes einzelne Ziel darf maximal einmal
+  /// vorkommen.
+  /// TODO: maybe change this to be just a single goal
+  ///
   List<Goal> _goals;
 
   int _priority;
   int _bonusPoints;
 
-  /**
-   * Diese Map speichert den aktuellen Zustand aller Werte, die fuer das
-   * Erfüllen eines Ziels von Bedeutung sind. Sobald sich einer dieser Werte
-   * aendert, muss die Map aktualisiert werden.
-   */
+  ///
+  /// Diese Map speichert den aktuellen Zustand aller Werte, die fuer das
+  /// Erfüllen eines Ziels von Bedeutung sind. Sobald sich einer dieser Werte
+  /// aendert, muss die Map aktualisiert werden.
+  ///
   Map<String, double> _goalMetrics;
 
 
@@ -63,18 +63,17 @@ class Level {
         isComplete = false;
       }
     });
-/*    if(isComplete) {
-      window.console.log('>>>: LEVEL COMPLETE');
-    }
-*/
+//    if(isComplete) {
+//      window.console.log('>>>: LEVEL COMPLETE');
+//   }
     //window.console.log('number of rows cleared: ${_model.numberOfRowsCleared}');
     return isComplete;
   }
 
-  /**
-   * Initialisiert eine neue Map mit allen Metriken die fuer den Fortschritt des
-   * Levels relevant sind.
-   */
+  ///
+  /// Initialisiert eine neue Map mit allen Metriken die fuer den Fortschritt des
+  /// Levels relevant sind.
+  ///
   Map<String, double> _initGoalMetrics() {
     Map<String, double> metrics = {
       'numberOfRowsCleared': 0.0
