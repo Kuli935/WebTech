@@ -48,6 +48,10 @@ class TetrisGame extends PowerUpUser {
   /// der aktuelle Punktestand
   num _score;
 
+  /// Hold Box verwendet in einem Tetromino fall
+  bool usedHoldBox = false;
+
+
  ///
  /// Konstruktor um ein neues Tetris Spiel zu erzeugen
  /// @param int _sizeHeight = Höhe des Spielfeldes
@@ -129,6 +133,7 @@ class TetrisGame extends PowerUpUser {
     _tetrominoCount++;
     _tetromino.addToField();
     _tetromino.down();
+    usedHoldBox = false;
   }
 
   ///
@@ -146,15 +151,17 @@ class TetrisGame extends PowerUpUser {
   /// in der Hold Box ist, wird diser aus der Box genommen und faellt herunter.
   ///
   void holdCurrentTetrominoe(){
-    if(_tetrominoOnHold == null){
+    if(_tetrominoOnHold == null && usedHoldBox == false){
       _tetrominoOnHold = _tetromino;
       dumpNextTetromino();
-    } else{
+      usedHoldBox = true;
+    } else if (usedHoldBox == false){
       _tetrominoOnHold.resetPosition();
       _tetrominoQueue.addFirst(_tetrominoOnHold);
       _tetrominoOnHold = _tetromino;
       _tetromino.removeFromField();
       dumpNextTetromino();
+      usedHoldBox = true;
     }
   }
 
