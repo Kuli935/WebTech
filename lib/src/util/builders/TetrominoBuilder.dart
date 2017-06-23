@@ -26,7 +26,9 @@ class TetrominoBuilder extends Builder<Tetromino> {
                   setColor(new Symbol(tetrominoConfig['color']));
 
     //TODO: test if a tetromino with multiple different power ups works
-    List<String> powerUpIds = tetrominoConfig['powerUps'];
+    List<String> powerUpIdsList = tetrominoConfig['powerUps'];
+    Set<String> powerUpIds = new HashSet();
+    powerUpIds.addAll(powerUpIdsList);
     powerUpIds.forEach((powerUpId) {
       PowerUp powerUp = new PowerUpBuilder(_reader, _model, tetromino).build(
           powerUpId);
