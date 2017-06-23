@@ -22,7 +22,7 @@ class Level {
 
   /// Alle Ziele fuer dieses Level. Jedes einzelne Ziel darf maximal einmal
   /// vorkommen.
-  List<Goal> _goals;
+  Goal _goal;
 
   /// Der Spieler erhaelt [bonusPoints] viele Extrapunkte, nachdem er das Ziel
   /// dieses Levels erfuellt hat.
@@ -45,18 +45,11 @@ class Level {
   /// wird über die setter Methoden konfiguritert.
   Level(){
     _goalMetrics = _initGoalMetrics();
-    _goals = new List<Goal>();
   }
 
   /// Prueft ob das Ziel dieses Levels erfuellt wurde.
   bool isComplete() {
-    bool isComplete = true;
-    _goals.forEach((goal) {
-      if (!goal.isCompleted()) {
-        isComplete = false;
-      }
-    });
-    return isComplete;
+    return _goal.isCompleted();
   }
 
   /// Initialisiert eine neue Map mit allen Metriken die fuer den Fortschritt des
@@ -89,7 +82,7 @@ class Level {
   Map<String, double> get goalMetrics => _goalMetrics;
 
   /// Gibt das Ziel dieses Levels zurueck.
-  List<Goal> get goals => _goals;
+  Goal get goal => _goal;
 
   /// Setzt die Prioritaet dieses Levels auf [priority] und gibt die Level
   /// Instanz zurueck.
@@ -128,8 +121,8 @@ class Level {
 
   /// Setzt das Ziel dieses Levels auf [goals] und gibt die Level Instanz
   /// zurueck.
-  Level setGoals(List<Goal> goals) {
-    _goals = goals;
+  Level setGoal(Goal goal) {
+    _goal = goal;
     return this;
   }
 

@@ -32,12 +32,9 @@ class LevelBuilder extends Builder<Level> {
       setTetrominoSpeedInMs(levelConfig['tetrominoSpeedInMs']).
       setBonusPoints(levelConfig['bounsPoints']).
       setPriority(levelConfig['priority']);
-
-    List<Goal> goals = new List();
-    //ATM it only is possible to load one goal for each level
+    
     GoalBuilder builder = new GoalBuilder(_reader, level, levelConfig['goal']);
-    goals.add(builder.build(''));
-    level.setGoals(goals);
+    level.setGoal(builder.build(''));
 
     return level;
   }

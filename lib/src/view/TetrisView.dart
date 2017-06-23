@@ -229,10 +229,10 @@ class TetrisView {
     updateFields(holdStoneField, 3);
 
     // Ziel als Zahl erreicht
-    this.goalDescription.text = model.currentLevel.goals[0].description;
+    this.goalDescription.text = model.currentLevel.goal.description;
     this.goalProgress.text =
-        model.currentLevel.goals[0].getProgress().toString();
-    this.goal.text = model.currentLevel.goals[0].goalValue.toString();
+        model.currentLevel.goal.getProgress().toString();
+    this.goal.text = model.currentLevel.goal.goalValue.toString();
     this.bonusPoints.text = model.currentLevel.bonusPoints.toString();
 
     this.levelParagraph.text = model.levelCount.toString();

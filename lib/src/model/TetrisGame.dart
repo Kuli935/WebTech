@@ -333,10 +333,8 @@ class TetrisGame extends PowerUpUser {
       setIdsOfAvailableTetrominoes(_configReader.readAllTetrominoIds()).
       setScoreMultiplier(1.0).setBonusPoints(0).setPriority(99);
 
-      List<Goal> endlessGoals = new List();
       Goal endlessGoal = new EndlessGoal(endlessMode);
-      endlessGoals.add(endlessGoal);
-      endlessMode.setGoals(endlessGoals);
+      endlessMode.setGoal(endlessGoal);
 
       _currentLevel = endlessMode;
     }
