@@ -7,7 +7,7 @@ class PowerUpUser {
 
   ///
   /// Hinzufügen eines PowerUps
-  /// @param PowerUp newPowerUp = PowerUp Klasse
+  /// [newPowerUp] PowerUp Klasse
   ///
   void addPowerUp(PowerUp newPowerUp) {
     _powerUps.add(newPowerUp);
@@ -15,7 +15,7 @@ class PowerUpUser {
 
   ///
   /// Verwenden des PowerUps
-  /// @param Map<String, Object> kwargs = enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
+  /// [kwargs] enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
   /// die Bedingung erfuellt wurde
   ///
   void consumeAllPowerUps(Map<String, Object> kwargs) {

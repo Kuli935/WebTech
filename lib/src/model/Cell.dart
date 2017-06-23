@@ -4,16 +4,23 @@ part of tetris;
 /// Definiert die interne Representation des Spielfelds.
 ///
 class Cell {
+  /// [isActive] der fallende Tetromino der gerade aktiv ist und sich bewegen kann
   bool _isActive;
+
+  /// [row] Reihe
   int _row;
+
+  /// [col] Spalte
   int _col;
+
+  /// [color] Farbe des Tetrominoes
   Symbol _color;
 
   ///
   /// Konstruktor um ein Cell Objekte zu erzeugen.
-  /// @param int row = Reihe
-  /// @param int col = Spalte
-  /// @param Symbol color = Farbe des Tetromino
+  /// [row] Reihe
+  /// [col] Spalte
+  /// [color] Farbe des Tetromino
   ///
   Cell(int row, int col, Symbol color) {
     this._isActive = false;

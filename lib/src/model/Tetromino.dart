@@ -2,17 +2,41 @@ part of tetris;
 
 class Tetromino extends PowerUpUser {
 
+  /// [stones] Liste der einzelnen Tetromino Steine
   List<Map<String, int>> _stones;
+
+  /// [preview] Liste der einzelnen Tetromino Steine für die Vorschau des
+  /// nächsten Tetromino
   List<Map<String, int>> _preview;
+
+  /// [initialPosition] Liste der Position wo der Tetromino oben erscheinen soll
   List<Map<String, int>> _initialPosition;
+
+  /// [model] TetrisGame Model
   TetrisGame _model;
+
+  /// [color] Farbe des Tetrominos
   Symbol _color;
+
+  /// [dc] gibt die Bewegungsrichtung in der Spalte an
   int _dc;
+
+  /// [dr] gibt die Bewegungsrichtung in der Reihe an
   int _dr;
+
+  /// [state] den Aktuellen Zustand
   int _state;
+
+  /// [numberOfStates] Anzahl der Zustände
   int _numberOfStates;
+
+  /// [transitions] enthält die transitions (Übergänge) zu den neuen Positionen
+  /// wenn ein Tetromino gedreht wird
   List<List<List<int>>> _transitions;
 
+  /// Konstruktor der Tetromino Klasse
+  /// [model] TetrisGame Model
+  /// [stonesConfig] Liste der Tetromino Steine aus der Config
   Tetromino(TetrisGame model, List<Map<String, int>> stonesConfig):
         _model = model,
         _state = 0,
@@ -23,7 +47,9 @@ class Tetromino extends PowerUpUser {
 
   ///
   /// Berechnet für den fallenden Tetromino die mittige start Position.
-  /// @param List<Map<String, int>> stonesConfig
+  /// [calculateInitialPosition] Liste der Position wo der Tetromino oben erscheinen soll
+  /// [stonesConfig] Liste der Tetromino Steine aus der Config
+  /// Rückgabe [initialPosition] Liste des Tetrominos mit der Position oben in der Mitte
   ///
   List<Map<String, int>> _calculateInitialPosition(
       List<Map<String, int>> stonesConfig) {
@@ -68,6 +94,9 @@ class Tetromino extends PowerUpUser {
   ///
   /// Abstrakte Definition fuer die Drehung eines Tetrominos. Die Rotation ist
   /// fuer jeden Tetromino anders.
+  /// Die Rotierungsrichtung wird durch [direction] angegeben.
+  /// [direction] = 1; 90 Grad (rechts Drehung)
+  /// [direction] = -1; -90 Grad (links Drehung)
   ///
   void rotate(int direction) {
     // Die richtige Drehmatrix wird in Abhaengigkeit des Zustandes und der
@@ -105,6 +134,7 @@ class Tetromino extends PowerUpUser {
 
   ///
   /// Bewegt den Tetromino und prüft auf Kollisionen
+  /// [move] Position des nächsten Tetrominoes
   ///
   void move() {
     // Bewegung berechnen
@@ -181,7 +211,8 @@ class Tetromino extends PowerUpUser {
 
   ///
   /// Prüft auf Kollosionen mit dem Rand.
-  /// @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+  /// [move] Position des nächsten Tetrominoes
+  /// Rückgabe [isCollision] false = Keine Kollosionen, true = Kollosionen
   ///
   bool _collisionWithBorder(List<Map<String, int>> move) {
     bool isCollision = false;
@@ -195,7 +226,8 @@ class Tetromino extends PowerUpUser {
 
   ///
   /// Prüft auf Kollosionen mit dem Grund.
-  /// @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+  /// [move] Position des nächsten Tetrominoes
+  /// Rückgabe [isCollision] false = Keine Kollosionen, true = Kollosionen
   ///
   bool _collisionWithGround(List<Map<String, int>> move) {
     bool isCollision = false;
@@ -207,7 +239,8 @@ class Tetromino extends PowerUpUser {
 
   ///
   /// Prüft auf Kollosionen mit den oberen Rand.
-  /// @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+  /// [move] Position des nächsten Tetrominoes
+  /// Rückgabe [isCollision] false = Keine Kollosionen, true = Kollosionen
   ///
   bool _collisionWithTop(List<Map<String, int>> move) {
     bool isCollision = false;
@@ -219,7 +252,8 @@ class Tetromino extends PowerUpUser {
 
   ///
   /// Prüft auf Kollosionen mit Tetrominoes.
-  /// @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+  /// [move] Position des nächsten Tetrominoes
+  /// Rückgabe [isCollision] false = Keine Kollosionen, true = Kollosionen
   ///
   bool _collisionWithOtherTetromino(List<Map<String, int>> move) {
     bool isCollision = false;

@@ -1,61 +1,61 @@
 part of tetris;
 
-/**
- * Ein Tetrisobjekt interagiert mit dem DOM tree
- */
+///
+/// Ein Tetrisobjekt interagiert mit dem DOM tree
+///
 class TetrisView {
-  /**
-   * Elemente mit der Klasse '.container_start' im DOM tree.
-   * Soll nur gezeigt werden wenn das Spiel nicht läuft
-   */
+  ///
+  /// Elemente mit der Klasse '.container_start' im DOM tree.
+  /// Soll nur gezeigt werden wenn das Spiel nicht läuft
+  ///
   final container_start = querySelector(".container_start");
 
-  /**
-   * Elemente mit der Klasse '.container_message' im DOM tree.
-   * Wird verwendet um das Feld für Nachrichten sichtbar zu machen.
-   */
+  ///
+  /// Elemente mit der Klasse '.container_message' im DOM tree.
+  /// Wird verwendet um das Feld für Nachrichten sichtbar zu machen.
+  ///
   final container_message = querySelector('.container_message');
 
-  /**
-   * Elemente mit der ID '#message' im DOM tree.
-   * Verwendet für Spiel Meldungen
-   */
+  ///
+  /// Elemente mit der ID '#message' im DOM tree.
+  /// Verwendet für Spiel Meldungen
+  ///
   final message = querySelector("#message");
 
-  /**
-   * Elemente mit der ID '#overlay' im DOM tree.
-   * Verwendet um das Display abzudunkeln
-   */
+  ///
+  /// Elemente mit der ID '#overlay' im DOM tree.
+  /// Verwendet um das Display abzudunkeln
+  ///
   final overlay = querySelector("#overlay");
 
 
-  /**
-   * Elemente mit der Klasse '.container_game' im DOM tree.
-   * Wird verwendet um das Spiel anzuzeigen
-   */
+  ///
+  /// Elemente mit der Klasse '.container_game' im DOM tree.
+  /// Wird verwendet um das Spiel anzuzeigen
+  ///
   final container_game = querySelector('.container_game');
 
-  /**
-   * Elemente mit der ID '#field' im DOM tree.
-   * Wird verwendet um das Feld von Tetromino zu visualisieren als eine HTML Tabelle.
-   */
+  ///
+  /// Elemente mit der ID '#field' im DOM tree.
+  /// Wird verwendet um das Feld von Tetromino zu visualisieren als eine HTML Tabelle.
+  ///
   final game = querySelector('#field');
 
-  /**
-   * Elemente mit der ID '#nextstone' im DOM tree.
-   * Wird verwendet um das Feld von Nächsten-Tetromino-Feld zu visualisieren als eine HTML Tabelle.
-   */
+  ///
+  /// Elemente mit der ID '#nextstone' im DOM tree.
+  /// Wird verwendet um das Feld von Nächsten-Tetromino-Feld zu visualisieren als eine HTML Tabelle.
+  ///
   final nextStone = querySelector('#nextstone');
 
-  /**
-   * Elemente mit der ID '#holdstone' im DOM tree.
-   * Wird verwendet um das Feld von Gehalteten-Tetromino-Feld zu visualisieren als eine HTML Tabelle.
-   */
+  ///
+  /// Elemente mit der ID '#holdstone' im DOM tree.
+  /// Wird verwendet um das Feld von Gehalteten-Tetromino-Feld zu visualisieren als eine HTML Tabelle.
+  ///
   final holdStone = querySelector('#holdstone');
 
-  /**
-   * Ziel des Levels.
-   */
+  ///
+  /// Ziel des Levels.
+  ///
   HtmlElement get goal => querySelector('#goal');
 
   /**
@@ -63,110 +63,110 @@ class TetrisView {
    */
   HtmlElement get goalDescription => querySelector('#goalDescription');
 
-  /**
-   * Forschritt des Levels.
-   */
+  ///
+  /// Forschritt des Levels.
+  ///
   HtmlElement get goalProgress => querySelector('#goalProgress');
 
-  /**
-   * Ziel des Levels als Zahl.
-   */
+  ///
+  /// Ziel des Levels als Zahl.
+  ///
   HtmlElement get bonusPoints => querySelector('#bonusPoints');
 
-  /**
-   * Anzeige des aktuellen Levels
-   */
+  ///
+  /// Anzeige des aktuellen Levels
+  ///
   HtmlElement get levelParagraph => querySelector('#level');
 
 
-  /**
-   * Start Button für das Spiel.
-   */
+  ///
+  /// Start Button für das Spiel.
+  ///
   HtmlElement get startButton => querySelector('#start');
 
-  /**
-   * Menü Button für das Spiel.
-   */
+  ///
+  ///Menü Button für das Spiel.
+  ///
   HtmlElement get menuButton => querySelector('#menu');
 
-  /**
-   * Direkter Fall Button für das Spiel.
-   */
+  ///
+  /// Direkter Fall Button für das Spiel.
+  ///
   HtmlElement get hardDropButton => querySelector('#hard_drop');
 
-  /**
-   * Links Rotation Button für das Spiel.
-   */
+  ///
+  /// Links Rotation Button für das Spiel.
+  ///
   HtmlElement get leftRotationButton => querySelector('#left_rotation');
 
-  /**
-   * Rechts Rotation Button für das Spiel.
-   */
+  ///
+  /// Rechts Rotation Button für das Spiel.
+  ///
   HtmlElement get rightRotationButton => querySelector('#right_rotation');
 
-  /**
-   * Stein halten Button für das Spiel.
-   */
+  ///
+  /// Stein halten Button für das Spiel.
+  ///
   HtmlElement get holdButton => querySelector('#hold');
 
-  /**
-   * Nach links Button für das Spiel.
-   */
+  ///
+  /// Nach links Button für das Spiel.
+  ///
   HtmlElement get leftButton => querySelector('#left');
 
-  /**
-   * Nach unten Button für das Spiel.
-   */
+  ///
+  /// Nach unten Button für das Spiel.
+  ///
   HtmlElement get downButton => querySelector('#down');
 
-  /**
-   * Nach rechts Button für das Spiel.
-   */
+  ///
+  /// Nach rechts Button für das Spiel.
+  ///
   HtmlElement get rightButton => querySelector('#right');
 
 
-  /**
-   * Fortsetzen Button.
-   */
+  ///
+  /// Fortsetzen Button.
+  ///
   HtmlElement get continueButton => querySelector('#continue');
 
-  /**
-   * Neues Spiel Button.
-   */
+  ///
+  /// Neues Spiel Button.
+  ///
   HtmlElement get newGameButton => querySelector('#newGame');
 
-  /**
-   * Anzeige fuer die Punktezahl
-   */
+  ///
+  /// Anzeige fuer die Punktezahl
+  ///
   HtmlElement get scoreParagraph => querySelector('#points');
 
-  /**
-   * Elemente mit der ID '.container_control' im DOM tree.
-   * Wird verwendet um ein Steuerungsbild zu zeigen.
-   */
+  ///
+  /// Elemente mit der ID '.container_control' im DOM tree.
+  /// Wird verwendet um ein Steuerungsbild zu zeigen.
+  ///
   final control_image = querySelector('.container_control');
 
-  /**
-   * Enthält alle TD-Elemente des Feldes.
-   */
+  ///
+  /// Enthält alle TD-Elemente des Feldes.
+  ///
   List<List<HtmlElement>> fields;
 
-  /**
-   * Enthält alle TD-Elemente des Feldes für den Nächsten-Tetromino-Feld.
-   */
+  ///
+  /// Enthält alle TD-Elemente des Feldes für den Nächsten-Tetromino-Feld.
+  ///
   List<List<HtmlElement>> nextStoneFields;
 
-  /**
-   * Enthält alle TD-Elemente des Feldes für den Gehalteten-Tetromino-Feld.
-   */
+  ///
+  /// Enthält alle TD-Elemente des Feldes für den Gehalteten-Tetromino-Feld.
+  ///
   List<List<HtmlElement>> holdStoneFields;
 
-  /**
-   * Aktualisiert die View nach dem Modelstatus.
-   *
-   * - [startButton] am Anfang zeigen
-   * - Spielfeld anzeigen nachdem Modelstatus
-   */
+  ///
+  /// Aktualisiert die View nach dem Modelstatus.
+  ///
+  /// - [startButton] am Anfang zeigen
+  /// - Spielfeld anzeigen nachdem Modelstatus
+  ///
   void update(TetrisGame model) {
     // Startfenster ausblenden
     container_start.style.display = "none";
@@ -237,12 +237,12 @@ class TetrisView {
     this.levelParagraph.text = model.levelCount.toString();
   }
 
-  /**
-   * Aktualisiert die Tabllen nach dem Model. Je nachdem wo sich Tetrominoes befinden.
-   * @param List<List<Symbol>> field = Modelzustand wo sich die Tetrominoes befinden
-   * @param int generateFieldModus = Welches Feld geändert werden soll
-   * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld, 3 = Gehalteten-Tetromino-Feld
-   */
+  ///
+  /// Aktualisiert die Tabllen nach dem Model. Je nachdem wo sich Tetrominoes befinden.
+  /// [field] Modelzustand wo sich die Tetrominoes befinden
+  /// [generateFieldModus] Welches Feld geändert werden soll
+  /// 1 = Spielfeld, 2 = Nächster-Tetromino-Feld, 3 = Gehalteten-Tetromino-Feld
+  ///
   void updateFields(List<List<Symbol>> field, int generateFieldModus) {
     List<List<HtmlElement>> fields;
     if (generateFieldModus == 1) {
@@ -282,13 +282,13 @@ class TetrisView {
   }
 
 
-  /**
-   * Generiert ein Spielfeld entsprechend dem Model Zustand.
-   * @param final field = Modelzustand wo sich die Tetrominoes befinden
-   * @param int generateFieldModus = Welches Feld geändert werden soll
-   * 1 = Spielfeld, 2 = Nächster-Tetromino-Feld, 3 = Gehalteten-Tetromino-Feld
-   * @param var nameID = ID Name um die TD's die Farben zuzuweisen
-   */
+  ///
+  /// Generiert ein Spielfeld entsprechend dem Model Zustand.
+  /// [field] Modelzustand wo sich die Tetrominoes befinden
+  /// [generateFieldModus] Welches Feld geändert werden soll
+  /// 1 = Spielfeld, 2 = Nächster-Tetromino-Feld, 3 = Gehalteten-Tetromino-Feld
+  /// [nameID] ID Name um die TD's die Farben zuzuweisen
+  ///
   void generateField(final field, int generateFieldModus, var nameID) {
     List<List<HtmlElement>> fields;
     String table = "";

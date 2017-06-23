@@ -46,8 +46,8 @@ part 'src/model/Cell.dart';
 
 part 'src/model/TetrisGame.dart';
 
-/**
- * Definiert die Größe des Feldes für das Nächster-Tetromino-Feld
- */
+///
+/// Definiert die Größe des Feldes für das Nächster-Tetromino-Feld
+///
 const extraFieldHeight = 4;
 const extraFieldWidth = 4;

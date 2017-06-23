@@ -39,6 +39,12 @@ class TetrisGame extends PowerUpUser {
   /// Holdbox (leer oder mit Tetromino gefuellt)
   Tetromino _tetrominoOnHold;
 
+  /// [usedHoldBox] = false ein Tetromino wurde während eines fallenden
+  /// Tetromino noch nicht getauscht
+  /// [usedHoldBox] = true ein Tetromino wurde während eines fallenden
+  /// Tetromino getauscht
+  bool usedHoldBox = false;
+
   /// interne Representation des Spielfelds
   List<List<Cell>> _field;
 
@@ -48,15 +54,13 @@ class TetrisGame extends PowerUpUser {
   /// der aktuelle Punktestand
   num _score;
 
-  /// Hold Box verwendet in einem Tetromino fall
-  bool usedHoldBox = false;
 
-
- /// Konstruktor um ein neues Tetris Spiel zu erzeugen
- /// @param int _sizeHeight = Höhe des Spielfeldes
- /// @param int _sizeWidth = Breite des Spielfeldes
- /// @param int _extraFieldHeight = Höhe des Extra-Tetromino-Feldes
- /// @param int _extraFieldWidth = Breite des Extra-Tetromino-Feldes
+  ///
+  /// Konstruktor um ein neues Tetris Spiel zu erzeugen
+  /// [fieldWidth] Breite des Spielfeldes
+  /// [fieldHeight] Höhe des Spielfeldes
+  /// [configReader] Höhe des Extra-Tetromino-Feldes
+  ///
   TetrisGame(int fieldWidth, int fieldHeight, Reader configReader):
         _fieldWidth = fieldWidth,
         _fieldHeight = fieldHeight,
@@ -72,6 +76,7 @@ class TetrisGame extends PowerUpUser {
     }).toList();
     _tetrominoQueue = new ListQueue();
   }
+
   ///
   /// Startet des Spiel
   ///
@@ -246,7 +251,7 @@ class TetrisGame extends PowerUpUser {
 
   ///
   /// Entfernt eine vollständige Tetromino Reihe
-  /// @param List<num> rows = Liste an Reihen
+  /// [rows] Liste an Reihen
   ///
   void removeRows(List<num> rows) {
     // falls keine Reihen vervollständigt wurden, muss nichts entfernt werden
@@ -280,7 +285,7 @@ class TetrisGame extends PowerUpUser {
 
   ///
   /// Berechnet wie viele Punkte das letzte vervollstaendigen wert ist.
-  /// @param num rowsCompleted = Anzahl an kompletten Reihen
+  /// [rowsCompleted] Anzahl an kompletten Reihen
   ///
   num calculateScoreOfMove(num rowsCompleted) {
     num score;
@@ -305,7 +310,7 @@ class TetrisGame extends PowerUpUser {
 
   ///
   /// Fügt Levels hinzu.
-  /// @param Level level = Das Level was hinzugefügt werden soll
+  /// [level] Das Level was hinzugefügt werden soll
   ///
   void addLevel(Level level) {
     if (_levels == null) {
@@ -371,7 +376,7 @@ class TetrisGame extends PowerUpUser {
   /// Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
   /// Leerzustand: #empty,
   /// Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
-  /// @return Nächster-Tetromino-Feld als eine Liste von Listen
+  /// Rückgabe [nextStoneField] Nächster-Tetromino-Feld als eine Liste von Listen
   ///
   List<List<Symbol>> get nextStoneField {
     // Leeres Feld erzeugen
@@ -400,7 +405,7 @@ class TetrisGame extends PowerUpUser {
   /// Wobei es es sich eigentlich um zwei Zustände handelt, leer und gefärbt.
   /// Leerzustand: #empty,
   /// Farben: #cyan, #blue, #yellow, #orange, #red, #green, #purple
-  /// @return Gehalteten-Tetromino-Feld als eine Liste von Listen
+  /// Rückgabe [holdStoneField] Gehalteten-Tetromino-Feld als eine Liste von Listen
   ///
   List<List<Symbol>> get holdStoneField {
     var _holdStoneField = new Iterable.generate(extraFieldHeight, (row) {

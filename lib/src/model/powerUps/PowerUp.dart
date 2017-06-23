@@ -31,7 +31,7 @@ abstract class PowerUp {
 
   ///
   /// Implementier die Bedingung, welche zur Aktivierung des PowerUps notwending
-  /// ist. kwargs enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
+  /// ist. [kwargs] enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
   /// die Bedingung erfuellt wurde.
   ///
   bool _isConsumable(Map<String, Object> kwargs);

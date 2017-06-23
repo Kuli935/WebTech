@@ -11,8 +11,8 @@ class RemoveAllRowsOfTetromino extends PowerUp {
 
   ///
   /// Entfernt alle Steine um den Tetromino.
-  /// @param TetrisGame model = Klasse TetrisGame
-  /// @param Tetromino tetromino = Klasse Tetromino
+  /// [model] TetrisGame Klasse
+  /// [tetromino] Tetromino Klasse
   ///
   RemoveAllRowsOfTetromino(TetrisGame model, Tetromino tetromino) :
         super(model, 'RemoveAllRowsOfTetromino') {
@@ -21,7 +21,7 @@ class RemoveAllRowsOfTetromino extends PowerUp {
 
   ///
   /// Gibt den Status isActive zurück.
-  /// @param Map<String, Object> kwargs = enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
+  /// [kwargs] enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
   /// die Bedingung erfuellt wurde
   ///
   bool _isConsumable(Map<String, Object> kwargs) {
@@ -39,7 +39,7 @@ class RemoveAllRowsOfTetromino extends PowerUp {
 
   ///
   /// Benutzen des PowerUps.
-  /// @param Map<String, Object> kwargs = enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
+  /// [kwargs] enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
   /// die Bedingung erfuellt wurde
   ///
   void consume(Map<String, Object> kwargs) {
