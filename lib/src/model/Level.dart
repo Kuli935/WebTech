@@ -29,7 +29,6 @@ class Level {
   int _bonusPoints;
 
   /// Die [priority] bestimmt die Reihenfolge der verschiedenen Level.
-  ///
   /// Das Level mit der hoechsten Prioritaet wird als erstes gestartet.
   int _priority;
 
@@ -40,7 +39,6 @@ class Level {
   Map<String, double> _goalMetrics;
 
   /// Er stellt eine neue [Level] Instanz, welche NICHT KONFIGURIERT IST.
-  ///
   /// Es sollte der entsprechende LevelBuilder genutzt werden, oder das Level
   /// wird über die setter Methoden konfiguritert.
   Level(){

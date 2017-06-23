@@ -4,39 +4,46 @@ part of tetris;
 /// Definiert ein Tetris Spiel.
 ///
 class TetrisGame extends PowerUpUser {
-  /// Tetromino = Tetris Stein
+
+  /// Das zum Level zugehoerige [Tetromino]
   Tetromino _tetromino;
 
-  /// Die Feldgröße des Spiels (n x m Feld)
+  /// [fieldHeight] enthält die Feldhöhe des Spiels
   final int _fieldHeight;
+
+  /// [fieldWidth] Die Feldbreite des Spiels
   final int _fieldWidth;
 
-  /// Die Feldgröße für das Extra-Tetromino-Feld (n x m Feld)
+  /// [extraFieldHeight] enthält die Feldhöhe für die Extra-Feldler,
+  /// wie Holdbox und Nächter-Tetromino
   final int _extraFieldHeight = 4;
+
+  /// [extraFieldHeight] enthält die Feldhbreite für die Extra-Feldler,
+  /// wie Holdbox und Nächter-Tetromino
   final int _extraFieldWidth = 4;
 
-  /// Reader
+  /// [configReader] Reader für die json Datei
   Reader _configReader;
 
-  /// Level Warteschlange
+  /// [levels] Warteschlange für die Levels
   PriorityQueue<Level> _levels;
 
-  /// Aktuelles Level
+  /// [currentLevel] beschreibt das aktuelle Level
   Level _currentLevel;
 
-  /// Anzahl der abgeschlossenen Level
+  /// Der [levelCount] enthält die Anzahl der abgeschlossenen Level
   int _levelCount;
 
-  /// Zaehlt die Anzahl der breits gefallenen Tetrominoes
+  /// [tetrominoCount] zählt die Anzahl der breits gefallenen Tetrominoes
   int _tetrominoCount;
 
-  /// Anzahl an gelöschte Reihen
+  /// [numberOfRowsCleared] Anzahl an gelöschte Reihen
   int _numberOfRowsCleared;
 
-  /// Tetromino Warteschlange
+  /// [tetrominoQueue] Tetromino Warteschlange
   ListQueue<Tetromino> _tetrominoQueue;
 
-  /// Holdbox (leer oder mit Tetromino gefuellt)
+  /// [tetrominoOnHold] Holdbox (leer oder mit Tetromino gefuellt)
   Tetromino _tetrominoOnHold;
 
   /// [usedHoldBox] = false ein Tetromino wurde während eines fallenden
@@ -59,7 +66,7 @@ class TetrisGame extends PowerUpUser {
   /// Konstruktor um ein neues Tetris Spiel zu erzeugen
   /// [fieldWidth] Breite des Spielfeldes
   /// [fieldHeight] Höhe des Spielfeldes
-  /// [configReader] Höhe des Extra-Tetromino-Feldes
+  /// [configReader] Reader für die json Datei
   ///
   TetrisGame(int fieldWidth, int fieldHeight, Reader configReader):
         _fieldWidth = fieldWidth,

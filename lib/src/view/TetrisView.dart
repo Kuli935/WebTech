@@ -58,9 +58,9 @@ class TetrisView {
   ///
   HtmlElement get goal => querySelector('#goal');
 
-  /**
-   * Beschreibund des Levelziels.
-   */
+  ///
+  /// Beschreibung des Levelziels.
+  ///
   HtmlElement get goalDescription => querySelector('#goalDescription');
 
   ///
@@ -74,7 +74,7 @@ class TetrisView {
   HtmlElement get bonusPoints => querySelector('#bonusPoints');
 
   ///
-  /// Anzeige des aktuellen Levels
+  /// Anzeige des aktuellen Levels.
   ///
   HtmlElement get levelParagraph => querySelector('#level');
 
