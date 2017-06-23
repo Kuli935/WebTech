@@ -13,20 +13,12 @@ class Tetromino extends PowerUpUser {
   int _numberOfStates;
   List<List<List<int>>> _transitions;
 
-  //TODO: refactor constructor messs to use benefits of builder, move initis
-  //to initializer
-  Tetromino(TetrisGame model, List<Map<String, int>> stonesConfig,
-      List<List<List<int>>> transitions,
-      List<Map<String, int>> preview,
-      Symbol color)
-      :_state = 0,
+  Tetromino(TetrisGame model, List<Map<String, int>> stonesConfig):
+        _model = model,
+        _state = 0,
         _numberOfStates = 4 {
-    _model = model;
-    _stones = _calculateInitialPosition(stonesConfig);
-    _initialPosition = _stones;
-    _transitions = transitions;
-    _preview = preview;
-    _color = color;
+    _initialPosition = _calculateInitialPosition(stonesConfig);
+    _stones = _initialPosition;
   }
 
   ///
@@ -290,4 +282,25 @@ class Tetromino extends PowerUpUser {
   /// Gibt die Tetrominoes Vorschau Steine zurück.
   ///
   get preview => _preview;
+
+  /// Setzt die Farbe des Tetromino auf [color] und gibt die Tetromino Instanz
+  /// zurueck.
+  Tetromino setColor(Symbol color){
+    _color = color;
+    return this;
+  }
+
+  /// Setzt die Anordung der Vorschau dieses Tetromino auf [preview] und gibt
+  /// die Tetromino Instanz zurueck.
+  Tetromino setPreview(List<Map<String, int>> preview){
+    _preview = preview;
+    return this;
+  }
+
+  /// Setzt die Rotationsmatrizen dieses Tetrominoes auf [transitions] und
+  /// gibt die Tetromino Instanz zurueck.
+  Tetromino setTransitions(List<List<List<int>>> transitions){
+    _transitions = transitions;
+    return this;
+  }
 }

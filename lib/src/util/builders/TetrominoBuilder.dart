@@ -19,18 +19,20 @@ class TetrominoBuilder extends Builder<Tetromino> {
           'https://github.com/Kuli935/WebTech');
       return null;
     }
-    Tetromino tetromino = new Tetromino(_model,
-        tetrominoConfig['stones'],
-        tetrominoConfig['transitions'],
-        tetrominoConfig['preview'],
-        new Symbol(tetrominoConfig['color']));
+    Tetromino tetromino = new Tetromino(_model, tetrominoConfig['stones']);
 
+    tetromino = tetromino.setTransitions(tetrominoConfig['transitions']).
+                  setPreview(tetrominoConfig['preview']).
+                  setColor(new Symbol(tetrominoConfig['color']));
+
+    //TODO: test if a tetromino with multiple different power ups works
     List<String> powerUpIds = tetrominoConfig['powerUps'];
     powerUpIds.forEach((powerUpId) {
       PowerUp powerUp = new PowerUpBuilder(_reader, _model, tetromino).build(
           powerUpId);
       tetromino.addPowerUp(powerUp);
     });
+
     return tetromino;
   }
 

@@ -3,7 +3,6 @@ part of tetris;
 /**
  * Ein Tetrisobjekt interagiert mit dem DOM tree
  */
-//TODO: why are all attributes public? could they be private instead?
 class TetrisView {
   /**
    * Elemente mit der Klasse '.container_start' im DOM tree.

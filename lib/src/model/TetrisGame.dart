@@ -52,16 +52,12 @@ class TetrisGame extends PowerUpUser {
   bool usedHoldBox = false;
 
 
- ///
  /// Konstruktor um ein neues Tetris Spiel zu erzeugen
  /// @param int _sizeHeight = Höhe des Spielfeldes
  /// @param int _sizeWidth = Breite des Spielfeldes
  /// @param int _extraFieldHeight = Höhe des Extra-Tetromino-Feldes
  /// @param int _extraFieldWidth = Breite des Extra-Tetromino-Feldes
- ///
-  //TODO: refactor constructor
-  TetrisGame(int fieldWidth, int fieldHeight, Reader configReader)
-      :
+  TetrisGame(int fieldWidth, int fieldHeight, Reader configReader):
         _fieldWidth = fieldWidth,
         _fieldHeight = fieldHeight,
         _configReader = configReader {
@@ -76,7 +72,6 @@ class TetrisGame extends PowerUpUser {
     }).toList();
     _tetrominoQueue = new ListQueue();
   }
-
   ///
   /// Startet des Spiel
   ///
