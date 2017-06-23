@@ -749,29 +749,83 @@
         "TTetromino",
         "JTetromino",
         "LTetromino",
-        "OTetromino",
-        "STetromino",
-        "ZTetromino"
+        "OTetromino"
       ],
       "scoreMultiplier": 1.0,
       "tetrominoSpeedInMs": 1000,
       "goal": {
         "numberOfRowsCleared": 3.0
       },
-      "bounsPoints": 2000,
+      "bounsPoints": 500,
       "priority": 99
     },
     {
       "id": "level2",
       "availibleTetrominoes": [
-        "TTetromino"
+        "ITetromino",
+        "TTetromino",
+        "JTetromino",
+        "LTetromino",
+        "OTetromino",
+        "STetromino",
+        "ZTetromino"
       ],
-      "scoreMultiplier": 2.0,
-      "tetrominoSpeedInMs": 1000,
+      "scoreMultiplier": 1.2,
+      "tetrominoSpeedInMs": 900,
+      "goal": {
+        "numberOfRowsCleared": 4.0
+      },
+      "bounsPoints": 750,
+      "priority": 80
+    },
+    {
+      "id": "level3",
+      "availibleTetrominoes": [
+        "ITetromino",
+        "JTetromino",
+        "LTetromino",
+        "STetromino",
+        "ZTetromino"
+      ],
+      "scoreMultiplier": 1.4,
+      "tetrominoSpeedInMs": 800,
       "goal": {
         "numberOfRowsCleared": 5.0
       },
-      "bounsPoints": 0,
+      "bounsPoints": 1000,
+      "priority": 70
+    },
+    {
+      "id": "level4",
+      "availibleTetrominoes": [
+        "JTetromino",
+        "LTetromino",
+        "OTetromino",
+        "STetromino",
+        "ZTetromino"
+      ],
+      "scoreMultiplier": 1.6,
+      "tetrominoSpeedInMs": 700,
+      "goal": {
+        "numberOfRowsCleared": 6.0
+      },
+      "bounsPoints": 1250,
+      "priority": 60
+    },
+    {
+      "id": "level5",
+      "availibleTetrominoes": [
+        "JTetromino",
+        "LTetromino",
+        "STetromino",
+        "ZTetromino"
+      ],
+      "scoreMultiplier": 1.8,
+      "tetrominoSpeedInMs": 600,
+      "goal": {
+        "numberOfRowsCleared": 7.0
+      },
+      "bounsPoints": 1500,
       "priority": 50
     }
   ]
