@@ -5,7 +5,7 @@ part of tetris;
 /// eines Tetrominoes vergeht.
 /// 
 /// Ein [tetrominoSpeed] von 1000ms bestimmt 1 Bewegungen pro Sekunde.
-const tetrominoSpeed = const Duration(milliseconds: 100);
+const tetrominoSpeed = const Duration(milliseconds: 1000);
 
 ///
 /// TODO: .....
