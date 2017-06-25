@@ -18,6 +18,8 @@ class TetrisGameBuilder extends Builder<TetrisGame> {
         modelConfiguration['fieldHeight'],
         _reader);
     //alle Level der Konfigurationsdatei erstellen und zum Spiel hinzufuegen
+    //TODO: if there are no level configs in the file, check what happens
+    //it will propably crash, if so load EndlessLevel as default
     _reader.readAllLevelIds().forEach((levelId) {
       LevelBuilder levelBuilder = new LevelBuilder(_reader, model);
       model.addLevel(levelBuilder.build(levelId));

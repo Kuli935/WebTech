@@ -1,831 +1,195 @@
 {
   "gameConfiguration": {
-    "id": "modelDefault",
+    "id":"modelDefault",
     "fieldWidth": 10,
     "fieldHeight": 18
   },
   "tetrominoes": [
     {
       "id": "ITetromino",
-      "stones": [
-        {
-          "row": 0,
-          "col": -2
-        },
-        {
-          "row": 0,
-          "col": -1
-        },
-        {
-          "row": 0,
-          "col": 0
-        },
-        {
-          "row": 0,
-          "col": 1
-        }
+      "stones":[
+        { "row" : 0, "col" : -2 },
+        { "row" : 0, "col" : -1 },
+        { "row" : 0, "col" : 0},
+        { "row" : 0, "col" : 1}
       ],
-      "preview": [
-        {
-          "row": 2,
-          "col": 0
-        },
-        {
-          "row": 2,
-          "col": 1
-        },
-        {
-          "row": 2,
-          "col": 2
-        },
-        {
-          "row": 2,
-          "col": 3
-        }
+      "preview":[
+        { "row" : 2, "col" : 0},
+        { "row" : 2, "col" : 1},
+        { "row" : 2, "col" : 2},
+        { "row" : 2, "col" : 3}
       ],
-      "transitions": [
-        [
-          [
-            -3,
-            1
-          ],
-          [
-            -2,
-            0
-          ],
-          [
-            -1,
-            -1
-          ],
-          [
-            0,
-            -2
-          ]
-        ],
-        [
-          [
-            3,
-            -1
-          ],
-          [
-            2,
-            0
-          ],
-          [
-            1,
-            1
-          ],
-          [
-            0,
-            2
-          ]
-        ],
-        [
-          [
-            -3,
-            1
-          ],
-          [
-            -2,
-            0
-          ],
-          [
-            -1,
-            -1
-          ],
-          [
-            0,
-            -2
-          ]
-        ],
-        [
-          [
-            3,
-            -1
-          ],
-          [
-            2,
-            0
-          ],
-          [
-            1,
-            1
-          ],
-          [
-            0,
-            2
-          ]
-        ]
+      "transitions":[
+        [[-3, 1], [-2, 0], [-1, -1], [0, -2]],
+        [[3, -1], [2, 0], [1, 1], [0, 2]],
+        [[-3, 1], [-2, 0], [-1, -1], [0, -2]],
+        [[3, -1], [2, 0], [1, 1], [0, 2]]
       ],
-      "powerUps": [],
+      "powerUps":[],
       "color": "cyan"
     },
     {
       "id": "JTetromino",
-      "stones": [
-        {
-          "row": 0,
-          "col": -1
-        },
-        {
-          "row": 0,
-          "col": 0
-        },
-        {
-          "row": 0,
-          "col": 1
-        },
-        {
-          "row": 1,
-          "col": 1
-        }
+      "stones":[
+        { "row" : 0, "col" : -1},
+        { "row" : 0, "col" : 0},
+        { "row" : 0, "col" : 1},
+        { "row" : 1, "col" : 1}
       ],
-      "preview": [
-        {
-          "row": 1,
-          "col": 1
-        },
-        {
-          "row": 1,
-          "col": 2
-        },
-        {
-          "row": 1,
-          "col": 3
-        },
-        {
-          "row": 2,
-          "col": 3
-        }
+      "preview":[
+        { "row" : 1, "col" : 1},
+        { "row" : 1, "col" : 2},
+        { "row" : 1, "col" : 3},
+        { "row" : 2, "col" : 3}
       ],
-      "transitions": [
-        [
-          [
-            0,
-            1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            2,
-            -1
-          ],
-          [
-            1,
-            -2
-          ]
-        ],
-        [
-          [
-            1,
-            1
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            -1,
-            -1
-          ],
-          [
-            -2,
-            0
-          ]
-        ],
-        [
-          [
-            1,
-            -2
-          ],
-          [
-            0,
-            -1
-          ],
-          [
-            -1,
-            0
-          ],
-          [
-            0,
-            1
-          ]
-        ],
-        [
-          [
-            -2,
-            0
-          ],
-          [
-            -1,
-            1
-          ],
-          [
-            0,
-            2
-          ],
-          [
-            1,
-            1
-          ]
-        ]
+      "transitions":[
+        [[0, 1], [1, 0], [2, -1], [1, -2]],
+        [[1, 1], [0, 0], [-1, -1], [-2, 0]],
+        [[1, -2], [0, -1], [-1, 0], [0, 1]],
+        [[-2, 0], [-1, 1], [0, 2], [1, 1]]
       ],
-      "powerUps": [],
+      "powerUps":[],
       "color": "blue"
     },
     {
       "id": "LTetromino",
-      "stones": [
-        {
-          "row": 1,
-          "col": -1
-        },
-        {
-          "row": 0,
-          "col": -1
-        },
-        {
-          "row": 0,
-          "col": 0
-        },
-        {
-          "row": 0,
-          "col": 1
-        }
+      "stones":[
+        { "row" : 1, "col" : -1},
+        { "row" : 0, "col" : -1},
+        { "row" : 0, "col" : 0},
+        { "row" : 0, "col" : 1}
       ],
-      "preview": [
-        {
-          "row": 2,
-          "col": 1
-        },
-        {
-          "row": 1,
-          "col": 1
-        },
-        {
-          "row": 1,
-          "col": 2
-        },
-        {
-          "row": 1,
-          "col": 3
-        }
+      "preview":[
+        { "row" : 2, "col" : 1},
+        { "row" : 1, "col" : 1},
+        { "row" : 1, "col" : 2},
+        { "row" : 1, "col" : 3}
       ],
-      "transitions": [
-        [
-          [
-            -1,
-            0
-          ],
-          [
-            0,
-            1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            2,
-            -1
-          ]
-        ],
-        [
-          [
-            0,
-            2
-          ],
-          [
-            1,
-            1
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            -1,
-            -1
-          ]
-        ],
-        [
-          [
-            2,
-            -1
-          ],
-          [
-            1,
-            -2
-          ],
-          [
-            0,
-            -1
-          ],
-          [
-            -1,
-            0
-          ]
-        ],
-        [
-          [
-            -1,
-            -1
-          ],
-          [
-            -2,
-            0
-          ],
-          [
-            -1,
-            1
-          ],
-          [
-            0,
-            2
-          ]
-        ]
+      "transitions":[
+        [[-1, 0], [0, 1], [1, 0], [2, -1]],
+        [[0, 2], [1, 1], [0, 0], [-1, -1]],
+        [[2, -1], [1, -2], [0, -1], [-1, 0]],
+        [[-1, -1], [-2, 0], [-1, 1], [0, 2]]
       ],
-      "powerUps": [],
+      "powerUps":[],
       "color": "orange"
     },
     {
       "id": "OTetromino",
-      "stones": [
-        {
-          "row": 0,
-          "col": -1
-        },
-        {
-          "row": 1,
-          "col": -1
-        },
-        {
-          "row": 0,
-          "col": 0
-        },
-        {
-          "row": 1,
-          "col": 0
-        }
+      "stones":[
+        { "row" : 0, "col" : -1},
+        { "row" : 1, "col" : -1},
+        { "row" : 0, "col" : 0},
+        { "row" : 1, "col" : 0}
       ],
-      "preview": [
-        {
-          "row": 1,
-          "col": 1
-        },
-        {
-          "row": 1,
-          "col": 2
-        },
-        {
-          "row": 2,
-          "col": 1
-        },
-        {
-          "row": 2,
-          "col": 2
-        }
+      "preview":[
+        { "row" : 1, "col" : 1},
+        { "row" : 1, "col" : 2},
+        { "row" : 2, "col" : 1},
+        { "row" : 2, "col" : 2}
       ],
-      "transitions": [
+      "transitions":[
       ],
-      "powerUps": [],
+      "powerUps":[],
       "color": "yellow"
     },
     {
       "id": "STetromino",
-      "stones": [
-        {
-          "row": 1,
-          "col": -1
-        },
-        {
-          "row": 1,
-          "col": 0
-        },
-        {
-          "row": 0,
-          "col": 0
-        },
-        {
-          "row": 0,
-          "col": 1
-        }
+      "stones":[
+        { "row" : 1, "col" : -1},
+        { "row" : 1, "col" : 0},
+        { "row" : 0, "col" : 0},
+        { "row" : 0, "col" : 1}
       ],
-      "preview": [
-        {
-          "row": 1,
-          "col": 2
-        },
-        {
-          "row": 1,
-          "col": 1
-        },
-        {
-          "row": 2,
-          "col": 1
-        },
-        {
-          "row": 2,
-          "col": 0
-        }
+      "preview":[
+        { "row" : 1, "col" : 2},
+        { "row" : 1, "col" : 1},
+        { "row" : 2, "col" : 1},
+        { "row" : 2, "col" : 0}
       ],
-      "transitions": [
-        [
-          [
-            -1,
-            0
-          ],
-          [
-            0,
-            -1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            2,
-            -1
-          ]
-        ],
-        [
-          [
-            1,
-            0
-          ],
-          [
-            0,
-            1
-          ],
-          [
-            -1,
-            0
-          ],
-          [
-            -2,
-            1
-          ]
-        ],
-        [
-          [
-            -1,
-            0
-          ],
-          [
-            0,
-            -1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            2,
-            -1
-          ]
-        ],
-        [
-          [
-            1,
-            0
-          ],
-          [
-            0,
-            1
-          ],
-          [
-            -1,
-            0
-          ],
-          [
-            -2,
-            1
-          ]
-        ]
+      "transitions":[
+        [[-1, 0], [0, -1], [1, 0], [2, -1]],
+        [[1, 0], [0, 1], [-1, 0], [-2, 1]],
+        [[-1, 0], [0, -1], [1, 0], [2, -1]],
+        [[1, 0], [0, 1], [-1, 0], [-2, 1]]
       ],
-      "powerUps": [],
+      "powerUps":[],
       "color": "green"
     },
     {
       "id": "ZTetromino",
-      "stones": [
-        {
-          "row": 0,
-          "col": -1
-        },
-        {
-          "row": 0,
-          "col": 0
-        },
-        {
-          "row": 1,
-          "col": 0
-        },
-        {
-          "row": 1,
-          "col": 1
-        }
+      "stones":[
+        { "row" : 0, "col" : -1},
+        { "row" : 0, "col" : 0},
+        { "row" : 1, "col" : 0},
+        { "row" : 1, "col" : 1}
       ],
-      "preview": [
-        {
-          "row": 1,
-          "col": 1
-        },
-        {
-          "row": 1,
-          "col": 2
-        },
-        {
-          "row": 2,
-          "col": 2
-        },
-        {
-          "row": 2,
-          "col": 3
-        }
+      "preview":[
+        { "row" : 1, "col" : 1},
+        { "row" : 1, "col" : 2},
+        { "row" : 2, "col" : 2},
+        { "row" : 2, "col" : 3}
       ],
-      "transitions": [
-        [
-          [
-            1,
-            0
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            1,
-            -2
-          ]
-        ],
-        [
-          [
-            -1,
-            0
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            -1,
-            2
-          ]
-        ],
-        [
-          [
-            1,
-            0
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            1,
-            -2
-          ]
-        ],
-        [
-          [
-            -1,
-            0
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            -1,
-            2
-          ]
-        ]
+      "transitions":[
+        [[1, 0], [0, 0], [0, 0], [1, -2]],
+        [[-1, 0], [0, 0], [0, 0], [-1, 2]],
+        [[1, 0], [0, 0], [0, 0], [1, -2]],
+        [[-1, 0], [0, 0], [0, 0], [-1, 2]]
       ],
-      "powerUps": [],
+      "powerUps":[],
       "color": "red"
     },
     {
       "id": "TTetromino",
-      "stones": [
-        {
-          "row": 0,
-          "col": -1
-        },
-        {
-          "row": 0,
-          "col": 0
-        },
-        {
-          "row": 0,
-          "col": 1
-        },
-        {
-          "row": 1,
-          "col": 0
-        }
+      "stones":[
+        { "row" : 0, "col" : -1},
+        { "row" : 0, "col" : 0},
+        { "row" : 0, "col" : 1},
+        { "row" : 1, "col" : 0}
       ],
-      "preview": [
-        {
-          "row": 1,
-          "col": 1
-        },
-        {
-          "row": 1,
-          "col": 2
-        },
-        {
-          "row": 1,
-          "col": 3
-        },
-        {
-          "row": 2,
-          "col": 2
-        }
+      "preview":[
+        { "row" : 1, "col" : 1},
+        { "row" : 1, "col" : 2},
+        { "row" : 1, "col" : 3},
+        { "row" : 2, "col" : 2}
       ],
-      "transitions": [
-        [
-          [
-            0,
-            1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            2,
-            -1
-          ],
-          [
-            0,
-            -1
-          ]
+      "transitions":[
+        [[0, 1], [1, 0], [2, -1], [0, -1]],
+        [[1, 1], [0, 0], [-1, -1], [-1, 1]],
+        [[1, -1], [0, 0], [-1, 1], [1, 1]],
+        [[-2, -1], [-1, 0], [0, 1], [0, -1]]
         ],
-        [
-          [
-            1,
-            1
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            -1,
-            -1
-          ],
-          [
-            -1,
-            1
-          ]
-        ],
-        [
-          [
-            1,
-            -1
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            -1,
-            1
-          ],
-          [
-            1,
-            1
-          ]
-        ],
-        [
-          [
-            -2,
-            -1
-          ],
-          [
-            -1,
-            0
-          ],
-          [
-            0,
-            1
-          ],
-          [
-            0,
-            -1
-          ]
-        ]
-      ],
-      "powerUps": [
+      "powerUps":[
         "RemoveAllRowsOfTetromino"
       ],
       "color": "purple"
     }
   ],
-  "levels": [
+  "levels":[
     {
       "id": "level1",
-      "availibleTetrominoes": [
-        "ITetromino",
-        "TTetromino",
-        "JTetromino",
-        "LTetromino",
-        "OTetromino"
+      "availibleTetrominoes":[
+        "ITetromino", "TTetromino", "JTetromino", "LTetromino", "OTetromino", "STetromino", "ZTetromino"
       ],
       "scoreMultiplier": 1.0,
       "tetrominoSpeedInMs": 1000,
-      "goal": {
+      "goal":{
         "numberOfRowsCleared": 3.0
       },
-      "bounsPoints": 500,
+      "bounsPoints": 2000,
       "priority": 99
     },
     {
       "id": "level2",
-      "availibleTetrominoes": [
-        "ITetromino",
-        "TTetromino",
-        "JTetromino",
-        "LTetromino",
-        "OTetromino",
-        "STetromino",
-        "ZTetromino"
+      "availibleTetrominoes":[
+        "TTetromino"
       ],
-      "scoreMultiplier": 1.2,
-      "tetrominoSpeedInMs": 900,
-      "goal": {
-        "numberOfRowsCleared": 4.0
-      },
-      "bounsPoints": 750,
-      "priority": 80
-    },
-    {
-      "id": "level3",
-      "availibleTetrominoes": [
-        "ITetromino",
-        "JTetromino",
-        "LTetromino",
-        "STetromino",
-        "ZTetromino"
-      ],
-      "scoreMultiplier": 1.4,
-      "tetrominoSpeedInMs": 800,
-      "goal": {
+      "scoreMultiplier": 2.0,
+      "tetrominoSpeedInMs": 1000,
+      "goal":{
         "numberOfRowsCleared": 5.0
       },
-      "bounsPoints": 1000,
-      "priority": 70
-    },
-    {
-      "id": "level4",
-      "availibleTetrominoes": [
-        "JTetromino",
-        "LTetromino",
-        "OTetromino",
-        "STetromino",
-        "ZTetromino"
-      ],
-      "scoreMultiplier": 1.6,
-      "tetrominoSpeedInMs": 700,
-      "goal": {
-        "numberOfRowsCleared": 6.0
-      },
-      "bounsPoints": 1250,
-      "priority": 60
-    },
-    {
-      "id": "level5",
-      "availibleTetrominoes": [
-        "JTetromino",
-        "LTetromino",
-        "STetromino",
-        "ZTetromino"
-      ],
-      "scoreMultiplier": 1.8,
-      "tetrominoSpeedInMs": 600,
-      "goal": {
-        "numberOfRowsCleared": 7.0
-      },
-      "bounsPoints": 1500,
+      "bounsPoints": 0,
       "priority": 50
     }
   ]
