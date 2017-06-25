@@ -70,7 +70,10 @@ class TetrisController {
   /// Bewegt den Tetromino.
   void _moveTetromino() {
     game.moveTetromino();
-    if (game._levelCount > _currentLevel && !game.endlessMode) { _increaseTetrominoSpeed(); _currentLevel++;}
+    if (game.levelCount > _currentLevel && !game.endlessMode){
+      _increaseTetrominoSpeed();
+      _currentLevel++;
+    }
     _view.update(game);
   }
 
@@ -233,7 +236,7 @@ class TetrisController {
   ///
   void _increaseTetrominoSpeed() {
     tetrominoTrigger.cancel();
-    final newSpeed = new Duration(milliseconds: game._currentLevel.tetrominoSpeedInMs);
+    final newSpeed = new Duration(milliseconds: game.currentLevel.tetrominoSpeedInMs);
     tetrominoTrigger = new Timer.periodic(newSpeed, (_) => _moveTetromino());
   }
 }
