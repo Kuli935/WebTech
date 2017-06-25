@@ -5,7 +5,7 @@ part of tetris;
 /// eines Tetrominoes vergeht.
 /// 
 /// Ein [tetrominoSpeed] von 1000ms bestimmt 1 Bewegungen pro Sekunde.
-const tetrominoSpeed = const Duration(milliseconds: 1000);
+const tetrominoSpeed = const Duration(milliseconds: 100);
 
 ///
 /// TODO: .....
@@ -33,6 +33,8 @@ class TetrisController {
   /// Ein [Reader] welcher die Konfiguration fuer die zu diesem Controller
   /// zugehoerige Spielinstanz bereit stellt.
   final JsonReader _configReader;
+
+  int currentLevel = 0;
 
   /// Erstellt einen neuen TetrisContoroller, dessen Model nach der
   /// Konfiguration des uebergebenen [Reader] konfiguriert wird.
@@ -67,6 +69,7 @@ class TetrisController {
   /// Bewegt den Tetromino.
   void _moveTetromino() {
     game.moveTetromino();
+    if (game._levelCount > currentLevel && !game.endlessMode) { _increaseTetrominoSpeed(); currentLevel++;}
     _view.update(game);
   }
 
@@ -224,4 +227,12 @@ class TetrisController {
     });
   }
 
+  ///
+  /// Erhöht die Geschwindigkeit für die fallenden Tetrominoes
+  ///
+  void _increaseTetrominoSpeed() {
+    tetrominoTrigger.cancel();
+    final newSpeed = new Duration(milliseconds: game._currentLevel.tetrominoSpeedInMs);
+    tetrominoTrigger = new Timer.periodic(newSpeed, (_) => _moveTetromino());
+  }
 }

@@ -50,7 +50,10 @@ class TetrisGame extends PowerUpUser {
   /// Tetromino noch nicht getauscht
   /// [usedHoldBox] = true ein Tetromino wurde während eines fallenden
   /// Tetromino getauscht
-  bool usedHoldBox = false;
+  bool _usedHoldBox = false;
+
+  // Endlos Modus erreicht
+  bool _endlessMode = false;
 
   /// interne Representation des Spielfelds
   List<List<Cell>> _field;
@@ -140,7 +143,7 @@ class TetrisGame extends PowerUpUser {
     _tetrominoCount++;
     _tetromino.addToField();
     _tetromino.down();
-    usedHoldBox = false;
+    _usedHoldBox = false;
   }
 
   ///
@@ -158,17 +161,17 @@ class TetrisGame extends PowerUpUser {
   /// in der Hold Box ist, wird diser aus der Box genommen und faellt herunter.
   ///
   void holdCurrentTetrominoe(){
-    if(_tetrominoOnHold == null && usedHoldBox == false){
+    if(_tetrominoOnHold == null && _usedHoldBox == false){
       _tetrominoOnHold = _tetromino;
       dumpNextTetromino();
-      usedHoldBox = true;
-    } else if (usedHoldBox == false){
+      _usedHoldBox = true;
+    } else if (_usedHoldBox == false){
       _tetrominoOnHold.resetPosition();
       _tetrominoQueue.addFirst(_tetrominoOnHold);
       _tetrominoOnHold = _tetromino;
       _tetromino.removeFromField();
       dumpNextTetromino();
-      usedHoldBox = true;
+      _usedHoldBox = true;
     }
   }
 
@@ -344,6 +347,7 @@ class TetrisGame extends PowerUpUser {
       endlessMode.setGoal(endlessGoal);
 
       _currentLevel = endlessMode;
+      _endlessMode = true;
     }
     _tetrominoQueue.clear();
     _fillTetrominoeQueue();
@@ -486,6 +490,11 @@ class TetrisGame extends PowerUpUser {
   /// Gibt an, ob das Spiel läuft
   ///
   bool get running => _gamestate == #running;
+
+  ///
+  /// Gibt an, ob der Enddlos Modus erreicht ist
+  ///
+  bool get endlessMode => _endlessMode;
 
   ///
   // Gibt den aktuellen Punktestand zurück
