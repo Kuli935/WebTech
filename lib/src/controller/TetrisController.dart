@@ -34,6 +34,9 @@ class TetrisController {
   /// zugehoerige Spielinstanz bereit stellt.
   final JsonReader _configReader;
 
+  // Zählt die Level
+  int _currentLevel = 0;
+
   /// Erstellt einen neuen TetrisContoroller, dessen Model nach der
   /// Konfiguration des uebergebenen [Reader] konfiguriert wird.
   TetrisController(Reader configReader) : _configReader = configReader {
@@ -67,6 +70,7 @@ class TetrisController {
   /// Bewegt den Tetromino.
   void _moveTetromino() {
     game.moveTetromino();
+    if (game._levelCount > _currentLevel && !game.endlessMode) { _increaseTetrominoSpeed(); _currentLevel++;}
     _view.update(game);
   }
 
@@ -224,4 +228,12 @@ class TetrisController {
     });
   }
 
+  ///
+  /// Erhöht die Geschwindigkeit für die fallenden Tetrominoes
+  ///
+  void _increaseTetrominoSpeed() {
+    tetrominoTrigger.cancel();
+    final newSpeed = new Duration(milliseconds: game._currentLevel.tetrominoSpeedInMs);
+    tetrominoTrigger = new Timer.periodic(newSpeed, (_) => _moveTetromino());
+  }
 }
