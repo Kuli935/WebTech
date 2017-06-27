@@ -435,10 +435,14 @@ body {
 
     .container_goal {
         z-index: 100;
-        font-size: 12px;
+        font-size: 10px;
         left: 5px;
         width: 182px;
         float: left;
+    }
+
+    .container_message #message {
+        font-size: 12px;
     }
 }
 
@@ -449,12 +453,13 @@ body {
         height: 57px;
     }
 
-    .container_message {
-    }
-
     #logo {
         margin-right: auto;
         margin-left: auto;
+    }
+	
+    .container_message #message {
+        font-size: 12px;
     }
 
     .container_message {
