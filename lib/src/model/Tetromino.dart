@@ -158,7 +158,7 @@ class Tetromino extends PowerUpUser {
 
   ///
   /// Handelt die Kollosionen ab.
-  /// @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+  /// [move] Position des nächsten Tetrominoes
   ///
   void _handleCollision(List<Map<String, int>> move) {
    // Kollisionen mit den Seitenraender des Spielfelds muessen nicht extra
@@ -201,7 +201,7 @@ class Tetromino extends PowerUpUser {
 
   ///
   /// Bewegt den Tetromino zur nächsten Position.
-  /// @param List<Map<String, int>> move = Position des nächsten Tetrominoes
+  /// [move] Position des nächsten Tetrominoes
   ///
   void _moveToNewPosition(List<Map<String, int>> move) {
     removeFromField();

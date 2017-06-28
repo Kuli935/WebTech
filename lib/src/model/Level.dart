@@ -54,7 +54,8 @@ class Level {
   /// Levels relevant sind.
   Map<String, double> _initGoalMetrics() {
     Map<String, double> metrics = {
-      'numberOfRowsCleared': 0.0
+      'numberOfRowsCleared': 0.0,
+      'numberOfTetrominoesFallen': 0.0
     };
     return metrics;
   }

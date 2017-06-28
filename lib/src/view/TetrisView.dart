@@ -194,6 +194,8 @@ class TetrisView {
     // landscape unterbinden
     if (window.innerWidth > window.innerHeight && window.innerHeight < 481) {
       model.pause();
+      // Spielfeld ausblenden
+      container_game.style.display = "none";
       newGameButton.style.display = "none";
       continueButton.style.display = "none";
       message.innerHtml = "<p>Das Spiel wurde pausiert!</p>"

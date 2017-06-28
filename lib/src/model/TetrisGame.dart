@@ -136,6 +136,7 @@ class TetrisGame extends PowerUpUser {
   /// Fügt dem Spielfeld den nächsten fallenden Tetromino hinzu
   ///
   void dumpNextTetromino() {
+    _currentLevel.goalMetrics['numberOfTetrominoesFallen'] += 1;
     _tetromino = _tetrominoQueue.removeFirst();
     if (_tetrominoQueue.isEmpty) {
       _fillTetrominoeQueue();
@@ -270,11 +271,11 @@ class TetrisGame extends PowerUpUser {
     }
     //TODO: list may contains duplicates, use set instead
     _numberOfRowsCleared += rows.length;
-    // increase score
+    // erhöht den Punktestand
     this._score += this.calculateScoreOfMove(rows.length);
     // keep track of how many row were completed this level
     _currentLevel.goalMetrics['numberOfRowsCleared'] += rows.length;
-    // remove completed rows
+    // entfernt komplette Reihen
     rows.forEach((rowIndex) {
       this.field[rowIndex].forEach((cell) {
         cell.color = #empty;
@@ -505,5 +506,10 @@ class TetrisGame extends PowerUpUser {
   /// Gibt die Nummer an gelöschten Reihen zurück.
   ///
   int get numberOfRowsCleared => _numberOfRowsCleared;
+
+  ///
+  /// Gibt die Nummer an gefallenden Tetrominoes zurück.
+  ///
+  int get tetrominoCount => _tetrominoCount;
 
 }

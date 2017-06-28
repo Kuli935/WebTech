@@ -18,6 +18,8 @@ part 'package:tetris/src/model/goals/EndlessGoal.dart';
 
 part 'package:tetris/src/model/goals/NumberOfRowsClearedGoal.dart';
 
+part 'package:tetris/src/model/goals/NumberOfTetrominoesFallenGoal.dart';
+
 part 'package:tetris/src/model/powerUps/PowerUp.dart';
 
 part 'package:tetris/src/model/powerUps/tetrominoPowerUps/RemoveAllRowsOfTetromino.dart';

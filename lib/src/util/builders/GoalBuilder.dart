@@ -16,6 +16,8 @@ class GoalBuilder extends Builder<Goal> {
     switch (id) {
       case 'numberOfRowsCleared':
         return new NumberOfRowClearedGoal(_level, _goalConfiguration[id]);
+      case 'numberOfTetrominoesFallen':
+        return new NumberOfTetrominoesFallenGoal(_level, _goalConfiguration[id]);
       default:
         window.alert('There is no Goal with id: ${id}. Please make sure '
             'your game configuration file is correct. You can find the manual '

@@ -210,7 +210,7 @@
       "scoreMultiplier": 1.4,
       "tetrominoSpeedInMs": 600,
       "goal": {
-        "numberOfRowsCleared": 5.0
+        "numberOfTetrominoesFallen": 10.0
       },
       "bounsPoints": 1000,
       "priority": 70
