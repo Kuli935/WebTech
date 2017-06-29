@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="4EEBD469AC6D3B25">
+  <PROJECT FORMAT="1.00" NAME="Kollsionserkennung der Tetrominoes" AUTHOR="Tetris" CREATED="2017.06.27 18:55:55" MODIFIED="2017.06.28 14:24:36">
+    <DIAGRAMS>
+      <DIAGRAM FORMAT="1.00" ID="0" NAME="Kollisionserkennung der Tetrominoes" CREATED="2017.06.27 18:56:24" MODIFIED="2017.06.28 14:24:36">
+        <LAYOUT FORMAT="1.00" COLUMNS="5" ROWS="12">
+          <ENTRIES>
+            <ENTRY COLUMN="0" ROW="2">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="109">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="10">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="93">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="3">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="67">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="9">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="55">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="0" ANCHOR="True">
+              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
+                <TEXT><![CDATA[Kollisionserkennung der Tetrominoes]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="1">
+              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
+                <TEXT><![CDATA[Start]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="2">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="111">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="3">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="69">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="4">
+              <FIGURE SUBTYPE="PapInput" FORMAT="1.00" ID="4">
+                <TEXT><![CDATA[Bewegung des fallenden Tetromino]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="5">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="16">
+                <TEXT><![CDATA[Kollision mit oberen Rand und anderen Tetrominoes?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="6">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="41">
+                <TEXT><![CDATA[Keine Kollision mit Rand, Grund und anderen Tetrominoes?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="7">
+              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="22">
+                <TEXT><![CDATA[Händelt Kollisonen]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="8">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="48">
+                <TEXT><![CDATA[Tetromino bleibt an seiner alten Position]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="9">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="52">
+                <TEXT><![CDATA[Neuen Tetromino fallen lassen]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="5">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="44">
+                <TEXT><![CDATA[Game Over]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="6">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="20">
+                <TEXT><![CDATA[Bewegen des Tetromino auf seine neue Position]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="10">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="87">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="5">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="18">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="11">
+              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
+                <TEXT><![CDATA[Ende]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+          </ENTRIES>
+        </LAYOUT>
+        <CONNECTIONS>
+          <CONNECTION FORMAT="1.00" ID="70" FROM="69" TO="4" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="82" FROM="20" TO="87" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="72" FROM="44" TO="18" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="56" FROM="52" TO="55" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="16" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="17" FROM="16" TO="41" TEXT="nein" />
+          <CONNECTION FORMAT="1.00" ID="112" FROM="111" TO="69" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="96" FROM="93" TO="109" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="111" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="90" FROM="87" TO="93" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="71" FROM="67" TO="69" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="19" FROM="16" TO="44" TEXT="ja" />
+          <CONNECTION FORMAT="1.00" ID="58" FROM="55" TO="67" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="51" FROM="48" TO="52" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="47" FROM="22" TO="48" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="73" FROM="18" TO="2" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="42" FROM="41" TO="22" TEXT="nein" />
+          <CONNECTION FORMAT="1.00" ID="43" FROM="41" TO="20" TEXT="ja" />
+          <CONNECTION FORMAT="1.00" ID="113" FROM="109" TO="111" TEXT="" />
+        </CONNECTIONS>
+      </DIAGRAM>
+    </DIAGRAMS>
+  </PROJECT>
+</FRAME>
