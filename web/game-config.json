@@ -176,7 +176,7 @@
       "goal":{
         "numberOfRowsCleared": 3.0
       },
-      "bounsPoints": 2000,
+      "bounsPoints": 1000,
       "priority": 99
     },
     {
@@ -195,7 +195,7 @@
       "goal": {
         "numberOfRowsCleared": 4.0
       },
-      "bounsPoints": 750,
+      "bounsPoints": 1250,
       "priority": 80
     },
     {
@@ -212,7 +212,7 @@
       "goal": {
         "numberOfTetrominoesFallen": 10.0
       },
-      "bounsPoints": 1000,
+      "bounsPoints": 1500,
       "priority": 70
     },
     {
@@ -229,7 +229,7 @@
       "goal": {
         "numberOfRowsCleared": 6.0
       },
-      "bounsPoints": 1250,
+      "bounsPoints": 1750,
       "priority": 60
     },
     {
@@ -245,7 +245,7 @@
       "goal": {
         "numberOfRowsCleared": 7.0
       },
-      "bounsPoints": 1500,
+      "bounsPoints": 2000,
       "priority": 50
     }
   ]
