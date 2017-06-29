@@ -190,7 +190,7 @@
         "STetromino",
         "ZTetromino"
       ],
-      "scoreMultiplier": 1.2,
+      "scoreMultiplier": 2.0,
       "tetrominoSpeedInMs": 800,
       "goal": {
         "numberOfRowsCleared": 4.0
@@ -207,7 +207,7 @@
         "STetromino",
         "ZTetromino"
       ],
-      "scoreMultiplier": 1.4,
+      "scoreMultiplier": 3.0,
       "tetrominoSpeedInMs": 600,
       "goal": {
         "numberOfTetrominoesFallen": 10.0
@@ -224,7 +224,7 @@
         "STetromino",
         "ZTetromino"
       ],
-      "scoreMultiplier": 1.6,
+      "scoreMultiplier": 4.0,
       "tetrominoSpeedInMs": 400,
       "goal": {
         "numberOfRowsCleared": 6.0
@@ -240,7 +240,7 @@
         "STetromino",
         "ZTetromino"
       ],
-      "scoreMultiplier": 1.8,
+      "scoreMultiplier": 5.0,
       "tetrominoSpeedInMs": 200,
       "goal": {
         "numberOfRowsCleared": 7.0
