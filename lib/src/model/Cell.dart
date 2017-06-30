@@ -1,7 +1,7 @@
 part of tetris;
 
 ///
-/// Definiert die interne Representation des Spielfelds.
+/// Definiert die interne Repraesentation des Spielfelds.
 ///
 class Cell {
   /// [isActive] der fallende Tetromino der gerade aktiv ist und sich bewegen kann

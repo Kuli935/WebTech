@@ -1,7 +1,7 @@
 part of tetris;
 
-/// Ein Level enthaelt verschiedene Kafigurationen fuer das Spiel
-/// ([TetrisGame]). Ein Level betitzt ein Ziel, wenn dieses erreicht wurde
+/// Ein Level enthaelt verschiedene Konfigurationen fuer das Spiel
+/// ([TetrisGame]). Ein Level besitzt ein Ziel, wenn dieses erreicht wurde
 /// ist das Level beendet.
 class Level {
 
@@ -12,11 +12,11 @@ class Level {
   /// verfuegbar sind.
   List<String> _idsOfAvailableTetrominoes;
 
-  /// Der [scoreMultiplier] veraendert die Berechung der Punkte die der User
+  /// Der [scoreMultiplier] veraendert die Berechnung der Punkte die der User
   /// in diesem Level fuer das vervollstaendigen von Reihen erhaelt.
   double _scoreMultiplier;
 
-  /// Der [tetrominoSpeedInMs] andert die Fallgeschwindigkeit des Tetrominos
+  /// Der [tetrominoSpeedInMs] aendert die Fallgeschwindigkeit des Tetrominos
   /// solange dieses Level aktiv ist.
   int _tetrominoSpeedInMs;
 
@@ -38,7 +38,7 @@ class Level {
   ///
   Map<String, double> _goalMetrics;
 
-  /// Er stellt eine neue [Level] Instanz, welche NICHT KONFIGURIERT IST.
+  /// Erstellt eine neue [Level] Instanz, welche NICHT KONFIGURIERT IST.
   /// Es sollte der entsprechende LevelBuilder genutzt werden, oder das Level
   /// wird über die setter Methoden konfiguritert.
   Level(){
