@@ -1,7 +1,7 @@
 part of tetris;
 
 ///
-/// Ein PoweUp kann Aspekete des Spiels manipulieren, wenn es aktiviert wird.
+/// Ein PoweUp kann Aspekte des Spiels manipulieren, wenn es aktiviert wird.
 /// Der Versuch ein PowerUp zu aktivieren kann an fast allen Stellen des Spiels
 /// passieren. Ob das PowerUp zu diesem Zeitpunkt wirklich genutzt werden kann,
 /// muss in _isConsumable geprueft werden.
