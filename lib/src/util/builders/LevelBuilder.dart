@@ -1,15 +1,23 @@
 part of tetris;
 
-class LevelBuilder extends Builder<Level>{
+/// Ein Builder zum Erstellen von Level Instanzen. Die Konfiguration fuer die
+/// Level wird aus dem zugehoerigen [Reader] ausgelesen.
+class LevelBuilder extends Builder<Level> {
 
-
+  /// Das Model zum dem dieses Level gehoert.
   final TetrisGame _model;
 
-  LevelBuilder(Reader reader, TetrisGame model): _model = model, super(reader){}
+  /// Erstellt einen neuen [LevelBuilder]. Die von diesem [LevelBuilder]
+  /// erstellten [Level] gehoeren zu [model].
+  LevelBuilder(Reader reader, TetrisGame model)
+      : _model = model,
+        super(reader) {}
 
-  Level build(String id){
+  /// Erstell ein neues [Level] mit den im [Reader] gespeicherten Parameter
+  /// mit der [id]
+  Level build(String id) {
     Map<String, Object> levelConfig = _reader.readLevelConfiguration(id);
-    if(levelConfig == null){
+    if (levelConfig == null) {
       window.alert('Could not find a Level configuration with the '
           'id: "${id}" in the file: "${_reader.dataUri}". Please make sure '
           'your game configuration file is correct. You can find the manual '
@@ -18,21 +26,16 @@ class LevelBuilder extends Builder<Level>{
       return null;
     }
 
-
-    Level level = new Level(_model,
-        levelConfig['availibleTetrominoes'],
-        levelConfig['scoreMultiplier'],
-        levelConfig['tetrominoSpeedInMs'],
-        levelConfig['bounsPoints'],
-        levelConfig['priority']);
-
-    List<Goal> goals = new List();
-    //ATM it only is possible to load one goal for each level
+    Level level = new Level().setModel(_model).
+      setIdsOfAvailableTetrominoes(levelConfig['availibleTetrominoes']).
+      setScoreMultiplier(levelConfig['scoreMultiplier']).
+      setTetrominoSpeedInMs(levelConfig['tetrominoSpeedInMs']).
+      setBonusPoints(levelConfig['bounsPoints']).
+      setPriority(levelConfig['priority']);
+    
     GoalBuilder builder = new GoalBuilder(_reader, level, levelConfig['goal']);
-    goals.add(builder.build(''));
+    level.setGoal(builder.build(''));
 
-    //add the goals to the level
-    level.goals = goals;
     return level;
   }
 }

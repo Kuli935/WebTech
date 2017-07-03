@@ -176,8 +176,77 @@
       "goal":{
         "numberOfRowsCleared": 3.0
       },
-      "bounsPoints": 2000,
+      "bounsPoints": 1000,
       "priority": 99
+    },
+    {
+      "id": "level2",
+      "availibleTetrominoes": [
+        "ITetromino",
+        "TTetromino",
+        "JTetromino",
+        "LTetromino",
+        "OTetromino",
+        "STetromino",
+        "ZTetromino"
+      ],
+      "scoreMultiplier": 2.0,
+      "tetrominoSpeedInMs": 800,
+      "goal": {
+        "numberOfRowsCleared": 4.0
+      },
+      "bounsPoints": 1250,
+      "priority": 80
+    },
+    {
+      "id": "level3",
+      "availibleTetrominoes": [
+        "ITetromino",
+        "JTetromino",
+        "LTetromino",
+        "STetromino",
+        "ZTetromino"
+      ],
+      "scoreMultiplier": 3.0,
+      "tetrominoSpeedInMs": 600,
+      "goal": {
+        "numberOfTetrominoesFallen": 10.0
+      },
+      "bounsPoints": 1500,
+      "priority": 70
+    },
+    {
+      "id": "level4",
+      "availibleTetrominoes": [
+        "JTetromino",
+        "LTetromino",
+        "OTetromino",
+        "STetromino",
+        "ZTetromino"
+      ],
+      "scoreMultiplier": 4.0,
+      "tetrominoSpeedInMs": 400,
+      "goal": {
+        "numberOfRowsCleared": 6.0
+      },
+      "bounsPoints": 1750,
+      "priority": 60
+    },
+    {
+      "id": "level5",
+      "availibleTetrominoes": [
+        "JTetromino",
+        "LTetromino",
+        "STetromino",
+        "ZTetromino"
+      ],
+      "scoreMultiplier": 5.0,
+      "tetrominoSpeedInMs": 200,
+      "goal": {
+        "numberOfRowsCleared": 7.0
+      },
+      "bounsPoints": 2000,
+      "priority": 50
     }
   ]
 }
