@@ -36,6 +36,12 @@ class TetrisView {
   final container_game = querySelector('.container_game');
 
   ///
+  /// Elemente mit der Klasse '.container_powerup' im DOM tree.
+  /// Wird verwendet um das Spiel anzuzeigen
+  ///
+  final container_powerup = querySelector('.container_powerup');
+
+  ///
   /// Elemente mit der ID '#field' im DOM tree.
   /// Wird verwendet um das Feld von Tetromino zu visualisieren als eine HTML Tabelle.
   ///
@@ -179,6 +185,13 @@ class TetrisView {
     // Game Nachrichten ausblenden
     container_message.style.display = "none";
 
+    if(model.powerUp) {
+      // PowerUp Hinweis ausblenden
+      container_powerup.style.display = "none";
+    } else {
+      // PowerUp Hinweis einblenden
+      container_powerup.style.display = "block";
+    }
 
     // Prüfen ob Pause aufgerufen wurde
     if (model.paused) {

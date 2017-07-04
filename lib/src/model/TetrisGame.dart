@@ -55,6 +55,9 @@ class TetrisGame extends PowerUpUser {
   // Endlos Modus erreicht
   bool _endlessMode = false;
 
+  // Tetromino enthält einen PowerUp
+  bool _powerUp = false;
+
   /// interne Representation des Spielfelds
   List<List<Cell>> _field;
 
@@ -506,6 +509,11 @@ class TetrisGame extends PowerUpUser {
   /// Gibt an, ob der Enddlos Modus erreicht ist
   ///
   bool get endlessMode => _endlessMode;
+
+  ///
+  /// Gibt an, ob der Tetromino einen PowerUp enthält
+  ///
+  bool get powerUp => _powerUp;
 
   ///
   // Gibt den aktuellen Punktestand zurück
