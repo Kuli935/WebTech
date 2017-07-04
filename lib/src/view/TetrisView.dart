@@ -185,12 +185,17 @@ class TetrisView {
     // Game Nachrichten ausblenden
     container_message.style.display = "none";
 
-    if(model.powerUp) {
+    if(model._tetromino.hasPowerUp()) {
       // PowerUp Hinweis ausblenden
       container_powerup.style.display = "none";
     } else {
       // PowerUp Hinweis einblenden
       container_powerup.style.display = "block";
+      model._tetromino._powerUps.forEach((powerUp) {
+        container_powerup.innerHtml = "<p><b>PowerUp</b>: "
+        + powerUp.getDescription().toString()
+        + "</p>";
+      });
     }
 
     // Prüfen ob Pause aufgerufen wurde

@@ -23,4 +23,18 @@ class PowerUpUser {
       powerUp.consume(kwargs);
     });
   }
+
+  ///
+  /// Überprüfen ob der Tetromino einen PowerUp besitzt
+  /// Rückgabe: true Tetromino hat einen PowerUp
+  /// false Tetromino hat keinen PowerUp
+  ///
+  bool hasPowerUp(){
+   if(_powerUps.length != 0){
+     return false;
+   } else {
+     return true;
+   }
+  }
+
 }

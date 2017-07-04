@@ -54,4 +54,10 @@ class RemoveAllRowsOfTetromino extends PowerUp {
       _model.removeRows(rowsToRemove.toList());
     }
   }
+
+  /// Gibt die Beschreibung des PowerUps zurück
+  String getDescription(){
+    return "Dieser Tetromino löscht alle Reihen um sich herum!";
+  }
+
 }

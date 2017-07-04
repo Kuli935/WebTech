@@ -36,5 +36,8 @@ abstract class PowerUp {
   ///
   bool _isConsumable(Map<String, Object> kwargs);
 
+  /// Gibt die Beschreibung des PowerUps zurück
+  String getDescription();
+
   get id => _id;
 }

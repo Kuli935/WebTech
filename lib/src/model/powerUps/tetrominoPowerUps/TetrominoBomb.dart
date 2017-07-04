@@ -1,13 +1,13 @@
 part of tetris;
 
 /// Dieses PowerUp laesst den zugehoerigen tetromino explodieren, wenn er
-/// gesetzt wird. Die Explosion hat breitet sich 2 Felder in jede Richtung aus.
+/// gesetzt wird. Die Explosion breitet sich 2 Felder in jede Richtung aus.
 class TetrominoBomb extends PowerUp{
 
   /// Der Tetromino zu dem dieses PowerUp gehoert
   Tetromino _tetromino;
 
-  /// Erstellt ein neues [TrteominoBomb] PowerUp. Dieses gehoesrt zum TetrisGame
+  /// Erstellt ein neues [TeteominoBomb] PowerUp. Dieses gehoesrt zum TetrisGame
   /// [model] und ist an den Tetromino [tetrominoe] gebunden.
   TetrominoBomb(TetrisGame model, Tetromino tetromino):
     _tetromino = tetromino,
@@ -54,6 +54,11 @@ class TetrominoBomb extends PowerUp{
       });
       _model.removeTetrominoFromCells(cellsToClear);
     }
+  }
+
+  /// Gibt die Beschreibung des PowerUps zurück
+  String getDescription(){
+    return "Bomben-Tetromino entfernt 2 Felder in jede Richtung!";
   }
 
 }
