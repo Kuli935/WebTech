@@ -187,10 +187,15 @@ class TetrisView {
 
     if(model._tetromino.hasPowerUp()) {
       // PowerUp Hinweis ausblenden
-      container_powerup.style.display = "none";
+      container_powerup.style.display = "block";
+      container_powerup.innerHtml = "<p>1</p>";
+      container_powerup.style.background = "none";
+      container_powerup.style.color = "#757575";
     } else {
       // PowerUp Hinweis einblenden
       container_powerup.style.display = "block";
+      container_powerup.style.background = "#d5d4d4";
+      container_powerup.style.color = "#000000";
       model._tetromino._powerUps.forEach((powerUp) {
         container_powerup.innerHtml = "<p><b>PowerUp</b>: "
         + powerUp.getDescription().toString()
