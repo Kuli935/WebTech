@@ -15,6 +15,8 @@ class PowerUpBuilder extends Builder<PowerUp> {
     switch (id) {
       case "RemoveAllRowsOfTetromino":
         return new RemoveAllRowsOfTetromino(_model, _target);
+      case "TetrominoBomb":
+        return new TetrominoBomb(_model, _target);
       default:
         window.alert('Could not find a Powerup configuration with the '
             'id: "${id}" in the file: "${_reader.dataUri}". Please make sure '

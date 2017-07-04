@@ -7,6 +7,8 @@ part of tetris;
 /// anderen Tetromino kollidiert.
 ///
 class RemoveAllRowsOfTetromino extends PowerUp {
+
+  /// Der Tetromino zu dem dieses PowerUp gehoert
   Tetromino _tetromino;
 
   ///
@@ -20,7 +22,7 @@ class RemoveAllRowsOfTetromino extends PowerUp {
   }
 
   ///
-  /// Gibt den Status isActive zurück.
+  /// Gibt den Status isConsumable zurück.
   /// [kwargs] enthaelt Daten, die benoetigt werden, um zu ueberpruefen ob
   /// die Bedingung erfuellt wurde
   ///

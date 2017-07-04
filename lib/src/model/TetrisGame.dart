@@ -295,6 +295,16 @@ class TetrisGame extends PowerUpUser {
   }
 
   ///
+  /// Entfert Tetromino Bestandteile an alle in [cells] uebergebenen Positionen
+  ///
+  void removeTetrominoFromCells(List<Map<String, int>> cells){
+    cells.forEach((cell){
+      _field[cell['row']][cell['col']].color = #empty;
+      _field[cell['row']][cell['col']].isActive = false;
+    });
+  }
+
+  ///
   /// Berechnet wie viele Punkte das letzte vervollstaendigen wert ist.
   /// [rowsCompleted] Anzahl an kompletten Reihen
   ///

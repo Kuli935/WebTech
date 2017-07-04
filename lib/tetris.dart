@@ -24,6 +24,8 @@ part 'package:tetris/src/model/powerUps/PowerUp.dart';
 
 part 'package:tetris/src/model/powerUps/tetrominoPowerUps/RemoveAllRowsOfTetromino.dart';
 
+part 'package:tetris/src/model/powerUps/tetrominoPowerUps/TetrominoBomb.dart';
+
 part 'package:tetris/src/model/powerUps/PowerUpUser.dart';
 
 part 'package:tetris/src/model/Level.dart';

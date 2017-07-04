@@ -163,13 +163,33 @@
         "RemoveAllRowsOfTetromino"
       ],
       "color": "purple"
+    },
+    {
+      "id": "BombTetromino",
+      "stones":[
+        { "row" : 0, "col" : 0}
+      ],
+      "preview":[
+        { "row" : 1, "col" : 1}
+      ],
+      "transitions":[],
+      "powerUps":[
+        "TetrominoBomb"
+      ],
+      "color": "green"
     }
   ],
   "levels":[
     {
       "id": "level1",
       "availibleTetrominoes":[
-        "ITetromino", "TTetromino", "JTetromino", "LTetromino", "OTetromino", "STetromino", "ZTetromino"
+        "ITetromino",
+        "TTetromino",
+        "JTetromino",
+        "LTetromino",
+        "OTetromino",
+        "STetromino",
+        "ZTetromino"
       ],
       "scoreMultiplier": 1.0,
       "tetrominoSpeedInMs": 1000,
@@ -182,6 +202,7 @@
     {
       "id": "level2",
       "availibleTetrominoes": [
+        "BombTetromino",
         "ITetromino",
         "TTetromino",
         "JTetromino",
@@ -222,7 +243,8 @@
         "LTetromino",
         "OTetromino",
         "STetromino",
-        "ZTetromino"
+        "ZTetromino",
+        "BombTetromino"
       ],
       "scoreMultiplier": 4.0,
       "tetrominoSpeedInMs": 400,
