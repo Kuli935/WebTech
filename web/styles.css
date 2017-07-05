@@ -316,7 +316,7 @@ body {
 
 
 
-@media (min-height: 700px) and (max-height: 799px) {
+@media (min-height: 650px) and (max-height: 799px) {
     /* Darstellung auf Laptops die eine kleinere Höhe haben */
     #field td, #nextstone td, #holdstone td {
         background-color: #ededed;
@@ -326,6 +326,10 @@ body {
 
     #field {
         border-top: 52px solid #d5d4d4;
+    }
+	
+	.container_game {
+        margin-top: 5px;
     }
 
     .container_sidebox {
